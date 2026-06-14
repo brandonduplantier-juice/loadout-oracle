@@ -83,4 +83,28 @@
   });
 })();
 </script>
+
+<script id="exotic-armor-by-class" type="application/json">{{ exotic_armor_by_class|tojson }}</script>
+<script>
+(function () {
+  var EBC = JSON.parse(document.getElementById('exotic-armor-by-class').textContent);
+  var ALL = [];
+  Object.keys(EBC).forEach(function (c) { ALL = ALL.concat(EBC[c]); });
+  ALL.sort();
+  var eaSel = document.getElementById('build_exotic_armor');
+  var clsSel = document.getElementById('cls');
+  if (!eaSel || !clsSel) return;
+  function fill(cls) {
+    eaSel.innerHTML = '';
+    var any = document.createElement('option'); any.value = 'Any'; any.textContent = 'Any';
+    eaSel.appendChild(any);
+    var list = (cls && EBC[cls]) ? EBC[cls] : ALL;
+    list.forEach(function (n) {
+      var o = document.createElement('option'); o.value = n; o.textContent = n; eaSel.appendChild(o);
+    });
+  }
+  clsSel.addEventListener('change', function () { fill(this.value); });
+  fill(clsSel.value);
+})();
+</script>
 {% endblock %}

@@ -4,7 +4,7 @@
 {% block content %}
 <form class="panel" method="post" action="{{ url_for('focus') }}">
   <h2>Focus weighting</h2>
-  <p class="sub">Rank how much each pillar should drive the build. 1 weighs heaviest, Any ignores it.</p>
+  <p class="sub">Rank how much each pillar should drive the build. High weighs heaviest, Any ignores it.</p>
   <div class="grid">
     {{ field('ability_focus', 'Ability focus', o.focus, a.get('ability_focus','Any'), hint='Grenade / melee / class ability') }}
     {{ field('super_focus', 'Super focus', o.focus, a.get('super_focus','Any'), hint='Super as the payoff') }}

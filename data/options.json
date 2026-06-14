@@ -325,9 +325,9 @@
   ],
   "focus": [
     "Any",
-    "1",
-    "2",
-    "3"
+    "High",
+    "Medium",
+    "Low"
   ],
   "engine": [
     "Any",

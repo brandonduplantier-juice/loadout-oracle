@@ -223,7 +223,45 @@ def construct(a):
     best["weap_elem"] = weap_elem
     best["slots"] = [s for s, _ in SLOTS]
     best["has_goals"] = bool(w)
+    best["armor_mods"] = recommend_armor_mods(best["elem"], a)
+    best["weapon_mods"] = recommend_weapon_mods(a)
     return best
+
+
+# exotic armor available per class, for the class-filtered dropdown
+EXOTIC_ARMOR_BY_CLASS = {c: sorted(
+    p["name"] for p in POOL if p["category"] == "Exotic Armor" and p["class"] == c
+) for c in CLASSES}
+
+
+def recommend_armor_mods(elem, a):
+    """Element economy mods are always correct; arms/class vary by focus."""
+    e = elem if elem in ("Arc", "Solar", "Void", "Stasis", "Strand") else None
+    mods = []
+    if e:
+        mods.append(("Helmet", e + " Siphon, Heavy Ammo Finder"))
+        mods.append(("Legs", e + " Surge x3"))
+        mods.append(("Chest", e + " Resistance"))
+    else:
+        mods.append(("Helmet", "Harmonic Siphon, Heavy Ammo Finder"))
+        mods.append(("Legs", "Harmonic Surge x3"))
+        mods.append(("Chest", "Concussive Dampener"))
+    af = focus_weight(a.get("ability_focus", "Any"))
+    wf = focus_weight(a.get("weapon_focus", "Any"))
+    if af and af >= wf:
+        mods.append(("Arms", "Grenade Kickstart, Melee Kickstart"))
+        mods.append(("Class item", "Bomber, Outreach, Distribution"))
+    elif wf:
+        mods.append(("Arms", "Loader and Dexterity for your weapon type"))
+        mods.append(("Class item", "Powerful Attraction, Reaper"))
+    else:
+        mods.append(("Arms", "Impact Induction, Momentum Transfer"))
+        mods.append(("Class item", "Powerful Attraction, Time Dilation"))
+    return mods
+
+
+def recommend_weapon_mods(a):
+    return ["Backup Mag", "Counterbalance Stock or Freehand Grip", "Targeting Adjuster"]
 
 ELEMENTS = {"Arc", "Solar", "Void", "Stasis", "Strand", "Prismatic"}
 SURV_RANK = {"Low": 1, "Med": 2, "High": 3}
@@ -248,13 +286,8 @@ def contains(needle, haystack):
 
 
 def focus_weight(rank):
-    """Any -> 0, else 4 - rank so rank 1 weighs most."""
-    if rank in (None, "", "Any"):
-        return 0
-    try:
-        return 4 - int(rank)
-    except (TypeError, ValueError):
-        return 0
+    """Any -> 0, else High/Medium/Low map to 3/2/1."""
+    return {"High": 3, "Medium": 2, "Low": 1}.get(rank, 0)
 
 
 def passes_hard_filters(b, a):
@@ -350,7 +383,8 @@ def theme(a):
 def index():
     session.clear()
     return render_template("step1.html", o=OPTIONS, a={}, theme="default",
-                           weapon_tree=WEAPON_TREE)
+                           weapon_tree=WEAPON_TREE,
+                           exotic_armor_by_class=EXOTIC_ARMOR_BY_CLASS)
 
 
 @app.route("/step1", methods=["POST"])

@@ -272,3 +272,16 @@ body {
 .cascade { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
 .cascade select:disabled { opacity: .45; cursor: not-allowed; }
 @media (max-width: 620px) { .cascade { grid-template-columns: 1fr; } }
+
+/* ---- per-card subclass theming ---- */
+.el-arc       { --accent:#5cc7f2; --accent-ink:#04222e; --accent-soft:rgba(92,199,242,.12);  --glow:rgba(92,199,242,.22);  --accent-grad:linear-gradient(90deg,#7fd8ff,#3aa8e0); }
+.el-solar     { --accent:#f3781f; --accent-ink:#241003; --accent-soft:rgba(243,120,31,.13);  --glow:rgba(243,120,31,.24);  --accent-grad:linear-gradient(90deg,#ff9a3c,#e85f12); }
+.el-void      { --accent:#b98cf0; --accent-ink:#1d0f33; --accent-soft:rgba(185,140,240,.14); --glow:rgba(185,140,240,.24); --accent-grad:linear-gradient(90deg,#cda6ff,#9a63e6); }
+.el-stasis    { --accent:#5f7df2; --accent-ink:#0a1330; --accent-soft:rgba(95,125,242,.14);  --glow:rgba(95,125,242,.24);  --accent-grad:linear-gradient(90deg,#8aa0ff,#4a64e6); }
+.el-strand    { --accent:#2fcf8f; --accent-ink:#042417; --accent-soft:rgba(47,207,143,.13);  --glow:rgba(47,207,143,.22);  --accent-grad:linear-gradient(90deg,#52e6a8,#16b377); }
+.el-prismatic { --accent:#e6a8ff; --accent-ink:#220a33; --accent-soft:rgba(230,168,255,.13); --glow:rgba(230,168,255,.22); --accent-grad:linear-gradient(90deg,#7fd8ff,#e6a8ff 35%,#ff9a3c 65%,#52e6a8); }
+.card::before { content: ""; position: absolute; left: 0; top: 0; height: 3px; width: 100%; background: var(--accent-grad); opacity: .9; }
+
+/* small artifact icons in mod rows */
+.modrow .mv.items { display: flex; flex-wrap: wrap; gap: 6px 10px; }
+.iitem .ic.sm { width: 22px; height: 22px; }

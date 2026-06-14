@@ -3368,7 +3368,7 @@
 {
 "category": "Movement",
 "class": "Hunter",
-"element": "Any",
+"element": "Void",
 "name": "Blink",
 "goal_tags": "Mobility, Utility",
 "flex_type": "-",
@@ -3440,7 +3440,7 @@
 {
 "category": "Movement",
 "class": "Warlock",
-"element": "Any",
+"element": "Void",
 "name": "Blink",
 "goal_tags": "Mobility, Utility",
 "flex_type": "-",
