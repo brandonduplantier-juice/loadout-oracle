@@ -1,0 +1,3 @@
+class-hunter.svg, class-titan.svg, class-warlock.svg
+Source: github.com/justrealmilk/destiny-icons (general/class_*.svg)
+License: CC0 1.0 Universal (public domain dedication)
