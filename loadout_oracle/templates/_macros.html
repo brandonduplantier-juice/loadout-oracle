@@ -1,0 +1,11 @@
+{% macro field(name, label, opts, current, hard=False, hint='', select_id='') -%}
+<div class="field {{ 'hard' if hard else '' }}">
+  <label for="{{ name }}">{{ label }}</label>
+  <select name="{{ name }}" id="{{ select_id or name }}">
+    {% for opt in opts %}
+    <option value="{{ opt }}" {{ 'selected' if current==opt else '' }}>{{ opt }}</option>
+    {% endfor %}
+  </select>
+  {% if hint %}<span class="hint">{{ hint }}</span>{% endif %}
+</div>
+{%- endmacro %}

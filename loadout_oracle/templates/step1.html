@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% from "_macros.html" import field %}
+{% set step = 1 %}
+{% block content %}
+<form class="panel" method="post" action="{{ url_for('step1') }}">
+  <h2>Loadout intent</h2>
+  <p class="sub">Tell the system what you want the build to do. Pick an element to set the theme.</p>
+  <div class="grid">
+    {{ field('cls', 'Class', o.class, a.get('cls','Any'), hard=True) }}
+    {{ field('element', 'Preferred element', o.element, a.get('element','Any'), select_id='element-select') }}
+    {{ field('main_goal', 'Main goal', o.goal, a.get('main_goal','Any')) }}
+    {{ field('second_goal', 'Secondary goal', o.goal, a.get('second_goal','Any')) }}
+    {{ field('optional_goal', 'Optional goal', o.goal, a.get('optional_goal','Any')) }}
+    {{ field('activity', 'Activity', o.activity, a.get('activity','Any')) }}
+    <div class="full">
+      <div class="field hard">
+        <label for="build_weapon">Build around weapon</label>
+        <input type="text" name="build_weapon" id="build_weapon" list="weaponlist"
+               autocomplete="off" placeholder="Any (type a weapon name)"
+               value="{{ a.get('build_weapon','') if a.get('build_weapon','Any')!='Any' else '' }}">
+        <datalist id="weaponlist">
+          {% for wname in weapons %}<option value="{{ wname }}"></option>{% endfor %}
+        </datalist>
+        <span class="hint">Legendary or exotic. Sets the build element when no element is chosen.</span>
+      </div>
+    </div>
+    {{ field('build_exotic_armor', 'Build around exotic armor', o.build_exotic_armor, a.get('build_exotic_armor','Any'), hard=True) }}
+    {{ field('build_exotic_weapon', 'Build around exotic weapon', o.build_exotic_weapon, a.get('build_exotic_weapon','Any'), hard=True) }}
+  </div>
+  <div class="actions">
+    <span class="spacer"></span>
+    <button type="submit" class="btn primary">Next</button>
+  </div>
+</form>
+{% endblock %}
