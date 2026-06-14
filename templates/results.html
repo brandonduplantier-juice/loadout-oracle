@@ -63,7 +63,8 @@
       <div class="modrow"><span class="mk">{{ slot }}</span><span class="mv">{{ mod }}</span></div>
       {% endfor %}
       <div class="modrow"><span class="mk">Weapon mods</span><span class="mv">{{ gen.weapon_mods|join(', ') }}</span></div>
-      <div class="modrow"><span class="mk">Artifact + gear</span><span class="mv">Season-specific. Follow a matching curated build below, or pick artifact perks and a gear set that reinforce {{ gen.elem }} and your goals.</span></div>
+      {% if gen.artifact %}<div class="modrow"><span class="mk">Artifact</span><div class="mv items"><span class="anote">{{ gen.artifact.name }}:</span>{% for p in gen.artifact.perks %}<span class="iitem">{% if p.icon %}<img class="ic sm" src="{{ ICON_BASE ~ p.icon }}" alt="" loading="lazy" onerror="this.style.display='none'">{% endif %}<span class="nm">{{ p.perk }}{% if p.element %} <span class="origin el-{{ p.element|lower }}">{{ p.element }}</span>{% endif %}</span></span>{% endfor %}</div></div>{% endif %}
+      {% if gen.gear_set %}<div class="modrow"><span class="mk">Gear set</span><span class="mv"><b>{{ gen.gear_set.name }}</b> &middot; {% for b in gen.gear_set.bonuses %}{{ b.count }}pc {{ b.perk }}{% if not loop.last %}; {% endif %}{% endfor %}</span></div>{% endif %}
     </div>
   </div>
 </div>

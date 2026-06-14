@@ -33,6 +33,10 @@ with open(os.path.join(BASE, "data", "weapons.json"), encoding="utf-8") as f:
     WEAPON_ELEM = json.load(f)
 with open(os.path.join(BASE, "data", "weapons_tree.json"), encoding="utf-8") as f:
     WEAPON_TREE = json.load(f)
+with open(os.path.join(BASE, "data", "artifact.json"), encoding="utf-8") as f:
+    ARTIFACT = json.load(f)
+with open(os.path.join(BASE, "data", "gear_sets.json"), encoding="utf-8") as f:
+    GEAR_SETS = json.load(f)
 
 ICON_BASE = "https://www.bungie.net"
 
@@ -225,6 +229,8 @@ def construct(a):
     best["has_goals"] = bool(w)
     best["armor_mods"] = recommend_armor_mods(best["elem"], a)
     best["weapon_mods"] = recommend_weapon_mods(a)
+    best["artifact"] = recommend_artifact(best["elem"])
+    best["gear_set"] = recommend_gear_set(best["elem"], a)
     return best
 
 
@@ -262,6 +268,55 @@ def recommend_armor_mods(elem, a):
 
 def recommend_weapon_mods(a):
     return ["Backup Mag", "Counterbalance Stock or Freehand Grip", "Targeting Adjuster"]
+
+
+# universally strong artifact perks worth taking on most builds
+GENERIC_ARTIFACT = {
+    "Elemental Siphon", "Fierce Proxemics", "Precision Equity",
+    "Expert Handling", "Vanguard Surplus Discounts", "Armorsmith",
+}
+
+
+def recommend_artifact(elem):
+    if not ARTIFACT.get("perks"):
+        return None
+    matched = [p for p in ARTIFACT["perks"] if p.get("element") == elem]
+    generic = [p for p in ARTIFACT["perks"] if p.get("perk") in GENERIC_ARTIFACT]
+    out, seen = [], set()
+    for p in matched + generic:
+        if p["perk"] not in seen:
+            seen.add(p["perk"])
+            out.append(p)
+    return {"name": ARTIFACT["name"], "perks": out[:8]}
+
+
+def recommend_gear_set(elem, a):
+    if not GEAR_SETS:
+        return None
+    signal = set()
+    if elem and elem != "Prismatic":
+        signal.add(elem.lower())
+    goalwords = {
+        "Max Damage": ["damage", "final blow"],
+        "High Survivability": ["heal", "shield", "health", "resist"],
+        "Add Clear": ["orb", "combatant", "ammo brick"],
+        "Healing": ["heal", "cure", "restoration"],
+        "Ability Spam": ["grenade", "melee", "ability", "energy"],
+        "Team Buff": ["fireteam", "ally", "allies"],
+        "Solo": ["heal", "shield", "resist"],
+    }
+    for k in ("main_goal", "second_goal", "optional_goal"):
+        for wd in goalwords.get(a.get(k, "Any"), []):
+            signal.add(wd)
+    best = None
+    for sname, bonuses in GEAR_SETS.items():
+        text = " ".join((b["perk"] + " " + b["desc"]).lower() for b in bonuses)
+        sc = sum(1 for wd in signal if wd in text)
+        if best is None or sc > best[0]:
+            best = (sc, sname, bonuses)
+    if not best or best[0] == 0:
+        return None
+    return {"name": best[1], "bonuses": best[2]}
 
 ELEMENTS = {"Arc", "Solar", "Void", "Stasis", "Strand", "Prismatic"}
 SURV_RANK = {"Low": 1, "Med": 2, "High": 3}

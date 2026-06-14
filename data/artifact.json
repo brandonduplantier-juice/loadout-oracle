@@ -1,0 +1,250 @@
+{
+"name": "Implement of Curiosity",
+"perks": [
+{
+"perk": "Anti-Barrier Hand Cannon",
+"element": "",
+"icon": "/common/destiny2_content/icons/9a2c53359db42bf87f48304efe7cae7b.png",
+"tier": "1",
+"desc": "Your equipped Hand Cannons fire shield-piercing rounds and stun [Shield-Piercing] Barrier Champions."
+},
+{
+"perk": "Anti-Barrier Sniper Rifle",
+"element": "",
+"icon": "/common/destiny2_content/icons/b74605a00dc8f942f64a7879359ab828.png",
+"tier": "1",
+"desc": "Your equipped Sniper Rifles fire shield-piercing rounds and stun [Shield-Piercing] Barrier Champions."
+},
+{
+"perk": "Overload Pulse Rifle",
+"element": "",
+"icon": "/common/destiny2_content/icons/781184e10d840a1463298cffd822aa02.png",
+"tier": "1",
+"desc": "Your equipped Pulse Rifles fire disrupting rounds which stun the target, delaying ability energy regeneration and lowering combatant damage "
+},
+{
+"perk": "Overload Submachine Gun",
+"element": "",
+"icon": "/common/destiny2_content/icons/8bb684eec1afb53877e2e57134c28572.png",
+"tier": "1",
+"desc": "Your equipped Submachine Guns fire disrupting rounds which stun the target, delaying ability energy regeneration and lowering combatant dama"
+},
+{
+"perk": "Unstoppable Bow",
+"element": "",
+"icon": "/common/destiny2_content/icons/286b844dd82bdc5f4fffa7671e283c60.png",
+"tier": "1",
+"desc": "Crossbows, and Bows that have been fully drawn for a short time, fire a powerful explosive payload that stuns unshielded combatants. Strong "
+},
+{
+"perk": "Stunning Fusion",
+"element": "",
+"icon": "/common/destiny2_content/icons/d303a19d807e6cfb2d6928f36c66dac9.png",
+"tier": "1",
+"desc": "Aiming down the sights of a Fusion Rifle or Linear Fusion Rifle for a short time loads a powerful payload that stuns unshielded combatants. "
+},
+{
+"perk": "Shield-Shattering Rounds",
+"element": "Stasis",
+"icon": "/common/destiny2_content/icons/d303a19d807e6cfb2d6928f36c66dac9.png",
+"tier": "1",
+"desc": "Your Machine Guns fire shield-piercing rounds and stun [Shield-Piercing] Barrier Champions."
+},
+{
+"perk": "Impact, Shock, Gravity",
+"element": "Arc",
+"icon": "/common/destiny2_content/icons/a8270c4670a71162f1d45477888b82ae.png",
+"tier": "2",
+"desc": "Grants access to the Helmet mods: Kinetic/Void Siphon and Kinetic/Arc Siphon.\n\nThese mods combine two elemental siphons at a discounted cost"
+},
+{
+"perk": "Gravitic-Voltaic Charge",
+"element": "Arc",
+"icon": "/common/destiny2_content/icons/24585408cad390bf80fff7f33c7e20ca.png",
+"tier": "2",
+"desc": "While you have an Arc or Void Super equipped, increase the maximum number of stacks of Armor Charge you can carry by 1."
+},
+{
+"perk": "Expert Handling",
+"element": "",
+"icon": "/common/destiny2_content/icons/e0dd4e954cebb62915528decaf28360b.png",
+"tier": "2",
+"desc": "Weapon final blows grant a stacking bonus to stability which resets on weapon reload or stow. Swords gain Guard Resistance."
+},
+{
+"perk": "Fastest Draw",
+"element": "",
+"icon": "/common/destiny2_content/icons/01c73e5250259ab4a59dd3153ce08e51.png",
+"tier": "2",
+"desc": "If the first shot shortly after reloading or readying your weapon is a precision hit, gain flinch resistance."
+},
+{
+"perk": "Elemental Siphon",
+"element": "",
+"icon": "/common/destiny2_content/icons/729357078b7e324467add99816bfda4b.png",
+"tier": "2",
+"desc": "Rapid final blows with a Kinetic weapon or a weapon matching your equipped Super create an Elemental pickup that matches your equipped Super"
+},
+{
+"perk": "Concentrated Forward Firepower",
+"element": "",
+"icon": "/common/destiny2_content/icons/d303a19d807e6cfb2d6928f36c66dac9.png",
+"tier": "2",
+"desc": "Sustained damage from Fusion Rifles, Linear Fusion Rifles, and Machine Guns grants those weapons bonus stability, range, and aim assist for "
+},
+{
+"perk": "Vanguard Surplus Discounts",
+"element": "",
+"icon": "/common/destiny2_content/icons/d303a19d807e6cfb2d6928f36c66dac9.png",
+"tier": "2",
+"desc": "All Ammo Finder mods are discounted."
+},
+{
+"perk": "Press The Advantage",
+"element": "",
+"icon": "/common/destiny2_content/icons/e79751de6d62c4820278fd3f0b833b0b.png",
+"tier": "3",
+"desc": "Breaking a combatant's shield grants increased weapon stability, handling, and reload speed. Swords gain increased guard resistance."
+},
+{
+"perk": "Kinetic Synthesis",
+"element": "",
+"icon": "/common/destiny2_content/icons/cf96e4e6ccba04d4948a7bb0ca90761b.png",
+"tier": "3",
+"desc": "Sustained Kinetic weapon damage and rapid final blows have a chance to generate a unique ammo brick. Collecting this brick will grant ammo t"
+},
+{
+"perk": "Reload at Range",
+"element": "",
+"icon": "/common/destiny2_content/icons/2dacdd67e219bb9ec62226c82bfcfaaf.png",
+"tier": "3",
+"desc": "Precision hits with Bows and Sniper Rifles grant a stacking bonus to their reload speed."
+},
+{
+"perk": "Riposte",
+"element": "",
+"icon": "/common/destiny2_content/icons/379e370534eed91f6ac666196ce56d3d.png",
+"tier": "3",
+"desc": "Shortly after guarding with a Sword, your light and heavy attacks stun unshielded combatants. Strong against [Stagger] Unstoppable Champions"
+},
+{
+"perk": "Power from Pain",
+"element": "Void",
+"icon": "/common/destiny2_content/icons/b59af0e3a3880873b9055c3e0697b216.png",
+"tier": "3",
+"desc": "Rapid final blows against weakened combatants grant you Devour."
+},
+{
+"perk": "Fierce Proxemics",
+"element": "",
+"icon": "/common/destiny2_content/icons/a8990e7598af609e1ffca8ff7e3a2f54.png",
+"tier": "3",
+"desc": "Finisher final blows grant grenade and melee energy."
+},
+{
+"perk": "Rapid Remedy",
+"element": "",
+"icon": "/common/destiny2_content/icons/d4c2808826b8eceea0a1acca31079f87.png",
+"tier": "3",
+"desc": "Machine Gun rapid final blows heal you."
+},
+{
+"perk": "Dielectric",
+"element": "Arc",
+"icon": "/common/destiny2_content/icons/2ba8a6fb47d9a36d8e5651bad5a86752.png",
+"tier": "4",
+"desc": "Defeating [Arc]Arc debuffed targets grants Bolt Charge.\n\nRapidly defeating Arc debuffed targets spawns an Orb of Power and heals a small por"
+},
+{
+"perk": "Armorsmith",
+"element": "",
+"icon": "/common/destiny2_content/icons/f48754b849cbc1b813ea2d078e36ed0c.png",
+"tier": "4",
+"desc": "Breaking a combatant's shield temporarily grants you damage resistance and increased melee damage."
+},
+{
+"perk": "Counter Energy",
+"element": "Solar",
+"icon": "/common/destiny2_content/icons/f9cff3113b9be57572ed6697be195a1a.png",
+"tier": "4",
+"desc": "When you or a member of your fireteam stuns a champion, you gain energy for your least-charged ability."
+},
+{
+"perk": "Combination Argent Blade",
+"element": "",
+"icon": "/common/destiny2_content/icons/b1f285e95953d68a6e72312234bfd363.png",
+"tier": "4",
+"desc": "Briefly pause after executing a light attack, then follow it up with a light or heavy attack to empower your Sword for a short time, grantin"
+},
+{
+"perk": "Singularity Blade",
+"element": "Void",
+"icon": "/common/destiny2_content/icons/f510c3b6aaee8ff2da5da4368bd4c63a.png",
+"tier": "4",
+"desc": "While you have a Void elemental buff, melee and Sword hits weaken targets, while melee and Sword final blows create a weakening burst."
+},
+{
+"perk": "Blinding Jolts",
+"element": "Arc",
+"icon": "/common/destiny2_content/icons/2944f8b47be4ff1f4a0ceaa8439d0367.png",
+"tier": "4",
+"desc": "Final blows on jolted combatants blind nearby combatants."
+},
+{
+"perk": "Precision Equity",
+"element": "",
+"icon": "/common/destiny2_content/icons/09c1f017f974b0a8bee28bb519993957.png",
+"tier": "4",
+"desc": "Precision final blows build progress towards a large Orb of Power that also grants bonus weapon damage on pickup. Higher ranked targets gran"
+},
+{
+"perk": "Elemental Orbs: Arc",
+"element": "Arc",
+"icon": "/common/destiny2_content/icons/57df71b415811ddee77e55f4b95519aa.png",
+"tier": "5",
+"desc": "[Arc]Arc weapon final blows have a chance to spawn an Arc Elemental Orb. Arc Orbs can be thrown or shot to create an Arc explosion that jolt"
+},
+{
+"perk": "Kinetic Rupture",
+"element": "",
+"icon": "/common/destiny2_content/icons/01fddf1eba3b2cca594be0fec0af049e.png",
+"tier": "5",
+"desc": "Kinetic weapon damage against a powerful combatant has a chance to create a Kinetic Rupture. Targeting this Rupture causes a damaging explos"
+},
+{
+"perk": "Sniper's Meditation",
+"element": "",
+"icon": "/common/destiny2_content/icons/e7a8b3b1eb71f1d70e31d5642c92c5fb.png",
+"tier": "5",
+"desc": "Sniper Rifle hits grant stacking Sniper Rifle damage, stability, and reload bonuses for a short time. Heavy ammo Sniper Rifle hits count as "
+},
+{
+"perk": "Sword Storm Combo",
+"element": "",
+"icon": "/common/destiny2_content/icons/daaa2ac873cf0d92f0386667b84450bd.png",
+"tier": "5",
+"desc": "Performing three Sword light attacks followed by a heavy attack summons penumbral blades that surround you to damage and disorient combatant"
+},
+{
+"perk": "Void Infestation",
+"element": "Void",
+"icon": "/common/destiny2_content/icons/5eacb6ab8ca7b9ed147dc842accdb41a.png",
+"tier": "5",
+"desc": "Defeating a weakened target spawns a tracking projectile that weakens other targets."
+},
+{
+"perk": "Tazer Tag",
+"element": "Arc",
+"icon": "/common/destiny2_content/icons/c30820ca53f6ec778ddf10c6a0d6956b.png",
+"tier": "5",
+"desc": "Arc-powered melee hits jolt combatants and deal further damage for a short duration."
+},
+{
+"perk": "Sticker Shock",
+"element": "Arc",
+"icon": "/common/destiny2_content/icons/132c4594b9738a242df26521caa6421f.png",
+"tier": "5",
+"desc": "Arc Flux, Magnetic, and Fusion Grenades deal more damage when attached to combatants; on final blows, they release several micro-missiles th"
+}
+]
+}
