@@ -27,6 +27,8 @@ with open(os.path.join(BASE, "data", "options.json"), encoding="utf-8") as f:
     OPTIONS = json.load(f)
 with open(os.path.join(BASE, "data", "icons.json"), encoding="utf-8") as f:
     ICONS = json.load(f)
+with open(os.path.join(BASE, "data", "pool.json"), encoding="utf-8") as f:
+    POOL = json.load(f)
 
 ICON_BASE = "https://www.bungie.net"
 
@@ -63,6 +65,123 @@ def split_items(field):
 
 app.jinja_env.globals["icon_url"] = icon_url
 app.jinja_env.globals["split_items"] = split_items
+app.jinja_env.globals["ICON_BASE"] = ICON_BASE
+
+
+# ---- pool-based constructor ----
+GOALMAP = {
+    "Max Damage": "Damage", "Add Clear": "Add Clear",
+    "High Survivability": "Survivability", "Ability Spam": "Ability Regen",
+    "Healing": "Healing", "Team Buff": "Team Buff", "Utility": "Utility",
+    "Solo": "Survivability",
+}
+SLOTS = [
+    ("Super", 1), ("Aspect", 2), ("Fragment", 4), ("Grenade", 1),
+    ("Melee", 1), ("Class Ability", 1), ("Movement", 1),
+    ("Exotic Armor", 1), ("Exotic Weapon", 1),
+]
+CLASSES = ["Hunter", "Titan", "Warlock"]
+POOL_ELEMENTS = ["Arc", "Solar", "Void", "Stasis", "Strand", "Prismatic"]
+
+
+def _taglist(s):
+    return [t.strip() for t in str(s or "").split(",") if t.strip() and t.strip() != "-"]
+
+
+def goal_weights(a):
+    w = {}
+
+    def add(tag, val):
+        if tag:
+            w[tag] = w.get(tag, 0) + val
+
+    for key, val in (("main_goal", 3), ("second_goal", 2), ("optional_goal", 1)):
+        g = a.get(key, "Any")
+        if g and g != "Any":
+            add(GOALMAP.get(g, g), val)
+    surv = a.get("survivability", "Any")
+    if surv == "High":
+        add("Survivability", 2)
+    elif surv == "Med":
+        add("Survivability", 1)
+    for tag, val in {
+        "Boss DPS": [("Damage", 2)], "Add Clear": [("Add Clear", 2)],
+        "Support": [("Team Buff", 1), ("Healing", 1)], "Sustained": [("Damage", 1)],
+    }.get(a.get("damage_profile", "Any"), []):
+        add(tag, val)
+    for tag, val in {
+        "Support": [("Team Buff", 1)], "DPS": [("Damage", 1)], "Solo": [("Survivability", 1)],
+    }.get(a.get("team_role", "Any"), []):
+        add(tag, val)
+    return w
+
+
+def item_score(item, w):
+    tg = _taglist(item["goal_tags"])
+    fx = _taglist(item["flex_type"])
+    s = 0.0
+    for tag, val in w.items():
+        if tag in tg:
+            s += val
+        elif tag in fx:
+            s += val * 0.5
+    return s
+
+
+def gated(cat, cls, elem):
+    return [p for p in POOL if p["category"] == cat
+            and p["class"] in ("Any", cls) and p["element"] in ("Any", elem)]
+
+
+def find_pool_item(cat, name):
+    n = _norm(str(name).split("(")[0].split(" or ")[0].split("/")[0])
+    for p in POOL:
+        if p["category"] == cat and _norm(p["name"]) == n:
+            return p
+    return None
+
+
+def assemble(cls, elem, a, w):
+    build = {}
+    total = 0.0
+    for cat, need in SLOTS:
+        ranked = sorted(gated(cat, cls, elem),
+                        key=lambda x: (-item_score(x, w), x["name"]))
+        picks = ranked[:need]
+        if cat == "Exotic Armor" and a.get("build_exotic_armor", "Any") not in ("Any", None):
+            fi = find_pool_item("Exotic Armor", a["build_exotic_armor"])
+            if fi and fi["class"] in ("Any", cls):
+                picks = [fi]
+        if cat == "Exotic Weapon" and a.get("build_exotic_weapon", "Any") not in ("Any", None):
+            fi = find_pool_item("Exotic Weapon", a["build_exotic_weapon"])
+            if fi:
+                picks = [fi]
+        scored = [{"item": p, "score": round(item_score(p, w), 1)} for p in picks]
+        build[cat] = scored
+        total += sum(x["score"] for x in scored)
+    return build, round(total, 1)
+
+
+def construct(a):
+    w = goal_weights(a)
+    classes = [a["cls"]] if a.get("cls", "Any") != "Any" else list(CLASSES)
+    fa = a.get("build_exotic_armor", "Any")
+    if fa not in ("Any", None):
+        fi = find_pool_item("Exotic Armor", fa)
+        if fi and fi["class"] in CLASSES:
+            classes = [fi["class"]]
+    elements = [a["element"]] if a.get("element", "Any") != "Any" else list(POOL_ELEMENTS)
+    best = None
+    for c in classes:
+        for e in elements:
+            b, total = assemble(c, e, a, w)
+            if best is None or total > best["total"]:
+                best = {"cls": c, "elem": e, "build": b, "total": total}
+    best["auto_class"] = a.get("cls", "Any") == "Any"
+    best["auto_elem"] = a.get("element", "Any") == "Any"
+    best["slots"] = [s for s, _ in SLOTS]
+    best["has_goals"] = bool(w)
+    return best
 
 ELEMENTS = {"Arc", "Solar", "Void", "Stasis", "Strand", "Prismatic"}
 SURV_RANK = {"Low": 1, "Med": 2, "High": 3}
@@ -234,8 +353,9 @@ def results():
         ranked.append({"build": b, "score": s, "reasons": reasons})
     ranked.sort(key=lambda x: -x["score"])
     top = ranked[0]["score"] if ranked else 0
+    gen = construct(a)
     return render_template(
-        "results.html", ranked=ranked, a=a, theme=theme(a), top=top
+        "results.html", ranked=ranked, a=a, theme=theme(a), top=top, gen=gen
     )
 
 

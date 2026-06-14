@@ -15,8 +15,8 @@
 {% block content %}
 
 <div class="results-head">
-  <h2 class="panel-free" style="font-family:'Saira',sans-serif;text-transform:uppercase;letter-spacing:.13em;font-size:16px;margin:0 0 6px;">Ranked builds</h2>
-  <p class="count">{{ ranked|length }} build{{ '' if ranked|length==1 else 's' }} match your hard filters, sorted by synergy.</p>
+  <h2 class="panel-free" style="font-family:'Saira',sans-serif;text-transform:uppercase;letter-spacing:.13em;font-size:16px;margin:0 0 6px;">Your results</h2>
+  <p class="count">A loadout assembled from the full pool, plus {{ ranked|length }} curated build{{ '' if ranked|length==1 else 's' }} matching your hard filters.</p>
   <div class="chips">
     {% if a.get('cls','Any')!='Any' %}<span class="chip"><b>{{ a.cls }}</b></span>{% endif %}
     {% if a.get('element','Any')!='Any' %}<span class="chip"><b>{{ a.element }}</b></span>{% endif %}
@@ -28,6 +28,40 @@
     {% if a.get('playstyle','Any')!='Any' %}<span class="chip"><b>{{ a.playstyle }}</b></span>{% endif %}
   </div>
 </div>
+
+<div class="card best gencard">
+  <div class="cardtop">
+    <div class="scorebadge"><span class="num">{{ gen.total|int }}</span><span class="lbl">synergy</span></div>
+    <div class="cardtitle">
+      <h3>Generated loadout</h3>
+      <div class="badgerow">
+        <span class="tag elem">{{ gen.elem }}</span>
+        <span class="tag">{{ gen.cls }}</span>
+        {% if gen.auto_class and gen.auto_elem %}<span class="tag auto">auto-picked class and element</span>
+        {% elif gen.auto_class %}<span class="tag auto">auto-picked class</span>
+        {% elif gen.auto_elem %}<span class="tag auto">auto-picked element</span>{% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="cardbody">
+    {% if not gen.has_goals %}<p class="blurb">This is a class and element baseline. Add a goal on step 1 and the pool re-scores to match it.</p>
+    {% else %}<p class="blurb">Best-scoring item picked for each slot from the full tagged pool, gated to {{ gen.cls }} and {{ gen.elem }}.</p>{% endif %}
+    <div class="loadout">
+      {% for slot in gen.slots %}
+      <div class="lo">
+        <span class="k">{{ slot }}</span>
+        <div class="items">
+          {%- for e in gen.build[slot] -%}
+          <span class="iitem">{% if e.item.icon %}<img class="ic" src="{{ ICON_BASE ~ e.item.icon }}" alt="" loading="lazy" onerror="this.style.display='none'">{% endif %}<span class="nm">{{ e.item.name }}{% if e.score>0 %} <span class="sc">+{{ e.score }}</span>{% endif %}</span></span>
+          {%- endfor -%}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<h3 class="section-label">Matching curated builds</h3>
 
 {% if not ranked %}
 <div class="panel empty">

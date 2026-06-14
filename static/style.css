@@ -229,3 +229,15 @@ body {
   display: block; margin: 10px auto 0; max-width: 660px;
   font-size: 10px; color: var(--muted-2); line-height: 1.55;
 }
+
+/* ---- generated loadout ---- */
+.gencard { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent-soft), 0 10px 30px -18px var(--glow); }
+.gencard .scorebadge { width: 64px; height: 64px; }
+.gencard .scorebadge .num { font-size: 26px; }
+.tag.auto { color: var(--muted); border-color: var(--line); letter-spacing: .06em; }
+.iitem .sc { font-size: 10px; color: var(--accent); font-weight: 600; margin-left: 2px; }
+.section-label {
+  font-family: "Saira", sans-serif; text-transform: uppercase; letter-spacing: .16em;
+  font-size: 12px; color: var(--muted); font-weight: 600;
+  margin: 26px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line-soft);
+}

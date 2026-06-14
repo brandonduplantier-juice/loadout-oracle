@@ -1,4 +1,4 @@
-# Loadout Oracle
+# Destiny 2 Build Creator
 
 A three-step wizard that ranks a curated build library by how well each build
 matches your picks. Class and the three build-around picks are hard filters;
