@@ -14,14 +14,22 @@
     {{ field('activity', 'Activity', o.activity, a.get('activity','Any')) }}
     <div class="full">
       <div class="field hard">
-        <label for="build_weapon">Build around weapon</label>
-        <input type="text" name="build_weapon" id="build_weapon" list="weaponlist"
-               autocomplete="off" placeholder="Any (type a weapon name)"
-               value="{{ a.get('build_weapon','') if a.get('build_weapon','Any')!='Any' else '' }}">
-        <datalist id="weaponlist">
-          {% for wname in weapons %}<option value="{{ wname }}"></option>{% endfor %}
-        </datalist>
-        <span class="hint">Legendary or exotic. Sets the build element when no element is chosen.</span>
+        <label>Build around weapon</label>
+        <div class="cascade">
+          <select id="ammo_type" aria-label="Ammo type">
+            <option value="Any">Any ammo</option>
+            <option value="Primary">Primary</option>
+            <option value="Special">Special</option>
+            <option value="Heavy">Heavy</option>
+          </select>
+          <select id="gun_type" aria-label="Weapon type" disabled>
+            <option value="Any">Any type</option>
+          </select>
+          <select name="build_weapon" id="build_weapon" aria-label="Weapon" disabled>
+            <option value="Any">Any weapon</option>
+          </select>
+        </div>
+        <span class="hint">Ammo, then weapon type, then the weapon. Sets the build element when no element is chosen.</span>
       </div>
     </div>
     {{ field('build_exotic_armor', 'Build around exotic armor', o.build_exotic_armor, a.get('build_exotic_armor','Any'), hard=True) }}
@@ -32,4 +40,47 @@
     <button type="submit" class="btn primary">Next</button>
   </div>
 </form>
+
+<script id="weapon-tree" type="application/json">{{ weapon_tree|tojson }}</script>
+<script>
+(function () {
+  var TREE = JSON.parse(document.getElementById('weapon-tree').textContent);
+  var ammoSel = document.getElementById('ammo_type');
+  var gunSel = document.getElementById('gun_type');
+  var wpnSel = document.getElementById('build_weapon');
+
+  function opt(value, label) {
+    var o = document.createElement('option');
+    o.value = value; o.textContent = label || value; return o;
+  }
+  function resetSelect(sel, anyLabel) {
+    sel.innerHTML = ''; sel.appendChild(opt('Any', anyLabel));
+  }
+
+  ammoSel.addEventListener('change', function () {
+    var ammo = this.value;
+    resetSelect(gunSel, 'Any type');
+    resetSelect(wpnSel, 'Any weapon');
+    wpnSel.disabled = true;
+    if (ammo === 'Any' || !TREE[ammo]) {
+      gunSel.disabled = true; return;
+    }
+    Object.keys(TREE[ammo]).forEach(function (gt) { gunSel.appendChild(opt(gt)); });
+    gunSel.disabled = false;
+  });
+
+  gunSel.addEventListener('change', function () {
+    var ammo = ammoSel.value, gun = this.value;
+    resetSelect(wpnSel, 'Any weapon');
+    if (gun === 'Any' || !TREE[ammo] || !TREE[ammo][gun]) {
+      wpnSel.disabled = true; return;
+    }
+    TREE[ammo][gun].forEach(function (pair) {
+      var name = pair[0], el = pair[1];
+      wpnSel.appendChild(opt(name, el ? name + '  \u00b7  ' + el : name));
+    });
+    wpnSel.disabled = false;
+  });
+})();
+</script>
 {% endblock %}

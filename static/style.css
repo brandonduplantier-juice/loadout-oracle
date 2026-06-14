@@ -267,3 +267,8 @@ body {
 @media (max-width: 620px) {
   .classmark svg { width: 24px; height: 24px; }
 }
+
+/* ---- cascading weapon picker ---- */
+.cascade { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.cascade select:disabled { opacity: .45; cursor: not-allowed; }
+@media (max-width: 620px) { .cascade { grid-template-columns: 1fr; } }

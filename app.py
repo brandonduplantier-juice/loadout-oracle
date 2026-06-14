@@ -31,6 +31,8 @@ with open(os.path.join(BASE, "data", "pool.json"), encoding="utf-8") as f:
     POOL = json.load(f)
 with open(os.path.join(BASE, "data", "weapons.json"), encoding="utf-8") as f:
     WEAPON_ELEM = json.load(f)
+with open(os.path.join(BASE, "data", "weapons_tree.json"), encoding="utf-8") as f:
+    WEAPON_TREE = json.load(f)
 
 ICON_BASE = "https://www.bungie.net"
 
@@ -348,7 +350,7 @@ def theme(a):
 def index():
     session.clear()
     return render_template("step1.html", o=OPTIONS, a={}, theme="default",
-                           weapons=sorted(WEAPON_ELEM.keys()))
+                           weapon_tree=WEAPON_TREE)
 
 
 @app.route("/step1", methods=["POST"])
