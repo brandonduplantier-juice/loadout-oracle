@@ -42,7 +42,8 @@
 "name": "Ascension",
 "goal_tags": "Add Clear, Crowd Control, Team Buff",
 "flex_type": "Ability Regen, Survivability, Damage",
-"icon": "/common/destiny2_content/icons/3bfe666002e12ec6ea3d0c3661f81f31.jpg"
+"icon": "/common/destiny2_content/icons/3bfe666002e12ec6ea3d0c3661f81f31.jpg",
+"origin": "Arc"
 },
 {
 "category": "Aspect",
@@ -51,7 +52,8 @@
 "name": "Gunpowder Gamble",
 "goal_tags": "Damage, Add Clear, Team Buff",
 "flex_type": "Ability Regen, Survivability",
-"icon": "/common/destiny2_content/icons/765402ea0cdaa799f62fe46b57ad8437.jpg"
+"icon": "/common/destiny2_content/icons/765402ea0cdaa799f62fe46b57ad8437.jpg",
+"origin": "Solar"
 },
 {
 "category": "Aspect",
@@ -60,7 +62,8 @@
 "name": "Stylish Executioner",
 "goal_tags": "Damage, Utility",
 "flex_type": "-",
-"icon": "/common/destiny2_content/icons/ed7f8c49b77fa46f4eec87a3c167c4b1.jpg"
+"icon": "/common/destiny2_content/icons/ed7f8c49b77fa46f4eec87a3c167c4b1.jpg",
+"origin": "Void"
 },
 {
 "category": "Aspect",
@@ -69,7 +72,8 @@
 "name": "Threaded Specter",
 "goal_tags": "Damage, Add Clear, Survivability",
 "flex_type": "Ability Regen",
-"icon": "/common/destiny2_content/icons/f0311771bc0f771779301102d62c0ae0.jpg"
+"icon": "/common/destiny2_content/icons/f0311771bc0f771779301102d62c0ae0.jpg",
+"origin": "Strand"
 },
 {
 "category": "Aspect",
@@ -78,7 +82,8 @@
 "name": "Winter's Shroud",
 "goal_tags": "Survivability, Ability Regen, Crowd Control",
 "flex_type": "Damage, Add Clear",
-"icon": "/common/destiny2_content/icons/edf787affb7089495610e8f8c770d323.png"
+"icon": "/common/destiny2_content/icons/edf787affb7089495610e8f8c770d323.png",
+"origin": "Stasis"
 },
 {
 "category": "Aspect",
@@ -231,7 +236,8 @@
 "name": "Consecration",
 "goal_tags": "Add Clear, Survivability, Ability Regen",
 "flex_type": "Damage",
-"icon": "/common/destiny2_content/icons/5c71b63e8b653cd63a2ae0d8a8c64979.jpg"
+"icon": "/common/destiny2_content/icons/5c71b63e8b653cd63a2ae0d8a8c64979.jpg",
+"origin": "Solar"
 },
 {
 "category": "Aspect",
@@ -240,7 +246,8 @@
 "name": "Diamond Lance",
 "goal_tags": "Add Clear, Survivability, Crowd Control",
 "flex_type": "Ability Regen, Damage",
-"icon": "/common/destiny2_content/icons/663ed4baf3983fa13d5daf766ae60bd4.png"
+"icon": "/common/destiny2_content/icons/663ed4baf3983fa13d5daf766ae60bd4.png",
+"origin": "Stasis"
 },
 {
 "category": "Aspect",
@@ -249,7 +256,8 @@
 "name": "Drengr's Lash",
 "goal_tags": "Crowd Control",
 "flex_type": "Survivability, Damage",
-"icon": "/common/destiny2_content/icons/921a526761ce27c1f419d0bc1aafbf5f.jpg"
+"icon": "/common/destiny2_content/icons/921a526761ce27c1f419d0bc1aafbf5f.jpg",
+"origin": "Strand"
 },
 {
 "category": "Aspect",
@@ -258,7 +266,8 @@
 "name": "Knockout",
 "goal_tags": "Healing",
 "flex_type": "Survivability",
-"icon": "/common/destiny2_content/icons/e0fdf5c4c4dc10d6ee63365bf7d70821.jpg"
+"icon": "/common/destiny2_content/icons/e0fdf5c4c4dc10d6ee63365bf7d70821.jpg",
+"origin": "Arc"
 },
 {
 "category": "Aspect",
@@ -267,7 +276,8 @@
 "name": "Unbreakable",
 "goal_tags": "Survivability, Ability Regen, Crowd Control",
 "flex_type": "Damage, Add Clear",
-"icon": "/common/destiny2_content/icons/717e2702d16fb2175f81b54c2d62b7be.jpg"
+"icon": "/common/destiny2_content/icons/717e2702d16fb2175f81b54c2d62b7be.jpg",
+"origin": "Void"
 },
 {
 "category": "Aspect",
@@ -420,7 +430,8 @@
 "name": "Bleak Watcher",
 "goal_tags": "Add Clear, Survivability, Crowd Control",
 "flex_type": "Ability Regen, Damage",
-"icon": "/common/destiny2_content/icons/51d335e369d83d303203448c75fce439.png"
+"icon": "/common/destiny2_content/icons/51d335e369d83d303203448c75fce439.png",
+"origin": "Stasis"
 },
 {
 "category": "Aspect",
@@ -429,7 +440,8 @@
 "name": "Feed the Void",
 "goal_tags": "Add Clear, Survivability, Ability Regen",
 "flex_type": "Damage",
-"icon": "/common/destiny2_content/icons/178bb0e78e55c5b960aa6f42660b9b66.jpg"
+"icon": "/common/destiny2_content/icons/178bb0e78e55c5b960aa6f42660b9b66.jpg",
+"origin": "Void"
 },
 {
 "category": "Aspect",
@@ -438,7 +450,8 @@
 "name": "Hellion",
 "goal_tags": "Add Clear",
 "flex_type": "Ability Regen",
-"icon": "/common/destiny2_content/icons/3514bec04e2464b2f48e1bd025afc668.jpg"
+"icon": "/common/destiny2_content/icons/3514bec04e2464b2f48e1bd025afc668.jpg",
+"origin": "Solar"
 },
 {
 "category": "Aspect",
@@ -447,7 +460,8 @@
 "name": "Lightning Surge",
 "goal_tags": "Damage, Add Clear, Survivability",
 "flex_type": "Ability Regen",
-"icon": "/common/destiny2_content/icons/5730fd352ae02a03290387ea81d39468.jpg"
+"icon": "/common/destiny2_content/icons/5730fd352ae02a03290387ea81d39468.jpg",
+"origin": "Arc"
 },
 {
 "category": "Aspect",
@@ -456,7 +470,8 @@
 "name": "Weaver's Call",
 "goal_tags": "Add Clear, Ability Regen",
 "flex_type": "Damage",
-"icon": "/common/destiny2_content/icons/5d38da97f92b3bdfef333a418ab8caf5.jpg"
+"icon": "/common/destiny2_content/icons/5d38da97f92b3bdfef333a418ab8caf5.jpg",
+"origin": "Strand"
 },
 {
 "category": "Aspect",
@@ -2868,7 +2883,8 @@
 "name": "Arcbolt Grenade",
 "goal_tags": "Damage, Add Clear",
 "flex_type": "Ability Regen",
-"icon": "/common/destiny2_content/icons/04c36b4cfebda156a8eca2b257e3ce4f.jpg"
+"icon": "/common/destiny2_content/icons/04c36b4cfebda156a8eca2b257e3ce4f.jpg",
+"origin": "Arc"
 },
 {
 "category": "Grenade",
@@ -2877,7 +2893,8 @@
 "name": "Duskfield Grenade",
 "goal_tags": "Add Clear, Crowd Control",
 "flex_type": "Ability Regen, Survivability, Damage",
-"icon": "/common/destiny2_content/icons/5ed90305d6131582eb76abd99c487826.png"
+"icon": "/common/destiny2_content/icons/5ed90305d6131582eb76abd99c487826.png",
+"origin": "Stasis"
 },
 {
 "category": "Grenade",
@@ -2886,7 +2903,8 @@
 "name": "Grapple",
 "goal_tags": "Ability Regen, Utility",
 "flex_type": "Damage, Add Clear",
-"icon": "/common/destiny2_content/icons/5d65ba9eb04c2f3760eba0b5eec9be8a.jpg"
+"icon": "/common/destiny2_content/icons/5d65ba9eb04c2f3760eba0b5eec9be8a.jpg",
+"origin": "Strand"
 },
 {
 "category": "Grenade",
@@ -2895,7 +2913,8 @@
 "name": "Magnetic Grenade",
 "goal_tags": "Add Clear, Team Buff",
 "flex_type": "Ability Regen, Damage, Survivability",
-"icon": "/common/destiny2_content/icons/72966b5c97e45d8668483f2263138613.jpg"
+"icon": "/common/destiny2_content/icons/72966b5c97e45d8668483f2263138613.jpg",
+"origin": "Void"
 },
 {
 "category": "Grenade",
@@ -2904,7 +2923,8 @@
 "name": "Swarm Grenade",
 "goal_tags": "Add Clear",
 "flex_type": "Ability Regen",
-"icon": "/common/destiny2_content/icons/0c322768dd41ac416e04dac131cf5fb5.jpg"
+"icon": "/common/destiny2_content/icons/0c322768dd41ac416e04dac131cf5fb5.jpg",
+"origin": "Solar"
 },
 {
 "category": "Grenade",
@@ -2913,7 +2933,8 @@
 "name": "Glacier Grenade",
 "goal_tags": "Add Clear, Crowd Control",
 "flex_type": "Ability Regen, Survivability, Damage",
-"icon": "/common/destiny2_content/icons/08b4d8632636f78c57425b844d7b42e4.png"
+"icon": "/common/destiny2_content/icons/08b4d8632636f78c57425b844d7b42e4.png",
+"origin": "Stasis"
 },
 {
 "category": "Grenade",
@@ -2922,7 +2943,8 @@
 "name": "Pulse Grenade",
 "goal_tags": "Add Clear, Team Buff",
 "flex_type": "Ability Regen, Damage, Survivability",
-"icon": "/common/destiny2_content/icons/11837de6306d28df467178af097d748b.jpg"
+"icon": "/common/destiny2_content/icons/11837de6306d28df467178af097d748b.jpg",
+"origin": "Arc"
 },
 {
 "category": "Grenade",
@@ -2931,7 +2953,8 @@
 "name": "Shackle Grenade",
 "goal_tags": "Add Clear",
 "flex_type": "Ability Regen",
-"icon": "/common/destiny2_content/icons/a2c73298753fdd565a22d3d6712820ab.jpg"
+"icon": "/common/destiny2_content/icons/a2c73298753fdd565a22d3d6712820ab.jpg",
+"origin": "Strand"
 },
 {
 "category": "Grenade",
@@ -2940,7 +2963,8 @@
 "name": "Suppressor Grenade",
 "goal_tags": "Add Clear, Crowd Control",
 "flex_type": "Ability Regen, Survivability, Damage",
-"icon": "/common/destiny2_content/icons/17372092d1add4cf52bb4862037b418c.jpg"
+"icon": "/common/destiny2_content/icons/17372092d1add4cf52bb4862037b418c.jpg",
+"origin": "Void"
 },
 {
 "category": "Grenade",
@@ -2949,7 +2973,8 @@
 "name": "Thermite Grenade",
 "goal_tags": "Add Clear",
 "flex_type": "Ability Regen",
-"icon": "/common/destiny2_content/icons/e4aa73bf21f3da3e22f9e07475e2e614.jpg"
+"icon": "/common/destiny2_content/icons/e4aa73bf21f3da3e22f9e07475e2e614.jpg",
+"origin": "Solar"
 },
 {
 "category": "Grenade",
@@ -2958,7 +2983,8 @@
 "name": "Coldsnap Grenade",
 "goal_tags": "Add Clear, Crowd Control",
 "flex_type": "Ability Regen, Survivability, Damage",
-"icon": "/common/destiny2_content/icons/ff53139f18628530891598936e7a8c13.png"
+"icon": "/common/destiny2_content/icons/ff53139f18628530891598936e7a8c13.png",
+"origin": "Stasis"
 },
 {
 "category": "Grenade",
@@ -2967,7 +2993,8 @@
 "name": "Healing Grenade",
 "goal_tags": "Healing, Team Buff",
 "flex_type": "Survivability, Damage",
-"icon": "/common/destiny2_content/icons/d7fa54aea967c101aeafcbc1163508d6.jpg"
+"icon": "/common/destiny2_content/icons/d7fa54aea967c101aeafcbc1163508d6.jpg",
+"origin": "Solar"
 },
 {
 "category": "Grenade",
@@ -2976,7 +3003,8 @@
 "name": "Storm Grenade",
 "goal_tags": "Damage, Add Clear",
 "flex_type": "Ability Regen",
-"icon": "/common/destiny2_content/icons/9f4ace2bd6ab050148f54ff6f4ce9a0f.jpg"
+"icon": "/common/destiny2_content/icons/9f4ace2bd6ab050148f54ff6f4ce9a0f.jpg",
+"origin": "Arc"
 },
 {
 "category": "Grenade",
@@ -2985,7 +3013,8 @@
 "name": "Threadling Grenade",
 "goal_tags": "Add Clear",
 "flex_type": "Ability Regen",
-"icon": "/common/destiny2_content/icons/18a14aeac121b2a5c8699556b63e38fd.jpg"
+"icon": "/common/destiny2_content/icons/18a14aeac121b2a5c8699556b63e38fd.jpg",
+"origin": "Strand"
 },
 {
 "category": "Grenade",
@@ -2994,7 +3023,8 @@
 "name": "Vortex Grenade",
 "goal_tags": "Damage, Add Clear",
 "flex_type": "Ability Regen",
-"icon": "/common/destiny2_content/icons/12997544665705bbbd94742268ce7091.jpg"
+"icon": "/common/destiny2_content/icons/12997544665705bbbd94742268ce7091.jpg",
+"origin": "Void"
 },
 {
 "category": "Melee",
@@ -3021,7 +3051,8 @@
 "name": "Combination Blow",
 "goal_tags": "Healing",
 "flex_type": "Survivability",
-"icon": "/common/destiny2_content/icons/a7ff3045c06a03649199c6b8e185d7a3.jpg"
+"icon": "/common/destiny2_content/icons/a7ff3045c06a03649199c6b8e185d7a3.jpg",
+"origin": "Arc"
 },
 {
 "category": "Melee",
@@ -3030,7 +3061,8 @@
 "name": "Knife Trick",
 "goal_tags": "Add Clear",
 "flex_type": "Ability Regen",
-"icon": "/common/destiny2_content/icons/d9607f7db9d1f53b16af6ee6f6bcb428.jpg"
+"icon": "/common/destiny2_content/icons/d9607f7db9d1f53b16af6ee6f6bcb428.jpg",
+"origin": "Solar"
 },
 {
 "category": "Melee",
@@ -3039,7 +3071,8 @@
 "name": "Snare Bomb",
 "goal_tags": "Add Clear, Crowd Control, Utility",
 "flex_type": "Ability Regen, Survivability, Damage",
-"icon": "/common/destiny2_content/icons/df5d0a9f49f37de0cb781b8d2fd70516.jpg"
+"icon": "/common/destiny2_content/icons/df5d0a9f49f37de0cb781b8d2fd70516.jpg",
+"origin": "Void"
 },
 {
 "category": "Melee",
@@ -3048,7 +3081,8 @@
 "name": "Threaded Spike",
 "goal_tags": "Survivability, Ability Regen, Crowd Control",
 "flex_type": "Damage, Add Clear",
-"icon": "/common/destiny2_content/icons/46620e1f142778a0d429be7a12c39f21.png"
+"icon": "/common/destiny2_content/icons/46620e1f142778a0d429be7a12c39f21.png",
+"origin": "Strand"
 },
 {
 "category": "Melee",
@@ -3057,7 +3091,8 @@
 "name": "Withering Blade",
 "goal_tags": "Crowd Control",
 "flex_type": "Survivability, Damage",
-"icon": "/common/destiny2_content/icons/d4dbdba1bbc4f102f865b14dc2ec186f.png"
+"icon": "/common/destiny2_content/icons/d4dbdba1bbc4f102f865b14dc2ec186f.png",
+"origin": "Stasis"
 },
 {
 "category": "Melee",
@@ -3165,7 +3200,8 @@
 "name": "Frenzied Blade",
 "goal_tags": "Crowd Control",
 "flex_type": "Survivability, Damage",
-"icon": "/common/destiny2_content/icons/7cccab938e8218821aed5d76740f61e9.png"
+"icon": "/common/destiny2_content/icons/7cccab938e8218821aed5d76740f61e9.png",
+"origin": "Strand"
 },
 {
 "category": "Melee",
@@ -3174,7 +3210,8 @@
 "name": "Hammer Strike",
 "goal_tags": "Add Clear, Ability Regen, Mobility",
 "flex_type": "Damage, Utility",
-"icon": "/common/destiny2_content/icons/c05584046992239cbbd0d319228058b8.jpg"
+"icon": "/common/destiny2_content/icons/c05584046992239cbbd0d319228058b8.jpg",
+"origin": "Solar"
 },
 {
 "category": "Melee",
@@ -3183,7 +3220,8 @@
 "name": "Shield Throw",
 "goal_tags": "Survivability",
 "flex_type": "-",
-"icon": "/common/destiny2_content/icons/18ba97e43f603ca3cbc1507255992d39.jpg"
+"icon": "/common/destiny2_content/icons/18ba97e43f603ca3cbc1507255992d39.jpg",
+"origin": "Void"
 },
 {
 "category": "Melee",
@@ -3192,7 +3230,8 @@
 "name": "Shiver Strike",
 "goal_tags": "Add Clear, Ability Regen, Crowd Control",
 "flex_type": "Damage, Survivability",
-"icon": "/common/destiny2_content/icons/1f34b1d2eb5377ac68346cb42db6f008.png"
+"icon": "/common/destiny2_content/icons/1f34b1d2eb5377ac68346cb42db6f008.png",
+"origin": "Stasis"
 },
 {
 "category": "Melee",
@@ -3201,7 +3240,8 @@
 "name": "Thunderclap",
 "goal_tags": "Damage, Survivability, Team Buff",
 "flex_type": "-",
-"icon": "/common/destiny2_content/icons/45e77f67fbb1e12c36972cd923f7b9e0.jpg"
+"icon": "/common/destiny2_content/icons/45e77f67fbb1e12c36972cd923f7b9e0.jpg",
+"origin": "Arc"
 },
 {
 "category": "Melee",
@@ -3282,7 +3322,8 @@
 "name": "Arcane Needle",
 "goal_tags": "Add Clear",
 "flex_type": "Ability Regen",
-"icon": "/common/destiny2_content/icons/e996524beb9d4371b1adc1212a6accdf.png"
+"icon": "/common/destiny2_content/icons/e996524beb9d4371b1adc1212a6accdf.png",
+"origin": "Strand"
 },
 {
 "category": "Melee",
@@ -3291,7 +3332,8 @@
 "name": "Chain Lightning",
 "goal_tags": "Add Clear, Crowd Control",
 "flex_type": "Ability Regen, Survivability, Damage",
-"icon": "/common/destiny2_content/icons/f07bbec19064eec2de3d02e3b700cfc2.jpg"
+"icon": "/common/destiny2_content/icons/f07bbec19064eec2de3d02e3b700cfc2.jpg",
+"origin": "Arc"
 },
 {
 "category": "Melee",
@@ -3300,7 +3342,8 @@
 "name": "Incinerator Snap",
 "goal_tags": "Add Clear",
 "flex_type": "Ability Regen",
-"icon": "/common/destiny2_content/icons/e9dee44a01ea409afe80a939b6341843.jpg"
+"icon": "/common/destiny2_content/icons/e9dee44a01ea409afe80a939b6341843.jpg",
+"origin": "Solar"
 },
 {
 "category": "Melee",
@@ -3309,7 +3352,8 @@
 "name": "Penumbral Blast",
 "goal_tags": "Add Clear, Crowd Control, Team Buff",
 "flex_type": "Ability Regen, Survivability, Damage",
-"icon": "/common/destiny2_content/icons/f77faacb093918106f28b2b49e168264.png"
+"icon": "/common/destiny2_content/icons/f77faacb093918106f28b2b49e168264.png",
+"origin": "Stasis"
 },
 {
 "category": "Melee",
@@ -3318,7 +3362,8 @@
 "name": "Pocket Singularity",
 "goal_tags": "Add Clear",
 "flex_type": "Ability Regen",
-"icon": "/common/destiny2_content/icons/afd8d014a0cf2e76a73172beae7ef0ee.jpg"
+"icon": "/common/destiny2_content/icons/afd8d014a0cf2e76a73172beae7ef0ee.jpg",
+"origin": "Void"
 },
 {
 "category": "Melee",
@@ -3498,7 +3543,8 @@
 "name": "Golden Gun: Marksman",
 "goal_tags": "Damage, Add Clear, Ability Regen",
 "flex_type": "-",
-"icon": "/common/destiny2_content/icons/52f2eb1fefa20e9c7b064c190855d588.png"
+"icon": "/common/destiny2_content/icons/52f2eb1fefa20e9c7b064c190855d588.png",
+"origin": "Solar"
 },
 {
 "category": "Super",
@@ -3507,7 +3553,8 @@
 "name": "Shadowshot: Deadfall",
 "goal_tags": "Crowd Control, Team Buff",
 "flex_type": "Survivability, Damage",
-"icon": "/common/destiny2_content/icons/61feac4f1271ba6cecc29cc50e20ab5a.png"
+"icon": "/common/destiny2_content/icons/61feac4f1271ba6cecc29cc50e20ab5a.png",
+"origin": "Void"
 },
 {
 "category": "Super",
@@ -3516,7 +3563,8 @@
 "name": "Silence and Squall",
 "goal_tags": "Crowd Control",
 "flex_type": "Survivability, Damage",
-"icon": "/common/destiny2_content/icons/a8bbee32ce8f259e7b9e112c0c8a401a.png"
+"icon": "/common/destiny2_content/icons/a8bbee32ce8f259e7b9e112c0c8a401a.png",
+"origin": "Stasis"
 },
 {
 "category": "Super",
@@ -3525,7 +3573,8 @@
 "name": "Silkstrike",
 "goal_tags": "Survivability, Team Buff, Mobility",
 "flex_type": "Damage, Utility",
-"icon": "/common/destiny2_content/icons/3da7e8684b09600e90ea5c16f1edebe0.png"
+"icon": "/common/destiny2_content/icons/3da7e8684b09600e90ea5c16f1edebe0.png",
+"origin": "Strand"
 },
 {
 "category": "Super",
@@ -3534,7 +3583,8 @@
 "name": "Storm's Edge",
 "goal_tags": "Survivability, Mobility",
 "flex_type": "Utility",
-"icon": "/common/destiny2_content/icons/515dafc7f95e310e26bf3189f640231c.png"
+"icon": "/common/destiny2_content/icons/515dafc7f95e310e26bf3189f640231c.png",
+"origin": "Arc"
 },
 {
 "category": "Super",
@@ -3633,7 +3683,8 @@
 "name": "Bladefury",
 "goal_tags": "Damage, Survivability, Ability Regen",
 "flex_type": "Add Clear",
-"icon": "/common/destiny2_content/icons/228496331415f6854ef589f33c2a2622.png"
+"icon": "/common/destiny2_content/icons/228496331415f6854ef589f33c2a2622.png",
+"origin": "Strand"
 },
 {
 "category": "Super",
@@ -3642,7 +3693,8 @@
 "name": "Glacial Quake",
 "goal_tags": "Add Clear, Survivability, Crowd Control",
 "flex_type": "Ability Regen, Damage",
-"icon": "/common/destiny2_content/icons/3c522f849a7d4d86d5224d7d5d5671a4.png"
+"icon": "/common/destiny2_content/icons/3c522f849a7d4d86d5224d7d5d5671a4.png",
+"origin": "Stasis"
 },
 {
 "category": "Super",
@@ -3651,7 +3703,8 @@
 "name": "Hammer of Sol",
 "goal_tags": "Add Clear, Survivability, Team Buff",
 "flex_type": "Ability Regen, Damage",
-"icon": "/common/destiny2_content/icons/9d1fd669f61cce4abd35dbefd22ba90c.png"
+"icon": "/common/destiny2_content/icons/9d1fd669f61cce4abd35dbefd22ba90c.png",
+"origin": "Solar"
 },
 {
 "category": "Super",
@@ -3660,7 +3713,8 @@
 "name": "Thundercrash",
 "goal_tags": "Add Clear, Survivability",
 "flex_type": "Ability Regen",
-"icon": "/common/destiny2_content/icons/adb140aba83a6c14345852531d4ee2e0.png"
+"icon": "/common/destiny2_content/icons/adb140aba83a6c14345852531d4ee2e0.png",
+"origin": "Arc"
 },
 {
 "category": "Super",
@@ -3669,7 +3723,8 @@
 "name": "Twilight Arsenal",
 "goal_tags": "Add Clear, Survivability",
 "flex_type": "Ability Regen",
-"icon": "/common/destiny2_content/icons/ad8fd9cd668f4d980b29e26ade9e4369.png"
+"icon": "/common/destiny2_content/icons/ad8fd9cd668f4d980b29e26ade9e4369.png",
+"origin": "Void"
 },
 {
 "category": "Super",
@@ -3759,7 +3814,8 @@
 "name": "Needlestorm",
 "goal_tags": "Add Clear",
 "flex_type": "Ability Regen",
-"icon": "/common/destiny2_content/icons/2e486aef07bd3551c35807f416ba0b6c.png"
+"icon": "/common/destiny2_content/icons/2e486aef07bd3551c35807f416ba0b6c.png",
+"origin": "Strand"
 },
 {
 "category": "Super",
@@ -3768,7 +3824,8 @@
 "name": "Nova Bomb: Cataclysm",
 "goal_tags": "Damage, Add Clear, Survivability",
 "flex_type": "Ability Regen",
-"icon": "/common/destiny2_content/icons/b1efa0eaa710653d85e2fcf5321047fb.png"
+"icon": "/common/destiny2_content/icons/b1efa0eaa710653d85e2fcf5321047fb.png",
+"origin": "Void"
 },
 {
 "category": "Super",
@@ -3777,7 +3834,8 @@
 "name": "Song of Flame",
 "goal_tags": "Damage, Add Clear, Ability Regen",
 "flex_type": "-",
-"icon": "/common/destiny2_content/icons/ed2e5deb9b67c0120468ee136f98f2b2.png"
+"icon": "/common/destiny2_content/icons/ed2e5deb9b67c0120468ee136f98f2b2.png",
+"origin": "Solar"
 },
 {
 "category": "Super",
@@ -3786,7 +3844,8 @@
 "name": "Stormtrance",
 "goal_tags": "Damage, Add Clear, Mobility",
 "flex_type": "Ability Regen, Utility",
-"icon": "/common/destiny2_content/icons/31a0445d352fd44b62c9a8dd2752ccdf.png"
+"icon": "/common/destiny2_content/icons/31a0445d352fd44b62c9a8dd2752ccdf.png",
+"origin": "Arc"
 },
 {
 "category": "Super",
@@ -3795,7 +3854,8 @@
 "name": "Winter's Wrath",
 "goal_tags": "Add Clear, Survivability, Crowd Control",
 "flex_type": "Ability Regen, Damage",
-"icon": "/common/destiny2_content/icons/c9f25c8f6d5e647366ffc4f71a825961.png"
+"icon": "/common/destiny2_content/icons/c9f25c8f6d5e647366ffc4f71a825961.png",
+"origin": "Stasis"
 },
 {
 "category": "Super",

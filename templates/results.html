@@ -45,14 +45,14 @@
   </div>
   <div class="cardbody">
     {% if not gen.has_goals %}<p class="blurb">This is a class and element baseline. Add a goal on step 1 and the pool re-scores to match it.</p>
-    {% else %}<p class="blurb">Best-scoring item picked for each slot from the full tagged pool, gated to {{ gen.cls }} and {{ gen.elem }}.</p>{% endif %}
+    {% else %}<p class="blurb">Best-scoring item picked for each slot from the full tagged pool, gated to {{ gen.cls }} and {{ gen.elem }}.{% if gen.elem == 'Prismatic' %} The colored tag on each pick is its origin element, so you can see the Light and Dark mix that goes together.{% endif %}</p>{% endif %}
     <div class="loadout">
       {% for slot in gen.slots %}
       <div class="lo">
         <span class="k">{{ slot }}</span>
         <div class="items">
           {%- for e in gen.build[slot] -%}
-          <span class="iitem">{% if e.item.icon %}<img class="ic" src="{{ ICON_BASE ~ e.item.icon }}" alt="" loading="lazy" onerror="this.style.display='none'">{% endif %}<span class="nm">{{ e.item.name }}{% if e.score>0 %} <span class="sc">+{{ e.score }}</span>{% endif %}</span></span>
+          <span class="iitem">{% if e.item.icon %}<img class="ic" src="{{ ICON_BASE ~ e.item.icon }}" alt="" loading="lazy" onerror="this.style.display='none'">{% endif %}<span class="nm">{{ e.item.name }}{% if e.score>0 %} <span class="sc">+{{ e.score }}</span>{% endif %}{% if e.item.origin %} <span class="origin el-{{ e.item.origin|lower }}">{{ e.item.origin }}</span>{% endif %}</span></span>
           {%- endfor -%}
         </div>
       </div>
