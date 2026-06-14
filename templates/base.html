@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loadout Oracle - Destiny 2 build finder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="{{ theme }}">
+<div class="wrap">
+
+  <div class="masthead">
+    <p class="kicker">Destiny 2 Build Synergy Engine</p>
+    <h1 class="title"><span class="glyph" id="glyph"></span><span>Loadout <span class="accentword">Oracle</span></span></h1>
+  </div>
+
+  {% if step %}
+  <div class="stepper">
+    <div class="node {{ 'active' if step==1 else 'done' }}"><span class="diamond"></span><span class="nlabel">Loadout</span></div>
+    <div class="seg {{ 'done' if step>1 else '' }}"></div>
+    <div class="node {{ 'active' if step==2 else ('done' if step>2 else '') }}"><span class="diamond"></span><span class="nlabel">Focus</span></div>
+    <div class="seg {{ 'done' if step>2 else '' }}"></div>
+    <div class="node {{ 'active' if step==3 else '' }}"><span class="diamond"></span><span class="nlabel">Synergy</span></div>
+  </div>
+  {% endif %}
+
+  {% block content %}{% endblock %}
+
+  <p class="footer">
+    Curated build library, ranked by synergy to your picks. Class and the three build-around picks are hard filters.<br>
+    <span class="legal">This is an unofficial fan-made app and is not affiliated with, endorsed by, or sponsored by Bungie. Destiny, Destiny 2, Bungie, and related images, icons, names, and game data are property of Bungie. Game data and icons are displayed using Bungie API/manifest data.</span>
+  </p>
+</div>
+
+<script>
+  var GLYPHS = {
+    default:  '<path d="M12 3 L21 19 L3 19 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+    arc:      '<path d="M13 2 L5 13 L11 13 L9 22 L19 10 L13 10 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+    solar:    '<path d="M12 3 C15 8 17 10 17 14 a5 5 0 0 1 -10 0 C7 10 9 8 12 3 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+    void:     '<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" fill="currentColor"/>',
+    stasis:   '<path d="M12 2 L20 12 L12 22 L4 12 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 2 L12 22 M4 12 L20 12" stroke="currentColor" stroke-width="1.1"/>',
+    strand:   '<circle cx="12" cy="5" r="2.4" fill="currentColor"/><circle cx="5.5" cy="17" r="2.4" fill="currentColor"/><circle cx="18.5" cy="17" r="2.4" fill="currentColor"/><path d="M12 7 L6 15 M12 7 L18 15 M7.5 17 L16.5 17" stroke="currentColor" stroke-width="1.5"/>',
+    prismatic:'<path d="M12 3 L21 19 L3 19 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 21 L3 5 L21 5 Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" opacity="0.6"/>'
+  };
+  function setGlyph(el) {
+    var g = document.getElementById('glyph');
+    if (!g) return;
+    g.innerHTML = '<svg viewBox="0 0 24 24" width="30" height="30">' + (GLYPHS[el] || GLYPHS.default) + '</svg>';
+  }
+  setGlyph(document.body.className || 'default');
+
+  var sel = document.getElementById('element-select');
+  if (sel) {
+    sel.addEventListener('change', function () {
+      var v = this.value.toLowerCase();
+      var elems = ['arc','solar','void','stasis','strand','prismatic'];
+      var cls = elems.indexOf(v) >= 0 ? v : 'default';
+      document.body.className = cls === 'default' ? '' : cls;
+      setGlyph(cls);
+    });
+  }
+</script>
+</body>
+</html>

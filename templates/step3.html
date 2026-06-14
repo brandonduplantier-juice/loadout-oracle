@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% from "_macros.html" import field %}
+{% set step = 3 %}
+{% block content %}
+<form class="panel" method="post" action="{{ url_for('synergy') }}">
+  <h2>Synergy preferences</h2>
+  <p class="sub">Fine-tune the match. The keyword engine is the strongest signal.</p>
+  <div class="grid">
+    <div class="full">{{ field('engine', 'Keyword engine', o.engine, a.get('engine','Any'), hint='The loop the build runs on, e.g. Frost Armor, Scorch, Volatile') }}</div>
+    {{ field('damage_profile', 'Damage profile', o.damage_profile, a.get('damage_profile','Any')) }}
+    {{ field('survivability', 'Survivability floor', o.survivability, a.get('survivability','Any')) }}
+    {{ field('team_role', 'Team role', o.team_role, a.get('team_role','Any')) }}
+    {{ field('playstyle', 'Playstyle', o.playstyle, a.get('playstyle','Any')) }}
+  </div>
+  <div class="actions">
+    <a class="btn ghost" href="{{ url_for('focus') }}">Back</a>
+    <span class="spacer"></span>
+    <button type="submit" class="btn primary">Find builds</button>
+  </div>
+</form>
+{% endblock %}

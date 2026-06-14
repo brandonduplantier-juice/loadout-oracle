@@ -1,0 +1,122 @@
+{
+  "class": [
+    "Any",
+    "Hunter",
+    "Titan",
+    "Warlock"
+  ],
+  "element": [
+    "Any",
+    "Arc",
+    "Solar",
+    "Void",
+    "Stasis",
+    "Strand",
+    "Prismatic"
+  ],
+  "goal": [
+    "Any",
+    "Max Damage",
+    "Add Clear",
+    "High Survivability",
+    "Ability Spam",
+    "Healing",
+    "Team Buff",
+    "Utility",
+    "Solo"
+  ],
+  "activity": [
+    "Any",
+    "General",
+    "PvE Endgame"
+  ],
+  "build_weapon": [
+    "Any",
+    "Add-clear primary",
+    "Any DPS heavy",
+    "Apex Predator (Bait and Switch)",
+    "Apex Predator or other heavy for follow-up",
+    "Arc/Stasis legendary of choice",
+    "Buried Bloodline or Khvostov",
+    "Heal Clip+Incandescent weapon (e.g. Aberrant Action)",
+    "Khvostov 7G-0X",
+    "No Hesitation auto",
+    "Solar weapon w/ Incandescent",
+    "Stasis primary w/ Headstone",
+    "Void weapon for volatile rounds",
+    "any heavy",
+    "boss-DPS heavy",
+    "fusion rifle",
+    "stasis primary"
+  ],
+  "build_exotic_armor": [
+    "Any",
+    "Celestial Nighthawk",
+    "Cuirass of the Falling Star",
+    "Getaway Artist",
+    "Gyrfalcon's Hauberk",
+    "Helm of Saint-14 (or Citan's)",
+    "Liar's Handshake (or Relativism: Spirit of Liar + Caliban)",
+    "Renewal Grasps (alt: Cyrtarachne's Facade)",
+    "Speaker's Sight",
+    "Starfire Protocol",
+    "Stoicism: Spirit of Synthoceps + Spirit of Inmost Light (or Synthoceps)",
+    "Stoicism: Spirit of the Assassin + Contact",
+    "Sunbracers",
+    "Wishful Ignorance"
+  ],
+  "build_exotic_weapon": [
+    "Any",
+    "Buried Bloodline / Khvostov",
+    "Khvostov 7G-0X",
+    "Solar weapon of choice",
+    "Still Hunt"
+  ],
+  "focus": [
+    "Any",
+    "1",
+    "2",
+    "3"
+  ],
+  "engine": [
+    "Any",
+    "Amplified",
+    "Amplified / Jolt",
+    "Bolt Charge",
+    "Frost Armor",
+    "Invisibility",
+    "Radiant",
+    "Restoration / Cure",
+    "Scorch",
+    "Void Overshield",
+    "Woven Mail"
+  ],
+  "damage_profile": [
+    "Any",
+    "Add Clear",
+    "Boss DPS",
+    "Support",
+    "Sustained"
+  ],
+  "survivability": [
+    "Any",
+    "Low",
+    "Med",
+    "High"
+  ],
+  "team_role": [
+    "Any",
+    "DPS",
+    "Flex",
+    "Solo",
+    "Support"
+  ],
+  "playstyle": [
+    "Any",
+    "Ability",
+    "Grenade",
+    "Melee",
+    "Super",
+    "Weapon"
+  ]
+}
