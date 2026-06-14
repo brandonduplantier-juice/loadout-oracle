@@ -100,6 +100,14 @@
       {{ slot('Legendaries', b.legendary_weapons) }}
       <div class="lo"><span class="k">Stat priority</span><div class="items"><span class="nm">{{ b.stat_priority or '-' }}</span></div></div>
     </div>
+    {% if b.key_mods or b.artifact_mods or b.gear_set or b.stat_effects %}
+    <div class="modblock">
+      {% if b.key_mods %}<div class="modrow"><span class="mk">Armor mods</span><span class="mv">{{ b.key_mods }}</span></div>{% endif %}
+      {% if b.artifact_mods %}<div class="modrow"><span class="mk">Artifact</span><span class="mv">{{ b.artifact_mods }}</span></div>{% endif %}
+      {% if b.gear_set %}<div class="modrow"><span class="mk">Gear set</span><span class="mv">{{ b.gear_set }}</span></div>{% endif %}
+      {% if b.stat_effects %}<div class="modrow"><span class="mk">Stat effects</span><span class="mv">{{ b.stat_effects }}</span></div>{% endif %}
+    </div>
+    {% endif %}
     {% if b.gameplay_loop %}<p class="loop">{{ b.gameplay_loop }}</p>{% endif %}
     {% if item.reasons %}
     <div class="why">

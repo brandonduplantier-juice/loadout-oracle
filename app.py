@@ -29,6 +29,8 @@ with open(os.path.join(BASE, "data", "icons.json"), encoding="utf-8") as f:
     ICONS = json.load(f)
 with open(os.path.join(BASE, "data", "pool.json"), encoding="utf-8") as f:
     POOL = json.load(f)
+with open(os.path.join(BASE, "data", "weapons.json"), encoding="utf-8") as f:
+    WEAPON_ELEM = json.load(f)
 
 ICON_BASE = "https://www.bungie.net"
 
@@ -83,6 +85,34 @@ SLOTS = [
 CLASSES = ["Hunter", "Titan", "Warlock"]
 POOL_ELEMENTS = ["Arc", "Solar", "Void", "Stasis", "Strand", "Prismatic"]
 
+# activity -> extra weighted tags (emphasis the activity rewards)
+ACTIVITY_TAGS = {
+    "Conquests (GM)": [("Survivability", 2), ("Add Clear", 1)],
+    "Raid": [("Damage", 2), ("Team Buff", 1)],
+    "Pantheon": [("Damage", 2), ("Team Buff", 1)],
+    "Dungeon": [("Survivability", 1), ("Damage", 1)],
+    "Onslaught": [("Add Clear", 2), ("Survivability", 1)],
+    "Contest of Elders": [("Add Clear", 1), ("Survivability", 1)],
+    "The Coil": [("Add Clear", 1), ("Survivability", 1)],
+    "Gambit": [("Add Clear", 1), ("Damage", 1)],
+    "Fireteam Ops": [("Add Clear", 1)],
+    "General PvE": [("Add Clear", 1)],
+    "Crucible (PvP)": [("Survivability", 1), ("Mobility", 1)],
+    "Trials of Osiris": [("Survivability", 1), ("Mobility", 1)],
+    "Iron Banner": [("Survivability", 1), ("Mobility", 1)],
+}
+# activities that read as endgame for matching the curated builds
+ACTIVITY_ENDGAME = {
+    "Conquests (GM)", "Raid", "Pantheon", "Dungeon",
+    "Contest of Elders", "Trials of Osiris",
+}
+
+
+def weapon_element(name):
+    if not name or name == "Any":
+        return ""
+    return WEAPON_ELEM.get(str(name).strip(), "")
+
 
 def _taglist(s):
     return [t.strip() for t in str(s or "").split(",") if t.strip() and t.strip() != "-"]
@@ -112,6 +142,8 @@ def goal_weights(a):
     for tag, val in {
         "Support": [("Team Buff", 1)], "DPS": [("Damage", 1)], "Solo": [("Survivability", 1)],
     }.get(a.get("team_role", "Any"), []):
+        add(tag, val)
+    for tag, val in ACTIVITY_TAGS.get(a.get("activity", "Any"), []):
         add(tag, val)
     return w
 
@@ -171,14 +203,22 @@ def construct(a):
         if fi and fi["class"] in CLASSES:
             classes = [fi["class"]]
     elements = [a["element"]] if a.get("element", "Any") != "Any" else list(POOL_ELEMENTS)
+    # an explicit weapon pick is a strong element signal: constrain to its
+    # element (Prismatic stays allowed since it runs any damage type)
+    weap_elem = weapon_element(a.get("build_weapon", "Any"))
+    if weap_elem and a.get("element", "Any") == "Any":
+        elements = [weap_elem, "Prismatic"]
     best = None
     for c in classes:
         for e in elements:
             b, total = assemble(c, e, a, w)
-            if best is None or total > best["total"]:
-                best = {"cls": c, "elem": e, "build": b, "total": total}
+            bonus = 0.5 if (weap_elem and e == weap_elem) else 0
+            if best is None or (total + bonus) > best["rank"]:
+                best = {"cls": c, "elem": e, "build": b, "total": total,
+                        "rank": total + bonus}
     best["auto_class"] = a.get("cls", "Any") == "Any"
     best["auto_elem"] = a.get("element", "Any") == "Any"
+    best["weap_elem"] = weap_elem
     best["slots"] = [s for s, _ in SLOTS]
     best["has_goals"] = bool(w)
     return best
@@ -216,16 +256,9 @@ def focus_weight(rank):
 
 
 def passes_hard_filters(b, a):
+    # Only class is a hard filter now. Build-around picks soft-boost instead,
+    # so the curated list stays populated even for pool-only exotics.
     if a.get("cls") and a["cls"] != "Any" and b["class"] != a["cls"]:
-        return False
-    bw = a.get("build_weapon")
-    if bw and bw != "Any" and not contains(bw, b.get("legendary_weapons")):
-        return False
-    ba = a.get("build_exotic_armor")
-    if ba and ba != "Any" and b.get("exotic_armor") != ba:
-        return False
-    be = a.get("build_exotic_weapon")
-    if be and be != "Any" and b.get("exotic_weapon") != be:
         return False
     return True
 
@@ -245,9 +278,13 @@ def score(b, a):
     if contains(a.get("optional_goal"), b.get("goals")):
         s += W_OPTIONAL
         reasons.append((W_OPTIONAL, a["optional_goal"]))
-    if contains(a.get("activity"), b.get("activity")):
-        s += W_ACTIVITY
-        reasons.append((W_ACTIVITY, a["activity"]))
+    act = a.get("activity", "Any")
+    if act and act != "Any":
+        endgame = act in ACTIVITY_ENDGAME
+        bact = str(b.get("activity") or "")
+        if (endgame and "Endgame" in bact) or (not endgame and "General" in bact):
+            s += W_ACTIVITY
+            reasons.append((W_ACTIVITY, act))
     if contains(a.get("engine"), b.get("keyword_engine")):
         s += W_ENGINE
         reasons.append((W_ENGINE, a["engine"]))
@@ -281,6 +318,23 @@ def score(b, a):
         if fb:
             s += fb
             reasons.append((fb, "focus match"))
+    ba = a.get("build_exotic_armor", "Any")
+    if ba and ba != "Any" and contains(ba.split("(")[0].split(":")[0].strip(), b.get("exotic_armor")):
+        s += 8
+        reasons.append((8, "exotic armor"))
+    be = a.get("build_exotic_weapon", "Any")
+    if be and be != "Any" and contains(be.split("(")[0].split("/")[0].strip(), b.get("exotic_weapon")):
+        s += 8
+        reasons.append((8, "exotic weapon"))
+    bw = a.get("build_weapon", "Any")
+    if bw and bw != "Any":
+        if contains(bw, b.get("legendary_weapons")):
+            s += 5
+            reasons.append((5, "weapon"))
+        we = weapon_element(bw)
+        if we and b.get("element") == we:
+            s += 2
+            reasons.append((2, we + " weapon"))
     reasons.sort(reverse=True)
     return s, reasons
 
@@ -293,7 +347,8 @@ def theme(a):
 @app.route("/")
 def index():
     session.clear()
-    return render_template("step1.html", o=OPTIONS, a={}, theme="default")
+    return render_template("step1.html", o=OPTIONS, a={}, theme="default",
+                           weapons=sorted(WEAPON_ELEM.keys()))
 
 
 @app.route("/step1", methods=["POST"])
@@ -306,7 +361,7 @@ def step1():
         "second_goal": f.get("second_goal", "Any"),
         "optional_goal": f.get("optional_goal", "Any"),
         "activity": f.get("activity", "Any"),
-        "build_weapon": f.get("build_weapon", "Any"),
+        "build_weapon": f.get("build_weapon", "Any").strip() or "Any",
         "build_exotic_armor": f.get("build_exotic_armor", "Any"),
         "build_exotic_weapon": f.get("build_exotic_weapon", "Any"),
     }
