@@ -257,3 +257,13 @@ body {
 .modrow { display: flex; gap: 10px; margin-bottom: 7px; font-size: 12.5px; line-height: 1.45; }
 .modrow .mk { flex: none; width: 96px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-2); padding-top: 1px; }
 .modrow .mv { color: var(--text); }
+
+/* ---- class marks flanking the title ---- */
+.title { position: relative; }
+.classmark { color: var(--accent); display: inline-flex; align-items: center; opacity: .9; transition: color 480ms ease, opacity 300ms ease; }
+.classmark:empty { width: 0; }
+.classmark svg { filter: drop-shadow(0 0 7px var(--glow)); }
+#classmark-right { transform: scaleX(-1); }
+@media (max-width: 620px) {
+  .classmark svg { width: 24px; height: 24px; }
+}

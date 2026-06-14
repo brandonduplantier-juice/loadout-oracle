@@ -9,12 +9,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="{{ theme }}">
+<body class="{{ theme }}" data-class="{{ a.get('cls','') if a.get('cls','Any') in ['Hunter','Titan','Warlock'] else '' }}">
 <div class="wrap">
 
   <div class="masthead">
     <p class="kicker">Destiny 2 Build Synergy Engine</p>
-    <h1 class="title"><span class="glyph" id="glyph"></span><span>Loadout <span class="accentword">Oracle</span></span></h1>
+    <h1 class="title">
+      <span class="classmark" id="classmark-left"></span>
+      <span class="glyph" id="glyph"></span>
+      <span>Loadout <span class="accentword">Oracle</span></span>
+      <span class="classmark" id="classmark-right"></span>
+    </h1>
   </div>
 
   {% if step %}
@@ -61,6 +66,26 @@
       document.body.className = cls === 'default' ? '' : cls;
       setGlyph(cls);
     });
+  }
+
+  var CLASSMARKS = {
+    titan:   '<path d="M4 5 L8 9 M20 5 L16 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 5 L18 9 L15.5 18 L12 21 L8.5 18 L6 9 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.5 12 L15.5 12" stroke="currentColor" stroke-width="1.5"/>',
+    hunter:  '<path d="M4 7 L8 4 L12 8 L16 4 L20 7 L15.5 13 L12 21 L8.5 13 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+    warlock: '<circle cx="12" cy="10.5" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 8 Q8 14.5 12 10.6 Q16 14.5 20.5 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 14 L12 21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>'
+  };
+  function setClassMarks(cls) {
+    var l = document.getElementById('classmark-left'), r = document.getElementById('classmark-right');
+    if (!l || !r) return;
+    cls = (cls || '').toLowerCase();
+    if (CLASSMARKS[cls]) {
+      var svg = '<svg viewBox="0 0 24 24" width="34" height="34">' + CLASSMARKS[cls] + '</svg>';
+      l.innerHTML = svg; r.innerHTML = svg;
+    } else { l.innerHTML = ''; r.innerHTML = ''; }
+  }
+  setClassMarks(document.body.dataset.class || '');
+  var clsSel = document.getElementById('cls');
+  if (clsSel) {
+    clsSel.addEventListener('change', function () { setClassMarks(this.value); });
   }
 </script>
 </body>
