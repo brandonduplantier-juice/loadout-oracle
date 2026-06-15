@@ -206,10 +206,15 @@
           dimToast('Link created and copied: ' + data.url + '  .  To use it, open DIM \u203a Loadouts \u203a Import Loadout and paste it.', 9000);
         } else {
           var reason = (data && data.reason) ? data.reason : 'unknown error';
-          dimToast('DIM share failed: ' + reason, 20000);
+          if (/401|authorization/i.test(reason)) {
+            dimToast('Real DIM import needs a DIM account login, which this tool does not have. Copied a search and opened DIM instead.', 9000);
+          } else {
+            dimToast('DIM share unavailable (' + reason + '). Copied a search and opened DIM instead.', 9000);
+          }
+          copyAndOpenDimSearch(search);
         }
       })
-      .catch(function (e) { dimToast('DIM share request error: ' + e, 20000); })
+      .catch(function (e) { dimToast('DIM unreachable. Copied a search and opened DIM instead.', 9000); copyAndOpenDimSearch(search); })
       .finally(function () { b.disabled = false; b.innerHTML = orig; });
   }
   document.querySelectorAll('.dimbtn').forEach(function (b) {
