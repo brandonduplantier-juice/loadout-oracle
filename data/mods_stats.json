@@ -62,7 +62,7 @@
    },
    {
     "mod": "Heavy Handed",
-    "cost": 1,
+    "cost": 3,
     "elem": false,
     "tags": [
      "orb",
@@ -72,7 +72,7 @@
    },
    {
     "mod": "Momentum Transfer",
-    "cost": 3,
+    "cost": 2,
     "elem": false,
     "tags": [
      "ability_regen",
@@ -132,7 +132,7 @@
    },
    {
     "mod": "Concussive Dampener",
-    "cost": 1,
+    "cost": 3,
     "elem": false,
     "tags": [
      "survivability"

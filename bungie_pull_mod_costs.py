@@ -51,15 +51,21 @@ def norm(s):
 
 
 # Concrete manifest names used to resolve the app's templated and element mod
-# keys. Element and weapon variants of a mod all share one energy cost, so any
-# single instance is representative. Keyed by the exact string in mods_stats.json.
+# keys. Element and weapon variants of a mod share one energy cost, and the
+# Harmonic (subclass-matching) variant is the cheapest, so it is listed first as
+# the value the app should prefer. Each key maps to a list of candidate manifest
+# names; the first that resolves wins. Keyed by the exact string in mods_stats.json.
 ALIAS = {
-    "<Element> Siphon": "Solar Siphon",
-    "<Element> Surge": "Solar Surge",
-    "<Element> Resistance": "Solar Resistance",
-    "<Weapon> Targeting": "Auto Rifle Targeting",
-    "<Weapon> Loader": "Auto Rifle Loader",
-    "<Weapon> Unflinching": "Unflinching Auto Rifle Aim",
+    "<Element> Siphon": ["Solar Siphon", "Arc Siphon", "Void Siphon"],
+    "<Element> Surge": ["Solar Weapon Surge", "Arc Weapon Surge", "Void Weapon Surge",
+                         "Solar Surge", "Kinetic Weapon Surge"],
+    "<Element> Resistance": ["Solar Resistance", "Arc Resistance", "Void Resistance"],
+    "<Weapon> Targeting": ["Harmonic Targeting", "Arc Targeting", "Solar Targeting"],
+    "<Weapon> Loader": ["Harmonic Loader", "Arc Loader", "Solar Loader"],
+    "<Weapon> Unflinching": ["Unflinching Harmonic Aim", "Unflinching Arc Aim",
+                             "Unflinching Solar Aim"],
+    "Charge Up": ["Charged Up", "Charge Up"],
+    "Heavy Ammo Scavenger": ["Heavy Ammo Scavenger", "Harmonic Scavenger"],
 }
 
 
@@ -94,6 +100,7 @@ def main():
 
     cost_by_hash = {}
     cost_by_name = {}
+    full = {}  # category -> { name: cost }, the complete official armor-mod list
     for h, it in items.items():
         ec = energy_of(it)
         if ec is None:
@@ -102,6 +109,11 @@ def main():
         nm = norm((it.get("displayProperties") or {}).get("name", ""))
         if nm and nm not in cost_by_name:
             cost_by_name[nm] = ec
+        cat = (it.get("plug") or {}).get("plugCategoryIdentifier", "")
+        if cat.startswith("enhancements"):
+            disp = (it.get("displayProperties") or {}).get("name", "")
+            if disp:
+                full.setdefault(cat, {})[disp] = ec
 
     out = {}
     unresolved = []
@@ -110,7 +122,10 @@ def main():
         if key in mod_hashes and int(mod_hashes[key]) in cost_by_hash:
             cost = cost_by_hash[int(mod_hashes[key])]
         if cost is None and key in ALIAS:
-            cost = cost_by_name.get(norm(ALIAS[key]))
+            for cand in ALIAS[key]:
+                cost = cost_by_name.get(norm(cand))
+                if cost is not None:
+                    break
         if cost is None:
             cost = cost_by_name.get(norm(key))
         if cost is None:
@@ -118,14 +133,25 @@ def main():
         else:
             out[key] = cost
 
-    out_path = os.path.join(os.path.dirname(data_path("mods_stats.json")), "mod_costs.json")
+    data_dir = os.path.dirname(data_path("mods_stats.json"))
+    out_path = os.path.join(data_dir, "mod_costs.json")
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
+
+    # Full official list of every armor mod and its energy cost, grouped by the
+    # manifest plug category, for reference and for picking replacements for any
+    # dead mod names. Not loaded by the app; a human-readable source of truth.
+    full_path = os.path.join(data_dir, "all_mod_costs.json")
+    full_sorted = {cat: dict(sorted(mods.items())) for cat, mods in sorted(full.items())}
+    with open(full_path, "w", encoding="utf-8") as f:
+        json.dump(full_sorted, f, ensure_ascii=False, indent=1)
+    total = sum(len(m) for m in full.values())
 
     print("resolved", len(out), "of", len(keys), "mod costs")
     if unresolved:
         print("unresolved (app keeps static fallback):", ", ".join(unresolved))
     print("Wrote", out_path)
+    print("Wrote", full_path, "with", total, "armor mods across", len(full), "categories")
     for k in keys:
         if k in out:
             print("  %-26s %s" % (k, out[k]))
