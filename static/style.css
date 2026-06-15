@@ -358,3 +358,47 @@ details.howto[open] > summary { border-bottom: 1px solid var(--line); }
 .verb { font-family: Saira, sans-serif; font-weight: 600; font-size: 12px; color: var(--accent); min-width: 110px; }
 .lflow { font-size: 12px; color: var(--text); line-height: 1.4; }
 .lflow .arrow { color: var(--muted); margin: 0 4px; }
+
+/* ---- stepper glyph (element symbol replaces the Loadout diamond) ---- */
+.diamond.hasglyph {
+  transform: none; border: none; background: none; box-shadow: none;
+  width: 24px; height: 24px; color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+}
+.node.active .diamond.hasglyph, .node.done .diamond.hasglyph { background: none; }
+.diamond.hasglyph svg { display: block; }
+
+/* ---- subclass shimmer / sheen on element select ---- */
+.masthead { position: relative; overflow: hidden; }
+.masthead .sheen {
+  position: absolute; top: 0; left: 0; height: 100%; width: 55%;
+  pointer-events: none; opacity: 0; transform: translateX(-130%);
+  background: linear-gradient(100deg, transparent 0%, var(--accent-soft) 50%, transparent 100%);
+}
+.shimmer .masthead .sheen { animation: sheen-sweep 850ms ease; }
+@keyframes sheen-sweep {
+  0% { opacity: 0; transform: translateX(-130%); }
+  25% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(130%); }
+}
+.shimmer .glyph, .shimmer #step-glyph, .shimmer .classmark {
+  animation: glyph-pulse 850ms ease;
+}
+@keyframes glyph-pulse {
+  0%, 100% { filter: none; }
+  40% { filter: drop-shadow(0 0 9px var(--accent)); }
+}
+.shimmer .panel::before, .shimmer .seg.done, .shimmer .node.done .diamond {
+  animation: accent-pulse 850ms ease;
+}
+@keyframes accent-pulse {
+  0%, 100% { filter: none; }
+  40% { filter: brightness(1.7) saturate(1.3); }
+}
+.accentword { transition: color 480ms ease; }
+.shimmer .accentword { animation: glyph-pulse 850ms ease; }
+
+/* ---- footer credit ---- */
+.footer .credit { color: var(--muted); font-size: 12px; }
+.footer .credit a { color: var(--accent); text-decoration: none; }
+.footer .credit a:hover { text-decoration: underline; }

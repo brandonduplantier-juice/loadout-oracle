@@ -219,6 +219,33 @@ def assemble(cls, elem, a, w):
     return build, round(total, 1)
 
 
+def mod_econ(name):
+    """What a given armor mod produces and consumes, for loop-aware selection
+    and synergy detection."""
+    p, c = set(), set()
+    if "Siphon" in name:
+        p.add("Orbs")
+    if "Surge" in name:
+        p.add("Empower")
+        c.add("Armor Charge")
+    if name in ("Recuperation", "Better Already"):
+        c.add("Orbs")
+    if name in ("Absolution", "Innervation", "Invigoration"):
+        c.add("Orbs")
+    if "Charge Up" in name:
+        p.add("Armor Charge")
+    if name in ("Bomber", "Outreach", "Distribution"):
+        p.add("Ability Energy")
+    if "Kickstart" in name:
+        p.add("Ability Energy")
+        c.add("Armor Charge")
+    if name == "Heavy Handed":
+        p.add("Orbs")
+    if name in ("Powerful Attraction", "Reaper"):
+        c.add("Orbs")
+    return p, c
+
+
 LOOP_WEIGHT = {"Orbs": 3.0, "Ability Energy": 2.5, "Empower": 2.0, "Transcendence": 2.0,
                "Healing": 1.5, "Crowd Control": 1.2, "Damage": 1.0, "Armor Charge": 1.5}
 
@@ -242,22 +269,12 @@ def compute_synergy(build, mods_loadout):
                 addp(cons, k, it["name"])
     for slot, info in (mods_loadout or {}).items():
         for m in info["mods"]:
-            nm = m["mod"]
-            if "Siphon" in nm:
-                addp(prod, "Orbs", nm)
-            if "Surge" in nm:
-                addp(prod, "Empower", nm)
-                addp(cons, "Armor Charge", nm)
-            if nm in ("Recuperation", "Better Already"):
-                addp(cons, "Orbs", nm)
-                addp(prod, "Healing", nm)
-            if nm in ("Absolution", "Innervation", "Invigoration"):
-                addp(cons, "Orbs", nm)
-                addp(prod, "Ability Energy", nm)
-            if "Charge Up" in nm:
-                addp(prod, "Armor Charge", nm)
-            if nm in ("Bomber", "Outreach", "Distribution"):
-                addp(prod, "Ability Energy", nm)
+            nm = m["mod"].split(" x")[0]
+            mp, mc = mod_econ(nm)
+            for k in mp:
+                addp(prod, k, m["mod"])
+            for k in mc:
+                addp(cons, k, m["mod"])
 
     loops, score = [], 0.0
     for k in set(list(prod) + list(cons)):
@@ -328,7 +345,7 @@ def construct(a):
     best["weapon_mods"] = recommend_weapon_mods(a)
     best["artifact"] = recommend_artifact(best["elem"], a)
     best["gear_set"] = recommend_gear_set(best["elem"], a)
-    best["armor_loadout"] = recommend_armor_loadout(best["elem"], a)
+    best["armor_loadout"] = recommend_armor_loadout(best["elem"], a, best["build"], best["artifact"])
     best["stat_priority"] = stat_priority(a, best["elem"])
     best["weapon_synergy"] = recommend_weapon_synergy(best["elem"], a)
     best["dim_search"] = dim_search_for(best["build"])
@@ -400,12 +417,64 @@ def _build_tags(a):
     return tags
 
 
-def recommend_armor_loadout(elem, a):
-    """Fill each armor piece with distinct, relevant mods. Element anchors
-    (Surge, Siphon, Resistance) stack to a realistic cap; everything else is
-    added once. No filler or stat mods are added just to reach 10, so a piece
-    can sit under its energy cap."""
-    tags = _build_tags(a)
+DIM2MOD = {
+    "Damage": ["damage"], "Add Clear": ["orb", "ammo"], "Ability Regen": ["ability_regen"],
+    "Survivability": ["survivability"], "Healing": ["healing", "survivability"],
+    "Crowd Control": ["orb"], "Team Buff": [], "Utility": [], "Mobility": [],
+}
+
+
+def _slot_note(elem, names):
+    bits = []
+    for raw in names:
+        n = raw.split(" x")[0]
+        if "Siphon" in n:
+            bits.append("makes orbs from your " + elem + " kills")
+        elif "Surge" in n:
+            bits.append("boosts your " + elem + " weapon damage")
+        elif "Resistance" in n and "Sniper" not in n:
+            bits.append("cuts incoming " + elem + " damage")
+        elif n in ("Recuperation", "Better Already"):
+            bits.append("heals you from the orbs the build makes")
+        elif n in ("Absolution", "Innervation", "Invigoration"):
+            bits.append("turns those orbs into ability energy")
+        elif "Kickstart" in n:
+            bits.append("refunds grenade and melee energy")
+        elif n == "Heavy Handed":
+            bits.append("your melee kills make orbs")
+        elif n in ("Bomber", "Outreach", "Distribution"):
+            bits.append("class ability feeds ability regen")
+        elif "Loader" in n or "Targeting" in n or "Scavenger" in n:
+            bits.append("supports your weapon damage phase")
+    out = []
+    for b in bits:
+        if b not in out:
+            out.append(b)
+    return "; ".join(out[:2])
+
+
+def recommend_armor_loadout(elem, a, build=None, artifact=None):
+    """Build-aware mod selection. Reads the assembled build's fragments, aspects,
+    exotics, super, grenade and melee (their produced and consumed verbs and
+    dominant tags), the artifact, and weapon focus, then picks mods that close
+    the build's loops. Distinct mods only; element anchors stack; sits under 10."""
+    pref = {}
+    for t in _build_tags(a):
+        pref[t] = pref.get(t, 0) + 1.0
+    build_prod, build_cons = set(), set()
+    if build:
+        for cat in ("Fragment", "Aspect", "Exotic Armor", "Super", "Grenade", "Melee"):
+            for e in build.get(cat, []):
+                it = e["item"]
+                build_prod |= set(it.get("prod", []))
+                build_cons |= set(it.get("cons", []))
+                for dim, w in (it.get("tagw") or {}).items():
+                    if w >= 0.18:
+                        for mt in DIM2MOD.get(dim, []):
+                            pref[mt] = pref.get(mt, 0) + min(w, 1.0)
+    # the artifact reinforces its element economy; most builds make orbs
+    if artifact:
+        build_prod.add("Orbs")
     el = "Harmonic" if elem in ("Prismatic", "Any", "") else elem
     out = {}
     for slot, mods in ARMOR_MODS.items():
@@ -413,10 +482,18 @@ def recommend_armor_loadout(elem, a):
                  if not (m["mod"] == "Harmonic Siphon" and el != "Harmonic")]
 
         def score(m):
-            return len(set(m["tags"]) & tags) + (3 if m["elem"] else 0)
+            name = m["mod"].replace("<Element>", el).replace("<Weapon>", "Primary")
+            s = sum(pref.get(t, 0) for t in m["tags"]) + (3 if m["elem"] else 0)
+            mp, mc = mod_econ(name)
+            # loop closing: mod consumes what the build produces, or vice versa
+            s += 2.0 * len(mc & build_prod) + 1.5 * len(mp & build_cons)
+            return s
 
         def relevant(m):
-            return m["elem"] or bool(set(m["tags"]) & tags)
+            name = m["mod"].replace("<Element>", el).replace("<Weapon>", "Primary")
+            mp, mc = mod_econ(name)
+            return (m["elem"] or bool(set(m["tags"]) & set(pref))
+                    or bool((mc & build_prod) or (mp & build_cons)))
 
         def cap(m):
             if m["elem"]:
@@ -442,7 +519,8 @@ def recommend_armor_loadout(elem, a):
         modlist = [{"mod": n + (" x" + str(v[2]) if v[2] > 1 else ""),
                     "cost": v[0], "desc": v[1]}
                    for n, v in counts.items() if v[2] > 0]
-        out[slot] = {"mods": modlist, "used": 10 - budget}
+        out[slot] = {"mods": modlist, "used": 10 - budget,
+                     "note": _slot_note(elem, [m["mod"] for m in modlist])}
     return out
 
 
@@ -784,11 +862,12 @@ def enrich_curated(b):
     build = {cat: _resolve_items(cat, b.get(field), elem)
              for _lab, cat, field in CUR_SLOTS}
     slots_view = [(lab, build[cat]) for lab, cat, _field in CUR_SLOTS]
-    armor = recommend_armor_loadout(elem, a)
+    art = recommend_artifact(elem, a)
+    armor = recommend_armor_loadout(elem, a, build, art)
     return {
         "elem": elem, "cls": b["class"], "slots_view": slots_view,
         "armor_loadout": armor,
-        "artifact": recommend_artifact(elem, a),
+        "artifact": art,
         "gear_set": recommend_gear_set(elem, a),
         "stat_priority": stat_priority(a, elem),
         "weapon_synergy": recommend_weapon_synergy(elem, a),
