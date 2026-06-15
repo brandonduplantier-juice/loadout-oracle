@@ -322,6 +322,7 @@ def construct(a):
     best["auto_elem"] = a.get("element", "Any") == "Any"
     best["weap_elem"] = weap_elem
     best["slots"] = [s for s, _ in SLOTS]
+    best["slots_view"] = [(s, best["build"][s]) for s in best["slots"]]
     best["has_goals"] = bool(w)
     best["armor_mods"] = recommend_armor_mods(best["elem"], a)
     best["weapon_mods"] = recommend_weapon_mods(a)
@@ -726,6 +727,76 @@ def synergy():
     return render_template("step3.html", o=OPTIONS, a=a, theme=theme(a))
 
 
+CUR_SLOTS = [
+    ("Super", "Super", "super"),
+    ("Class ability", "Class Ability", "class_ability"),
+    ("Aspects", "Aspect", "aspects"),
+    ("Fragments", "Fragment", "fragments"),
+    ("Grenade", "Grenade", "grenade"),
+    ("Melee", "Melee", "melee"),
+    ("Exotic armor", "Exotic Armor", "exotic_armor"),
+    ("Exotic weapon", "Exotic Weapon", "exotic_weapon"),
+    ("Legendaries", "Weapon", "legendary_weapons"),
+]
+
+
+def _stub_item(nm, cat, elem):
+    return {"name": nm, "category": cat, "element": elem, "icon": "",
+            "tier": "", "origin": None, "prod": [], "cons": []}
+
+
+def _resolve_items(cat, field, elem):
+    out = []
+    for nm, _ic in split_items(field):
+        p = find_pool_item(cat, nm)
+        out.append({"item": p or _stub_item(nm, cat, elem), "score": 0})
+    return out
+
+
+def _curated_answers(b):
+    goals = [g.strip() for g in str(b.get("goals") or "").split(",") if g.strip()]
+    fmap = {3: "High", 2: "Medium", 1: "Low"}
+
+    def f(k):
+        try:
+            return fmap.get(int(b.get(k) or 0), "Any")
+        except (TypeError, ValueError):
+            return "Any"
+    return {
+        "cls": b["class"], "element": b["element"],
+        "main_goal": goals[0] if goals else "Any",
+        "second_goal": goals[1] if len(goals) > 1 else "Any",
+        "optional_goal": goals[2] if len(goals) > 2 else "Any",
+        "ability_focus": f("ability_focus"), "super_focus": f("super_focus"),
+        "weapon_focus": f("weapon_focus"),
+        "damage_profile": b.get("damage_profile", "Any"),
+        "team_role": b.get("team_role", "Any"),
+        "activity": b.get("activity", "Any"),
+    }
+
+
+def enrich_curated(b):
+    """Resolve a curated build's items against the enriched pool and regenerate
+    the structured mod/artifact/gear/synergy sections so curated cards match the
+    generated loadout's format and detail."""
+    elem = b["element"]
+    a = _curated_answers(b)
+    build = {cat: _resolve_items(cat, b.get(field), elem)
+             for _lab, cat, field in CUR_SLOTS}
+    slots_view = [(lab, build[cat]) for lab, cat, _field in CUR_SLOTS]
+    armor = recommend_armor_loadout(elem, a)
+    return {
+        "elem": elem, "cls": b["class"], "slots_view": slots_view,
+        "armor_loadout": armor,
+        "artifact": recommend_artifact(elem, a),
+        "gear_set": recommend_gear_set(elem, a),
+        "stat_priority": stat_priority(a, elem),
+        "weapon_synergy": recommend_weapon_synergy(elem, a),
+        "synergy": compute_synergy(build, armor),
+        "community": classify_community(b["class"], elem, build),
+    }
+
+
 @app.route("/results")
 def results():
     a = session.get("answers", {})
@@ -735,7 +806,8 @@ def results():
     ranked = []
     for b in pool:
         s, reasons = score(b, a)
-        ranked.append({"build": b, "score": s, "reasons": reasons})
+        ranked.append({"build": b, "score": s, "reasons": reasons,
+                       "gen": enrich_curated(b)})
     ranked.sort(key=lambda x: -x["score"])
     top = ranked[0]["score"] if ranked else 0
     gen = construct(a)

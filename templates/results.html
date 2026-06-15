@@ -1,4 +1,41 @@
 {% extends "base.html" %}
+{% macro item_grid(rows) -%}
+<div class="loadout">
+  {% for label, items in rows %}
+  <div class="lo">
+    <span class="k">{{ label }}</span>
+    <div class="items">
+      {%- for e in items -%}
+        <span class="iitem">{% if e.item.icon %}<img class="ic" src="{{ ICON_BASE ~ e.item.icon }}" alt="" loading="lazy" onerror="this.style.display='none'">{% endif %}<span class="nm">{{ e.item.name }}{% if e.score>0 %} <span class="sc">+{{ e.score }}</span>{% endif %}{% if e.item.origin %} <span class="origin el-{{ e.item.origin|lower }}">{{ e.item.origin }}</span>{% endif %}{% if e.item.tier %} <span class="tier">{{ e.item.tier }}</span>{% endif %}</span></span>
+      {%- else -%}<span class="nm">-</span>{%- endfor -%}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{%- endmacro %}
+{% macro mod_sections(g) -%}
+<div class="modblock">
+  <div class="modrow"><span class="mk">Stat priority</span><span class="mv">{% for s in g.stat_priority %}<b title="{{ s.desc }}">{{ loop.index }}. {{ s.stat }}</b>{% if not loop.last %} &rsaquo; {% endif %}{% endfor %}<br><span class="altnote">Push your top one or two toward 100 or higher.</span></span></div>
+  {% for slot, info in g.armor_loadout.items() %}
+  <div class="modrow"><span class="mk">{{ slot }}</span><span class="mv">{% for m in info.mods %}<span class="modpill" title="{{ m.desc }}">{{ m.mod }}</span>{% endfor %}<span class="emini">{{ info.used }}/10</span></span></div>
+  {% endfor %}
+  <div class="modrow"><span class="mk">Weapons</span><span class="mv">{{ g.weapon_synergy.primary }} {{ g.weapon_synergy.heavy }}<br><b>Weapon mods:</b> {{ g.weapon_synergy.mods|join(', ') }}<br><span class="altnote">{{ g.weapon_synergy.note }}</span></span></div>
+  {% if g.artifact %}<div class="modrow"><span class="mk">Artifact</span><div class="mv items"><span class="anote">{{ g.artifact.name }}, unlock in this order:</span>{% for p in g.artifact.perks %}<span class="iitem">{% if p.icon %}<img class="ic sm" src="{{ ICON_BASE ~ p.icon }}" alt="" loading="lazy" onerror="this.style.display='none'">{% endif %}<span class="nm">{{ loop.index }}. {{ p.perk }}{% if p.element %} <span class="origin el-{{ p.element|lower }}">{{ p.element }}</span>{% endif %}</span></span>{% endfor %}{% if g.artifact.alts %}<span class="altnote">also strong: {{ g.artifact.alts|join(', ') }}</span>{% endif %}</div></div>{% endif %}
+  {% if g.gear_set %}<div class="modrow"><span class="mk">Gear set</span><div class="mv"><b>{{ g.gear_set.name }}</b> <span class="altnote">wear 4 of your 5 armor slots from this one set, with your exotic in the 5th. Four pieces grants both bonuses below.</span>{% for bonus in g.gear_set.bonuses %}<div class="setbonus"><span class="setcount">{{ bonus.count }}pc</span> <b>{{ bonus.perk }}</b> &middot; {{ bonus.desc }}</div>{% endfor %}</div></div>{% endif %}
+</div>
+{%- endmacro %}
+{% macro synergy_block(syn, community) -%}
+{% if syn and syn.loops %}
+<div class="synergy">
+  <div class="synhead"><span class="synlabel">Synergy loops</span><span class="synscore" title="sum of closed producer to consumer loops">{{ syn.score }}</span></div>
+  {% if community %}<p class="synnote">{{ community.note }}</p>{% endif %}
+  {% for L in syn.loops %}
+  <div class="looprow"><span class="verb">{{ L.verb }}</span><span class="lflow">{{ L.from|join(', ') }} <span class="arrow">&rarr;</span> {{ L.to|join(', ') }}</span></div>
+  {% endfor %}
+  <p class="synnote">Each row is something the build produces feeding something that consumes it. More closed loops means the build sustains itself instead of relying on one item.</p>
+</div>
+{% endif %}
+{%- endmacro %}
 {% macro slot(label, field) -%}
 <div class="lo">
   <span class="k">{{ label }}</span>
@@ -47,37 +84,9 @@
     {% if not gen.has_goals %}<p class="blurb">This is a class and element baseline. Add a goal on step 1 and the pool re-scores to match it.</p>
     {% else %}<p class="blurb">Best-scoring item picked for each slot from the full tagged pool, gated to {{ gen.cls }} and {{ gen.elem }}.{% if gen.elem == 'Prismatic' %} The colored tag on each pick is its origin element, so you can see the Light and Dark mix that goes together.{% endif %}</p>{% endif %}
     {% if gen.dim_search %}<div class="dimrow"><button class="dimbtn" data-search="{{ gen.dim_search|e }}"><span class="di">&#9883;</span> Open in DIM</button><span class="dimhint">opens DIM and copies a search for this build's exotics and weapons</span></div>{% endif %}
-    <div class="loadout">
-      {% for slot in gen.slots %}
-      <div class="lo">
-        <span class="k">{{ slot }}</span>
-        <div class="items">
-          {%- for e in gen.build[slot] -%}
-          <span class="iitem">{% if e.item.icon %}<img class="ic" src="{{ ICON_BASE ~ e.item.icon }}" alt="" loading="lazy" onerror="this.style.display='none'">{% endif %}<span class="nm">{{ e.item.name }}{% if e.score>0 %} <span class="sc">+{{ e.score }}</span>{% endif %}{% if e.item.origin %} <span class="origin el-{{ e.item.origin|lower }}">{{ e.item.origin }}</span>{% endif %}{% if e.item.tier %} <span class="tier">{{ e.item.tier }}</span>{% endif %}</span></span>
-          {%- endfor -%}
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-    <div class="modblock">
-      <div class="modrow"><span class="mk">Stat priority</span><span class="mv">{% for s in gen.stat_priority %}<b title="{{ s.desc }}">{{ loop.index }}. {{ s.stat }}</b>{% if not loop.last %} &rsaquo; {% endif %}{% endfor %}<br><span class="altnote">Push your top one or two toward 100 or higher.</span></span></div>
-      {% for slot, info in gen.armor_loadout.items() %}
-      <div class="modrow"><span class="mk">{{ slot }}</span><span class="mv">{% for m in info.mods %}<span class="modpill" title="{{ m.desc }}">{{ m.mod }}</span>{% endfor %}<span class="emini">{{ info.used }}/10</span></span></div>
-      {% endfor %}
-      <div class="modrow"><span class="mk">Weapons</span><span class="mv">{{ gen.weapon_synergy.primary }} {{ gen.weapon_synergy.heavy }}<br><b>Weapon mods:</b> {{ gen.weapon_synergy.mods|join(', ') }}<br><span class="altnote">{{ gen.weapon_synergy.note }}</span></span></div>
-      {% if gen.artifact %}<div class="modrow"><span class="mk">Artifact</span><div class="mv items"><span class="anote">{{ gen.artifact.name }}, unlock in this order:</span>{% for p in gen.artifact.perks %}<span class="iitem">{% if p.icon %}<img class="ic sm" src="{{ ICON_BASE ~ p.icon }}" alt="" loading="lazy" onerror="this.style.display='none'">{% endif %}<span class="nm">{{ loop.index }}. {{ p.perk }}{% if p.element %} <span class="origin el-{{ p.element|lower }}">{{ p.element }}</span>{% endif %}</span></span>{% endfor %}{% if gen.artifact.alts %}<span class="altnote">also strong: {{ gen.artifact.alts|join(', ') }}</span>{% endif %}</div></div>{% endif %}
-      {% if gen.gear_set %}<div class="modrow"><span class="mk">Gear set</span><div class="mv"><b>{{ gen.gear_set.name }}</b> <span class="altnote">wear 4 of your 5 armor slots from this one set, with your exotic in the 5th. Four pieces grants both bonuses below.</span>{% for b in gen.gear_set.bonuses %}<div class="setbonus"><span class="setcount">{{ b.count }}pc</span> <b>{{ b.perk }}</b> &middot; {{ b.desc }}</div>{% endfor %}</div></div>{% endif %}
-    </div>
-    {% if gen.synergy and gen.synergy.loops %}
-    <div class="synergy">
-      <div class="synhead"><span class="synlabel">Synergy loops</span><span class="synscore" title="sum of closed producer to consumer loops">{{ gen.synergy.score }}</span></div>
-      {% if gen.community %}<p class="synnote">{{ gen.community.note }}</p>{% endif %}
-      {% for L in gen.synergy.loops %}
-      <div class="looprow"><span class="verb">{{ L.verb }}</span><span class="lflow">{{ L.from|join(', ') }} <span class="arrow">&rarr;</span> {{ L.to|join(', ') }}</span></div>
-      {% endfor %}
-      <p class="synnote">Each row is something the build produces feeding something that consumes it. More closed loops means the build sustains itself instead of relying on one item.</p>
-    </div>
-    {% endif %}
+    {{ item_grid(gen.slots_view) }}
+    {{ mod_sections(gen) }}
+    {{ synergy_block(gen.synergy, gen.community) }}
   </div>
 </div>
 
@@ -119,26 +128,10 @@
   </div>
   <div class="cardbody">
     {% if b.what_it_does %}<p class="blurb">{{ b.what_it_does }}</p>{% endif %}
-    <div class="loadout">
-      {{ slot('Super', b.super) }}
-      {{ slot('Class ability', b.class_ability) }}
-      {{ slot('Aspects', b.aspects) }}
-      {{ slot('Fragments', b.fragments) }}
-      {{ slot('Grenade', b.grenade) }}
-      {{ slot('Melee', b.melee) }}
-      {{ slot('Exotic armor', b.exotic_armor) }}
-      {{ slot('Exotic weapon', b.exotic_weapon) }}
-      {{ slot('Legendaries', b.legendary_weapons) }}
-      <div class="lo"><span class="k">Stat priority</span><div class="items"><span class="nm">{{ b.stat_priority or '-' }}</span></div></div>
-    </div>
-    {% if b.key_mods or b.artifact_mods or b.gear_set or b.stat_effects %}
-    <div class="modblock">
-      {% if b.key_mods %}<div class="modrow"><span class="mk">Armor mods</span><span class="mv">{{ b.key_mods }}</span></div>{% endif %}
-      {% if b.artifact_mods %}<div class="modrow"><span class="mk">Artifact</span><div class="mv items">{% for nm, ic in split_items(b.artifact_mods) %}<span class="iitem">{% if ic %}<img class="ic sm" src="{{ ic }}" alt="" loading="lazy" onerror="this.style.display='none'">{% endif %}<span class="nm">{{ nm }}</span></span>{% endfor %}</div></div>{% endif %}
-      {% if b.gear_set %}<div class="modrow"><span class="mk">Gear set</span><span class="mv">{{ b.gear_set }}</span></div>{% endif %}
-      {% if b.stat_effects %}<div class="modrow"><span class="mk">Stat effects</span><span class="mv">{{ b.stat_effects }}</span></div>{% endif %}
-    </div>
-    {% endif %}
+    {{ item_grid(item.gen.slots_view) }}
+    {{ mod_sections(item.gen) }}
+    {% if b.stat_effects %}<div class="modblock"><div class="modrow"><span class="mk">Stat effects</span><span class="mv">{{ b.stat_effects }}</span></div></div>{% endif %}
+    {{ synergy_block(item.gen.synergy, item.gen.community) }}
     {% if b.gameplay_loop %}<p class="loop">{{ b.gameplay_loop }}</p>{% endif %}
     {% if item.reasons %}
     <div class="why">
