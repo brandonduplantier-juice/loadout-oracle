@@ -15,9 +15,11 @@ Output: dim_refs.json
 
 USAGE:
     pip install requests
+    set BUNGIE_API_KEY=<your Bungie.net API key>
     python bungie_pull_dim_refs.py
-Run it next to pool.json / mods_stats.json (or with a ./data folder).
-Rotate your API key first, then upload dim_refs.json.
+
+Run it from the repo root or beside pool.json / mods_stats.json. The API key is
+read from the BUNGIE_API_KEY environment variable; nothing is hardcoded.
 """
 import json
 import os
@@ -247,30 +249,10 @@ def main():
             exotic_class_items[cls] = entry
 
     if not exotic_class_items:
-        print("EXOTIC DIAG: extraction empty, investigating ...")
-        named = {}
-        for h, it in items.items():
-            nm = (it.get("displayProperties") or {}).get("name", "")
-            if nm in ("Essentialism", "Stoicism", "Solipsism"):
-                named[nm] = (h, it)
-        print("EXOTIC DIAG: found by name:", list(named.keys()))
-        for nm, (h, it) in named.items():
-            inv = it.get("inventory") or {}
-            print("EXOTIC DIAG", nm, "itemType=", it.get("itemType"),
-                  "subType=", it.get("itemSubType"),
-                  "tierType=", inv.get("tierType"),
-                  "bucket=", inv.get("bucketTypeHash"))
-            for si, sock in enumerate((it.get("sockets") or {}).get("socketEntries", [])):
-                rp = sock.get("randomizedPlugSetHash")
-                ru = sock.get("reusablePlugSetHash")
-                if rp or ru:
-                    ps = plugsets.get(str(rp or ru)) or {}
-                    sample = []
-                    for ip in (ps.get("reusablePlugItems", [])[:3]):
-                        d = items.get(str(ip.get("plugItemHash"))) or {}
-                        sample.append((d.get("displayProperties") or {}).get("name", "?"))
-                    print("EXOTIC DIAG  socket", si, "rand=", rp, "reuse=", ru,
-                          "sample plugs:", sample)
+        # Exotic class item spirit perks are not reliably exposed in the
+        # manifest's standard plug sockets, so the app ships a verified static
+        # dataset for these instead. This puller leaves the field empty.
+        pass
 
     out = {
         "subclasses": subclasses,
@@ -292,7 +274,7 @@ def main():
     print("stats matched:", len(stat_hashes), "of", len(STAT_NAMES), stat_hashes)
     print("aspect frag slots:", len(aspect_frag_slots))
     print("exotic class items:", {k: v["name"] for k, v in exotic_class_items.items()})
-    print("Wrote dim_refs.json. Upload it here.")
+    print("Wrote dim_refs.json")
 
 
 if __name__ == "__main__":
