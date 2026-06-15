@@ -39,6 +39,11 @@ with open(os.path.join(BASE, "data", "mods_stats.json"), encoding="utf-8") as f:
     _ms = json.load(f)
     ARMOR_MODS = _ms["armor_mods"]
     STATS = _ms["stats"]
+try:
+    with open(os.path.join(BASE, "data", "community_priors.json"), encoding="utf-8") as f:
+        COMMUNITY_PRIORS = json.load(f)
+except FileNotFoundError:
+    COMMUNITY_PRIORS = {"item_pop": {}, "class_elem": {}, "n_builds": 0}
 with open(os.path.join(BASE, "data", "gear_sets.json"), encoding="utf-8") as f:
     GEAR_SETS = json.load(f)
 
@@ -159,14 +164,24 @@ def goal_weights(a):
 
 
 def item_score(item, w):
-    tg = _taglist(item["goal_tags"])
-    fx = _taglist(item["flex_type"])
+    # weighted tier signal: item's tag distribution dotted with the build's goal
+    # weights, so a 70/30 Damage-Health item scores differently from pure Damage.
+    tw = item.get("tagw") or {}
     s = 0.0
     for tag, val in w.items():
+        s += val * tw.get(tag, 0.0) * 3.0
+    # legacy binary term keeps behaviour stable when tagw is thin
+    tg = _taglist(item["goal_tags"])
+    fx = _taglist(item["flex_type"])
+    for tag, val in w.items():
         if tag in tg:
-            s += val
+            s += val * 0.25
         elif tag in fx:
-            s += val * 0.5
+            s += val * 0.12
+    # human element: items that show up in scraped meta builds get a small nudge
+    pop = COMMUNITY_PRIORS["item_pop"].get(_norm(item["name"]), 0)
+    if pop:
+        s += min(pop, 3) * 0.5
     return s
 
 
@@ -204,6 +219,83 @@ def assemble(cls, elem, a, w):
     return build, round(total, 1)
 
 
+LOOP_WEIGHT = {"Orbs": 3.0, "Ability Energy": 2.5, "Empower": 2.0, "Transcendence": 2.0,
+               "Healing": 1.5, "Crowd Control": 1.2, "Damage": 1.0, "Armor Charge": 1.5}
+
+
+def compute_synergy(build, mods_loadout):
+    """Detect closed producer to consumer loops across the assembled build and
+    its mod set. This is the 'everything feeding into things' score."""
+    prod, cons = {}, {}
+
+    def addp(d, k, name):
+        d.setdefault(k, [])
+        if name not in d[k]:
+            d[k].append(name)
+
+    for cat, picks in build.items():
+        for e in picks:
+            it = e["item"]
+            for k in it.get("prod", []):
+                addp(prod, k, it["name"])
+            for k in it.get("cons", []):
+                addp(cons, k, it["name"])
+    for slot, info in (mods_loadout or {}).items():
+        for m in info["mods"]:
+            nm = m["mod"]
+            if "Siphon" in nm:
+                addp(prod, "Orbs", nm)
+            if "Surge" in nm:
+                addp(prod, "Empower", nm)
+                addp(cons, "Armor Charge", nm)
+            if nm in ("Recuperation", "Better Already"):
+                addp(cons, "Orbs", nm)
+                addp(prod, "Healing", nm)
+            if nm in ("Absolution", "Innervation", "Invigoration"):
+                addp(cons, "Orbs", nm)
+                addp(prod, "Ability Energy", nm)
+            if "Charge Up" in nm:
+                addp(prod, "Armor Charge", nm)
+            if nm in ("Bomber", "Outreach", "Distribution"):
+                addp(prod, "Ability Energy", nm)
+
+    loops, score = [], 0.0
+    for k in set(list(prod) + list(cons)):
+        P = list(prod.get(k, []))
+        C = list(cons.get(k, []))
+        cross = [n for n in P if n not in C] or [n for n in C if n not in P] or (len(P) > 1)
+        if P and C and cross:
+            strength = min(len(P), len(C))
+            contrib = strength * LOOP_WEIGHT.get(k, 1.0)
+            score += contrib
+            loops.append({"verb": k, "from": P[:3], "to": C[:3], "w": round(contrib, 1)})
+    loops.sort(key=lambda l: -l["w"])
+    return {"loops": loops[:6], "score": round(score, 1)}
+
+
+def classify_community(cls, elem, build):
+    """Place the build against how the scraped meta builds are distributed."""
+    pri = COMMUNITY_PRIORS
+    share = pri["class_elem"].get(cls + "|" + elem, 0)
+    dims = {}
+    for cat in ("Super", "Aspect", "Grenade", "Melee"):
+        for e in build.get(cat, []):
+            for t, v in (e["item"].get("tagw") or {}).items():
+                dims[t] = dims.get(t, 0) + v
+    top = max(dims, key=dims.get) if dims else "Damage"
+    arche = {
+        "Damage": "weapon and super damage", "Add Clear": "ad-clear and orbs",
+        "Ability Regen": "ability spam", "Survivability": "survivability and uptime",
+        "Healing": "sustain and support", "Crowd Control": "lockdown and control",
+        "Team Buff": "team support", "Utility": "utility", "Mobility": "mobility",
+    }.get(top, top)
+    note = "This leans into " + arche + "."
+    if share:
+        note += (" " + cls + " " + elem + " appears in about "
+                 + str(int(share * 100)) + "% of the scraped meta builds.")
+    return {"archetype": arche, "share": share, "note": note}
+
+
 def construct(a):
     w = goal_weights(a)
     classes = [a["cls"]] if a.get("cls", "Any") != "Any" else list(CLASSES)
@@ -238,6 +330,9 @@ def construct(a):
     best["armor_loadout"] = recommend_armor_loadout(best["elem"], a)
     best["stat_priority"] = stat_priority(a, best["elem"])
     best["weapon_synergy"] = recommend_weapon_synergy(best["elem"], a)
+    best["dim_search"] = dim_search_for(best["build"])
+    best["synergy"] = compute_synergy(best["build"], best["armor_loadout"])
+    best["community"] = classify_community(best["cls"], best["elem"], best["build"])
     return best
 
 
@@ -352,6 +447,16 @@ def stat_priority(a, elem):
     order.remove("Health")
     order.insert(0 if pri == "Health" else 1, "Health")
     return [{"stat": s, "desc": STATS[s]} for s in order]
+
+
+def dim_search_for(build):
+    names = []
+    for slot in ("Exotic Weapon", "Exotic Armor"):
+        for e in build.get(slot, []):
+            nm = (e.get("item") or {}).get("name", "")
+            if nm and nm.lower() != "none":
+                names.append(nm)
+    return " or ".join('name:"' + n + '"' for n in names)
 
 
 def recommend_weapon_synergy(elem, a):

@@ -46,13 +46,14 @@
   <div class="cardbody">
     {% if not gen.has_goals %}<p class="blurb">This is a class and element baseline. Add a goal on step 1 and the pool re-scores to match it.</p>
     {% else %}<p class="blurb">Best-scoring item picked for each slot from the full tagged pool, gated to {{ gen.cls }} and {{ gen.elem }}.{% if gen.elem == 'Prismatic' %} The colored tag on each pick is its origin element, so you can see the Light and Dark mix that goes together.{% endif %}</p>{% endif %}
+    {% if gen.dim_search %}<div class="dimrow"><button class="dimbtn" data-search="{{ gen.dim_search|e }}"><span class="di">&#9883;</span> Open in DIM</button><span class="dimhint">opens DIM and copies a search for this build's exotics and weapons</span></div>{% endif %}
     <div class="loadout">
       {% for slot in gen.slots %}
       <div class="lo">
         <span class="k">{{ slot }}</span>
         <div class="items">
           {%- for e in gen.build[slot] -%}
-          <span class="iitem">{% if e.item.icon %}<img class="ic" src="{{ ICON_BASE ~ e.item.icon }}" alt="" loading="lazy" onerror="this.style.display='none'">{% endif %}<span class="nm">{{ e.item.name }}{% if e.score>0 %} <span class="sc">+{{ e.score }}</span>{% endif %}{% if e.item.origin %} <span class="origin el-{{ e.item.origin|lower }}">{{ e.item.origin }}</span>{% endif %}</span></span>
+          <span class="iitem">{% if e.item.icon %}<img class="ic" src="{{ ICON_BASE ~ e.item.icon }}" alt="" loading="lazy" onerror="this.style.display='none'">{% endif %}<span class="nm">{{ e.item.name }}{% if e.score>0 %} <span class="sc">+{{ e.score }}</span>{% endif %}{% if e.item.origin %} <span class="origin el-{{ e.item.origin|lower }}">{{ e.item.origin }}</span>{% endif %}{% if e.item.tier %} <span class="tier">{{ e.item.tier }}</span>{% endif %}</span></span>
           {%- endfor -%}
         </div>
       </div>
@@ -67,13 +68,24 @@
       {% if gen.artifact %}<div class="modrow"><span class="mk">Artifact</span><div class="mv items"><span class="anote">{{ gen.artifact.name }}, unlock in this order:</span>{% for p in gen.artifact.perks %}<span class="iitem">{% if p.icon %}<img class="ic sm" src="{{ ICON_BASE ~ p.icon }}" alt="" loading="lazy" onerror="this.style.display='none'">{% endif %}<span class="nm">{{ loop.index }}. {{ p.perk }}{% if p.element %} <span class="origin el-{{ p.element|lower }}">{{ p.element }}</span>{% endif %}</span></span>{% endfor %}{% if gen.artifact.alts %}<span class="altnote">also strong: {{ gen.artifact.alts|join(', ') }}</span>{% endif %}<span class="altnote">{{ gen.artifact.unlock_note }}</span></div></div>{% endif %}
       {% if gen.gear_set %}<div class="modrow"><span class="mk">Gear set</span><div class="mv"><b>{{ gen.gear_set.name }}</b>{% for b in gen.gear_set.bonuses %}<div class="setbonus"><span class="setcount">{{ b.count }}pc</span> <b>{{ b.perk }}</b> &middot; {{ b.desc }}</div>{% endfor %}</div></div>{% endif %}
     </div>
+    {% if gen.synergy and gen.synergy.loops %}
+    <div class="synergy">
+      <div class="synhead"><span class="synlabel">Synergy loops</span><span class="synscore" title="sum of closed producer to consumer loops">{{ gen.synergy.score }}</span></div>
+      {% if gen.community %}<p class="synnote">{{ gen.community.note }}</p>{% endif %}
+      {% for L in gen.synergy.loops %}
+      <div class="looprow"><span class="verb">{{ L.verb }}</span><span class="lflow">{{ L.from|join(', ') }} <span class="arrow">&rarr;</span> {{ L.to|join(', ') }}</span></div>
+      {% endfor %}
+      <p class="synnote">Each row is something the build produces feeding something that consumes it. More closed loops means the build sustains itself instead of relying on one item.</p>
+    </div>
+    {% endif %}
   </div>
 </div>
 
 <details class="howto">
   <summary>How this build works and how to use it</summary>
   <div class="howbody">
-    <p>The generated build is assembled from a tagged pool of every Super, Aspect, Fragment, ability, exotic, mod, artifact perk, and gear set. Each item carries tags (Damage, Add Clear, Survivability, Healing, Ability Regen, Crowd Control, Team Buff, Utility, Mobility). Your goals and focus on steps 1 to 3 become weights, and the engine picks the highest-scoring item for each slot that fits your class and element.</p>
+    <p>The generated build is assembled from a tagged pool of every Super, Aspect, Fragment, ability, exotic, mod, artifact perk, and gear set. Each item now carries a weighted tag distribution, so it reads as a tier like "Damage + Health" or "Add Clear hybrid" rather than a flat label, and the engine scores items by how that distribution matches your goals. Items that show up in scraped meta builds get a small nudge, so the human element of how people actually build is folded in without overriding your choices.</p>
+    <p>The <b>Synergy loops</b> panel is the payoff. Each item also lists what game verbs it produces (orbs, ability energy, scorch, jolt, empower) and consumes, and a loop is counted whenever one item feeds another. A higher synergy score means the build sustains itself, one thing feeding the next, instead of leaning on a single item.</p>
     <p><b>Reading it:</b> the top rows are your subclass loadout (Super, Aspects, Fragments, grenade, melee, class ability, movement, exotic armor and weapon). The <b>Stat priority</b> tells you which Armor 3.0 stats to chase first. Each armor piece lists a full mod set that fills its energy; hover any mod for what it does. The <b>Artifact</b> row names the single artifact to equip and the perks to unlock in order. The <b>Gear set</b> row shows the 2-piece and 4-piece bonuses to aim for.</p>
     <p><b>Using it in game:</b> set your subclass to the listed element, slot the Super, Aspects and Fragments, then equip the exotic. Install the mods piece by piece (Siphon on helmet for orbs, Surge on legs for damage, ability-regen mods on arms and class item). Equip the named artifact and unlock its perks top to bottom. Build toward the stat priority and the 4-piece set bonus. The whole loop is: generate orbs with Siphon, pick them up to refund abilities and feed Surge, use abilities and weapons that match your element so every kill loops back into more uptime and damage.</p>
     <p><b>Note on data:</b> six of the seven artifacts and the armor mod effects are community-sourced for the Monument of Triumph sandbox; the Encrypted Data Disk artifact and subclass icons come from the live Bungie manifest. Verify exact perk wording in game.</p>
@@ -148,4 +160,21 @@
   <a class="btn primary" href="{{ url_for('index') }}">Start over</a>
 </div>
 {% endif %}
+
+<div id="dimtoast" class="dimtoast"></div>
+<script>
+  function openDim(search) {
+    var msg = 'DIM opened.';
+    if (search) {
+      try { navigator.clipboard.writeText(search); msg = 'Search copied. Paste it into DIM\u2019s search bar to find this build\u2019s gear.'; }
+      catch (e) { msg = 'Open DIM, then search: ' + search; }
+    }
+    window.open('https://app.destinyitemmanager.com/', '_blank', 'noopener');
+    var t = document.getElementById('dimtoast');
+    if (t) { t.textContent = msg; t.classList.add('show'); setTimeout(function () { t.classList.remove('show'); }, 4000); }
+  }
+  document.querySelectorAll('.dimbtn').forEach(function (b) {
+    b.addEventListener('click', function () { openDim(b.dataset.search || ''); });
+  });
+</script>
 {% endblock %}
