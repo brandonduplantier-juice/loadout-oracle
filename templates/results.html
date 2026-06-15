@@ -179,9 +179,9 @@
 <div id="dimtoast" class="dimtoast"></div>
 <script>
   var DIM_ENABLED = {{ 'true' if dim_enabled else 'false' }};
-  function dimToast(msg) {
+  function dimToast(msg, ms) {
     var t = document.getElementById('dimtoast');
-    if (t) { t.textContent = msg; t.classList.add('show'); setTimeout(function () { t.classList.remove('show'); }, 4000); }
+    if (t) { t.textContent = msg; t.classList.add('show'); setTimeout(function () { t.classList.remove('show'); }, ms || 4000); }
   }
   function openDimSearch(search) {
     var msg = 'DIM opened.';
@@ -202,14 +202,16 @@
       .then(function (r) { return r.json(); })
       .then(function (data) {
         if (data && data.ok && data.url) {
-          window.open(data.url, '_blank', 'noopener');
-          dimToast('DIM loadout link created and opened. It also copied to your clipboard.');
           try { navigator.clipboard.writeText(data.url); } catch (e) {}
+          window.open(data.url, '_blank', 'noopener');
+          dimToast('Link created and copied: ' + data.url + '  .  To use it, open DIM \u203a Loadouts \u203a Import Loadout and paste it.', 9000);
         } else {
+          var reason = (data && data.reason) ? data.reason : 'unknown error';
+          dimToast('DIM share failed (' + reason + '). Opened DIM search instead.', 12000);
           openDimSearch(search);
         }
       })
-      .catch(function () { openDimSearch(search); })
+      .catch(function (e) { dimToast('DIM share request error: ' + e + '. Opened DIM search instead.', 12000); openDimSearch(search); })
       .finally(function () { b.disabled = false; b.innerHTML = orig; });
   }
   document.querySelectorAll('.dimbtn').forEach(function (b) {

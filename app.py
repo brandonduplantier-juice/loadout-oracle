@@ -92,7 +92,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.1"
+APP_VERSION = "0.9.2"
 BUILD_DATE = "2026-06-15"
 
 
@@ -897,32 +897,53 @@ def build_dim_loadout(gen):
     }
 
 
-def post_dim_share(loadout):
-    """POST a loadout to DIM, return (url, error). Network errors degrade gracefully."""
-    if not DIM_API_KEY:
-        return None, "no_key"
-    body = json.dumps({"loadout": loadout, "platformMembershipId": "0"}).encode("utf-8")
+def _dim_post_once(payload):
+    body = json.dumps(payload).encode("utf-8")
     req = urlreq.Request(
         "https://api.destinyitemmanager.com/loadout_share",
         data=body, method="POST",
         headers={"Content-Type": "application/json", "X-API-Key": DIM_API_KEY,
                  "X-DIM-Version": "loadout-oracle-" + APP_VERSION})
-    try:
-        with urlreq.urlopen(req, timeout=12) as r:
-            data = json.loads(r.read().decode("utf-8"))
-    except urlerr.HTTPError as e:
+    with urlreq.urlopen(req, timeout=12) as r:
+        return json.loads(r.read().decode("utf-8"))
+
+
+def post_dim_share(loadout):
+    """POST a loadout to DIM, return (url, error). Tries with and without a
+    platformMembershipId since the share endpoint is anonymous. Degrades
+    gracefully and logs the outcome to stdout (visible in Render logs)."""
+    if not DIM_API_KEY:
+        return None, "no_key"
+    attempts = [
+        {"loadout": loadout},
+        {"loadout": loadout, "platformMembershipId": "0"},
+    ]
+    last_err = "unknown"
+    for payload in attempts:
         try:
-            detail = e.read().decode("utf-8")[:300]
-        except Exception:
-            detail = ""
-        return None, "http_" + str(e.code) + (": " + detail if detail else "")
-    except Exception as e:  # timeout, DNS, JSON, etc.
-        return None, str(e)[:200]
-    url = data.get("shareUrl") or data.get("url")
-    if not url:
-        sid = data.get("shareId") or data.get("id")
-        url = "https://dim.gg/" + str(sid) if sid else None
-    return (url, None) if url else (None, "no_url_in_response")
+            data = _dim_post_once(payload)
+        except urlerr.HTTPError as e:
+            try:
+                detail = e.read().decode("utf-8")[:400]
+            except Exception:
+                detail = ""
+            last_err = "http_" + str(e.code) + (": " + detail if detail else "")
+            print("[dim_share] HTTPError", last_err)
+            continue
+        except Exception as e:
+            last_err = type(e).__name__ + ": " + str(e)[:200]
+            print("[dim_share] error", last_err)
+            continue
+        url = data.get("shareUrl") or data.get("url")
+        if not url:
+            sid = data.get("shareId") or data.get("id")
+            url = "https://dim.gg/" + str(sid) if sid else None
+        if url:
+            print("[dim_share] ok", url)
+            return url, None
+        last_err = "no_url_in_response: " + json.dumps(data)[:300]
+        print("[dim_share]", last_err)
+    return None, last_err
 
 
 RECOIL_TYPES = {"Auto Rifle", "Submachine Gun", "Pulse Rifle", "Machine Gun"}
