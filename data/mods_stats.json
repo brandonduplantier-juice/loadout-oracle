@@ -4,85 +4,135 @@
    {
     "mod": "<Element> Siphon",
     "cost": 3,
+    "harmonic": true,
+    "harmonic_cost": 1,
+    "harmonic_mod": "Harmonic Siphon",
+    "max_copies": 2,
     "elem": true,
     "tags": [
      "orb",
      "ability_regen"
     ],
-    "desc": "Rapid matching-element kills spawn an Orb of Power (and a little Super energy)."
+    "desc": "Rapid subclass-matching kills spawn Orbs of Power."
    },
    {
-    "mod": "Harmonic Siphon",
-    "cost": 1,
+    "mod": "<Weapon> Targeting",
+    "cost": 3,
+    "harmonic": true,
+    "harmonic_cost": 2,
+    "harmonic_mod": "Harmonic Targeting",
+    "max_copies": 1,
     "elem": false,
     "tags": [
-     "orb",
-     "ability_regen"
+     "weapon_handling"
     ],
-    "desc": "Rapid kills with weapons matching your subclass spawn Orbs."
+    "desc": "Better target acquisition and aim for subclass-matching weapons."
+   },
+   {
+    "mod": "Ashes to Assets",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "super",
+     "grenade"
+    ],
+    "desc": "Bonus Super energy on grenade final blows."
+   },
+   {
+    "mod": "Dynamo",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "super",
+     "class"
+    ],
+    "desc": "Super energy when using your class ability near enemies."
    },
    {
     "mod": "Hands-On",
     "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
     "elem": false,
     "tags": [
      "super",
      "melee"
     ],
-    "desc": "Gain bonus Super energy on melee final blows."
-   },
-   {
-    "mod": "<Weapon> Targeting",
-    "cost": 3,
-    "elem": false,
-    "tags": [
-     "weapon_handling"
-    ],
-    "desc": "Improved target acquisition and aim-assist for that weapon type."
+    "desc": "Bonus Super energy on melee final blows."
    },
    {
     "mod": "Heavy Ammo Finder",
     "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
     "elem": false,
     "tags": [
      "ammo"
     ],
     "desc": "More heavy ammo bricks drop for your damage phase."
+   },
+   {
+    "mod": "Super Font",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "super",
+     "armor_charge"
+    ],
+    "desc": "Boosts your Super stat while you hold Armor Charge."
    }
   ],
   "Arms": [
    {
     "mod": "<Weapon> Loader",
     "cost": 3,
+    "harmonic": true,
+    "harmonic_cost": 2,
+    "harmonic_mod": "Harmonic Loader",
+    "max_copies": 1,
     "elem": false,
     "tags": [
      "weapon_handling"
     ],
-    "desc": "Increases reload speed for that weapon type."
+    "desc": "Faster reload for subclass-matching weapons."
    },
    {
-    "mod": "Heavy Handed",
-    "cost": 3,
-    "elem": false,
-    "tags": [
-     "orb",
-     "melee"
-    ],
-    "desc": "Powered melee final blows spawn an Orb and refund melee energy."
-   },
-   {
-    "mod": "Momentum Transfer",
+    "mod": "Bolstering Detonation",
     "cost": 2,
+    "harmonic": false,
+    "max_copies": 1,
     "elem": false,
     "tags": [
      "ability_regen",
-     "melee"
+     "grenade",
+     "class"
     ],
-    "desc": "Grenade damage refunds melee energy."
+    "desc": "Class ability energy when you damage with a grenade."
+   },
+   {
+    "mod": "Focusing Strike",
+    "cost": 2,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "ability_regen",
+     "melee",
+     "class"
+    ],
+    "desc": "Class ability energy when you damage with a melee."
    },
    {
     "mod": "Impact Induction",
     "cost": 2,
+    "harmonic": false,
+    "max_copies": 1,
     "elem": false,
     "tags": [
      "ability_regen",
@@ -91,114 +141,206 @@
     "desc": "Melee damage refunds grenade energy."
    },
    {
-    "mod": "Grenade Kickstart",
-    "cost": 3,
-    "elem": false,
-    "tags": [
-     "ability_regen",
-     "grenade"
-    ],
-    "desc": "Casting grenade while empty refunds a chunk of energy (more with Armor Charge)."
-   },
-   {
-    "mod": "Melee Kickstart",
-    "cost": 3,
+    "mod": "Momentum Transfer",
+    "cost": 2,
+    "harmonic": false,
+    "max_copies": 1,
     "elem": false,
     "tags": [
      "ability_regen",
      "melee"
     ],
-    "desc": "Casting melee while empty refunds a chunk of energy (more with Armor Charge)."
+    "desc": "Grenade damage refunds melee energy."
    },
    {
-    "mod": "Heavy Ammo Scavenger",
-    "cost": 2,
+    "mod": "Firepower",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
     "elem": false,
     "tags": [
-     "ammo"
+     "orb",
+     "grenade"
     ],
-    "desc": "Pick up more heavy ammo from bricks."
+    "desc": "Grenade final blows create Orbs of Power."
+   },
+   {
+    "mod": "Grenade Font",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "grenade",
+     "armor_charge"
+    ],
+    "desc": "Boosts your Grenade stat while you hold Armor Charge."
+   },
+   {
+    "mod": "Grenade Kickstart",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "ability_regen",
+     "grenade"
+    ],
+    "desc": "Casting grenade while empty refunds energy (more with Armor Charge)."
+   },
+   {
+    "mod": "Heavy Handed",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "orb",
+     "melee"
+    ],
+    "desc": "Powered melee final blows spawn an Orb and refund melee energy."
+   },
+   {
+    "mod": "Melee Font",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "melee",
+     "armor_charge"
+    ],
+    "desc": "Boosts your Melee stat while you hold Armor Charge."
+   },
+   {
+    "mod": "Melee Kickstart",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "ability_regen",
+     "melee"
+    ],
+    "desc": "Casting melee while empty refunds energy (more with Armor Charge)."
    }
   ],
   "Chest": [
    {
     "mod": "<Element> Resistance",
     "cost": 2,
+    "harmonic": true,
+    "harmonic_cost": 1,
+    "harmonic_mod": "Harmonic Resistance",
+    "max_copies": 2,
     "elem": true,
     "tags": [
      "survivability"
     ],
-    "desc": "Reduces incoming damage of that element."
+    "desc": "Reduces incoming subclass-matching elemental damage."
    },
    {
-    "mod": "Concussive Dampener",
-    "cost": 3,
-    "elem": false,
-    "tags": [
-     "survivability"
-    ],
-    "desc": "Reduces incoming AoE/explosive damage."
-   },
-   {
-    "mod": "Charge Up",
+    "mod": "<Weapon> Ammo Generation",
     "cost": 2,
+    "harmonic": true,
+    "harmonic_cost": 1,
+    "harmonic_mod": "Harmonic Ammo Generation",
+    "max_copies": 1,
     "elem": false,
     "tags": [
-     "armor_charge"
+     "ammo"
     ],
-    "desc": "Increases max Armor Charge you can hold by one (stacks)."
-   },
-   {
-    "mod": "Sniper Damage Resistance",
-    "cost": 3,
-    "elem": false,
-    "tags": [
-     "survivability"
-    ],
-    "desc": "Reduces sniper damage (Champion/boss snipers)."
+    "desc": "Increases ammo generation for subclass-matching weapons."
    },
    {
     "mod": "<Weapon> Unflinching",
     "cost": 3,
+    "harmonic": true,
+    "harmonic_cost": 2,
+    "harmonic_mod": "Unflinching Harmonic Aim",
+    "max_copies": 1,
     "elem": false,
     "tags": [
      "weapon_handling"
     ],
-    "desc": "Reduces flinch while aiming that weapon type."
+    "desc": "Reduces flinch while aiming subclass-matching weapons."
+   },
+   {
+    "mod": "Charged Up",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 2,
+    "elem": false,
+    "tags": [
+     "armor_charge"
+    ],
+    "desc": "Increases max Armor Charge you can hold."
+   },
+   {
+    "mod": "Concussive Dampener",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "survivability"
+    ],
+    "desc": "Reduces incoming AoE and explosive damage."
+   },
+   {
+    "mod": "Emergency Reinforcement",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 3,
+    "elem": false,
+    "tags": [
+     "survivability",
+     "armor_charge"
+    ],
+    "desc": "Damage resistance at critical health while you hold Armor Charge."
+   },
+   {
+    "mod": "Health Font",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "survivability",
+     "armor_charge"
+    ],
+    "desc": "Boosts your Health stat while you hold Armor Charge."
+   },
+   {
+    "mod": "Sniper Damage Resistance",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "survivability"
+    ],
+    "desc": "Reduces incoming long-range (sniper) damage."
    }
   ],
   "Legs": [
    {
-    "mod": "<Element> Surge",
-    "cost": 3,
-    "elem": true,
-    "tags": [
-     "damage"
-    ],
-    "desc": "Increases matching-element weapon damage while you have Armor Charge (stacks)."
-   },
-   {
-    "mod": "Recuperation",
+    "mod": "Better Already",
     "cost": 1,
+    "harmonic": false,
+    "max_copies": 1,
     "elem": false,
     "tags": [
      "survivability",
      "healing"
     ],
-    "desc": "Restores health when you pick up an Orb of Power."
-   },
-   {
-    "mod": "Absolution",
-    "cost": 3,
-    "elem": false,
-    "tags": [
-     "ability_regen"
-    ],
-    "desc": "Orb pickups reduce all ability cooldowns."
+    "desc": "Orb pickup starts health regen sooner."
    },
    {
     "mod": "Innervation",
     "cost": 1,
+    "harmonic": false,
+    "max_copies": 1,
     "elem": false,
     "tags": [
      "ability_regen",
@@ -207,8 +349,22 @@
     "desc": "Orb pickups grant grenade energy."
    },
    {
+    "mod": "Insulation",
+    "cost": 1,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "ability_regen",
+     "class"
+    ],
+    "desc": "Orb pickups reduce class ability cooldown."
+   },
+   {
     "mod": "Invigoration",
     "cost": 1,
+    "harmonic": false,
+    "max_copies": 1,
     "elem": false,
     "tags": [
      "ability_regen",
@@ -217,20 +373,92 @@
     "desc": "Orb pickups grant melee energy."
    },
    {
-    "mod": "Better Already",
+    "mod": "Recuperation",
     "cost": 1,
+    "harmonic": false,
+    "max_copies": 1,
     "elem": false,
     "tags": [
      "survivability",
      "healing"
     ],
-    "desc": "Orb pickup starts health regen sooner."
+    "desc": "Restores health when you pick up an Orb of Power."
+   },
+   {
+    "mod": "Orbs of Restoration",
+    "cost": 2,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "ability_regen",
+     "orb"
+    ],
+    "desc": "Orb pickups grant energy to your emptiest ability."
+   },
+   {
+    "mod": "<Element> Weapon Surge",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 3,
+    "elem": true,
+    "tags": [
+     "damage"
+    ],
+    "desc": "Boosts matching-element weapon damage while you hold Armor Charge."
+   },
+   {
+    "mod": "Absolution",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "ability_regen"
+    ],
+    "desc": "Orb pickups reduce all ability cooldowns."
+   },
+   {
+    "mod": "Elemental Charge",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "armor_charge"
+    ],
+    "desc": "Gain Armor Charge from elemental pickups."
+   },
+   {
+    "mod": "Weapons Font",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "weapon_handling",
+     "armor_charge"
+    ],
+    "desc": "Boosts your Weapons stat while you hold Armor Charge."
+   },
+   {
+    "mod": "Stacks on Stacks",
+    "cost": 4,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "armor_charge"
+    ],
+    "desc": "Orb pickups grant an extra Armor Charge."
    }
   ],
   "Class Item": [
    {
     "mod": "Bomber",
     "cost": 1,
+    "harmonic": false,
+    "max_copies": 1,
     "elem": false,
     "tags": [
      "ability_regen",
@@ -241,6 +469,8 @@
    {
     "mod": "Outreach",
     "cost": 1,
+    "harmonic": false,
+    "max_copies": 1,
     "elem": false,
     "tags": [
      "ability_regen",
@@ -249,27 +479,56 @@
     "desc": "Class ability cast grants melee energy."
    },
    {
-    "mod": "Distribution",
-    "cost": 3,
-    "elem": false,
-    "tags": [
-     "ability_regen"
-    ],
-    "desc": "Class ability cast reduces all ability cooldowns when near targets."
-   },
-   {
     "mod": "Powerful Attraction",
     "cost": 2,
+    "harmonic": false,
+    "max_copies": 1,
     "elem": false,
     "tags": [
      "orb",
      "utility"
     ],
-    "desc": "Class ability auto-collects nearby Orbs and elemental pickups."
+    "desc": "Class ability auto-collects nearby Orbs and pickups."
+   },
+   {
+    "mod": "Class Font",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "class",
+     "armor_charge"
+    ],
+    "desc": "Boosts your Class stat while you hold Armor Charge."
+   },
+   {
+    "mod": "Distribution",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "ability_regen"
+    ],
+    "desc": "Class ability near enemies reduces all ability cooldowns."
+   },
+   {
+    "mod": "Reaper",
+    "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
+    "elem": false,
+    "tags": [
+     "orb"
+    ],
+    "desc": "First weapon final blow after class ability spawns an Orb."
    },
    {
     "mod": "Time Dilation",
     "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
     "elem": false,
     "tags": [
      "armor_charge"
@@ -277,13 +536,16 @@
     "desc": "Extends Armor Charge decay time (keeps Surge/Font stacks up)."
    },
    {
-    "mod": "Reaper",
+    "mod": "Utility Kickstart",
     "cost": 3,
+    "harmonic": false,
+    "max_copies": 1,
     "elem": false,
     "tags": [
-     "orb"
+     "ability_regen",
+     "class"
     ],
-    "desc": "First weapon final blow after class ability spawns an Orb."
+    "desc": "Casting class ability while empty refunds energy."
    }
   ]
  },

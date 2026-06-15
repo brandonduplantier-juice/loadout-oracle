@@ -120,7 +120,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.11"
+APP_VERSION = "0.9.12"
 BUILD_DATE = "2026-06-15"
 
 
@@ -688,14 +688,28 @@ def recommend_armor_loadout(elem, a, build=None, artifact=None):
     if build and build.get("Exotic Armor"):
         exo_name = build["Exotic Armor"][0]["item"].get("name", "")
     forced = EXOTIC_OVERRIDES.get(exo_name, {})
-    el = "Harmonic" if elem in ("Prismatic", "Any", "") else elem
+    # Surge has no Harmonic version, so it takes the subclass element directly.
+    surge_el = elem if elem not in ("Prismatic", "Any", "") else ""
+
+    def eff_name(m):
+        # The build assumes weapons match the subclass, so for any mod that has a
+        # Harmonic version we use it: same effect, cheaper energy.
+        if m.get("harmonic"):
+            return m["harmonic_mod"]
+        nm = m["mod"]
+        if "<Element>" in nm:
+            nm = ((surge_el + " ") if surge_el else "") + nm.replace("<Element> ", "")
+        return nm.replace("<Weapon>", "Primary")
+
+    def eff_cost(m):
+        return m["harmonic_cost"] if m.get("harmonic") else m["cost"]
+
     out = {}
     for slot, mods in ARMOR_MODS.items():
-        cands = [m for m in mods
-                 if not (m["mod"] == "Harmonic Siphon" and el != "Harmonic")]
+        cands = list(mods)
 
         def score(m):
-            name = m["mod"].replace("<Element>", el).replace("<Weapon>", "Primary")
+            name = eff_name(m)
             s = sum(pref.get(t, 0) for t in m["tags"]) + (3 if m["elem"] else 0)
             mp, mc = mod_econ(name)
             # loop closing: mod consumes what the build produces, or vice versa
@@ -703,42 +717,38 @@ def recommend_armor_loadout(elem, a, build=None, artifact=None):
             return s
 
         def relevant(m):
-            name = m["mod"].replace("<Element>", el).replace("<Weapon>", "Primary")
+            name = eff_name(m)
             mp, mc = mod_econ(name)
             return (m["elem"] or bool(set(m["tags"]) & set(pref))
                     or bool((mc & build_prod) or (mp & build_cons)))
 
-        def cap(m):
-            if m["elem"]:
-                return {"Legs": 3, "Helmet": 2, "Chest": 2}.get(slot, 1)
-            return 1
-        ranked = sorted(cands, key=lambda m: (-score(m), m["cost"]))
+        ranked = sorted(cands, key=lambda m: (-score(m), eff_cost(m)))
         budget = 10
-        counts = {}
+        counts = {}  # name -> [cost, desc, count, harmonic, base_cost]
         # pre-seed mods forced by a specific exotic, before the greedy fill
         for fname in forced.get(slot, []):
-            m = next((x for x in cands
-                      if x["mod"].replace("<Element>", el).replace("<Weapon>", "Primary") == fname),
-                     None)
-            if m and m["cost"] <= budget:
-                counts.setdefault(fname, [m["cost"], m["desc"], 0])[2] += 1
-                budget -= m["cost"]
+            m = next((x for x in cands if eff_name(x) == fname), None)
+            if m and eff_cost(m) <= budget:
+                counts.setdefault(fname, [eff_cost(m), m["desc"], 0,
+                                          m.get("harmonic", False), m["cost"]])[2] += 1
+                budget -= eff_cost(m)
         progress = True
         while budget > 0 and progress:
             progress = False
             for m in ranked:
                 if not relevant(m):
                     continue
-                name = m["mod"].replace("<Element>", el).replace("<Weapon>", "Primary")
-                c = counts.setdefault(name, [m["cost"], m["desc"], 0])
-                if c[2] >= cap(m) or m["cost"] > budget:
+                name = eff_name(m)
+                c = counts.setdefault(name, [eff_cost(m), m["desc"], 0,
+                                             m.get("harmonic", False), m["cost"]])
+                if c[2] >= m.get("max_copies", 1) or eff_cost(m) > budget:
                     continue
                 c[2] += 1
-                budget -= m["cost"]
+                budget -= eff_cost(m)
                 progress = True
                 break
         modlist = [{"mod": n + (" x" + str(v[2]) if v[2] > 1 else ""),
-                    "cost": v[0], "desc": v[1]}
+                    "cost": v[0], "desc": v[1], "harmonic": v[3], "base_cost": v[4]}
                    for n, v in counts.items() if v[2] > 0]
         note = _slot_note(elem, [m["mod"] for m in modlist])
         if forced.get(slot) and forced.get("note"):
