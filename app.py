@@ -48,6 +48,31 @@ except FileNotFoundError:
 with open(os.path.join(BASE, "data", "gear_sets.json"), encoding="utf-8") as f:
     GEAR_SETS = json.load(f)
 
+# Prismatic exotic class items (Essentialism / Stoicism / Solipsism).
+# Static file is the verified Final Shape launch set with synergy tags.
+# If the dim_refs puller has written the live-manifest set, fold in any
+# spirits the manifest lists that the static file is missing, so the app
+# stays current the moment Brandon runs the puller. Tags persist by name.
+with open(os.path.join(BASE, "data", "exotic_class_items.json"), encoding="utf-8") as f:
+    EXOTIC_CLASS_ITEMS = json.load(f)
+try:
+    with open(os.path.join(BASE, "data", "dim_refs.json"), encoding="utf-8") as f:
+        _dref = json.load(f).get("exotic_class_items", {})
+    for _cls, _live in (_dref or {}).items():
+        if _cls not in EXOTIC_CLASS_ITEMS:
+            continue
+        _base = EXOTIC_CLASS_ITEMS[_cls]
+        for _col in ("col1", "col2"):
+            have = {s["spirit"] for s in _base.get(_col, [])}
+            for _s in (_live.get(_col) or []):
+                nm = _s.get("spirit") or _s.get("name")
+                if nm and nm not in have:
+                    _base.setdefault(_col, []).append({
+                        "spirit": nm, "source": _s.get("source", ""),
+                        "effect": _s.get("effect", ""), "tags": _s.get("tags", [])})
+except FileNotFoundError:
+    pass
+
 ICON_BASE = "https://www.bungie.net"
 
 app = Flask(__name__)
@@ -398,6 +423,8 @@ def construct(a):
     best["dim_search"] = dim_search_for(best["build"])
     best["synergy"] = compute_synergy(best["build"], best["armor_loadout"])
     best["community"] = classify_community(best["cls"], best["elem"], best["build"])
+    best["exotic_class_item"] = recommend_exotic_class_item(
+        best["cls"], a, best["build"], best["elem"])
     return best
 
 
@@ -640,6 +667,71 @@ def stat_priority(a, elem):
     order.remove("Health")
     order.insert(0 if pri == "Health" else 1, "Health")
     return [{"stat": s, "desc": STATS[s]} for s in order]
+
+
+ECI_NEED_WEIGHTS = {
+    "super":         {"super": 3, "weapon": 1, "regen": 1},
+    "grenade":       {"grenade": 3, "regen": 2, "weapon": 1, "ability": 1},
+    "melee":         {"melee": 3, "add-clear": 1, "regen": 1},
+    "weapon":        {"weapon": 3, "add-clear": 1, "super": 1},
+    "survivability": {"survivability": 3, "healing": 2, "class": 1},
+    "ability":       {"regen": 3, "ability": 2, "grenade": 1, "melee": 1, "class": 1},
+}
+# meta staples get a small versatility nudge so ties resolve toward known picks
+ECI_STAPLE = {"Spirit of Inmost Light": 0.5, "Spirit of the Ophidian": 0.2,
+              "Spirit of the Star-Eater": 1.5, "Spirit of Synthoceps": 0.2}
+
+
+def _eci_need(a):
+    play = a.get("playstyle")
+    goals = [a.get("main_goal"), a.get("second_goal"), a.get("optional_goal")]
+    if a.get("super_focus") == "High" or play == "Super" or "Max Damage" in goals:
+        return "super"
+    if play == "Melee":
+        return "melee"
+    if play == "Grenade":
+        return "grenade"
+    if play == "Weapon" or a.get("weapon_focus") == "High":
+        return "weapon"
+    if "High Survivability" in goals or "Healing" in goals:
+        return "survivability"
+    return "ability"
+
+
+def _eci_pick(spirits, need):
+    w = ECI_NEED_WEIGHTS.get(need, ECI_NEED_WEIGHTS["ability"])
+    best, bestscore = None, -1.0
+    for s in spirits:
+        sc = sum(w.get(t, 0) for t in s.get("tags", [])) + ECI_STAPLE.get(s["spirit"], 0)
+        if sc > bestscore:
+            best, bestscore = s, sc
+    return best
+
+
+def recommend_exotic_class_item(cls, a, build, elem):
+    """Prismatic-only: pick a col1 + col2 spirit combo matched to build focus."""
+    if elem != "Prismatic" or cls not in EXOTIC_CLASS_ITEMS:
+        return None
+    item = EXOTIC_CLASS_ITEMS[cls]
+    need = _eci_need(a)
+    why = {
+        "super": "leans into Super and boss damage",
+        "grenade": "feeds grenade-centric ability spam",
+        "melee": "supports a melee-forward loop",
+        "weapon": "favors weapon damage and uptime",
+        "survivability": "prioritizes staying alive",
+        "ability": "keeps your full ability kit cycling",
+    }.get(need, "rounds out the build")
+    note = ("Prismatic only. It uses your single exotic-armor slot, so run it "
+            "instead of another exotic armor piece, not alongside one.")
+    chosen = a.get("exotic_armor")
+    if chosen and chosen not in ("Any", "", None):
+        note = ("You picked " + str(chosen) + " as your exotic, so this is the "
+                "Prismatic alternative if you free up the exotic slot.")
+    return {"name": item["name"], "slot": item["slot"], "need": need, "why": why,
+            "col1": _eci_pick(item["col1"], need),
+            "col2": _eci_pick(item["col2"], need),
+            "all_col1": item["col1"], "all_col2": item["col2"], "note": note}
 
 
 def dim_search_for(build):

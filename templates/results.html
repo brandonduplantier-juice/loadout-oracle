@@ -36,6 +36,26 @@
 </div>
 {% endif %}
 {%- endmacro %}
+{% macro eci_block(eci) -%}
+{% if eci %}
+<div class="eci">
+  <div class="ecihead"><span class="ecilabel">Prismatic exotic class item</span><span class="eciname">{{ eci.name }} <span class="ecislot">{{ eci.slot }}</span></span></div>
+  <p class="ecitag">Recommended roll, tuned to a build that {{ eci.why }}.</p>
+  <div class="ecicols">
+    <div class="ecicol"><span class="ecicolh">Column 1</span><b class="ecispirit">{{ eci.col1.spirit }}</b><span class="ecisrc">{{ eci.col1.source }}</span><span class="ecieff">{{ eci.col1.effect }}</span></div>
+    <div class="ecicol"><span class="ecicolh">Column 2</span><b class="ecispirit">{{ eci.col2.spirit }}</b><span class="ecisrc">{{ eci.col2.source }}</span><span class="ecieff">{{ eci.col2.effect }}</span></div>
+  </div>
+  <p class="ecinote">{{ eci.note }}</p>
+  <details class="eciall">
+    <summary>All {{ eci.name }} spirits ({{ eci.all_col1|length }} per column)</summary>
+    <div class="ecicols">
+      <div class="ecicol"><span class="ecicolh">Column 1</span>{% for s in eci.all_col1 %}<div class="eciopt{% if s.spirit == eci.col1.spirit %} on{% endif %}"><b>{{ s.spirit }}</b> <span class="ecisrc">{{ s.source }}</span><span class="ecieff">{{ s.effect }}</span></div>{% endfor %}</div>
+      <div class="ecicol"><span class="ecicolh">Column 2</span>{% for s in eci.all_col2 %}<div class="eciopt{% if s.spirit == eci.col2.spirit %} on{% endif %}"><b>{{ s.spirit }}</b> <span class="ecisrc">{{ s.source }}</span><span class="ecieff">{{ s.effect }}</span></div>{% endfor %}</div>
+    </div>
+  </details>
+</div>
+{% endif %}
+{%- endmacro %}
 {% macro slot(label, field) -%}
 <div class="lo">
   <span class="k">{{ label }}</span>
@@ -86,6 +106,7 @@
     {% if gen.dim_search %}<div class="dimrow"><button class="dimbtn" data-search="{{ gen.dim_search|e }}"><span class="di">&#9883;</span> Open in DIM</button><span class="dimhint">opens DIM and copies a search for this build's exotics and weapons</span></div>{% endif %}
     {{ item_grid(gen.slots_view) }}
     {{ mod_sections(gen) }}
+    {{ eci_block(gen.exotic_class_item) }}
     {{ synergy_block(gen.synergy, gen.community) }}
   </div>
 </div>

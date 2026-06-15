@@ -1,0 +1,462 @@
+{
+  "_meta": {
+    "source": "Final Shape launch set (June 2024), verified via dotesports, gamesradar, escapist, gamespot",
+    "refresh": "dim_refs puller exotic_class_items block pulls the current full set from the Bungie manifest",
+    "rule": "Prismatic-only. Occupies your single exotic-armor slot (mutually exclusive with another exotic armor piece)."
+  },
+  "Hunter": {
+    "name": "Essentialism",
+    "slot": "Cloak",
+    "col1": [
+      {
+        "spirit": "Spirit of the Assassin",
+        "source": "Assassin's Cowl",
+        "effect": "Become invisible after powered melee kills or finishers.",
+        "tags": [
+          "stealth",
+          "melee",
+          "survivability"
+        ]
+      },
+      {
+        "spirit": "Spirit of Inmost Light",
+        "source": "Heart of Inmost Light",
+        "effect": "Using an ability boosts the regeneration of your other two abilities.",
+        "tags": [
+          "regen",
+          "ability",
+          "class"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Ophidian",
+        "source": "Ophidian Aspect",
+        "effect": "All weapons ready and reload very quickly.",
+        "tags": [
+          "weapon"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Dragon",
+        "source": "Dragon's Shadow",
+        "effect": "Dodging reloads all weapons and boosts weapon handling.",
+        "tags": [
+          "weapon",
+          "class"
+        ]
+      },
+      {
+        "spirit": "Spirit of Galanor",
+        "source": "Shards of Galanor",
+        "effect": "Super hits and final blows return Super energy when it ends.",
+        "tags": [
+          "super"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Foetracer",
+        "source": "Foetracer",
+        "effect": "Damaging a tough target with an ability grants a matching-element weapon damage bonus.",
+        "tags": [
+          "weapon",
+          "ability"
+        ]
+      },
+      {
+        "spirit": "Spirit of Caliban",
+        "source": "Caliban's Hand",
+        "effect": "Powered melee final blows trigger an ignition.",
+        "tags": [
+          "melee",
+          "add-clear"
+        ]
+      },
+      {
+        "spirit": "Spirit of Renewal",
+        "source": "Renewal Grasps",
+        "effect": "Allies in your Duskfield take less damage and enemies inside deal less.",
+        "tags": [
+          "survivability",
+          "class",
+          "crowd-control"
+        ]
+      }
+    ],
+    "col2": [
+      {
+        "spirit": "Spirit of the Star-Eater",
+        "source": "Star-Eater Scales",
+        "effect": "Orbs picked up while your Super is full increase its damage.",
+        "tags": [
+          "super"
+        ]
+      },
+      {
+        "spirit": "Spirit of Synthoceps",
+        "source": "Synthoceps",
+        "effect": "Improved melee and weapon damage when you are surrounded.",
+        "tags": [
+          "melee",
+          "weapon"
+        ]
+      },
+      {
+        "spirit": "Spirit of Verity",
+        "source": "Verity's Brow",
+        "effect": "Weapon kills matching your grenade element stack a grenade damage bonus.",
+        "tags": [
+          "grenade",
+          "weapon"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Cyrtarachne",
+        "source": "Cyrtarachne's Facade",
+        "effect": "Gain Woven Mail when you use your grenade.",
+        "tags": [
+          "survivability"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Gyrfalcon",
+        "source": "Gyrfalcon's Hauberk",
+        "effect": "Void weapons gain Volatile Rounds after you leave invisibility.",
+        "tags": [
+          "weapon",
+          "add-clear"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Liar",
+        "source": "Liar's Handshake",
+        "effect": "A powered melee or taking a melee enables a heavy counterpunch.",
+        "tags": [
+          "melee"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Wormhusk",
+        "source": "Wormhusk Crown",
+        "effect": "Dodging heals you a small amount.",
+        "tags": [
+          "survivability",
+          "class"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Coyote",
+        "source": "Sixth Coyote",
+        "effect": "Gain a second class ability charge.",
+        "tags": [
+          "class"
+        ]
+      }
+    ]
+  },
+  "Titan": {
+    "name": "Stoicism",
+    "slot": "Mark",
+    "col1": [
+      {
+        "spirit": "Spirit of the Assassin",
+        "source": "Assassin's Cowl",
+        "effect": "Become invisible after powered melee kills or finishers.",
+        "tags": [
+          "stealth",
+          "melee",
+          "survivability"
+        ]
+      },
+      {
+        "spirit": "Spirit of Inmost Light",
+        "source": "Heart of Inmost Light",
+        "effect": "Using an ability boosts the regeneration of your other two abilities.",
+        "tags": [
+          "regen",
+          "ability",
+          "class"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Ophidian",
+        "source": "Ophidian Aspect",
+        "effect": "All weapons ready and reload very quickly.",
+        "tags": [
+          "weapon"
+        ]
+      },
+      {
+        "spirit": "Spirit of Severance",
+        "source": "Severance Enclosure",
+        "effect": "Powered melee or finisher final blows unleash a damaging explosion.",
+        "tags": [
+          "melee",
+          "add-clear"
+        ]
+      },
+      {
+        "spirit": "Spirit of Hoarfrost",
+        "source": "Hoarfrost-Z",
+        "effect": "Your Barricade becomes a wall of Stasis crystals that slows nearby enemies.",
+        "tags": [
+          "class",
+          "survivability",
+          "crowd-control"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Eternal Warrior",
+        "source": "Eternal Warrior",
+        "effect": "When your Super ends, gain bonus damage for weapons matching its element.",
+        "tags": [
+          "super",
+          "weapon"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Abeyant",
+        "source": "Abeyant Leap",
+        "effect": "Drengr's Lash gains extra projectiles, better tracking, and more range.",
+        "tags": [
+          "class",
+          "crowd-control"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Bear",
+        "source": "Ursa Furiosa",
+        "effect": "Damage blocked with Unbreakable converts to Super energy and you move faster.",
+        "tags": [
+          "class",
+          "super",
+          "survivability"
+        ]
+      }
+    ],
+    "col2": [
+      {
+        "spirit": "Spirit of the Star-Eater",
+        "source": "Star-Eater Scales",
+        "effect": "Orbs picked up while your Super is full increase its damage.",
+        "tags": [
+          "super"
+        ]
+      },
+      {
+        "spirit": "Spirit of Synthoceps",
+        "source": "Synthoceps",
+        "effect": "Improved melee and weapon damage when you are surrounded.",
+        "tags": [
+          "melee",
+          "weapon"
+        ]
+      },
+      {
+        "spirit": "Spirit of Verity",
+        "source": "Verity's Brow",
+        "effect": "Weapon kills matching your grenade element stack a grenade damage bonus.",
+        "tags": [
+          "grenade",
+          "weapon"
+        ]
+      },
+      {
+        "spirit": "Spirit of Contact",
+        "source": "Point-Contact Cannon Brace",
+        "effect": "A powered melee hit creates a jolting bolt of lightning in the area.",
+        "tags": [
+          "melee",
+          "add-clear",
+          "crowd-control"
+        ]
+      },
+      {
+        "spirit": "Spirit of Scars",
+        "source": "Precious Scars",
+        "effect": "Weapon final blows matching your Super element create a healing burst.",
+        "tags": [
+          "survivability",
+          "healing",
+          "weapon"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Horn",
+        "source": "Khepri's Horn",
+        "effect": "Your class ability creates a scorching shockwave.",
+        "tags": [
+          "class",
+          "add-clear"
+        ]
+      },
+      {
+        "spirit": "Spirit of Alpha Lupi",
+        "source": "Crest of Alpha Lupi",
+        "effect": "Your class ability generates a healing pulse.",
+        "tags": [
+          "survivability",
+          "healing",
+          "class"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Armamentarium",
+        "source": "Armamentarium",
+        "effect": "Gain a second grenade charge.",
+        "tags": [
+          "grenade"
+        ]
+      }
+    ]
+  },
+  "Warlock": {
+    "name": "Solipsism",
+    "slot": "Band",
+    "col1": [
+      {
+        "spirit": "Spirit of the Assassin",
+        "source": "Assassin's Cowl",
+        "effect": "Become invisible after powered melee kills or finishers.",
+        "tags": [
+          "stealth",
+          "melee",
+          "survivability"
+        ]
+      },
+      {
+        "spirit": "Spirit of Inmost Light",
+        "source": "Heart of Inmost Light",
+        "effect": "Using an ability boosts the regeneration of your other two abilities.",
+        "tags": [
+          "regen",
+          "ability",
+          "class"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Ophidian",
+        "source": "Ophidian Aspect",
+        "effect": "All weapons ready and reload very quickly.",
+        "tags": [
+          "weapon"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Stag",
+        "source": "The Stag",
+        "effect": "Your Rift grants damage reduction to allies standing in it.",
+        "tags": [
+          "survivability",
+          "class"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Filaments",
+        "source": "Secant Filaments",
+        "effect": "Casting an empowering Rift grants you Devour.",
+        "tags": [
+          "survivability",
+          "healing",
+          "class"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Necrotic",
+        "source": "Necrotic Grips",
+        "effect": "Melee damage poisons enemies and the poison spreads on their death.",
+        "tags": [
+          "melee",
+          "add-clear"
+        ]
+      },
+      {
+        "spirit": "Spirit of Osmiomancy",
+        "source": "Osmiomancy Gloves",
+        "effect": "Grenades recharge faster on hits and Coldsnap seekers track better.",
+        "tags": [
+          "grenade"
+        ]
+      },
+      {
+        "spirit": "Spirit of Apotheosis",
+        "source": "Apotheosis Veil",
+        "effect": "Greatly increased grenade and melee energy after your Super ends.",
+        "tags": [
+          "super",
+          "regen"
+        ]
+      }
+    ],
+    "col2": [
+      {
+        "spirit": "Spirit of the Star-Eater",
+        "source": "Star-Eater Scales",
+        "effect": "Orbs picked up while your Super is full increase its damage.",
+        "tags": [
+          "super"
+        ]
+      },
+      {
+        "spirit": "Spirit of Synthoceps",
+        "source": "Synthoceps",
+        "effect": "Improved melee and weapon damage when you are surrounded.",
+        "tags": [
+          "melee",
+          "weapon"
+        ]
+      },
+      {
+        "spirit": "Spirit of Verity",
+        "source": "Verity's Brow",
+        "effect": "Weapon kills matching your grenade element stack a grenade damage bonus.",
+        "tags": [
+          "grenade",
+          "weapon"
+        ]
+      },
+      {
+        "spirit": "Spirit of Vesper",
+        "source": "Vesper of Radius",
+        "effect": "Your Rifts release Arc shockwaves.",
+        "tags": [
+          "class",
+          "add-clear"
+        ]
+      },
+      {
+        "spirit": "Spirit of Harmony",
+        "source": "Mantle of Battle Harmony",
+        "effect": "Weapon kills matching your Super element grant Super energy.",
+        "tags": [
+          "super",
+          "weapon"
+        ]
+      },
+      {
+        "spirit": "Spirit of Starfire",
+        "source": "Starfire Protocol",
+        "effect": "Empowered weapon damage grants grenade energy.",
+        "tags": [
+          "grenade",
+          "weapon"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Swarm",
+        "source": "Swarmers",
+        "effect": "Destroying a Tangle spawns Threadlings.",
+        "tags": [
+          "add-clear"
+        ]
+      },
+      {
+        "spirit": "Spirit of the Claw",
+        "source": "Claws of the Ahamkara",
+        "effect": "Gain a second melee charge.",
+        "tags": [
+          "melee"
+        ]
+      }
+    ]
+  }
+}
