@@ -15,6 +15,7 @@ nothing is excluded by the soft layer (closest builds always rank to the top).
 """
 import json
 import os
+import re
 
 from flask import (
     Flask, render_template, request, redirect, url_for, session
@@ -198,6 +199,44 @@ def find_pool_item(cat, name):
     return None
 
 
+def _name_cores(name):
+    """Candidate sub-names from a messy curated label, for loose matching."""
+    n = _norm(name)
+    cores = {n, re.sub(r"\(.*?\)", "", n).strip()}
+    for m in re.findall(r"\((.*?)\)", n):
+        cores.add(m.strip())
+    for sep in ("/", " or ", " + ", ":"):
+        for part in n.split(sep):
+            cores.add(re.sub(r"\(.*?\)", "", part).strip())
+    return {c for c in cores if len(c) >= 5}
+
+
+def loose_pool_item(cat, name):
+    """Resolve a curated name to a pool item when an exact match fails, by
+    finding the category item whose name contains a distinctive core word."""
+    exact = find_pool_item(cat, name)
+    if exact:
+        return exact
+    cores = _name_cores(name)
+    best = None
+    for p in POOL:
+        if p["category"] != cat:
+            continue
+        pn = _norm(p["name"])
+        if any(core in pn for core in cores):
+            if best is None or len(pn) < len(_norm(best["name"])):
+                best = p
+    return best
+
+
+# weapon name -> type (Auto Rifle, Hand Cannon, ...) from the weapons tree
+WEAPON_TYPE = {}
+for _ammo, _types in WEAPON_TREE.items():
+    for _wtype, _list in _types.items():
+        for _entry in _list:
+            WEAPON_TYPE[_norm(_entry[0])] = _wtype
+
+
 def assemble(cls, elem, a, w):
     build = {}
     total = 0.0
@@ -347,7 +386,7 @@ def construct(a):
     best["gear_set"] = recommend_gear_set(best["elem"], a)
     best["armor_loadout"] = recommend_armor_loadout(best["elem"], a, best["build"], best["artifact"])
     best["stat_priority"] = stat_priority(a, best["elem"])
-    best["weapon_synergy"] = recommend_weapon_synergy(best["elem"], a)
+    best["weapon_synergy"] = recommend_weapon_synergy(best["elem"], a, best["build"], best["artifact"])
     best["dim_search"] = dim_search_for(best["build"])
     best["synergy"] = compute_synergy(best["build"], best["armor_loadout"])
     best["community"] = classify_community(best["cls"], best["elem"], best["build"])
@@ -554,18 +593,67 @@ def dim_search_for(build):
     return " or ".join('name:"' + n + '"' for n in names)
 
 
-def recommend_weapon_synergy(elem, a):
+RECOIL_TYPES = {"Auto Rifle", "Submachine Gun", "Pulse Rifle", "Machine Gun"}
+HIPFIRE_TYPES = {"Sidearm", "Submachine Gun", "Shotgun"}
+AIRBORNE_TYPES = {"Hand Cannon", "Pulse Rifle", "Scout Rifle"}
+
+
+def recommend_weapon_synergy(elem, a, build=None, artifact=None):
+    """Build-aware gun mods. Ties the weapon mod picks to the build-around weapon
+    type, the exotic weapon, the damage profile and goals, and the element the
+    rest of the build (fragments, Surge, artifact) is amplifying."""
     we = "your subclass element" if elem in ("Prismatic", "Any", "") else elem
     goals = (a.get("main_goal"), a.get("second_goal"), a.get("optional_goal"))
-    dmg = "Max Damage" in goals or a.get("weapon_focus") == "High"
-    spec = "Boss Spec" if dmg else "Minor Spec"
-    return {
-        "primary": "A " + we + " Primary to feed your Siphon orb generation and Surge stacks.",
-        "heavy": "A Special or Heavy weapon for your damage phase.",
-        "mods": [spec + " (damage)", "Backup Mag (uptime)",
-                 "Counterbalance or Freehand Grip (stability/handling)"],
-        "note": "Champion counters are intrinsic to weapon frames now, so no artifact slots are spent on them.",
-    }
+    dps = ("Max Damage" in goals or "Damage" in goals
+           or a.get("damage_profile") in ("DPS", "Burst", "Sustained")
+           or a.get("team_role") == "DPS"
+           or a.get("activity") in ACTIVITY_ENDGAME)
+    addclear = "Add Clear" in goals or "Crowd Control" in goals
+    bw = a.get("build_weapon", "Any")
+    wtype = WEAPON_TYPE.get(_norm(bw)) if bw not in ("Any", None, "") else None
+    has_exotic_wpn = bool(build and build.get("Exotic Weapon")
+                          and build["Exotic Weapon"][0]["item"].get("name")
+                          and "choice" not in build["Exotic Weapon"][0]["item"]["name"].lower())
+    # build produces empowering buffs (radiant/surge/volatile/jolt)?
+    empower = False
+    if build:
+        for cat in ("Fragment", "Aspect", "Super", "Melee"):
+            for e in build.get(cat, []):
+                if "Empower" in e["item"].get("prod", []):
+                    empower = True
+
+    mods = []
+    # 1) damage spec mod, keyed to what you are shooting
+    if dps:
+        mods.append({"mod": "Boss Spec", "why": "more damage to bosses and vehicles in your damage phase"})
+    elif addclear:
+        mods.append({"mod": "Minor Spec", "why": "more damage to red-bar adds for clearing"})
+    else:
+        mods.append({"mod": "Major Spec", "why": "more damage to the majors you fight most"})
+    # 2) uptime mod, stronger case when a DPS exotic anchors the build
+    if dps or has_exotic_wpn:
+        mods.append({"mod": "Backup Mag", "why": "more rounds before reloading mid damage phase"})
+    # 3) handling mod from the actual weapon type
+    if wtype in RECOIL_TYPES:
+        mods.append({"mod": "Counterbalance Stock", "why": "steadies the recoil on your " + wtype.lower()})
+    elif wtype in HIPFIRE_TYPES:
+        mods.append({"mod": "Freehand Grip", "why": "improves hip-fire on your " + wtype.lower()})
+    elif a.get("weapon_focus") == "High":
+        mods.append({"mod": "Targeting Adjuster", "why": "tighter aim assist since weapons are your focus"})
+    elif not dps:
+        mods.append({"mod": "Counterbalance Stock", "why": "general recoil control"})
+
+    primary = ("A " + we + " Primary so its kills feed your "
+               + ("" if we == "your subclass element" else we + " ")
+               + "Siphon orbs and stack Surge.")
+    heavy = ("Your exotic as the damage weapon, fed by Backup Mag."
+             if has_exotic_wpn else
+             "A Special or Heavy in your damage element for the damage phase.")
+    note = "Champion counters are intrinsic to weapon frames now, so no mod slots go to them."
+    if empower:
+        note += (" Your build makes empowering buffs, so fire your damage weapon while they are up "
+                 "and match its element to your Surge.")
+    return {"primary": primary, "heavy": heavy, "mods": mods, "note": note}
 
 
 # perks worth taking regardless of element (broad utility / champion / economy)
@@ -826,7 +914,7 @@ def _stub_item(nm, cat, elem):
 def _resolve_items(cat, field, elem):
     out = []
     for nm, _ic in split_items(field):
-        p = find_pool_item(cat, nm)
+        p = loose_pool_item(cat, nm)
         out.append({"item": p or _stub_item(nm, cat, elem), "score": 0})
     return out
 
@@ -870,7 +958,7 @@ def enrich_curated(b):
         "artifact": art,
         "gear_set": recommend_gear_set(elem, a),
         "stat_priority": stat_priority(a, elem),
-        "weapon_synergy": recommend_weapon_synergy(elem, a),
+        "weapon_synergy": recommend_weapon_synergy(elem, a, build, art),
         "synergy": compute_synergy(build, armor),
         "community": classify_community(b["class"], elem, build),
     }
