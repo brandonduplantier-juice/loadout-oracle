@@ -16,6 +16,8 @@ nothing is excluded by the soft layer (closest builds always rank to the top).
 import json
 import os
 import re
+import uuid
+from urllib import request as urlreq, error as urlerr
 
 from flask import (
     Flask, render_template, request, redirect, url_for, session
@@ -57,26 +59,46 @@ with open(os.path.join(BASE, "data", "exotic_class_items.json"), encoding="utf-8
     EXOTIC_CLASS_ITEMS = json.load(f)
 try:
     with open(os.path.join(BASE, "data", "dim_refs.json"), encoding="utf-8") as f:
-        _dref = json.load(f).get("exotic_class_items", {})
-    for _cls, _live in (_dref or {}).items():
-        if _cls not in EXOTIC_CLASS_ITEMS:
-            continue
-        _base = EXOTIC_CLASS_ITEMS[_cls]
-        for _col in ("col1", "col2"):
-            have = {s["spirit"] for s in _base.get(_col, [])}
-            for _s in (_live.get(_col) or []):
-                nm = _s.get("spirit") or _s.get("name")
-                if nm and nm not in have:
-                    _base.setdefault(_col, []).append({
-                        "spirit": nm, "source": _s.get("source", ""),
-                        "effect": _s.get("effect", ""), "tags": _s.get("tags", [])})
+        DIM_REFS = json.load(f)
 except FileNotFoundError:
-    pass
+    DIM_REFS = {}
+SUBCLASS_REFS = DIM_REFS.get("subclasses", {})
+STAT_HASHES = DIM_REFS.get("stat_hashes", {})
+ARMOR_MOD_HASHES = DIM_REFS.get("armor_mod_hashes", {})
+FRAG_SLOTS = DIM_REFS.get("aspect_frag_slots", {})  # aspect name -> fragment count
+try:
+    with open(os.path.join(BASE, "data", "pool_hashes.json"), encoding="utf-8") as f:
+        POOL_HASHES = json.load(f)  # item name -> manifest inventory item hash
+except FileNotFoundError:
+    POOL_HASHES = {}
+DIM_API_KEY = os.environ.get("DIM_API_KEY", "")
+# fold any live-manifest exotic class item spirits into the static set
+for _cls, _live in (DIM_REFS.get("exotic_class_items") or {}).items():
+    if _cls not in EXOTIC_CLASS_ITEMS:
+        continue
+    _base = EXOTIC_CLASS_ITEMS[_cls]
+    for _col in ("col1", "col2"):
+        have = {s["spirit"] for s in _base.get(_col, [])}
+        for _s in (_live.get(_col) or []):
+            nm = _s.get("spirit") or _s.get("name")
+            if nm and nm not in have:
+                _base.setdefault(_col, []).append({
+                    "spirit": nm, "source": _s.get("source", ""),
+                    "effect": _s.get("effect", ""), "tags": _s.get("tags", [])})
 
 ICON_BASE = "https://www.bungie.net"
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
+
+# Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
+APP_VERSION = "0.9.1"
+BUILD_DATE = "2026-06-15"
+
+
+@app.context_processor
+def inject_version():
+    return {"app_version": APP_VERSION, "build_date": BUILD_DATE}
 
 
 def _norm(s):
@@ -269,9 +291,11 @@ def assemble(cls, elem, a, w):
     for cat, need in SLOTS:
         n = need
         if cat == "Fragment" and chosen_aspects:
-            # fragment count = sum of the chosen aspects' fragment slots
-            n = max(1, min(5, sum(int(x.get("frag_slots", 2) or 2)
-                                  for x in chosen_aspects)))
+            # fragment count = sum of the chosen aspects' fragment slots,
+            # using exact manifest counts (aspect name -> slots) when available
+            n = max(1, min(5, sum(
+                int(FRAG_SLOTS.get(x["name"], x.get("frag_slots", 2)) or 2)
+                for x in chosen_aspects)))
         ranked = sorted(gated(cat, cls, elem),
                         key=lambda x: (-item_score(x, w), x["name"]))
         picks = ranked[:n]
@@ -722,12 +746,14 @@ def recommend_exotic_class_item(cls, a, build, elem):
         "survivability": "prioritizes staying alive",
         "ability": "keeps your full ability kit cycling",
     }.get(need, "rounds out the build")
-    note = ("Prismatic only. It uses your single exotic-armor slot, so run it "
-            "instead of another exotic armor piece, not alongside one.")
+    note = ("It takes your single exotic-armor slot, so it competes with a "
+            "dedicated exotic, it does not stack with one. The item is always "
+            + item["name"] + ", but its two Spirit perks are a random roll, so "
+            "target this pairing by farming Dual Destiny and attuning.")
     chosen = a.get("exotic_armor")
     if chosen and chosen not in ("Any", "", None):
-        note = ("You picked " + str(chosen) + " as your exotic, so this is the "
-                "Prismatic alternative if you free up the exotic slot.")
+        note = ("You picked " + str(chosen) + " as your exotic. A class item is "
+                "only worth it if a roll clearly beats that for this build. " + note)
     return {"name": item["name"], "slot": item["slot"], "need": need, "why": why,
             "col1": _eci_pick(item["col1"], need),
             "col2": _eci_pick(item["col2"], need),
@@ -742,6 +768,161 @@ def dim_search_for(build):
             if nm and nm.lower() != "none":
                 names.append(nm)
     return " or ".join('name:"' + n + '"' for n in names)
+
+
+# ---- DIM loadout share document builder ----
+DESTINY_CLASS = {"Titan": 0, "Hunter": 1, "Warlock": 2}
+_POOL_HASHES_NORM = {_norm(k): v for k, v in POOL_HASHES.items()}
+DIM_MOVEMENT_CAT = 457473665  # class-ability/movement socket category in 3.0 subclasses
+
+
+def _hash_for(name):
+    """Resolve an item name to a manifest hash, apostrophe and case tolerant."""
+    if not name:
+        return None
+    h = POOL_HASHES.get(name)
+    if h is not None:
+        return h
+    return _POOL_HASHES_NORM.get(_norm(name))
+
+
+def _slot_names(slotval):
+    out = []
+    if isinstance(slotval, list):
+        for x in slotval:
+            nm = (x.get("item") or {}).get("name") if isinstance(x, dict) else None
+            if nm and nm.lower() != "none":
+                out.append(nm)
+    elif isinstance(slotval, str):
+        out = [p.strip() for p in slotval.split(",") if p.strip()]
+    return out
+
+
+def _subclass_overrides(sc, build):
+    """Map build ability/aspect/fragment picks to subclass socket indices.
+
+    Indices are derived from the subclass's real socket_categories so Prismatic
+    (fragments at 9+) and base subclasses (fragments at 7+) both place correctly.
+    """
+    cats = {int(k): v for k, v in (sc.get("socket_categories") or {}).items()}
+    if not cats:
+        return {}
+    aspect_cat = cats.get(5)
+    frag_cat = cats[max(cats)]  # highest socket index is always a fragment slot
+    overrides = {}
+
+    def place(idx, slotkey):
+        nm = _slot_names(build.get(slotkey))
+        if nm:
+            h = _hash_for(nm[0])
+            if h:
+                overrides[idx] = int(h)
+
+    place(0, "Super")
+    place(1, "Class Ability")
+    place(2, "Movement")
+    place(3, "Melee")
+    place(4, "Grenade")
+    for idx, nm in zip(sorted(i for i, c in cats.items() if c == aspect_cat),
+                       _slot_names(build.get("Aspect"))):
+        h = _hash_for(nm)
+        if h:
+            overrides[idx] = int(h)
+    for idx, nm in zip(sorted(i for i, c in cats.items() if c == frag_cat),
+                       _slot_names(build.get("Fragment"))):
+        h = _hash_for(nm)
+        if h:
+            overrides[idx] = int(h)
+    return overrides
+
+
+def _mod_hashes(gen):
+    """Collect manifest hashes for any recommended mods we have hashes for."""
+    out, seen = [], set()
+    for _slot, txt in (gen.get("armor_mods") or []):
+        for piece in re.split(r",", txt):
+            nm = re.sub(r"\s*x\d+\s*$", "", piece.strip())
+            if nm in ARMOR_MOD_HASHES and nm not in seen:
+                out.append(int(ARMOR_MOD_HASHES[nm]))
+                seen.add(nm)
+    for _slot, info in (gen.get("armor_loadout") or {}).items():
+        for m in (info.get("mods") or []):
+            nm = m.get("mod") if isinstance(m, dict) else m
+            nm = re.sub(r"\s*x\d+\s*$", "", str(nm or "").strip())
+            if nm in ARMOR_MOD_HASHES and nm not in seen:
+                out.append(int(ARMOR_MOD_HASHES[nm]))
+                seen.add(nm)
+    return out
+
+
+def build_dim_loadout(gen):
+    """Assemble a DIM loadout-share document from a generated build."""
+    cls, elem, build = gen["cls"], gen["elem"], gen["build"]
+    equipped = []
+    sc = SUBCLASS_REFS.get(cls + "|" + elem)
+    if sc and sc.get("hash"):
+        item = {"hash": int(sc["hash"])}
+        ov = _subclass_overrides(sc, build)
+        if ov:
+            item["socketOverrides"] = ov
+        equipped.append(item)
+
+    params = {"assumeArmorMasterwork": 3}  # All (legendary + exotic)
+    exo = _slot_names(build.get("Exotic Armor"))
+    if exo:
+        h = _hash_for(exo[0])
+        if h:
+            params["exoticArmorHash"] = int(h)
+    scs = []
+    for s in gen.get("stat_priority", []):
+        sh = STAT_HASHES.get(s["stat"])
+        if sh:
+            scs.append({"statHash": int(sh)})
+    if scs:
+        params["statConstraints"] = scs
+    mods = _mod_hashes(gen)
+    if mods:
+        params["mods"] = mods
+
+    label = (gen.get("community") or {}).get("label")
+    name = "Loadout Oracle - " + (label or (cls + " " + elem))
+    return {
+        "id": str(uuid.uuid4()),
+        "name": name[:120],
+        "classType": DESTINY_CLASS.get(cls, 3),
+        "equipped": equipped,
+        "unequipped": [],
+        "parameters": params,
+        "notes": "Generated by Loadout Oracle (loadout-oracle.onrender.com)",
+    }
+
+
+def post_dim_share(loadout):
+    """POST a loadout to DIM, return (url, error). Network errors degrade gracefully."""
+    if not DIM_API_KEY:
+        return None, "no_key"
+    body = json.dumps({"loadout": loadout, "platformMembershipId": "0"}).encode("utf-8")
+    req = urlreq.Request(
+        "https://api.destinyitemmanager.com/loadout_share",
+        data=body, method="POST",
+        headers={"Content-Type": "application/json", "X-API-Key": DIM_API_KEY,
+                 "X-DIM-Version": "loadout-oracle-" + APP_VERSION})
+    try:
+        with urlreq.urlopen(req, timeout=12) as r:
+            data = json.loads(r.read().decode("utf-8"))
+    except urlerr.HTTPError as e:
+        try:
+            detail = e.read().decode("utf-8")[:300]
+        except Exception:
+            detail = ""
+        return None, "http_" + str(e.code) + (": " + detail if detail else "")
+    except Exception as e:  # timeout, DNS, JSON, etc.
+        return None, str(e)[:200]
+    url = data.get("shareUrl") or data.get("url")
+    if not url:
+        sid = data.get("shareId") or data.get("id")
+        url = "https://dim.gg/" + str(sid) if sid else None
+    return (url, None) if url else (None, "no_url_in_response")
 
 
 RECOIL_TYPES = {"Auto Rifle", "Submachine Gun", "Pulse Rifle", "Machine Gun"}
@@ -1147,8 +1328,22 @@ def results():
     top = ranked[0]["score"] if ranked else 0
     gen = construct(a)
     return render_template(
-        "results.html", ranked=ranked, a=a, theme=theme(a), top=top, gen=gen
+        "results.html", ranked=ranked, a=a, theme=theme(a), top=top, gen=gen,
+        dim_enabled=bool(DIM_API_KEY)
     )
+
+
+@app.route("/dim_share", methods=["POST"])
+def dim_share():
+    a = session.get("answers", {})
+    if not a:
+        return {"ok": False, "reason": "no_build"}, 400
+    if not DIM_API_KEY:
+        return {"ok": False, "reason": "no_key"}
+    url, err = post_dim_share(build_dim_loadout(construct(a)))
+    if url:
+        return {"ok": True, "url": url}
+    return {"ok": False, "reason": err or "unknown"}
 
 
 @app.route("/back/<step>")

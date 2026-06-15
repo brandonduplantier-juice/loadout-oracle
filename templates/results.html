@@ -39,11 +39,12 @@
 {% macro eci_block(eci) -%}
 {% if eci %}
 <div class="eci">
-  <div class="ecihead"><span class="ecilabel">Prismatic exotic class item</span><span class="eciname">{{ eci.name }} <span class="ecislot">{{ eci.slot }}</span></span></div>
-  <p class="ecitag">Recommended roll, tuned to a build that {{ eci.why }}.</p>
+  <div class="ecihead"><span class="ecilabel">Prismatic exotic class item (optional)</span><span class="eciname">{{ eci.name }} <span class="ecislot">{{ eci.slot }}</span></span></div>
+  <p class="ecicaveat">Each Spirit is a toned-down version of the real exotic, not a one-to-one copy, so a focused exotic armor piece is often stronger. Build quality comes first. Only chase a class item if a roll genuinely beats a dedicated exotic for your build.</p>
+  <p class="ecitag">If you go this route, a roll that {{ eci.why }} would target:</p>
   <div class="ecicols">
-    <div class="ecicol"><span class="ecicolh">Column 1</span><b class="ecispirit">{{ eci.col1.spirit }}</b><span class="ecisrc">{{ eci.col1.source }}</span><span class="ecieff">{{ eci.col1.effect }}</span></div>
-    <div class="ecicol"><span class="ecicolh">Column 2</span><b class="ecispirit">{{ eci.col2.spirit }}</b><span class="ecisrc">{{ eci.col2.source }}</span><span class="ecieff">{{ eci.col2.effect }}</span></div>
+    <div class="ecicol"><span class="ecicolh">Column 1 target</span><b class="ecispirit">{{ eci.col1.spirit }}</b><span class="ecisrc">{{ eci.col1.source }}</span><span class="ecieff">{{ eci.col1.effect }}</span></div>
+    <div class="ecicol"><span class="ecicolh">Column 2 target</span><b class="ecispirit">{{ eci.col2.spirit }}</b><span class="ecisrc">{{ eci.col2.source }}</span><span class="ecieff">{{ eci.col2.effect }}</span></div>
   </div>
   <p class="ecinote">{{ eci.note }}</p>
   <details class="eciall">
@@ -103,7 +104,7 @@
   <div class="cardbody">
     {% if not gen.has_goals %}<p class="blurb">This is a class and element baseline. Add a goal on step 1 and the pool re-scores to match it.</p>
     {% else %}<p class="blurb">Best-scoring item picked for each slot from the full tagged pool, gated to {{ gen.cls }} and {{ gen.elem }}.{% if gen.elem == 'Prismatic' %} The colored tag on each pick is its origin element, so you can see the Light and Dark mix that goes together.{% endif %}</p>{% endif %}
-    {% if gen.dim_search %}<div class="dimrow"><button class="dimbtn" data-search="{{ gen.dim_search|e }}"><span class="di">&#9883;</span> Open in DIM</button><span class="dimhint">opens DIM and copies a search for this build's exotics and weapons</span></div>{% endif %}
+    {% if gen.dim_search %}<div class="dimrow"><button class="dimbtn" data-search="{{ gen.dim_search|e }}"><span class="di">&#9883;</span> {{ 'Create DIM loadout link' if dim_enabled else 'Open in DIM' }}</button><span class="dimhint">{% if dim_enabled %}builds a DIM share link for this loadout (subclass, fragments, exotic, stat priority, mods){% else %}opens DIM and copies a search for this build's exotics and weapons{% endif %}</span></div>{% endif %}
     {{ item_grid(gen.slots_view) }}
     {{ mod_sections(gen) }}
     {{ eci_block(gen.exotic_class_item) }}
@@ -177,18 +178,42 @@
 
 <div id="dimtoast" class="dimtoast"></div>
 <script>
-  function openDim(search) {
+  var DIM_ENABLED = {{ 'true' if dim_enabled else 'false' }};
+  function dimToast(msg) {
+    var t = document.getElementById('dimtoast');
+    if (t) { t.textContent = msg; t.classList.add('show'); setTimeout(function () { t.classList.remove('show'); }, 4000); }
+  }
+  function openDimSearch(search) {
     var msg = 'DIM opened.';
     if (search) {
       try { navigator.clipboard.writeText(search); msg = 'Search copied. Paste it into DIM\u2019s search bar to find this build\u2019s gear.'; }
       catch (e) { msg = 'Open DIM, then search: ' + search; }
     }
     window.open('https://app.destinyitemmanager.com/', '_blank', 'noopener');
-    var t = document.getElementById('dimtoast');
-    if (t) { t.textContent = msg; t.classList.add('show'); setTimeout(function () { t.classList.remove('show'); }, 4000); }
+    dimToast(msg);
+  }
+  function dimShare(b) {
+    var search = b.dataset.search || '';
+    if (!DIM_ENABLED) { openDimSearch(search); return; }
+    var orig = b.innerHTML;
+    b.disabled = true;
+    b.innerHTML = '<span class="di">&#9883;</span> Building DIM link\u2026';
+    fetch('/dim_share', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.ok && data.url) {
+          window.open(data.url, '_blank', 'noopener');
+          dimToast('DIM loadout link created and opened. It also copied to your clipboard.');
+          try { navigator.clipboard.writeText(data.url); } catch (e) {}
+        } else {
+          openDimSearch(search);
+        }
+      })
+      .catch(function () { openDimSearch(search); })
+      .finally(function () { b.disabled = false; b.innerHTML = orig; });
   }
   document.querySelectorAll('.dimbtn').forEach(function (b) {
-    b.addEventListener('click', function () { openDim(b.dataset.search || ''); });
+    b.addEventListener('click', function () { dimShare(b); });
   });
 </script>
 {% endblock %}
