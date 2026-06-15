@@ -13,11 +13,13 @@ Scoring model is the one validated against 20000+ simulated builds: class and
 the three build-around picks are HARD filters; everything else soft-scores and
 nothing is excluded by the soft layer (closest builds always rank to the top).
 """
+import base64
 import json
 import os
 import re
+import time
 import uuid
-from urllib import request as urlreq, error as urlerr
+from urllib import request as urlreq, error as urlerr, parse as urlparse
 
 from flask import (
     Flask, render_template, request, redirect, url_for, session
@@ -72,6 +74,15 @@ try:
 except FileNotFoundError:
     POOL_HASHES = {}
 DIM_API_KEY = os.environ.get("DIM_API_KEY", "")
+# Single-account Bungie OAuth, so the server can mint authenticated DIM shares.
+BUNGIE_API_KEY = os.environ.get("BUNGIE_API_KEY", "")
+BUNGIE_OAUTH_CLIENT_ID = os.environ.get("BUNGIE_OAUTH_CLIENT_ID", "")
+BUNGIE_OAUTH_CLIENT_SECRET = os.environ.get("BUNGIE_OAUTH_CLIENT_SECRET", "")
+BUNGIE_REFRESH_TOKEN = os.environ.get("BUNGIE_REFRESH_TOKEN", "")
+BUNGIE_MEMBERSHIP_ID = os.environ.get("BUNGIE_MEMBERSHIP_ID", "")
+DIM_AUTH_READY = all([DIM_API_KEY, BUNGIE_API_KEY, BUNGIE_OAUTH_CLIENT_ID,
+                      BUNGIE_OAUTH_CLIENT_SECRET, BUNGIE_REFRESH_TOKEN,
+                      BUNGIE_MEMBERSHIP_ID])
 # fold any live-manifest exotic class item spirits into the static set
 for _cls, _live in (DIM_REFS.get("exotic_class_items") or {}).items():
     if _cls not in EXOTIC_CLASS_ITEMS:
@@ -92,7 +103,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.6"
+APP_VERSION = "0.9.8"
 BUILD_DATE = "2026-06-15"
 
 
@@ -943,63 +954,140 @@ def build_dim_loadout(gen):
     }
 
 
-def _dim_post_once(payload):
-    body = json.dumps(payload).encode("utf-8")
+_DIM_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+           "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
+_TOKENS = {"bungie": None, "bungie_exp": 0.0, "dim": None, "dim_exp": 0.0,
+           "destiny_mid": None}
+
+
+def _bungie_access_token():
+    """Refresh the Bungie access token from the stored refresh token, cached."""
+    now = time.time()
+    if _TOKENS["bungie"] and now < _TOKENS["bungie_exp"] - 60:
+        return _TOKENS["bungie"]
+    data = urlparse.urlencode({
+        "grant_type": "refresh_token",
+        "refresh_token": BUNGIE_REFRESH_TOKEN,
+    }).encode("utf-8")
+    basic = base64.b64encode(
+        (BUNGIE_OAUTH_CLIENT_ID + ":" + BUNGIE_OAUTH_CLIENT_SECRET).encode("utf-8")
+    ).decode("ascii")
     req = urlreq.Request(
-        "https://api.destinyitemmanager.com/loadout_share",
-        data=body, method="POST",
-        headers={
-            "Content-Type": "application/json",
-            "X-API-Key": DIM_API_KEY,
-            "X-DIM-Version": "loadout-oracle-" + APP_VERSION,
-            # Cloudflare in front of the DIM API rejects the default urllib
-            # signature with error 1010, so present a normal client signature.
-            "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                           "AppleWebKit/537.36 (KHTML, like Gecko) "
-                           "Chrome/126.0.0.0 Safari/537.36"),
-            "Accept": "application/json, text/plain, */*",
-            "Accept-Language": "en-US,en;q=0.9",
-        })
+        "https://www.bungie.net/Platform/App/OAuth/Token/", data=data, method="POST",
+        headers={"Content-Type": "application/x-www-form-urlencoded",
+                 "Authorization": "Basic " + basic, "X-API-Key": BUNGIE_API_KEY,
+                 "User-Agent": _DIM_UA})
+    with urlreq.urlopen(req, timeout=12) as r:
+        tok = json.loads(r.read().decode("utf-8"))
+    _TOKENS["bungie"] = tok["access_token"]
+    _TOKENS["bungie_exp"] = now + int(tok.get("expires_in", 3600))
+    return _TOKENS["bungie"]
+
+
+def _dim_auth_token():
+    """Exchange the Bungie access token for a DIM bearer token, cached."""
+    now = time.time()
+    if _TOKENS["dim"] and now < _TOKENS["dim_exp"] - 60:
+        return _TOKENS["dim"]
+    bt = _bungie_access_token()
+    body = json.dumps({"bungieAccessToken": bt,
+                       "membershipId": BUNGIE_MEMBERSHIP_ID}).encode("utf-8")
+    req = urlreq.Request(
+        "https://api.destinyitemmanager.com/auth/token", data=body, method="POST",
+        headers={"Content-Type": "application/json", "X-API-Key": DIM_API_KEY,
+                 "Accept": "application/json", "User-Agent": _DIM_UA})
+    with urlreq.urlopen(req, timeout=12) as r:
+        tok = json.loads(r.read().decode("utf-8"))
+    _TOKENS["dim"] = tok["accessToken"]
+    _TOKENS["dim_exp"] = now + int(tok.get("expiresInSeconds", 3600))
+    return _TOKENS["dim"]
+
+
+def _dim_post_once(payload, bearer):
+    body = json.dumps(payload).encode("utf-8")
+    headers = {
+        "Content-Type": "application/json",
+        "X-API-Key": DIM_API_KEY,
+        "X-DIM-Version": "loadout-oracle-" + APP_VERSION,
+        "User-Agent": _DIM_UA,
+        "Accept": "application/json, text/plain, */*",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
+    if bearer:
+        headers["Authorization"] = "Bearer " + bearer
+    req = urlreq.Request("https://api.destinyitemmanager.com/loadout_share",
+                         data=body, method="POST", headers=headers)
     with urlreq.urlopen(req, timeout=12) as r:
         return json.loads(r.read().decode("utf-8"))
 
 
+def _destiny_membership_id():
+    """Look up the user's primary Destiny platform membership id, cached.
+    The DIM share endpoint requires this (not the Bungie.net id)."""
+    if _TOKENS.get("destiny_mid"):
+        return _TOKENS["destiny_mid"]
+    at = _bungie_access_token()
+    req = urlreq.Request(
+        "https://www.bungie.net/Platform/User/GetMembershipsForCurrentUser/",
+        headers={"X-API-Key": BUNGIE_API_KEY, "Authorization": "Bearer " + at,
+                 "User-Agent": _DIM_UA, "Accept": "application/json"})
+    with urlreq.urlopen(req, timeout=12) as r:
+        data = json.loads(r.read().decode("utf-8"))
+    resp = data.get("Response", {})
+    mid = resp.get("primaryMembershipId")
+    if not mid:
+        dm = resp.get("destinyMemberships") or []
+        if dm:
+            mid = dm[0].get("membershipId")
+    if not mid:
+        raise RuntimeError("no Destiny membership found for account")
+    _TOKENS["destiny_mid"] = mid
+    return mid
+
+
 def post_dim_share(loadout):
-    """POST a loadout to DIM, return (url, error). Tries with and without a
-    platformMembershipId since the share endpoint is anonymous. Degrades
-    gracefully and logs the outcome to stdout (visible in Render logs)."""
-    if not DIM_API_KEY:
-        return None, "no_key"
-    attempts = [
-        {"loadout": loadout},
-        {"loadout": loadout, "platformMembershipId": "0"},
-    ]
-    last_err = "unknown"
-    for payload in attempts:
+    """Create a DIM loadout share, returning (url, error). Mints an authenticated
+    share under the single configured account. Degrades gracefully, logs to stdout."""
+    if not DIM_AUTH_READY:
+        return None, "auth_not_configured"
+    try:
+        bearer = _dim_auth_token()
+        platform_mid = _destiny_membership_id()
+    except urlerr.HTTPError as e:
         try:
-            data = _dim_post_once(payload)
-        except urlerr.HTTPError as e:
-            try:
-                detail = e.read().decode("utf-8")[:400]
-            except Exception:
-                detail = ""
-            last_err = "http_" + str(e.code) + (": " + detail if detail else "")
-            print("[dim_share] HTTPError", last_err)
-            continue
-        except Exception as e:
-            last_err = type(e).__name__ + ": " + str(e)[:200]
-            print("[dim_share] error", last_err)
-            continue
-        url = data.get("shareUrl") or data.get("url")
-        if not url:
-            sid = data.get("shareId") or data.get("id")
-            url = "https://dim.gg/" + str(sid) if sid else None
-        if url:
-            print("[dim_share] ok", url)
-            return url, None
-        last_err = "no_url_in_response: " + json.dumps(data)[:300]
-        print("[dim_share]", last_err)
-    return None, last_err
+            detail = e.read().decode("utf-8")[:300]
+        except Exception:
+            detail = ""
+        print("[dim_share] auth HTTPError", e.code, detail)
+        return None, "auth_http_" + str(e.code) + (": " + detail if detail else "")
+    except Exception as e:
+        print("[dim_share] auth error", e)
+        return None, "auth_error: " + str(e)[:150]
+    payload = {"loadout": loadout, "platformMembershipId": platform_mid}
+    try:
+        data = _dim_post_once(payload, bearer)
+    except urlerr.HTTPError as e:
+        try:
+            detail = e.read().decode("utf-8")[:400]
+        except Exception:
+            detail = ""
+        err = "http_" + str(e.code) + (": " + detail if detail else "")
+        print("[dim_share] HTTPError", err)
+        return None, err
+    except Exception as e:
+        err = type(e).__name__ + ": " + str(e)[:200]
+        print("[dim_share] error", err)
+        return None, err
+    url = data.get("shareUrl") or data.get("url")
+    if not url:
+        sid = data.get("shareId") or data.get("id")
+        url = "https://dim.gg/" + str(sid) if sid else None
+    if url:
+        print("[dim_share] ok", url)
+        return url, None
+    err = "no_url_in_response: " + json.dumps(data)[:300]
+    print("[dim_share]", err)
+    return None, err
 
 
 RECOIL_TYPES = {"Auto Rifle", "Submachine Gun", "Pulse Rifle", "Machine Gun"}
@@ -1406,7 +1494,7 @@ def results():
     gen = construct(a)
     return render_template(
         "results.html", ranked=ranked, a=a, theme=theme(a), top=top, gen=gen,
-        dim_enabled=bool(DIM_API_KEY)
+        dim_enabled=DIM_AUTH_READY
     )
 
 
