@@ -100,20 +100,22 @@ def main():
 
     cost_by_hash = {}
     cost_by_name = {}
-    full = {}  # category -> { name: cost }, the complete official armor-mod list
+    v2_copies = {}  # (category, display name) -> [costs across non-redacted copies]
     for h, it in items.items():
         ec = energy_of(it)
-        if ec is None:
+        if ec is None or it.get("redacted"):
             continue
         cost_by_hash[int(h)] = ec
         nm = norm((it.get("displayProperties") or {}).get("name", ""))
-        if nm and nm not in cost_by_name:
+        if not nm:
+            continue
+        if nm not in cost_by_name:
             cost_by_name[nm] = ec
         cat = (it.get("plug") or {}).get("plugCategoryIdentifier", "")
-        if cat.startswith("enhancements"):
+        if cat.startswith("enhancements.v2"):
             disp = (it.get("displayProperties") or {}).get("name", "")
             if disp:
-                full.setdefault(cat, {})[disp] = ec
+                v2_copies.setdefault((cat, disp), []).append(ec)
 
     out = {}
     unresolved = []
@@ -138,9 +140,21 @@ def main():
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
 
-    # Full official list of every armor mod and its energy cost, grouped by the
-    # manifest plug category, for reference and for picking replacements for any
-    # dead mod names. Not loaded by the app; a human-readable source of truth.
+    # Full official list of armor mods (the v2 slot categories only, so no Ghost or
+    # dead seasonal mods) with energy cost. The manifest keeps duplicate copies of a
+    # mod, so for each name we trust the cost from our known hash when we have one,
+    # otherwise the modal (most common) cost across non-redacted copies, which drops
+    # the stray low-cost duplicate that made an earlier pass read everything as 1.
+    refs_hash_by_name = {norm(k): int(v) for k, v in mod_hashes.items()}
+    full = {}
+    for (cat, disp), costs in v2_copies.items():
+        nm = norm(disp)
+        if nm in refs_hash_by_name and refs_hash_by_name[nm] in cost_by_hash:
+            c = cost_by_hash[refs_hash_by_name[nm]]
+        else:
+            c = max(set(costs), key=costs.count)
+        full.setdefault(cat, {})[disp] = c
+
     full_path = os.path.join(data_dir, "all_mod_costs.json")
     full_sorted = {cat: dict(sorted(mods.items())) for cat, mods in sorted(full.items())}
     with open(full_path, "w", encoding="utf-8") as f:
