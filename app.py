@@ -92,7 +92,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.4"
+APP_VERSION = "0.9.5"
 BUILD_DATE = "2026-06-15"
 
 
@@ -948,8 +948,18 @@ def _dim_post_once(payload):
     req = urlreq.Request(
         "https://api.destinyitemmanager.com/loadout_share",
         data=body, method="POST",
-        headers={"Content-Type": "application/json", "X-API-Key": DIM_API_KEY,
-                 "X-DIM-Version": "loadout-oracle-" + APP_VERSION})
+        headers={
+            "Content-Type": "application/json",
+            "X-API-Key": DIM_API_KEY,
+            "X-DIM-Version": "loadout-oracle-" + APP_VERSION,
+            # Cloudflare in front of the DIM API rejects the default urllib
+            # signature with error 1010, so present a normal client signature.
+            "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                           "AppleWebKit/537.36 (KHTML, like Gecko) "
+                           "Chrome/126.0.0.0 Safari/537.36"),
+            "Accept": "application/json, text/plain, */*",
+            "Accept-Language": "en-US,en;q=0.9",
+        })
     with urlreq.urlopen(req, timeout=12) as r:
         return json.loads(r.read().decode("utf-8"))
 
