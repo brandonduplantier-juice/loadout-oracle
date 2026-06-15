@@ -45,6 +45,22 @@ with open(os.path.join(BASE, "data", "mods_stats.json"), encoding="utf-8") as f:
     _ms = json.load(f)
     ARMOR_MODS = _ms["armor_mods"]
     STATS = _ms["stats"]
+# Authoritative armor mod energy costs from the Bungie manifest, written by
+# bungie_pull_mod_costs.py into data/mod_costs.json. DIM enforces the manifest
+# energy cost against each piece's budget (10 for most armor, 11 for Tier 4/5),
+# so using these exact values keeps generated loadouts within the real budget and
+# importable into DIM. Falls back to the static costs above for any mod the puller
+# could not resolve, or if the file is absent. Re-run the puller after any Bungie
+# mod rebalance to stay aligned.
+try:
+    with open(os.path.join(BASE, "data", "mod_costs.json"), encoding="utf-8") as f:
+        MOD_COSTS = json.load(f)
+    for _slot_mods in ARMOR_MODS.values():
+        for _m in _slot_mods:
+            if _m["mod"] in MOD_COSTS:
+                _m["cost"] = MOD_COSTS[_m["mod"]]
+except FileNotFoundError:
+    MOD_COSTS = {}
 try:
     with open(os.path.join(BASE, "data", "community_priors.json"), encoding="utf-8") as f:
         COMMUNITY_PRIORS = json.load(f)
@@ -104,7 +120,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.10"
+APP_VERSION = "0.9.11"
 BUILD_DATE = "2026-06-15"
 
 

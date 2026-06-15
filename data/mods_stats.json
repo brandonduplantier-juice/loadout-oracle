@@ -3,7 +3,7 @@
   "Helmet": [
    {
     "mod": "<Element> Siphon",
-    "cost": 1,
+    "cost": 3,
     "elem": true,
     "tags": [
      "orb",
@@ -33,7 +33,7 @@
    },
    {
     "mod": "<Weapon> Targeting",
-    "cost": 1,
+    "cost": 3,
     "elem": false,
     "tags": [
      "weapon_handling"
@@ -42,7 +42,7 @@
    },
    {
     "mod": "Heavy Ammo Finder",
-    "cost": 1,
+    "cost": 3,
     "elem": false,
     "tags": [
      "ammo"
@@ -53,7 +53,7 @@
   "Arms": [
    {
     "mod": "<Weapon> Loader",
-    "cost": 2,
+    "cost": 3,
     "elem": false,
     "tags": [
      "weapon_handling"
@@ -72,7 +72,7 @@
    },
    {
     "mod": "Momentum Transfer",
-    "cost": 2,
+    "cost": 3,
     "elem": false,
     "tags": [
      "ability_regen",
@@ -132,7 +132,7 @@
    },
    {
     "mod": "Concussive Dampener",
-    "cost": 2,
+    "cost": 1,
     "elem": false,
     "tags": [
      "survivability"
@@ -150,7 +150,7 @@
    },
    {
     "mod": "Sniper Damage Resistance",
-    "cost": 1,
+    "cost": 3,
     "elem": false,
     "tags": [
      "survivability"
@@ -159,7 +159,7 @@
    },
    {
     "mod": "<Weapon> Unflinching",
-    "cost": 1,
+    "cost": 3,
     "elem": false,
     "tags": [
      "weapon_handling"
@@ -198,7 +198,7 @@
    },
    {
     "mod": "Innervation",
-    "cost": 2,
+    "cost": 1,
     "elem": false,
     "tags": [
      "ability_regen",
@@ -208,7 +208,7 @@
    },
    {
     "mod": "Invigoration",
-    "cost": 2,
+    "cost": 1,
     "elem": false,
     "tags": [
      "ability_regen",
@@ -250,7 +250,7 @@
    },
    {
     "mod": "Distribution",
-    "cost": 2,
+    "cost": 3,
     "elem": false,
     "tags": [
      "ability_regen"
@@ -259,7 +259,7 @@
    },
    {
     "mod": "Powerful Attraction",
-    "cost": 1,
+    "cost": 2,
     "elem": false,
     "tags": [
      "orb",
@@ -278,7 +278,7 @@
    },
    {
     "mod": "Reaper",
-    "cost": 2,
+    "cost": 3,
     "elem": false,
     "tags": [
      "orb"
