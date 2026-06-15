@@ -120,7 +120,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.12"
+APP_VERSION = "0.9.13"
 BUILD_DATE = "2026-06-15"
 
 
@@ -1204,24 +1204,33 @@ def _artifact_match(p, elem):
 def recommend_artifact(elem, a):
     if not ARTIFACTS:
         return None
-    ranked = sorted(
-        ARTIFACTS,
-        key=lambda art: -sum(1 for p in art["perks"] if _artifact_match(p, elem)),
-    )
-    art = ranked[0]
-    matched = [p for p in art["perks"] if _artifact_match(p, elem)]
-    neutral = [p for p in art["perks"] if p["perk"] in NEUTRAL_GOOD]
-    picks, seen = [], set()
-    for p in matched + neutral + art["perks"]:
-        if p["perk"] not in seen:
-            seen.add(p["perk"])
-            picks.append(p)
-        if len(picks) >= 7:
-            break
+    art = ARTIFACTS[0]  # the live seasonal artifact
+    wtype = a.get("weapon_type", "")
+    goals = (a.get("main_goal"), a.get("second_goal"), a.get("optional_goal"))
+
+    def pscore(p):
+        s = 0.0
+        els = p.get("elements", [])
+        if elem == "Prismatic":
+            s += 1.5 if els else 0.0
+        elif elem in els:
+            s += 3.0
+        if wtype and wtype in p.get("weapons", []):
+            s += 3.0
+        if p.get("champion"):
+            s += 2.0  # champion mods enable content, always worth surfacing
+        t = p.get("type", "")
+        if t == "economy":
+            s += 1.5
+        elif t == "survivability" and "Survivability" in goals:
+            s += 1.0
+        return s
+
+    ranked = sorted(art["perks"], key=lambda p: (-pscore(p), p.get("tier", 9), p["perk"]))
+    picks = [p for p in ranked if pscore(p) > 0][:8] or ranked[:6]
     return {
-        "name": art["name"], "source": art["source"], "perks": picks,
-        "alts": [x["name"] for x in ranked[1:3]
-                 if sum(1 for p in x["perks"] if _artifact_match(p, elem)) > 0],
+        "name": art["name"], "source": art.get("source", ""),
+        "perks": picks, "alts": [],
     }
 
 
