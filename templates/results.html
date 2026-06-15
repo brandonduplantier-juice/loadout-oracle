@@ -59,15 +59,26 @@
       {% endfor %}
     </div>
     <div class="modblock">
-      {% for slot, mod in gen.armor_mods %}
-      <div class="modrow"><span class="mk">{{ slot }}</span><span class="mv">{{ mod }}</span></div>
+      <div class="modrow"><span class="mk">Stat priority</span><span class="mv">{% for s in gen.stat_priority %}<b title="{{ s.desc }}">{{ loop.index }}. {{ s.stat }}</b>{% if not loop.last %} &rsaquo; {% endif %}{% endfor %}<br><span class="altnote">Armor 3.0 stats. Push your top one or two toward 100+. These replaced the old Mobility/Resilience/Recovery/Discipline/Intellect/Strength.</span></span></div>
+      {% for slot, info in gen.armor_loadout.items() %}
+      <div class="modrow"><span class="mk">{{ slot }}</span><span class="mv">{% for m in info.mods %}<span class="modpill" title="{{ m.desc }}">{{ m.mod }}</span>{% endfor %}<span class="emini">{{ info.used }}/10</span></span></div>
       {% endfor %}
-      <div class="modrow"><span class="mk">Weapon mods</span><span class="mv">{{ gen.weapon_mods|join(', ') }}</span></div>
-      {% if gen.artifact %}<div class="modrow"><span class="mk">Artifact</span><div class="mv items"><span class="anote">{{ gen.artifact.name }}:</span>{% for p in gen.artifact.perks %}<span class="iitem">{% if p.icon %}<img class="ic sm" src="{{ ICON_BASE ~ p.icon }}" alt="" loading="lazy" onerror="this.style.display='none'">{% endif %}<span class="nm">{{ p.perk }}{% if p.element %} <span class="origin el-{{ p.element|lower }}">{{ p.element }}</span>{% endif %}</span></span>{% endfor %}</div></div>{% endif %}
-      {% if gen.gear_set %}<div class="modrow"><span class="mk">Gear set</span><span class="mv"><b>{{ gen.gear_set.name }}</b> &middot; {% for b in gen.gear_set.bonuses %}{{ b.count }}pc {{ b.perk }}{% if not loop.last %}; {% endif %}{% endfor %}</span></div>{% endif %}
+      <div class="modrow"><span class="mk">Weapons</span><span class="mv">{{ gen.weapon_synergy.primary }} {{ gen.weapon_synergy.heavy }}<br><b>Weapon mods:</b> {{ gen.weapon_synergy.mods|join(', ') }}<br><span class="altnote">{{ gen.weapon_synergy.note }}</span></span></div>
+      {% if gen.artifact %}<div class="modrow"><span class="mk">Artifact</span><div class="mv items"><span class="anote">{{ gen.artifact.name }}, unlock in this order:</span>{% for p in gen.artifact.perks %}<span class="iitem">{% if p.icon %}<img class="ic sm" src="{{ ICON_BASE ~ p.icon }}" alt="" loading="lazy" onerror="this.style.display='none'">{% endif %}<span class="nm">{{ loop.index }}. {{ p.perk }}{% if p.element %} <span class="origin el-{{ p.element|lower }}">{{ p.element }}</span>{% endif %}</span></span>{% endfor %}{% if gen.artifact.alts %}<span class="altnote">also strong: {{ gen.artifact.alts|join(', ') }}</span>{% endif %}<span class="altnote">{{ gen.artifact.unlock_note }}</span></div></div>{% endif %}
+      {% if gen.gear_set %}<div class="modrow"><span class="mk">Gear set</span><div class="mv"><b>{{ gen.gear_set.name }}</b>{% for b in gen.gear_set.bonuses %}<div class="setbonus"><span class="setcount">{{ b.count }}pc</span> <b>{{ b.perk }}</b> &middot; {{ b.desc }}</div>{% endfor %}</div></div>{% endif %}
     </div>
   </div>
 </div>
+
+<details class="howto">
+  <summary>How this build works and how to use it</summary>
+  <div class="howbody">
+    <p>The generated build is assembled from a tagged pool of every Super, Aspect, Fragment, ability, exotic, mod, artifact perk, and gear set. Each item carries tags (Damage, Add Clear, Survivability, Healing, Ability Regen, Crowd Control, Team Buff, Utility, Mobility). Your goals and focus on steps 1 to 3 become weights, and the engine picks the highest-scoring item for each slot that fits your class and element.</p>
+    <p><b>Reading it:</b> the top rows are your subclass loadout (Super, Aspects, Fragments, grenade, melee, class ability, movement, exotic armor and weapon). The <b>Stat priority</b> tells you which Armor 3.0 stats to chase first. Each armor piece lists a full mod set that fills its energy; hover any mod for what it does. The <b>Artifact</b> row names the single artifact to equip and the perks to unlock in order. The <b>Gear set</b> row shows the 2-piece and 4-piece bonuses to aim for.</p>
+    <p><b>Using it in game:</b> set your subclass to the listed element, slot the Super, Aspects and Fragments, then equip the exotic. Install the mods piece by piece (Siphon on helmet for orbs, Surge on legs for damage, ability-regen mods on arms and class item). Equip the named artifact and unlock its perks top to bottom. Build toward the stat priority and the 4-piece set bonus. The whole loop is: generate orbs with Siphon, pick them up to refund abilities and feed Surge, use abilities and weapons that match your element so every kill loops back into more uptime and damage.</p>
+    <p><b>Note on data:</b> six of the seven artifacts and the armor mod effects are community-sourced for the Monument of Triumph sandbox; the Encrypted Data Disk artifact and subclass icons come from the live Bungie manifest. Verify exact perk wording in game.</p>
+  </div>
+</details>
 
 <h3 class="section-label">Matching curated builds</h3>
 

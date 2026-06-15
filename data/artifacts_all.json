@@ -1,0 +1,1097 @@
+{
+"artifacts": [
+{
+"name": "NPA Repulsion Regulator",
+"source": "community data (PlayerAuctions guide + Tony Lucente infographic), Jun 2026",
+"perks": [
+{
+"perk": "Authorized Mods: Arc",
+"element": "Arc",
+"icon": "",
+"desc": "Arc armor mods heavily discounted."
+},
+{
+"perk": "Improved Unraveling",
+"element": "Strand",
+"icon": "",
+"desc": "Unraveling deals more damage."
+},
+{
+"perk": "Strand Soldier",
+"element": "Strand",
+"icon": "",
+"desc": "On Strand, gaining Woven Mail grants Strand weapons Unraveling Rounds."
+},
+{
+"perk": "Conductive Cosmic Needle",
+"element": "Strand",
+"icon": "",
+"desc": "Strand-debuffed targets take more Arc and Void ability damage."
+},
+{
+"perk": "Authorized Mods: Void",
+"element": "Void",
+"icon": "",
+"desc": "Void armor mods heavily discounted."
+},
+{
+"perk": "Deeper Origins",
+"element": "",
+"icon": "",
+"desc": "Boosts Unsated Hunger, Nanotech Tracer Rounds, Harmonic Resonance, Noble Deeds origin traits."
+},
+{
+"perk": "Overcharged Armory",
+"element": "",
+"icon": "",
+"desc": "Weapons with those four origin traits are Overcharged."
+},
+{
+"perk": "Shock And Awe",
+"element": "Arc",
+"icon": "",
+"desc": "Arc final blows while Amplified summon a Jolting lightning burst."
+},
+{
+"perk": "Authorized Mods: Strand",
+"element": "Strand",
+"icon": "",
+"desc": "Strand armor mods heavily discounted."
+},
+{
+"perk": "Unto The Breach",
+"element": "Void",
+"icon": "",
+"desc": "On Void, defeating a Void-debuffed target makes a Void Breach."
+},
+{
+"perk": "Protective Breach",
+"element": "Void",
+"icon": "",
+"desc": "Picking up a Void Breach grants Void Overshield."
+},
+{
+"perk": "Supernova",
+"element": "Void",
+"icon": "",
+"desc": "Void Breach pickup makes your next Void damage emit a Weakening pulse."
+},
+{
+"perk": "Authorized Mods: Melee",
+"element": "",
+"icon": "",
+"desc": "Melee armor mods heavily discounted."
+},
+{
+"perk": "Electric Armor",
+"element": "Arc",
+"icon": "",
+"desc": "On Arc, Amplified lasts 20 seconds."
+},
+{
+"perk": "Counter Charge",
+"element": "",
+"icon": "",
+"desc": "Stunning a Champion grants 1 Armor Charge."
+},
+{
+"perk": "Squad Goals",
+"element": "",
+"icon": "",
+"desc": "Finishers grant allies your subclass keyword."
+},
+{
+"perk": "Technicolor Siphon",
+"element": "Strand",
+"icon": "",
+"desc": "Combines Strand Siphon and Arc Siphon mods."
+},
+{
+"perk": "Thunderous Retort",
+"element": "Arc",
+"icon": "",
+"desc": "Arc Supers deal 25% more when cast while hurt or Amplified."
+},
+{
+"perk": "Amped Up",
+"element": "Arc",
+"icon": "",
+"desc": "Damage resistance while Amplified."
+},
+{
+"perk": "Lightning Strikes Twice",
+"element": "Arc",
+"icon": "",
+"desc": "Arc grenade throw boosts grenade regen; Arc kills extend it."
+}
+],
+"season": "Deep"
+},
+{
+"name": "Queensfoil Censer",
+"source": "community data (PlayerAuctions guide + Tony Lucente infographic), Jun 2026",
+"perks": [
+{
+"perk": "Flame, Fiber, And Freeze",
+"element": "Stasis",
+"icon": "",
+"desc": "Combines Solar/Strand and Solar/Stasis Siphon mods."
+},
+{
+"perk": "Kindling Trigger",
+"element": "Solar",
+"icon": "",
+"desc": "Radiant makes Solar weapons apply Scorch."
+},
+{
+"perk": "Blast Radius",
+"element": "",
+"icon": "",
+"desc": "Rapid Rocket and Grenade Launcher kills grant Armor Charge."
+},
+{
+"perk": "Origin Spec I",
+"element": "",
+"icon": "",
+"desc": "Boosts Sundering, Nano-Munitions, Nanotech Tracer Rockets traits; Overcharges them."
+},
+{
+"perk": "From Whence You Came",
+"element": "",
+"icon": "",
+"desc": "More ability damage to Taken and Scorn."
+},
+{
+"perk": "Flint Striker",
+"element": "Solar",
+"icon": "",
+"desc": "Rapid Solar precision hits or kills grant Radiant."
+},
+{
+"perk": "Torch",
+"element": "Stasis",
+"icon": "",
+"desc": "While Radiant, more weapon damage to Strand/Stasis-debuffed targets."
+},
+{
+"perk": "Heart Of The Flame",
+"element": "Solar",
+"icon": "",
+"desc": "Solar Super grants allies Radiant and scales Super damage by allies."
+},
+{
+"perk": "Origin Spec II",
+"element": "",
+"icon": "",
+"desc": "Boosts Noble Deeds, Unsated Hunger, Head Rush, Dragon's Vengeance traits; Overcharges them."
+},
+{
+"perk": "Wished Into Being",
+"element": "",
+"icon": "",
+"desc": "Near-full Super: ability kills spawn Orbs of Power."
+},
+{
+"perk": "Unraveling Orbs",
+"element": "Strand",
+"icon": "",
+"desc": "Orb pickup grants Strand weapons Unraveling Rounds."
+},
+{
+"perk": "Pillar Of Ice",
+"element": "Stasis",
+"icon": "",
+"desc": "Defeating encased combatants spawns Stasis crystals."
+},
+{
+"perk": "Revitalizing Blast",
+"element": "Solar",
+"icon": "",
+"desc": "Solar ability damage weakens Champions and bosses."
+},
+{
+"perk": "Dragon's Bite",
+"element": "Stasis",
+"icon": "",
+"desc": "Strand/Stasis weapon shield-breaks can Suspend or Freeze."
+},
+{
+"perk": "Horde Shuttle",
+"element": "Strand",
+"icon": "",
+"desc": "Damaging Unraveled targets can spawn a Threadling."
+},
+{
+"perk": "Hail The Storm",
+"element": "Stasis",
+"icon": "",
+"desc": "Shattering crystals deals more damage and releases slowing shards."
+},
+{
+"perk": "Rays Of Precision",
+"element": "Solar",
+"icon": "",
+"desc": "While Radiant, Solar precision kills Ignite."
+},
+{
+"perk": "Thunderous Retort",
+"element": "Arc",
+"icon": "",
+"desc": "Arc Supers deal 25% more when cast while hurt or Amplified."
+},
+{
+"perk": "Solo Operative",
+"element": "",
+"icon": "",
+"desc": "More damage when alone in your fireteam."
+},
+{
+"perk": "Argent Ordnance",
+"element": "",
+"icon": "",
+"desc": "Rocket fire consumes Armor Charge for more damage and reload."
+}
+],
+"season": "Wish"
+},
+{
+"name": "Hunter's Journal",
+"source": "community data (PlayerAuctions guide + Tony Lucente infographic), Jun 2026",
+"perks": [
+{
+"perk": "Logic Reductor",
+"element": "",
+"icon": "",
+"desc": "Radiolaria Transposer weapons deal more to Vex; longer pools."
+},
+{
+"perk": "Overcharged Armory",
+"element": "",
+"icon": "",
+"desc": "Dealer's Choice, Radiolaria Transposer, Collective Purpose, Sundering weapons Overcharged."
+},
+{
+"perk": "Authorized Mod: Elemental Charge",
+"element": "",
+"icon": "",
+"desc": "Elemental Charge costs 1 energy."
+},
+{
+"perk": "Saint's Inspiration",
+"element": "",
+"icon": "",
+"desc": "Cast no Shadows rounds can overflow the magazine."
+},
+{
+"perk": "Winning Hand",
+"element": "Solar",
+"icon": "",
+"desc": "Dealer's Choice weapons trigger Solar explosions on rapid/precision kills."
+},
+{
+"perk": "Authorized Mods: Scavenger",
+"element": "",
+"icon": "",
+"desc": "Scavenger mods cost 1 energy."
+},
+{
+"perk": "Authorized Mod: Charged Up",
+"element": "",
+"icon": "",
+"desc": "Charged Up costs 1 energy."
+},
+{
+"perk": "Elemental Siphon",
+"element": "Kinetic",
+"icon": "",
+"desc": "Multikills matching your Super element make a matching pickup; Kinetic works too."
+},
+{
+"perk": "Creeping Chill",
+"element": "Stasis",
+"icon": "",
+"desc": "Stasis kills on slowed/frozen targets release a slowing burst."
+},
+{
+"perk": "Press The Advantage",
+"element": "",
+"icon": "",
+"desc": "Shield-breaks grant weapon stability, handling, reload; Swords gain guard."
+},
+{
+"perk": "Threaded Blast",
+"element": "Strand",
+"icon": "",
+"desc": "Strand-detonated Tangles explode larger."
+},
+{
+"perk": "Incendiary Rifle Rounds",
+"element": "Solar",
+"icon": "",
+"desc": "Solar Sniper precision hits Scorch."
+},
+{
+"perk": "Sustained Fire",
+"element": "",
+"icon": "",
+"desc": "Consecutive Auto Rifle hits grant 40% damage reduction."
+},
+{
+"perk": "Counter Energy",
+"element": "",
+"icon": "",
+"desc": "Stunning a Champion grants 30% energy to your least-charged ability."
+},
+{
+"perk": "Blade Stamina",
+"element": "",
+"icon": "",
+"desc": "Sword triple kills refund three ammo (PvE)."
+},
+{
+"perk": "Void Hegemony",
+"element": "Void",
+"icon": "",
+"desc": "On Void/Prismatic, defeating weakened targets grants a small Void Overshield."
+},
+{
+"perk": "Radiant Orbs",
+"element": "Solar",
+"icon": "",
+"desc": "On Solar/Prismatic, Orb pickup makes you Radiant."
+},
+{
+"perk": "Galvanic Armor",
+"element": "Arc",
+"icon": "",
+"desc": "30% damage resistance while Amplified (Arc/Prismatic)."
+},
+{
+"perk": "Solar Fulmination",
+"element": "Solar",
+"icon": "",
+"desc": "Ignitions deal more damage in a larger radius."
+},
+{
+"perk": "Targeting Autoloader",
+"element": "",
+"icon": "",
+"desc": "Auto Rifle kills reload and boost Auto Rifle damage."
+},
+{
+"perk": "Prismatic Transfer",
+"element": "",
+"icon": "",
+"desc": "Super grants allies with non-matching Supers a damage buff."
+},
+{
+"perk": "Argent Blade",
+"element": "",
+"icon": "",
+"desc": "Sword damage consumes Armor Charge for a stacking damage buff."
+},
+{
+"perk": "Expanding Abyss",
+"element": "Void",
+"icon": "",
+"desc": "Void sources deal more to weakened targets."
+},
+{
+"perk": "Shieldcrush",
+"element": "Stasis",
+"icon": "",
+"desc": "Woven Mail/Frost Armor/Void Overshield boosts melee; Amplified/Radiant boosts grenade."
+},
+{
+"perk": "Transference",
+"element": "",
+"icon": "",
+"desc": "More grenade/melee damage while transcendent; kills refund Light/Dark."
+},
+{
+"perk": "Sniper's Meditation",
+"element": "",
+"icon": "",
+"desc": "Sniper hits grant stacking Sniper damage, stability, reload."
+},
+{
+"perk": "Shock and Awe",
+"element": "Arc",
+"icon": "",
+"desc": "On Arc/Prismatic, Amplified Arc kills explode and Jolt."
+}
+],
+"season": "Echoes"
+},
+{
+"name": "Tablet of Ruin",
+"source": "community data (PlayerAuctions guide + Tony Lucente infographic), Jun 2026",
+"perks": [
+{
+"perk": "Overclock And Load",
+"element": "Arc",
+"icon": "",
+"desc": "Amplified or Bolt Charge boosts Arc weapon handling and reload."
+},
+{
+"perk": "Deep Alchemy",
+"element": "",
+"icon": "",
+"desc": "Subjugation weapons gain stability/reload on hit; Overcharged."
+},
+{
+"perk": "Volatile Marksman",
+"element": "Void",
+"icon": "",
+"desc": "Rapid Void precision hits/kills grant Volatile Rounds."
+},
+{
+"perk": "Legend Incarnate",
+"element": "",
+"icon": "",
+"desc": "Timelost Magazine weapons gain bonus damage; Overcharged."
+},
+{
+"perk": "Unraveling Orbs",
+"element": "Strand",
+"icon": "",
+"desc": "Orb or Tangle pickup grants Strand weapons Unraveling Rounds."
+},
+{
+"perk": "Beam Medic",
+"element": "",
+"icon": "",
+"desc": "Rapid Trace Rifle kills heal you and allies."
+},
+{
+"perk": "Hold The Line",
+"element": "",
+"icon": "",
+"desc": "While surrounded, Machine Guns/Glaives gain reload; kills heal."
+},
+{
+"perk": "Dielectric",
+"element": "Arc",
+"icon": "",
+"desc": "Defeating Arc-debuffed targets grants Bolt Charge; upgrade spawns Orbs and heals."
+},
+{
+"perk": "King's Vestige",
+"element": "",
+"icon": "",
+"desc": "Defeating powerful Taken loads 3 Taken seekers (Disrupt/Exhaust)."
+},
+{
+"perk": "Disruptor Spike",
+"element": "Strand",
+"icon": "",
+"desc": "Exhaust and Sever are stronger."
+},
+{
+"perk": "Photonic Flare",
+"element": "Strand",
+"icon": "",
+"desc": "Arc-killing Exhausted/Severed targets releases a blinding burst."
+},
+{
+"perk": "Elemental Siphon",
+"element": "Kinetic",
+"icon": "",
+"desc": "Rapid Kinetic/Super-matching kills make a matching pickup; grants Super energy."
+},
+{
+"perk": "Dreadful Finisher",
+"element": "",
+"icon": "",
+"desc": "Finishers on powerful combatants spawn Special ammo."
+},
+{
+"perk": "Maligned Harvest",
+"element": "Void",
+"icon": "",
+"desc": "Rapid Volatile makes your next Void damage emit a Weakening pulse."
+},
+{
+"perk": "Flashover",
+"element": "Arc",
+"icon": "",
+"desc": "Max Bolt Charge makes you Amplified; bolts deal more."
+},
+{
+"perk": "Horde Shuttle",
+"element": "Strand",
+"icon": "",
+"desc": "Damaging Unraveled targets can spawn a Threadling."
+},
+{
+"perk": "No Bell",
+"element": "",
+"icon": "",
+"desc": "Rapid Glaive melee kills grant Glaive ammo; blocking boosts melee."
+},
+{
+"perk": "Harsh Refraction",
+"element": "",
+"icon": "",
+"desc": "Trace Rifles deal more to targets with matching elemental debuff."
+},
+{
+"perk": "Particle Reconstruction",
+"element": "",
+"icon": "",
+"desc": "Fusion/Linear damage debuffs target for more incoming damage; reloads."
+},
+{
+"perk": "Elemental Supercharger",
+"element": "Strand",
+"icon": "",
+"desc": "Killing Exhausted/Severed targets with Super-element weapons grants Super energy."
+},
+{
+"perk": "Heavy Ordnance Regeneration",
+"element": "",
+"icon": "",
+"desc": "Sustained MG/Rocket damage grants DR and ability regen."
+},
+{
+"perk": "Defibrillating Blast",
+"element": "Arc",
+"icon": "",
+"desc": "Stunning a Champion grants max Bolt Charge; heals and Jolts."
+},
+{
+"perk": "Void Flux",
+"element": "Void",
+"icon": "",
+"desc": "Void kills on Weakened targets apply Volatile nearby."
+},
+{
+"perk": "Limit Break",
+"element": "",
+"icon": "",
+"desc": "Casting Super while hurt or with matching elemental buff boosts Super damage."
+}
+],
+"season": "Heresy"
+},
+{
+"name": "Slayer Baron Apothecary Satchel",
+"source": "community data (PlayerAuctions guide + Tony Lucente infographic), Jun 2026",
+"perks": [
+{
+"perk": "One With Frost",
+"element": "Stasis",
+"icon": "",
+"desc": "Frost Armor boosts Stasis weapon reload/stability; Swords gain guard."
+},
+{
+"perk": "Killing Breeze",
+"element": "Stasis",
+"icon": "",
+"desc": "Rapid kills grant mobility; Dark Ether Reaper triggers faster."
+},
+{
+"perk": "Enhanced Ether Generator",
+"element": "Stasis",
+"icon": "",
+"desc": "Dark Ether Reaper can spawn bonus charge; Overcharged."
+},
+{
+"perk": "Fell The Revenant",
+"element": "",
+"icon": "",
+"desc": "3% more to Scorn; Shadestalker stacks it."
+},
+{
+"perk": "Rapid Impacts",
+"element": "",
+"icon": "",
+"desc": "Grenade Launcher damage boosts GL reload."
+},
+{
+"perk": "Beam Medic",
+"element": "",
+"icon": "",
+"desc": "Rapid Trace Rifle kills heal you and allies."
+},
+{
+"perk": "Emergency Flare",
+"element": "",
+"icon": "",
+"desc": "Emergency Reinforcement consumes all but 1 Armor Charge."
+},
+{
+"perk": "Wind Chill",
+"element": "Stasis",
+"icon": "",
+"desc": "Rapid Stasis precision hits grant Frost Armor."
+},
+{
+"perk": "Crystalline Converter",
+"element": "Stasis",
+"icon": "",
+"desc": "Stasis Shards make your next Stasis melee spawn crystals."
+},
+{
+"perk": "Total Carnage",
+"element": "",
+"icon": "",
+"desc": "Finishers grant 25% DR; 2+ Shadestalker also heals."
+},
+{
+"perk": "Power From Pain",
+"element": "Void",
+"icon": "",
+"desc": "Multikills on Weakened targets grant Devour."
+},
+{
+"perk": "Trace Evidence",
+"element": "Arc",
+"icon": "",
+"desc": "Rapid hits/kills on Arc-debuffed foes spawn an Ionic Trace."
+},
+{
+"perk": "The Thick Of It",
+"element": "",
+"icon": "",
+"desc": "Rapid kills while surrounded grant Armor Charge."
+},
+{
+"perk": "Finders Keepers",
+"element": "",
+"icon": "",
+"desc": "Grabbing multiple ammo bricks grants 1 Armor Charge."
+},
+{
+"perk": "Armor Of Eramis",
+"element": "Stasis",
+"icon": "",
+"desc": "With Frost Armor, critical damage emits a freezing burst."
+},
+{
+"perk": "Hail The Storm",
+"element": "Stasis",
+"icon": "",
+"desc": "Shattering crystals releases slowing shards."
+},
+{
+"perk": "Debilitating Wave",
+"element": "",
+"icon": "",
+"desc": "Finishers emit a wave matching your Super element."
+},
+{
+"perk": "Concussive Reload",
+"element": "Void",
+"icon": "",
+"desc": "Grenade Launchers Weaken (15%) bosses and Champions."
+},
+{
+"perk": "Retinal Burn",
+"element": "Arc",
+"icon": "",
+"desc": "Rapid Arc precision hits consume Armor Charge to Blind."
+},
+{
+"perk": "Curative Orbs",
+"element": "",
+"icon": "",
+"desc": "First shield-break makes an Orb of Power."
+},
+{
+"perk": "Void Renewal",
+"element": "Void",
+"icon": "",
+"desc": "While Devour, Void kills can spawn a Void Breach."
+},
+{
+"perk": "Brain Freeze",
+"element": "Stasis",
+"icon": "",
+"desc": "Frozen enemies emit slowing fog; Dark Ether Reaper does more to frozen."
+},
+{
+"perk": "Supernova",
+"element": "Void",
+"icon": "",
+"desc": "Void Breach pickup makes your next Void damage emit a 15% Weaken wave."
+},
+{
+"perk": "Conductive Cosmic Crystal",
+"element": "Stasis",
+"icon": "",
+"desc": "Dark Ether Reaper and Arc/Void abilities do more to Stasis-afflicted."
+},
+{
+"perk": "Served Cold",
+"element": "Stasis",
+"icon": "",
+"desc": "Stasis Shards grant class ability energy; Void Breaches grant melee."
+},
+{
+"perk": "Kinetic Impacts",
+"element": "Kinetic",
+"icon": "",
+"desc": "Five GL hits on a target trigger a stunning shockwave."
+},
+{
+"perk": "Arc Compounding",
+"element": "Arc",
+"icon": "",
+"desc": "Arc sources deal 15% more to Blind targets."
+},
+{
+"perk": "Old God's Rite",
+"element": "Void",
+"icon": "",
+"desc": "After a Void Breach, Void weapon damage rains seeking projectiles."
+}
+],
+"season": "Revenant"
+},
+{
+"name": "Implement of Curiosity",
+"source": "community data (PlayerAuctions guide + Tony Lucente infographic), Jun 2026",
+"perks": [
+{
+"perk": "Flame, Fiber, and Freeze",
+"element": "Stasis",
+"icon": "",
+"desc": "Unlocks Solar/Strand and Solar/Stasis helmet siphons at 3 energy each."
+},
+{
+"perk": "Diviner's Discount",
+"element": "",
+"icon": "",
+"desc": "Scavenger mods cost 1 energy."
+},
+{
+"perk": "One With Frost",
+"element": "Stasis",
+"icon": "",
+"desc": "Frost Armor boosts Stasis weapon reload/stability; Swords gain guard."
+},
+{
+"perk": "Tightly Woven",
+"element": "Strand",
+"icon": "",
+"desc": "Woven Mail grants increased Super and Grenade stats."
+},
+{
+"perk": "Rapid Precision Rifling",
+"element": "",
+"icon": "",
+"desc": "Rapid Scout precision hits/kills grant reload and flinch resist."
+},
+{
+"perk": "Fever and Chill",
+"element": "Stasis",
+"icon": "",
+"desc": "Rapid Solar precision grants Radiant; Stasis precision grants Frost Armor."
+},
+{
+"perk": "Elemental Benevolence",
+"element": "",
+"icon": "",
+"desc": "Granting allies elemental buffs restores class ability energy."
+},
+{
+"perk": "Frost Renewal",
+"element": "Stasis",
+"icon": "",
+"desc": "With Frost Armor, critical damage freezes nearby and grants allies Frost Armor."
+},
+{
+"perk": "Reciprocal Draw",
+"element": "",
+"icon": "",
+"desc": "Rapid non-Sidearm kills boost Sidearm damage on next draw."
+},
+{
+"perk": "Refresh Threads",
+"element": "",
+"icon": "",
+"desc": "Matching elemental pickup grants energy to least-charged ability."
+},
+{
+"perk": "Threaded Blast",
+"element": "Strand",
+"icon": "",
+"desc": "Strand-destroyed Tangles explode larger."
+},
+{
+"perk": "Cauterized Darkness",
+"element": "Stasis",
+"icon": "",
+"desc": "Stasis/Strand non-bosses take more Solar damage."
+},
+{
+"perk": "Elemental Daze",
+"element": "",
+"icon": "",
+"desc": "Stunning a Champion with an elemental weapon emits a matching debuff explosion."
+},
+{
+"perk": "Shoulder to Shoulder",
+"element": "",
+"icon": "",
+"desc": "Sustained precision damage near 2+ allies grants DR."
+},
+{
+"perk": "Elemental Coalescence",
+"element": "",
+"icon": "",
+"desc": "Kills can make an elemental pickup matching your Super."
+},
+{
+"perk": "Radiant Shrapnel",
+"element": "Solar",
+"icon": "",
+"desc": "While Radiant, sustained damage fires Scorching Solar projectiles."
+},
+{
+"perk": "Shieldcrush",
+"element": "Stasis",
+"icon": "",
+"desc": "Woven Mail/Frost Armor/Void Overshield boosts melee; Amplified/Radiant boosts grenade."
+},
+{
+"perk": "Elemental Overdrive",
+"element": "Strand",
+"icon": "",
+"desc": "Elemental pickup or Tangle boosts same-element weapon damage."
+},
+{
+"perk": "Tangled Web",
+"element": "Strand",
+"icon": "",
+"desc": "Tangle from a Strand-debuffed kill suspends nearby."
+},
+{
+"perk": "Frigid Glare",
+"element": "Stasis",
+"icon": "",
+"desc": "With Frost Armor, Stasis precision kills emit a freezing burst."
+}
+],
+"season": "Edge of Fate"
+},
+{
+"name": "Encrypted Data Disk",
+"source": "Bungie manifest (live), perks verified vs infographic (Tony Lucente, Jun 2026)",
+"perks": [
+{
+"perk": "Anti-Barrier Hand Cannon",
+"element": "",
+"icon": "/common/destiny2_content/icons/9a2c53359db42bf87f48304efe7cae7b.png",
+"desc": "Your equipped Hand Cannons fire shield-piercing rounds and stun [Shield-Piercing] Barrier Champions."
+},
+{
+"perk": "Anti-Barrier Sniper Rifle",
+"element": "",
+"icon": "/common/destiny2_content/icons/b74605a00dc8f942f64a7879359ab828.png",
+"desc": "Your equipped Sniper Rifles fire shield-piercing rounds and stun [Shield-Piercing] Barrier Champions."
+},
+{
+"perk": "Overload Pulse Rifle",
+"element": "",
+"icon": "/common/destiny2_content/icons/781184e10d840a1463298cffd822aa02.png",
+"desc": "Your equipped Pulse Rifles fire disrupting rounds which stun the target, delaying ability energy regeneration and lowering combatant damage "
+},
+{
+"perk": "Overload Submachine Gun",
+"element": "",
+"icon": "/common/destiny2_content/icons/8bb684eec1afb53877e2e57134c28572.png",
+"desc": "Your equipped Submachine Guns fire disrupting rounds which stun the target, delaying ability energy regeneration and lowering combatant dama"
+},
+{
+"perk": "Unstoppable Bow",
+"element": "",
+"icon": "/common/destiny2_content/icons/286b844dd82bdc5f4fffa7671e283c60.png",
+"desc": "Crossbows, and Bows that have been fully drawn for a short time, fire a powerful explosive payload that stuns unshielded combatants. Strong "
+},
+{
+"perk": "Stunning Fusion",
+"element": "",
+"icon": "/common/destiny2_content/icons/d303a19d807e6cfb2d6928f36c66dac9.png",
+"desc": "Aiming down the sights of a Fusion Rifle or Linear Fusion Rifle for a short time loads a powerful payload that stuns unshielded combatants. "
+},
+{
+"perk": "Shield-Shattering Rounds",
+"element": "Stasis",
+"icon": "/common/destiny2_content/icons/d303a19d807e6cfb2d6928f36c66dac9.png",
+"desc": "Your Machine Guns fire shield-piercing rounds and stun [Shield-Piercing] Barrier Champions."
+},
+{
+"perk": "Impact, Shock, Gravity",
+"element": "Arc",
+"icon": "/common/destiny2_content/icons/a8270c4670a71162f1d45477888b82ae.png",
+"desc": "Grants access to the Helmet mods: Kinetic/Void Siphon and Kinetic/Arc Siphon.\n\nThese mods combine two elemental siphons at a discounted cost"
+},
+{
+"perk": "Gravitic-Voltaic Charge",
+"element": "Arc",
+"icon": "/common/destiny2_content/icons/24585408cad390bf80fff7f33c7e20ca.png",
+"desc": "While you have an Arc or Void Super equipped, increase the maximum number of stacks of Armor Charge you can carry by 1."
+},
+{
+"perk": "Expert Handling",
+"element": "",
+"icon": "/common/destiny2_content/icons/e0dd4e954cebb62915528decaf28360b.png",
+"desc": "Weapon final blows grant a stacking bonus to stability which resets on weapon reload or stow. Swords gain Guard Resistance."
+},
+{
+"perk": "Fastest Draw",
+"element": "",
+"icon": "/common/destiny2_content/icons/01c73e5250259ab4a59dd3153ce08e51.png",
+"desc": "If the first shot shortly after reloading or readying your weapon is a precision hit, gain flinch resistance."
+},
+{
+"perk": "Elemental Siphon",
+"element": "Kinetic",
+"icon": "/common/destiny2_content/icons/729357078b7e324467add99816bfda4b.png",
+"desc": "Rapid final blows with a Kinetic weapon or a weapon matching your equipped Super create an Elemental pickup that matches your equipped Super"
+},
+{
+"perk": "Concentrated Forward Firepower",
+"element": "",
+"icon": "/common/destiny2_content/icons/d303a19d807e6cfb2d6928f36c66dac9.png",
+"desc": "Sustained damage from Fusion Rifles, Linear Fusion Rifles, and Machine Guns grants those weapons bonus stability, range, and aim assist for "
+},
+{
+"perk": "Vanguard Surplus Discounts",
+"element": "",
+"icon": "/common/destiny2_content/icons/d303a19d807e6cfb2d6928f36c66dac9.png",
+"desc": "All Ammo Finder mods are discounted."
+},
+{
+"perk": "Press The Advantage",
+"element": "",
+"icon": "/common/destiny2_content/icons/e79751de6d62c4820278fd3f0b833b0b.png",
+"desc": "Breaking a combatant's shield grants increased weapon stability, handling, and reload speed. Swords gain increased guard resistance."
+},
+{
+"perk": "Kinetic Synthesis",
+"element": "Kinetic",
+"icon": "/common/destiny2_content/icons/cf96e4e6ccba04d4948a7bb0ca90761b.png",
+"desc": "Sustained Kinetic weapon damage and rapid final blows have a chance to generate a unique ammo brick. Collecting this brick will grant ammo t"
+},
+{
+"perk": "Reload at Range",
+"element": "",
+"icon": "/common/destiny2_content/icons/2dacdd67e219bb9ec62226c82bfcfaaf.png",
+"desc": "Precision hits with Bows and Sniper Rifles grant a stacking bonus to their reload speed."
+},
+{
+"perk": "Riposte",
+"element": "",
+"icon": "/common/destiny2_content/icons/379e370534eed91f6ac666196ce56d3d.png",
+"desc": "Shortly after guarding with a Sword, your light and heavy attacks stun unshielded combatants. Strong against [Stagger] Unstoppable Champions"
+},
+{
+"perk": "Power from Pain",
+"element": "Void",
+"icon": "/common/destiny2_content/icons/b59af0e3a3880873b9055c3e0697b216.png",
+"desc": "Rapid final blows against weakened combatants grant you Devour."
+},
+{
+"perk": "Fierce Proxemics",
+"element": "",
+"icon": "/common/destiny2_content/icons/a8990e7598af609e1ffca8ff7e3a2f54.png",
+"desc": "Finisher final blows grant grenade and melee energy."
+},
+{
+"perk": "Rapid Remedy",
+"element": "",
+"icon": "/common/destiny2_content/icons/d4c2808826b8eceea0a1acca31079f87.png",
+"desc": "Machine Gun rapid final blows heal you."
+},
+{
+"perk": "Dielectric",
+"element": "Arc",
+"icon": "/common/destiny2_content/icons/2ba8a6fb47d9a36d8e5651bad5a86752.png",
+"desc": "Defeating [Arc]Arc debuffed targets grants Bolt Charge.\n\nRapidly defeating Arc debuffed targets spawns an Orb of Power and heals a small por"
+},
+{
+"perk": "Armorsmith",
+"element": "",
+"icon": "/common/destiny2_content/icons/f48754b849cbc1b813ea2d078e36ed0c.png",
+"desc": "Breaking a combatant's shield temporarily grants you damage resistance and increased melee damage."
+},
+{
+"perk": "Counter Energy",
+"element": "Solar",
+"icon": "/common/destiny2_content/icons/f9cff3113b9be57572ed6697be195a1a.png",
+"desc": "When you or a member of your fireteam stuns a champion, you gain energy for your least-charged ability."
+},
+{
+"perk": "Combination Argent Blade",
+"element": "",
+"icon": "/common/destiny2_content/icons/b1f285e95953d68a6e72312234bfd363.png",
+"desc": "Briefly pause after executing a light attack, then follow it up with a light or heavy attack to empower your Sword for a short time, grantin"
+},
+{
+"perk": "Singularity Blade",
+"element": "Void",
+"icon": "/common/destiny2_content/icons/f510c3b6aaee8ff2da5da4368bd4c63a.png",
+"desc": "While you have a Void elemental buff, melee and Sword hits weaken targets, while melee and Sword final blows create a weakening burst."
+},
+{
+"perk": "Blinding Jolts",
+"element": "Arc",
+"icon": "/common/destiny2_content/icons/2944f8b47be4ff1f4a0ceaa8439d0367.png",
+"desc": "Final blows on jolted combatants blind nearby combatants."
+},
+{
+"perk": "Precision Equity",
+"element": "",
+"icon": "/common/destiny2_content/icons/09c1f017f974b0a8bee28bb519993957.png",
+"desc": "Precision final blows build progress towards a large Orb of Power that also grants bonus weapon damage on pickup. Higher ranked targets gran"
+},
+{
+"perk": "Elemental Orbs: Arc",
+"element": "Arc",
+"icon": "/common/destiny2_content/icons/57df71b415811ddee77e55f4b95519aa.png",
+"desc": "[Arc]Arc weapon final blows have a chance to spawn an Arc Elemental Orb. Arc Orbs can be thrown or shot to create an Arc explosion that jolt"
+},
+{
+"perk": "Kinetic Rupture",
+"element": "Kinetic",
+"icon": "/common/destiny2_content/icons/01fddf1eba3b2cca594be0fec0af049e.png",
+"desc": "Kinetic weapon damage against a powerful combatant has a chance to create a Kinetic Rupture. Targeting this Rupture causes a damaging explos"
+},
+{
+"perk": "Sniper's Meditation",
+"element": "",
+"icon": "/common/destiny2_content/icons/e7a8b3b1eb71f1d70e31d5642c92c5fb.png",
+"desc": "Sniper Rifle hits grant stacking Sniper Rifle damage, stability, and reload bonuses for a short time. Heavy ammo Sniper Rifle hits count as "
+},
+{
+"perk": "Sword Storm Combo",
+"element": "",
+"icon": "/common/destiny2_content/icons/daaa2ac873cf0d92f0386667b84450bd.png",
+"desc": "Performing three Sword light attacks followed by a heavy attack summons penumbral blades that surround you to damage and disorient combatant"
+},
+{
+"perk": "Void Infestation",
+"element": "Void",
+"icon": "/common/destiny2_content/icons/5eacb6ab8ca7b9ed147dc842accdb41a.png",
+"desc": "Defeating a weakened target spawns a tracking projectile that weakens other targets."
+},
+{
+"perk": "Tazer Tag",
+"element": "Arc",
+"icon": "/common/destiny2_content/icons/c30820ca53f6ec778ddf10c6a0d6956b.png",
+"desc": "Arc-powered melee hits jolt combatants and deal further damage for a short duration."
+},
+{
+"perk": "Sticker Shock",
+"element": "Arc",
+"icon": "/common/destiny2_content/icons/132c4594b9738a242df26521caa6421f.png",
+"desc": "Arc Flux, Magnetic, and Fusion Grenades deal more damage when attached to combatants; on final blows, they release several micro-missiles th"
+}
+],
+"season": "Renegades"
+}
+]
+}

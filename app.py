@@ -33,8 +33,12 @@ with open(os.path.join(BASE, "data", "weapons.json"), encoding="utf-8") as f:
     WEAPON_ELEM = json.load(f)
 with open(os.path.join(BASE, "data", "weapons_tree.json"), encoding="utf-8") as f:
     WEAPON_TREE = json.load(f)
-with open(os.path.join(BASE, "data", "artifact.json"), encoding="utf-8") as f:
-    ARTIFACT = json.load(f)
+with open(os.path.join(BASE, "data", "artifacts_all.json"), encoding="utf-8") as f:
+    ARTIFACTS = json.load(f)["artifacts"]
+with open(os.path.join(BASE, "data", "mods_stats.json"), encoding="utf-8") as f:
+    _ms = json.load(f)
+    ARMOR_MODS = _ms["armor_mods"]
+    STATS = _ms["stats"]
 with open(os.path.join(BASE, "data", "gear_sets.json"), encoding="utf-8") as f:
     GEAR_SETS = json.load(f)
 
@@ -229,8 +233,11 @@ def construct(a):
     best["has_goals"] = bool(w)
     best["armor_mods"] = recommend_armor_mods(best["elem"], a)
     best["weapon_mods"] = recommend_weapon_mods(a)
-    best["artifact"] = recommend_artifact(best["elem"])
+    best["artifact"] = recommend_artifact(best["elem"], a)
     best["gear_set"] = recommend_gear_set(best["elem"], a)
+    best["armor_loadout"] = recommend_armor_loadout(best["elem"], a)
+    best["stat_priority"] = stat_priority(a, best["elem"])
+    best["weapon_synergy"] = recommend_weapon_synergy(best["elem"], a)
     return best
 
 
@@ -270,24 +277,138 @@ def recommend_weapon_mods(a):
     return ["Backup Mag", "Counterbalance Stock or Freehand Grip", "Targeting Adjuster"]
 
 
-# universally strong artifact perks worth taking on most builds
-GENERIC_ARTIFACT = {
-    "Elemental Siphon", "Fierce Proxemics", "Precision Equity",
-    "Expert Handling", "Vanguard Surplus Discounts", "Armorsmith",
+def _build_tags(a):
+    """Translate the build's goals and focus into mod-matching tags."""
+    tags = set()
+    gmap = {
+        "Max Damage": ["damage"], "Damage": ["damage"],
+        "Add Clear": ["orb", "ammo"], "Crowd Control": ["orb"],
+        "High Survivability": ["survivability"], "Survivability": ["survivability"],
+        "Healing": ["healing", "survivability"], "Tank": ["survivability"],
+        "Ability Spam": ["ability_regen"], "Ability Uptime": ["ability_regen"],
+        "Ability Regen": ["ability_regen"], "Grenade": ["grenade", "ability_regen"],
+        "Melee": ["melee", "ability_regen"], "Team Buff": ["orb", "ability_regen"],
+        "Mobility": ["weapon_handling"], "Utility": ["utility", "orb"],
+    }
+    for k in ("main_goal", "second_goal", "optional_goal"):
+        for t in gmap.get(a.get(k, ""), []):
+            tags.add(t)
+    if a.get("ability_focus") == "High":
+        tags.add("ability_regen")
+    if a.get("super_focus") == "High":
+        tags.update(["super", "orb"])
+    if a.get("weapon_focus") == "High":
+        tags.update(["damage", "weapon_handling"])
+    if not tags:
+        tags.update(["orb", "ability_regen", "survivability", "damage"])
+    return tags
+
+
+def recommend_armor_loadout(elem, a):
+    """Fill every armor piece with a full mod set (~10 energy) matched to the build."""
+    tags = _build_tags(a)
+    el = "Harmonic" if elem in ("Prismatic", "Any", "") else elem
+    out = {}
+    for slot, mods in ARMOR_MODS.items():
+        cands = [m for m in mods
+                 if not (m["mod"] == "Harmonic Siphon" and el != "Harmonic")]
+
+        def score(m):
+            return len(set(m["tags"]) & tags) + (3 if m["elem"] else 0)
+        ranked = sorted(cands, key=lambda m: -score(m))
+        budget, chosen = 10, []
+        for m in ranked:
+            if score(m) <= 0 and chosen:
+                continue
+            name = m["mod"].replace("<Element>", el).replace("<Weapon>", "Primary")
+            # element anchor mods (Siphon/Surge/Resistance) can stack
+            copies = 2 if (m["elem"] and slot in ("Legs", "Helmet")) else 1
+            for _ in range(copies):
+                if budget - m["cost"] < 0 or len(chosen) >= 4:
+                    break
+                chosen.append({"mod": name, "cost": m["cost"], "desc": m["desc"]})
+                budget -= m["cost"]
+            if len(chosen) >= 4 or budget <= 1:
+                break
+        out[slot] = {"mods": chosen, "used": 10 - budget}
+    return out
+
+
+def stat_priority(a, elem):
+    """Order the six Armor 3.0 stats by what this build leans on."""
+    goals = [a.get("main_goal"), a.get("second_goal"), a.get("optional_goal")]
+    if a.get("super_focus") == "High" or "Max Damage" in goals:
+        pri = "Super"
+    elif "Grenade" in goals or "Ability Spam" in goals or a.get("ability_focus") == "High":
+        pri = "Grenade"
+    elif "Melee" in goals:
+        pri = "Melee"
+    else:
+        pri = "Health"
+    order = ["Super", "Grenade", "Melee", "Class", "Weapons", "Health"]
+    if pri in order:
+        order.remove(pri)
+        order.insert(0, pri)
+    order.remove("Health")
+    order.insert(0 if pri == "Health" else 1, "Health")
+    return [{"stat": s, "desc": STATS[s]} for s in order]
+
+
+def recommend_weapon_synergy(elem, a):
+    we = "your subclass element" if elem in ("Prismatic", "Any", "") else elem
+    goals = (a.get("main_goal"), a.get("second_goal"), a.get("optional_goal"))
+    dmg = "Max Damage" in goals or a.get("weapon_focus") == "High"
+    spec = "Boss Spec" if dmg else "Minor Spec"
+    return {
+        "primary": "A " + we + " Primary to feed your Siphon orb generation and Surge stacks.",
+        "heavy": "A Special or Heavy weapon for your damage phase.",
+        "mods": [spec + " (damage)", "Backup Mag (uptime)",
+                 "Counterbalance or Freehand Grip (stability/handling)"],
+        "note": "Champion counters are intrinsic to weapon frames now, so no artifact slots are spent on them.",
+    }
+
+
+# perks worth taking regardless of element (broad utility / champion / economy)
+NEUTRAL_GOOD = {
+    "Elemental Siphon", "Press The Advantage", "Counter Energy", "Expert Handling",
+    "Armorsmith", "Dreadful Finisher", "Sniper's Meditation", "Fierce Proxemics",
+    "Precision Equity", "Diviner's Discount", "Overcharged Armory", "Squad Goals",
+    "Solo Operative", "Vanguard Surplus Discounts",
 }
 
 
-def recommend_artifact(elem):
-    if not ARTIFACT.get("perks"):
+def _artifact_match(p, elem):
+    e = p.get("element", "")
+    if elem == "Prismatic":
+        return e not in ("", "Kinetic")
+    return e == elem
+
+
+def recommend_artifact(elem, a):
+    if not ARTIFACTS:
         return None
-    matched = [p for p in ARTIFACT["perks"] if p.get("element") == elem]
-    generic = [p for p in ARTIFACT["perks"] if p.get("perk") in GENERIC_ARTIFACT]
-    out, seen = [], set()
-    for p in matched + generic:
+    ranked = sorted(
+        ARTIFACTS,
+        key=lambda art: -sum(1 for p in art["perks"] if _artifact_match(p, elem)),
+    )
+    art = ranked[0]
+    matched = [p for p in art["perks"] if _artifact_match(p, elem)]
+    neutral = [p for p in art["perks"] if p["perk"] in NEUTRAL_GOOD]
+    picks, seen = [], set()
+    for p in matched + neutral + art["perks"]:
         if p["perk"] not in seen:
             seen.add(p["perk"])
-            out.append(p)
-    return {"name": ARTIFACT["name"], "perks": out[:8]}
+            picks.append(p)
+        if len(picks) >= 7:
+            break
+    return {
+        "name": art["name"], "source": art["source"], "perks": picks,
+        "unlock_note": ("Equip this one artifact, then spend points (earned from XP) to "
+                        "unlock perks in the order listed. You can hold up to about 12 at "
+                        "once and refund freely, so prioritize the element-matched perks first."),
+        "alts": [x["name"] for x in ranked[1:3]
+                 if sum(1 for p in x["perks"] if _artifact_match(p, elem)) > 0],
+    }
 
 
 def recommend_gear_set(elem, a):
