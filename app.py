@@ -240,10 +240,16 @@ for _ammo, _types in WEAPON_TREE.items():
 def assemble(cls, elem, a, w):
     build = {}
     total = 0.0
+    chosen_aspects = []
     for cat, need in SLOTS:
+        n = need
+        if cat == "Fragment" and chosen_aspects:
+            # fragment count = sum of the chosen aspects' fragment slots
+            n = max(1, min(5, sum(int(x.get("frag_slots", 2) or 2)
+                                  for x in chosen_aspects)))
         ranked = sorted(gated(cat, cls, elem),
                         key=lambda x: (-item_score(x, w), x["name"]))
-        picks = ranked[:need]
+        picks = ranked[:n]
         if cat == "Exotic Armor" and a.get("build_exotic_armor", "Any") not in ("Any", None):
             fi = find_pool_item("Exotic Armor", a["build_exotic_armor"])
             if fi and fi["class"] in ("Any", cls):
@@ -254,6 +260,8 @@ def assemble(cls, elem, a, w):
                 picks = [fi]
         scored = [{"item": p, "score": round(item_score(p, w), 1)} for p in picks]
         build[cat] = scored
+        if cat == "Aspect":
+            chosen_aspects = [x["item"] for x in scored]
         total += sum(x["score"] for x in scored)
     return build, round(total, 1)
 
@@ -462,6 +470,43 @@ DIM2MOD = {
     "Crowd Control": ["orb"], "Team Buff": [], "Utility": [], "Mobility": [],
 }
 
+# exotics whose mechanic is specific enough to force a matching mod into a slot
+EXOTIC_OVERRIDES = {
+    # melee-damage exotics -> Heavy Handed (orbs on melee) and a melee regen mod
+    "Wormgod Caress": {"Arms": ["Heavy Handed", "Melee Kickstart"],
+                       "note": "Wormgod stacks melee damage, so keep meleeing"},
+    "Synthoceps": {"Arms": ["Heavy Handed"],
+                   "note": "Synthoceps empowers melee and super when surrounded"},
+    "Liar's Handshake": {"Arms": ["Heavy Handed", "Momentum Transfer"],
+                         "note": "Liar's Handshake rewards the melee counter-punch loop"},
+    "Karnstein Armlets": {"Arms": ["Heavy Handed"],
+                          "note": "Karnstein melee kills heal you"},
+    "Necrotic Grip": {"Arms": ["Heavy Handed"],
+                      "note": "Necrotic spreads poison from melee"},
+    "Caliban's Hand": {"Arms": ["Heavy Handed"],
+                       "note": "Caliban ignites from melee"},
+    # grenade exotics -> grenade regen mods
+    "Contraverse Hold": {"Arms": ["Grenade Kickstart", "Impact Induction"],
+                         "note": "Contraverse refunds grenade energy on hits"},
+    "Sunbracers": {"Arms": ["Grenade Kickstart", "Impact Induction"],
+                   "note": "Sunbracers turn a melee kill into grenade spam"},
+    "Nothing Manacles": {"Arms": ["Grenade Kickstart"],
+                         "note": "Nothing Manacles track scatter grenades"},
+    "Verity's Brow": {"Arms": ["Grenade Kickstart"],
+                      "note": "Verity's Brow charges grenades from ability kills"},
+    # super exotics -> Hands-On on the helmet
+    "Celestial Nighthawk": {"Helmet": ["Hands-On"],
+                            "note": "Celestial turns Golden Gun into one big shot"},
+    "Cuirass of the Falling Star": {"Helmet": ["Hands-On"],
+                                    "note": "Cuirass massively boosts Thundercrash"},
+    "Star-Eater Scales": {"Helmet": ["Hands-On"],
+                          "note": "Star-Eater overcharges your super from orbs"},
+    # three-ability empower loop
+    "Heart of Inmost Light": {"Arms": ["Grenade Kickstart", "Melee Kickstart"],
+                              "Class Item": ["Bomber", "Outreach"],
+                              "note": "Inmost Light empowers the other two abilities each cast"},
+}
+
 
 def _slot_note(elem, names):
     bits = []
@@ -514,6 +559,10 @@ def recommend_armor_loadout(elem, a, build=None, artifact=None):
     # the artifact reinforces its element economy; most builds make orbs
     if artifact:
         build_prod.add("Orbs")
+    exo_name = ""
+    if build and build.get("Exotic Armor"):
+        exo_name = build["Exotic Armor"][0]["item"].get("name", "")
+    forced = EXOTIC_OVERRIDES.get(exo_name, {})
     el = "Harmonic" if elem in ("Prismatic", "Any", "") else elem
     out = {}
     for slot, mods in ARMOR_MODS.items():
@@ -541,6 +590,14 @@ def recommend_armor_loadout(elem, a, build=None, artifact=None):
         ranked = sorted(cands, key=lambda m: (-score(m), m["cost"]))
         budget = 10
         counts = {}
+        # pre-seed mods forced by a specific exotic, before the greedy fill
+        for fname in forced.get(slot, []):
+            m = next((x for x in cands
+                      if x["mod"].replace("<Element>", el).replace("<Weapon>", "Primary") == fname),
+                     None)
+            if m and m["cost"] <= budget:
+                counts.setdefault(fname, [m["cost"], m["desc"], 0])[2] += 1
+                budget -= m["cost"]
         progress = True
         while budget > 0 and progress:
             progress = False
@@ -558,8 +615,10 @@ def recommend_armor_loadout(elem, a, build=None, artifact=None):
         modlist = [{"mod": n + (" x" + str(v[2]) if v[2] > 1 else ""),
                     "cost": v[0], "desc": v[1]}
                    for n, v in counts.items() if v[2] > 0]
-        out[slot] = {"mods": modlist, "used": 10 - budget,
-                     "note": _slot_note(elem, [m["mod"] for m in modlist])}
+        note = _slot_note(elem, [m["mod"] for m in modlist])
+        if forced.get(slot) and forced.get("note"):
+            note = forced["note"] + (("; " + note) if note else "")
+        out[slot] = {"mods": modlist, "used": 10 - budget, "note": note}
     return out
 
 
@@ -696,6 +755,13 @@ def recommend_artifact(elem, a):
     }
 
 
+def _set_bonus(bonuses, count):
+    for b in bonuses:
+        if int(b.get("count", 0)) == count:
+            return b
+    return bonuses[0] if bonuses else None
+
+
 def recommend_gear_set(elem, a):
     if not GEAR_SETS:
         return None
@@ -714,15 +780,25 @@ def recommend_gear_set(elem, a):
     for k in ("main_goal", "second_goal", "optional_goal"):
         for wd in goalwords.get(a.get(k, "Any"), []):
             signal.add(wd)
-    best = None
+    ranked = []
     for sname, bonuses in GEAR_SETS.items():
         text = " ".join((b["perk"] + " " + b["desc"]).lower() for b in bonuses)
         sc = sum(1 for wd in signal if wd in text)
-        if best is None or sc > best[0]:
-            best = (sc, sname, bonuses)
-    if not best or best[0] == 0:
+        ranked.append((sc, sname, bonuses))
+    ranked.sort(key=lambda x: -x[0])
+    if not ranked or ranked[0][0] == 0:
         return None
-    return {"name": best[1], "bonuses": best[2]}
+    best = ranked[0]
+    four = _set_bonus(best[2], 4)
+    out = {"name": best[1],
+           "four": {"perk": four["perk"], "desc": four["desc"]} if four else None,
+           "two_two": []}
+    # a valid alternative: two different sets at 2 pieces each
+    for sc, sname, bonuses in ranked[:2]:
+        two = _set_bonus(bonuses, 2)
+        if two:
+            out["two_two"].append({"name": sname, "perk": two["perk"], "desc": two["desc"]})
+    return out
 
 ELEMENTS = {"Arc", "Solar", "Void", "Stasis", "Strand", "Prismatic"}
 SURV_RANK = {"Low": 1, "Med": 2, "High": 3}
