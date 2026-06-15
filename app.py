@@ -92,7 +92,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.3"
+APP_VERSION = "0.9.4"
 BUILD_DATE = "2026-06-15"
 
 
@@ -284,6 +284,45 @@ for _ammo, _types in WEAPON_TREE.items():
             WEAPON_TYPE[_norm(_entry[0])] = _wtype
 
 
+SYN_KW = 1.2      # score per producer/consumer keyword the exotic shares with the build
+SYN_ELEM = 2.0    # exotic weapon element matches the build element
+
+
+def _build_econ(build):
+    """Keywords produced and consumed by the slots assembled so far."""
+    produced, consumed = set(), set()
+    for _cat, picks in build.items():
+        for e in picks:
+            it = e["item"]
+            produced.update(it.get("prod", []))
+            consumed.update(it.get("cons", []))
+    return produced, consumed
+
+
+def exotic_synergy_score(item, w, produced, consumed, elem, a):
+    """Score an exotic by how well it works with the rest of the build, not in
+    isolation: closed producer/consumer loops, element match, then goal fit."""
+    s = item_score(item, w)
+    for k in item.get("prod", []):
+        if k in consumed:
+            s += SYN_KW
+    for k in item.get("cons", []):
+        if k in produced:
+            s += SYN_KW
+    we = WEAPON_ELEM.get(item["name"], "")
+    if we:
+        if we == elem:
+            s += SYN_ELEM
+        elif elem == "Prismatic":
+            s += SYN_ELEM * 0.5
+    tagw = item.get("tagw", {})
+    if a.get("damage_profile") in ("Boss DPS", "Sustained") and tagw.get("Damage"):
+        s += tagw["Damage"] * 2
+    if a.get("playstyle") == "Weapon" and tagw.get("Damage"):
+        s += tagw["Damage"]
+    return s
+
+
 def assemble(cls, elem, a, w):
     build = {}
     total = 0.0
@@ -296,8 +335,15 @@ def assemble(cls, elem, a, w):
             n = max(1, min(5, sum(
                 int(FRAG_SLOTS.get(x["name"], x.get("frag_slots", 2)) or 2)
                 for x in chosen_aspects)))
-        ranked = sorted(gated(cat, cls, elem),
-                        key=lambda x: (-item_score(x, w), x["name"]))
+        if cat in ("Exotic Weapon", "Exotic Armor"):
+            # exotic slots are assembled last, so score them for synergy with
+            # everything already chosen instead of in isolation
+            produced, consumed = _build_econ(build)
+            ranked = sorted(gated(cat, cls, elem), key=lambda x: (
+                -exotic_synergy_score(x, w, produced, consumed, elem, a), x["name"]))
+        else:
+            ranked = sorted(gated(cat, cls, elem),
+                            key=lambda x: (-item_score(x, w), x["name"]))
         picks = ranked[:n]
         if cat == "Exotic Armor" and a.get("build_exotic_armor", "Any") not in ("Any", None):
             fi = find_pool_item("Exotic Armor", a["build_exotic_armor"])
