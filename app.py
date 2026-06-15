@@ -400,7 +400,8 @@ def _build_tags(a):
 
 
 def recommend_armor_loadout(elem, a):
-    """Fill every armor piece with a full mod set (~10 energy) matched to the build."""
+    """Fill every armor piece to its full ~10 energy with a mod set matched to
+    the build, stacking element anchors (Surge, Siphon, Resistance) first."""
     tags = _build_tags(a)
     el = "Harmonic" if elem in ("Prismatic", "Any", "") else elem
     out = {}
@@ -410,22 +411,30 @@ def recommend_armor_loadout(elem, a):
 
         def score(m):
             return len(set(m["tags"]) & tags) + (3 if m["elem"] else 0)
-        ranked = sorted(cands, key=lambda m: -score(m))
-        budget, chosen = 10, []
-        for m in ranked:
-            if score(m) <= 0 and chosen:
-                continue
-            name = m["mod"].replace("<Element>", el).replace("<Weapon>", "Primary")
-            # element anchor mods (Siphon/Surge/Resistance) can stack
-            copies = 2 if (m["elem"] and slot in ("Legs", "Helmet")) else 1
-            for _ in range(copies):
-                if budget - m["cost"] < 0 or len(chosen) >= 4:
-                    break
-                chosen.append({"mod": name, "cost": m["cost"], "desc": m["desc"]})
+
+        def cap(m):
+            if m["elem"]:
+                return 3
+            return 2 if m["cost"] == 1 else 1
+        ranked = sorted(cands, key=lambda m: (-score(m), m["cost"]))
+        budget = 10
+        counts = {}
+        progress = True
+        while budget > 0 and progress:
+            progress = False
+            for m in ranked:
+                name = m["mod"].replace("<Element>", el).replace("<Weapon>", "Primary")
+                c = counts.setdefault(name, [m["cost"], m["desc"], 0])
+                if c[2] >= cap(m) or m["cost"] > budget:
+                    continue
+                c[2] += 1
                 budget -= m["cost"]
-            if len(chosen) >= 4 or budget <= 1:
+                progress = True
                 break
-        out[slot] = {"mods": chosen, "used": 10 - budget}
+        modlist = [{"mod": n + (" x" + str(v[2]) if v[2] > 1 else ""),
+                    "cost": v[0], "desc": v[1]}
+                   for n, v in counts.items() if v[2] > 0]
+        out[slot] = {"mods": modlist, "used": 10 - budget}
     return out
 
 
@@ -508,9 +517,6 @@ def recommend_artifact(elem, a):
             break
     return {
         "name": art["name"], "source": art["source"], "perks": picks,
-        "unlock_note": ("Equip this one artifact, then spend points (earned from XP) to "
-                        "unlock perks in the order listed. You can hold up to about 12 at "
-                        "once and refund freely, so prioritize the element-matched perks first."),
         "alts": [x["name"] for x in ranked[1:3]
                  if sum(1 for p in x["perks"] if _artifact_match(p, elem)) > 0],
     }
