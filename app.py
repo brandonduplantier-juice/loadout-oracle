@@ -19,6 +19,7 @@ import os
 import re
 import time
 import uuid
+from collections import deque
 from urllib import request as urlreq, error as urlerr, parse as urlparse
 
 from flask import (
@@ -103,7 +104,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.8"
+APP_VERSION = "0.9.10"
 BUILD_DATE = "2026-06-15"
 
 
@@ -957,17 +958,20 @@ def build_dim_loadout(gen):
 _DIM_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
            "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
 _TOKENS = {"bungie": None, "bungie_exp": 0.0, "dim": None, "dim_exp": 0.0,
-           "destiny_mid": None}
+           "destiny_mid": None, "refresh": None}
 
 
 def _bungie_access_token():
-    """Refresh the Bungie access token from the stored refresh token, cached."""
+    """Refresh the Bungie access token, cached. Bungie rotates the refresh token
+    on each call, so we keep the freshest one for this process's lifetime and fall
+    back to the env-provided token on a cold start."""
     now = time.time()
     if _TOKENS["bungie"] and now < _TOKENS["bungie_exp"] - 60:
         return _TOKENS["bungie"]
+    refresh = _TOKENS.get("refresh") or BUNGIE_REFRESH_TOKEN
     data = urlparse.urlencode({
         "grant_type": "refresh_token",
-        "refresh_token": BUNGIE_REFRESH_TOKEN,
+        "refresh_token": refresh,
     }).encode("utf-8")
     basic = base64.b64encode(
         (BUNGIE_OAUTH_CLIENT_ID + ":" + BUNGIE_OAUTH_CLIENT_SECRET).encode("utf-8")
@@ -981,6 +985,8 @@ def _bungie_access_token():
         tok = json.loads(r.read().decode("utf-8"))
     _TOKENS["bungie"] = tok["access_token"]
     _TOKENS["bungie_exp"] = now + int(tok.get("expires_in", 3600))
+    if tok.get("refresh_token"):
+        _TOKENS["refresh"] = tok["refresh_token"]
     return _TOKENS["bungie"]
 
 
@@ -1498,6 +1504,48 @@ def results():
     )
 
 
+# In-memory rate limiting for the public DIM share endpoint, which performs an
+# authenticated action under the single configured account. The service runs a
+# single worker, so a process-local limiter is consistent. State resets on
+# restart, which is acceptable for casual abuse prevention.
+_RATE_IP = {}            # ip -> deque[timestamps]
+_RATE_GLOBAL = deque()   # timestamps across all callers
+_RATE_IP_MAX = 12        # shares per IP
+_RATE_IP_WINDOW = 3600   # over this many seconds
+_RATE_GLOBAL_MAX = 60    # shares total
+_RATE_GLOBAL_WINDOW = 600
+
+
+def _client_ip():
+    fwd = request.headers.get("X-Forwarded-For", "")
+    if fwd:
+        return fwd.split(",")[0].strip()
+    return request.remote_addr or "?"
+
+
+def _rate_ok(ip):
+    now = time.time()
+    g = _RATE_GLOBAL
+    while g and now - g[0] > _RATE_GLOBAL_WINDOW:
+        g.popleft()
+    if len(g) >= _RATE_GLOBAL_MAX:
+        return False
+    dq = _RATE_IP.get(ip)
+    if dq is None:
+        dq = deque()
+        _RATE_IP[ip] = dq
+    while dq and now - dq[0] > _RATE_IP_WINDOW:
+        dq.popleft()
+    if len(dq) >= _RATE_IP_MAX:
+        return False
+    dq.append(now)
+    g.append(now)
+    if len(_RATE_IP) > 2000:  # bound memory: drop emptied buckets
+        for k in [k for k, v in _RATE_IP.items() if not v]:
+            _RATE_IP.pop(k, None)
+    return True
+
+
 @app.route("/dim_share", methods=["POST"])
 def dim_share():
     a = session.get("answers", {})
@@ -1505,6 +1553,8 @@ def dim_share():
         return {"ok": False, "reason": "no_build"}, 400
     if not DIM_API_KEY:
         return {"ok": False, "reason": "no_key"}
+    if not _rate_ok(_client_ip()):
+        return {"ok": False, "reason": "rate_limited"}, 429
     url, err = post_dim_share(build_dim_loadout(construct(a)))
     if url:
         return {"ok": True, "url": url}

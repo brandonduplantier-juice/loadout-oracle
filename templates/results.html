@@ -206,7 +206,9 @@
           dimToast('Link created and copied: ' + data.url + '  .  To use it, open DIM \u203a Loadouts \u203a Import Loadout and paste it.', 9000);
         } else {
           var reason = (data && data.reason) ? data.reason : 'unknown error';
-          if (/401|authorization/i.test(reason)) {
+          if (/rate.?limit|429/i.test(reason)) {
+            dimToast('Too many share requests right now. Copied a search and opened DIM instead.', 9000);
+          } else if (/401|authorization/i.test(reason)) {
             dimToast('Real DIM import needs a DIM account login, which this tool does not have. Copied a search and opened DIM instead.', 9000);
           } else {
             dimToast('DIM share unavailable (' + reason + '). Copied a search and opened DIM instead.', 9000);
