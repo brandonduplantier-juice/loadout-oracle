@@ -400,8 +400,10 @@ def _build_tags(a):
 
 
 def recommend_armor_loadout(elem, a):
-    """Fill every armor piece to its full ~10 energy with a mod set matched to
-    the build, stacking element anchors (Surge, Siphon, Resistance) first."""
+    """Fill each armor piece with distinct, relevant mods. Element anchors
+    (Surge, Siphon, Resistance) stack to a realistic cap; everything else is
+    added once. No filler or stat mods are added just to reach 10, so a piece
+    can sit under its energy cap."""
     tags = _build_tags(a)
     el = "Harmonic" if elem in ("Prismatic", "Any", "") else elem
     out = {}
@@ -412,10 +414,13 @@ def recommend_armor_loadout(elem, a):
         def score(m):
             return len(set(m["tags"]) & tags) + (3 if m["elem"] else 0)
 
+        def relevant(m):
+            return m["elem"] or bool(set(m["tags"]) & tags)
+
         def cap(m):
             if m["elem"]:
-                return 3
-            return 2 if m["cost"] == 1 else 1
+                return {"Legs": 3, "Helmet": 2, "Chest": 2}.get(slot, 1)
+            return 1
         ranked = sorted(cands, key=lambda m: (-score(m), m["cost"]))
         budget = 10
         counts = {}
@@ -423,6 +428,8 @@ def recommend_armor_loadout(elem, a):
         while budget > 0 and progress:
             progress = False
             for m in ranked:
+                if not relevant(m):
+                    continue
                 name = m["mod"].replace("<Element>", el).replace("<Weapon>", "Primary")
                 c = counts.setdefault(name, [m["cost"], m["desc"], 0])
                 if c[2] >= cap(m) or m["cost"] > budget:
