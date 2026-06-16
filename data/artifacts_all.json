@@ -1,451 +1,1998 @@
 {
- "artifacts": [
-  {
-   "name": "Implement of Curiosity",
-   "hash": 2894222926,
-   "source": "Bungie manifest (live), 2026-06-15",
-   "tiers": 5,
-   "perks": [
+  "artifacts": [
     {
-     "perk": "Anti-Barrier Hand Cannon",
-     "tier": 1,
-     "element": "",
-     "elements": [],
-     "weapons": [
-      "Hand Cannon"
-     ],
-     "champion": "Barrier",
-     "type": "champion",
-     "desc": "Your equipped Hand Cannons fire shield-piercing rounds and stun [Shield-Piercing] Barrier Champions.",
-     "hash": 4217417017
+      "name": "Implement of Curiosity",
+      "hash": 2894222926,
+      "source": "Bungie manifest (live), 2026-06-15",
+      "tiers": 3,
+      "perks": [
+        {
+          "perk": "Argent Quiver",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Bow"
+          ],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Reloading a Bow consumes one stack of Armor Charge, granting increased damage and reload speed for your next 3 shots until you stow your Bow.",
+          "hash": null
+        },
+        {
+          "perk": "Iron Lord's Vigor",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Sword"
+          ],
+          "champion": "",
+          "type": "survivability",
+          "desc": "While wielding a Sword, you take decreased damage; rapid final blows grant ammo to the wielder.",
+          "hash": null
+        },
+        {
+          "perk": "Frigid Glare",
+          "tier": 3,
+          "element": "Stasis",
+          "elements": [
+            "Stasis"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "While Frost Armor is active, Stasis precision final blows cause combatants to release a freezing burst.",
+          "hash": null
+        },
+        {
+          "perk": "Tangled Web",
+          "tier": 3,
+          "element": "Strand",
+          "elements": [
+            "Strand"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Creating a Tangle by defeating a Strand debuffed target suspends nearby combatants.",
+          "hash": null
+        },
+        {
+          "perk": "Elemental Overdrive",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Picking up an Elemental pickup or Tangle grants increased damage to weapons of the same element.",
+          "hash": null
+        },
+        {
+          "perk": "Shieldcrush",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "While you have Woven Mail, Frost Armor, or a Void overshield, your melee recharges faster and deals increased damage. While you are Amplified or Radiant, your grenade recharges faster and deals increased damage.",
+          "hash": null
+        },
+        {
+          "perk": "Radiant Shrapnel",
+          "tier": 3,
+          "element": "Solar",
+          "elements": [
+            "Solar"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Dealing sustained weapon damage while Radiant or defeating a scorched combatant with a weapon causes the target to release Solar projectiles that deal damage and scorch on impact.",
+          "hash": null
+        },
+        {
+          "perk": "Threaded Blast",
+          "tier": 2,
+          "element": "Strand",
+          "elements": [
+            "Strand"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Destroying a Tangle with a Strand weapon increases the radius of the explosion and its damage.",
+          "hash": null
+        },
+        {
+          "perk": "Cauterized Darkness",
+          "tier": 2,
+          "element": "",
+          "elements": [
+            "Solar",
+            "Stasis",
+            "Strand"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Stasis or Strand debuffed non-boss combatants take increased Solar damage from all sources.",
+          "hash": null
+        },
+        {
+          "perk": "Elemental Daze",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Stunning a Champion with an elemental weapon creates an elementally aligned explosion, applying a matching elemental debuff to them and nearby targets.",
+          "hash": null
+        },
+        {
+          "perk": "Shoulder to Shoulder",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Dealing sustained precision damage against combatants while near two or more allies grants you damage resistance.",
+          "hash": null
+        },
+        {
+          "perk": "Elemental Coalescence",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "Defeating targets has the chance to create an Elemental pickup matching your equipped Super element.",
+          "hash": null
+        },
+        {
+          "perk": "That Fresh Bullets Smell",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Picking up an ammo brick gives your Kinetic weapons increased damage for a short duration.",
+          "hash": null
+        },
+        {
+          "perk": "Energy Acceleration",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "Unstoppable",
+          "type": "champion",
+          "desc": "Sustained damage with micro-missiles causes the combatant to emit a Kinetic shockwave that damages nearby combatants. Strong against Unstoppable Champions.",
+          "hash": null
+        },
+        {
+          "perk": "Semi-Auto Striker",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Bow",
+            "Sniper Rifle",
+            "Scout Rifle"
+          ],
+          "champion": "",
+          "type": "economy",
+          "desc": "If you have fewer than 2 stacks of Armor Charge, rapid precision shots with Bows, Snipers, and Scout Rifles generate an Armor Charge.",
+          "hash": null
+        },
+        {
+          "perk": "Pack Tactics",
+          "tier": 1,
+          "element": "Strand",
+          "elements": [
+            "Strand"
+          ],
+          "weapons": [],
+          "champion": "Unstoppable",
+          "type": "champion",
+          "desc": "Dealing damage with Threadlings increases Threadling damage. At maximum stacks, Threadlings stun Unstoppable Champions.",
+          "hash": null
+        },
+        {
+          "perk": "Refresh Threads",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "Picking up an Elemental pickup matching your subclass element or picking up a Tangle while you have a Strand Super equipped grants energy to your least charged ability.",
+          "hash": null
+        },
+        {
+          "perk": "Horde Shuttle",
+          "tier": 1,
+          "element": "Strand",
+          "elements": [
+            "Strand"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Damaging unraveled targets with a weapon occasionally spawns a Threadling. Threadlings sever targets that they damage.",
+          "hash": null
+        },
+        {
+          "perk": "Frost Renewal",
+          "tier": 1,
+          "element": "Stasis",
+          "elements": [
+            "Stasis"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "While you have Frost Armor, taking critical damage releases a burst that freezes nearby combatants and grants Frost Armor to you and nearby allies.",
+          "hash": null
+        },
+        {
+          "perk": "Elemental Benevolence",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "Granting allies an elemental buff gives class ability energy.",
+          "hash": null
+        },
+        {
+          "perk": "Fever and Chill",
+          "tier": 1,
+          "element": "",
+          "elements": [
+            "Solar",
+            "Stasis"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Rapid precision hits with Solar weapons grant Radiant. Rapid precision hits with Stasis weapons grant Frost Armor.",
+          "hash": null
+        }
+      ],
+      "lore": "A relic from a past journey to Kepler.",
+      "elements": [
+        "Solar",
+        "Stasis",
+        "Strand"
+      ],
+      "weapons": [
+        "Bow",
+        "Sword",
+        "Sniper Rifle",
+        "Scout Rifle"
+      ]
     },
     {
-     "perk": "Anti-Barrier Sniper Rifle",
-     "tier": 1,
-     "element": "",
-     "elements": [],
-     "weapons": [
-      "Sniper Rifle"
-     ],
-     "champion": "Barrier",
-     "type": "champion",
-     "desc": "Your equipped Sniper Rifles fire shield-piercing rounds and stun [Shield-Piercing] Barrier Champions.",
-     "hash": 4217417018
+      "name": "Encrypted Data Disk",
+      "hash": 1085005333,
+      "source": "In-game screenshots, 2026-06-16",
+      "tiers": 3,
+      "perks": [
+        {
+          "perk": "Elemental Orbs: Arc",
+          "tier": 3,
+          "element": "Arc",
+          "elements": [
+            "Arc"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "[Arc]Arc weapon final blows have a chance to spawn an Arc Elemental Orb. Arc Orbs can be thrown or shot to create an Arc explosion that jolts targets it damages.",
+          "hash": 2742146821
+        },
+        {
+          "perk": "Kinetic Rupture",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "Unstoppable",
+          "type": "champion",
+          "desc": "Kinetic weapon damage against a powerful combatant has a chance to create a Kinetic Rupture. Targeting this Rupture causes a damaging explosion that staggers combatants. Strong against [Stagger] Unstoppable Champions.",
+          "hash": 2742146822
+        },
+        {
+          "perk": "Sniper's Meditation",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Sniper Rifle"
+          ],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Sniper Rifle hits grant stacking Sniper Rifle damage, stability, and reload bonuses for a short time. Heavy ammo Sniper Rifle hits count as more than one hit.",
+          "hash": 2742146823
+        },
+        {
+          "perk": "Sword Storm Combo",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Sword"
+          ],
+          "champion": "",
+          "type": "utility",
+          "desc": "Performing three Sword light attacks followed by a heavy attack summons penumbral blades that surround you to damage and disorient combatants. Sword final blows extend the duration of these penumbral blades.",
+          "hash": 2742146816
+        },
+        {
+          "perk": "Void Infestation",
+          "tier": 3,
+          "element": "Void",
+          "elements": [
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Defeating a weakened target spawns a tracking projectile that weakens other targets.",
+          "hash": 2742146817
+        },
+        {
+          "perk": "Tazer Tag",
+          "tier": 3,
+          "element": "Arc",
+          "elements": [
+            "Arc"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Arc-powered melee hits jolt combatants and deal further damage for a short duration.",
+          "hash": 2742146818
+        },
+        {
+          "perk": "Sticker Shock",
+          "tier": 3,
+          "element": "Arc",
+          "elements": [
+            "Arc"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Arc Flux, Magnetic, and Fusion Grenades deal more damage when attached to combatants; on final blows, they release several micro-missiles that seek nearby combatants.",
+          "hash": 2742146819
+        },
+        {
+          "perk": "Dielectric",
+          "tier": 2,
+          "element": "Arc",
+          "elements": [
+            "Arc"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "Defeating [Arc]Arc debuffed targets grants Bolt Charge.  Rapidly defeating Arc debuffed targets spawns an Orb of Power and heals a small portion of health.",
+          "hash": 2903198438
+        },
+        {
+          "perk": "Armorsmith",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Breaking a combatant's shield temporarily grants you damage resistance and increased melee damage.",
+          "hash": 2903198437
+        },
+        {
+          "perk": "Counter Energy",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "When you or a member of your fireteam stuns a champion, you gain energy for your least-charged ability.",
+          "hash": 2903198436
+        },
+        {
+          "perk": "Combination Argent Blade",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Sword"
+          ],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Briefly pause after executing a light attack, then follow it up with a light or heavy attack to empower your Sword for a short time, granting it bonus damage and charge rate.",
+          "hash": 2903198435
+        },
+        {
+          "perk": "Singularity Blade",
+          "tier": 2,
+          "element": "Void",
+          "elements": [
+            "Void"
+          ],
+          "weapons": [
+            "Sword"
+          ],
+          "champion": "",
+          "type": "survivability",
+          "desc": "While you have a Void elemental buff, melee and Sword hits weaken targets, while melee and Sword final blows create a weakening burst.",
+          "hash": 2903198434
+        },
+        {
+          "perk": "Blinding Jolts",
+          "tier": 2,
+          "element": "Arc",
+          "elements": [
+            "Arc"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Final blows on jolted combatants blind nearby combatants.",
+          "hash": 2903198433
+        },
+        {
+          "perk": "Precision Equity",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "Precision final blows build progress towards a large Orb of Power that also grants bonus weapon damage on pickup. Higher ranked targets grant more progress.",
+          "hash": 2903198432
+        },
+        {
+          "perk": "Press The Advantage",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Breaking a combatant's shield grants increased weapon stability, handling, and reload speed. Swords gain increased guard resistance.",
+          "hash": 3834273543
+        },
+        {
+          "perk": "Kinetic Synthesis",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Sustained Kinetic weapon damage and rapid final blows have a chance to generate a unique ammo brick. Collecting this brick will grant ammo to equipped Kinetic damage weapons and grant Special and Heavy ammo progress.",
+          "hash": 3834273540
+        },
+        {
+          "perk": "Reload at Range",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Bow",
+            "Sniper Rifle"
+          ],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Precision hits with Bows and Sniper Rifles grant a stacking bonus to their reload speed.",
+          "hash": 3834273541
+        },
+        {
+          "perk": "Riposte",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Sword"
+          ],
+          "champion": "Unstoppable",
+          "type": "champion",
+          "desc": "Shortly after guarding with a Sword, your light and heavy attacks stun unshielded combatants. Strong against [Stagger] Unstoppable Champions.",
+          "hash": 3834273538
+        },
+        {
+          "perk": "Power from Pain",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Rapid final blows against weakened combatants grant you Devour.",
+          "hash": 3834273539
+        },
+        {
+          "perk": "Fierce Proxemics",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "Finisher final blows grant grenade and melee energy.",
+          "hash": 3834273536
+        },
+        {
+          "perk": "Rapid Remedy",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Machine Gun"
+          ],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Machine Gun rapid final blows heal you.",
+          "hash": 3834273537
+        }
+      ],
+      "lore": "A relic from a past journey as a renegade.",
+      "elements": [
+        "Kinetic",
+        "Void",
+        "Arc"
+      ],
+      "weapons": [
+        "Sword",
+        "Sniper Rifle",
+        "Auto Rifle"
+      ]
     },
     {
-     "perk": "Overload Pulse Rifle",
-     "tier": 1,
-     "element": "",
-     "elements": [],
-     "weapons": [
-      "Pulse Rifle"
-     ],
-     "champion": "Overload",
-     "type": "champion",
-     "desc": "Your equipped Pulse Rifles fire disrupting rounds which stun the target, delaying ability energy regeneration and lowering combatant damage output.  Strong against [Disruption] Overload Champions.",
-     "hash": 4217417019
+      "name": "NPA Repulsion Regulator",
+      "hash": null,
+      "source": "In-game screenshots, 2026-06-16",
+      "tiers": 3,
+      "perks": [
+        {
+          "perk": "Void Weapon Channeling",
+          "tier": 3,
+          "element": "Void",
+          "elements": [
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "weapon",
+          "desc": "You gain a temporary bonus to Void weapon damage after you defeat a target with a Void weapon while at least one of your Void abilities is fully charged. This damage bonus increases based on the number of fully charged Void abilities you have.",
+          "hash": null
+        },
+        {
+          "perk": "Passive Aggressive Guard",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Glaive"
+          ],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Receive less damage from combatants that are close to you while you are wielding a Glaive.",
+          "hash": null
+        },
+        {
+          "perk": "Lightning Strikes Twice",
+          "tier": 3,
+          "element": "Arc",
+          "elements": [
+            "Arc"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "After throwing an Arc grenade, gain increased grenade recharge for a short time. Arc final blows extend the duration of this benefit.",
+          "hash": null
+        },
+        {
+          "perk": "Squad Goals",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Performing a finisher while you are amplified grants Amplified to nearby allies. Performing a finisher while you have Woven Mail grants Woven Mail to nearby allies. Performing a finisher while you have Devour grants Devour to nearby allies.",
+          "hash": null
+        },
+        {
+          "perk": "Supernova",
+          "tier": 3,
+          "element": "Void",
+          "elements": [
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Picking up a Void Breach causes your next source of Void damage to create a large weakening pulse.",
+          "hash": null
+        },
+        {
+          "perk": "Shock and Awe",
+          "tier": 3,
+          "element": "Arc",
+          "elements": [
+            "Arc"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Arc final blows while you are amplified summon a burst of lightning that damages and jolts targets.",
+          "hash": null
+        },
+        {
+          "perk": "Conductive Cosmic Needle",
+          "tier": 3,
+          "element": "",
+          "elements": [
+            "Strand",
+            "Arc",
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Targets affected by Strand debuffs take increased damage from Arc and Void abilities.",
+          "hash": null
+        },
+        {
+          "perk": "Strand Soldier",
+          "tier": 2,
+          "element": "Strand",
+          "elements": [
+            "Strand"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Your Strand weapons gain Unraveling Rounds whenever you gain Woven Mail while your Strand or Prismatic subclass is equipped.",
+          "hash": null
+        },
+        {
+          "perk": "Suppressing Glaive",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Glaive"
+          ],
+          "champion": "",
+          "type": "utility",
+          "desc": "Damaging combatants with your Glaive suppresses them, preventing them from using abilities for a short time.",
+          "hash": null
+        },
+        {
+          "perk": "Protective Breach",
+          "tier": 2,
+          "element": "Void",
+          "elements": [
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Picking up a Void Breach gives you an overshield or refreshes your existing overshield.",
+          "hash": null
+        },
+        {
+          "perk": "Counter Charge",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "Gain a stack of Armor Charge when you stun a Champion.",
+          "hash": null
+        },
+        {
+          "perk": "Bricks from Beyond",
+          "tier": 2,
+          "element": "Void",
+          "elements": [
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "Defeating a powerful combatant with a Void weapon has a chance to generate Heavy ammo progress for you and your teammates.",
+          "hash": null
+        },
+        {
+          "perk": "Overload Grenades",
+          "tier": 2,
+          "element": "Void",
+          "elements": [
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "Overload",
+          "type": "champion",
+          "desc": "Void grenades disrupt combatants, stunning them, delaying ability energy regeneration and lowering combatant damage output. Strong against Overload Champions.",
+          "hash": null
+        },
+        {
+          "perk": "Targeting Autoloader",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Auto Rifle"
+          ],
+          "champion": "",
+          "type": "weapon",
+          "desc": "While you have an Auto Rifle equipped, defeating combatants reloads your equipped weapon and temporarily increases weapon damage. Awards bonus progress when dealing final blows while surrounded.",
+          "hash": null
+        },
+        {
+          "perk": "Shatter Orbs",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "The first time you break a combatant's shield, you create an Orb of Power if you break the shield with the matching damage type.",
+          "hash": null
+        },
+        {
+          "perk": "Sustained Fire",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Auto Rifle"
+          ],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Continuously damaging combatants or healing allies with an Auto Rifle grants you damage resistance.",
+          "hash": null
+        },
+        {
+          "perk": "Thunderous Retort",
+          "tier": 1,
+          "element": "Arc",
+          "elements": [
+            "Arc"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Grants bonus Arc Super damage if cast while critically wounded or while amplified. Lasts until the end of the Super activation.",
+          "hash": null
+        },
+        {
+          "perk": "Amped Up",
+          "tier": 1,
+          "element": "Arc",
+          "elements": [
+            "Arc"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Stay amplified longer while your Arc or Prismatic subclass is equipped.",
+          "hash": null
+        },
+        {
+          "perk": "Unto the Breach",
+          "tier": 1,
+          "element": "Void",
+          "elements": [
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "Defeating a Void debuffed target creates a Void Breach while your Void or Prismatic subclass is equipped.",
+          "hash": null
+        },
+        {
+          "perk": "Volatile Flow",
+          "tier": 1,
+          "element": "Void",
+          "elements": [
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Picking up an Orb of Power grants your Void weapons Volatile rounds.",
+          "hash": null
+        },
+        {
+          "perk": "Improved Unraveling",
+          "tier": 1,
+          "element": "Strand",
+          "elements": [
+            "Strand"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Increases the amount of damage dealt by unraveling a target.",
+          "hash": null
+        }
+      ],
+      "lore": "A relic from a past journey to reunite with Commander Sloane and Ahsa.",
+      "elements": [
+        "Arc",
+        "Void",
+        "Strand"
+      ],
+      "weapons": [
+        "Glaive",
+        "Auto Rifle"
+      ]
     },
     {
-     "perk": "Overload Submachine Gun",
-     "tier": 1,
-     "element": "",
-     "elements": [],
-     "weapons": [
-      "Submachine Gun"
-     ],
-     "champion": "Overload",
-     "type": "champion",
-     "desc": "Your equipped Submachine Guns fire disrupting rounds which stun the target, delaying ability energy regeneration and lowering combatant damage output.  Strong against [Disruption] Overload Champions.",
-     "hash": 4217417020
+      "name": "Hunter's Journal",
+      "hash": null,
+      "source": "In-game screenshots, 2026-06-16",
+      "tiers": 3,
+      "perks": [
+        {
+          "perk": "Shock and Awe",
+          "tier": 3,
+          "element": "Arc",
+          "elements": [
+            "Arc"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "When you have an Arc or Prismatic subclass equipped, Arc final blows while you are amplified summon a burst of lightning that damages and jolts targets.",
+          "hash": null
+        },
+        {
+          "perk": "Sniper's Meditation",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Sniper Rifle"
+          ],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Sniper Rifle hits grant stacking Sniper Rifle damage, stability, and reload bonuses for a short time. Heavy ammo Sniper Rifle hits count as more than one.",
+          "hash": null
+        },
+        {
+          "perk": "Transference",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Gain increased grenade and melee damage while transcendent. Weapon final blows while transcendent refund Light and Dark energy after Transcendence ends.",
+          "hash": null
+        },
+        {
+          "perk": "Shieldcrush",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "While you have Woven Mail, Frost Armor, or a Void Overshield, your melee recharges faster and deals increased damage. While you are amplified or radiant, your grenade recharges faster and deals increased damage.",
+          "hash": null
+        },
+        {
+          "perk": "Expanding Abyss",
+          "tier": 3,
+          "element": "Void",
+          "elements": [
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Void sources deal increased damage to weakened targets.",
+          "hash": null
+        },
+        {
+          "perk": "Argent Blade",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Sword"
+          ],
+          "champion": "",
+          "type": "weapon",
+          "desc": "While you have Armor Charge, dealing damage with a Sword consumes an Armor Charge and empowers your Sword for a short time, granting it bonus damage and energy charge rate.",
+          "hash": null
+        },
+        {
+          "perk": "Prismatic Transfer",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "weapon",
+          "desc": "When you cast your Super, each member of your fireteam with a Super type different than yours gains a bonus to weapon damage.",
+          "hash": null
+        },
+        {
+          "perk": "Counter Energy",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "When you or a member of your fireteam stuns a champion, you gain energy for your least-charged ability.",
+          "hash": null
+        },
+        {
+          "perk": "Blade Stamina",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Sword"
+          ],
+          "champion": "",
+          "type": "economy",
+          "desc": "Rapidly defeating combatants with a Sword refunds some ammo.",
+          "hash": null
+        },
+        {
+          "perk": "Void Hegemony",
+          "tier": 2,
+          "element": "Void",
+          "elements": [
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "While you have a Void or Prismatic subclass equipped, defeating weakened targets provides a small Void Overshield.",
+          "hash": null
+        },
+        {
+          "perk": "Radiant Orbs",
+          "tier": 2,
+          "element": "Solar",
+          "elements": [
+            "Solar"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "While you have a Solar or Prismatic subclass equipped, picking up an Orb of Power makes you radiant.",
+          "hash": null
+        },
+        {
+          "perk": "Bad Amplitude",
+          "tier": 2,
+          "element": "Arc",
+          "elements": [
+            "Arc"
+          ],
+          "weapons": [],
+          "champion": "Overload",
+          "type": "champion",
+          "desc": "Damaging a Champion with an Arc ability causes the Champion to become jolted.",
+          "hash": null
+        },
+        {
+          "perk": "Solar Fulmination",
+          "tier": 2,
+          "element": "Solar",
+          "elements": [
+            "Solar"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Your ignitions do increased damage in an increased radius.",
+          "hash": null
+        },
+        {
+          "perk": "Targeting Autoloader",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Auto Rifle"
+          ],
+          "champion": "",
+          "type": "weapon",
+          "desc": "While you have an Auto Rifle equipped, defeating combatants reloads your equipped weapon and temporarily increases weapon damage. Awards bonus progress when dealing final blows while surrounded.",
+          "hash": null
+        },
+        {
+          "perk": "Sustained Fire",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Auto Rifle"
+          ],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Continuously damaging combatants or healing allies with an Auto Rifle grants you damage resistance.",
+          "hash": null
+        },
+        {
+          "perk": "Incendiary Rifle Rounds",
+          "tier": 1,
+          "element": "Solar",
+          "elements": [
+            "Solar"
+          ],
+          "weapons": [
+            "Sniper Rifle"
+          ],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Solar Sniper Rifle precision hits scorch targets.",
+          "hash": null
+        },
+        {
+          "perk": "Threaded Blast",
+          "tier": 1,
+          "element": "Strand",
+          "elements": [
+            "Strand"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Destroying a Tangle with a Strand weapon creates a larger and more damaging explosion.",
+          "hash": null
+        },
+        {
+          "perk": "Press the Advantage",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Sword"
+          ],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Breaking a combatant's shield grants increased weapon stability, handling, and reload speed. Swords gain increased guard resistance.",
+          "hash": null
+        },
+        {
+          "perk": "Creeping Chill",
+          "tier": 1,
+          "element": "Stasis",
+          "elements": [
+            "Stasis"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Stasis final blows against slowed or frozen targets release a burst that slows combatants and grants Frost Armor to allies caught in the blast.",
+          "hash": null
+        },
+        {
+          "perk": "Energy Diffusion Substrate",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Gain a small amount of resistance to all damage dealt to you by combatants.",
+          "hash": null
+        },
+        {
+          "perk": "Elemental Siphon",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "Rapid final blows with a Kinetic weapon or a weapon matching your equipped Super create an Elemental pickup that matches your equipped Super.",
+          "hash": null
+        }
+      ],
+      "lore": "A relic from a past journey to help Saint-14 and face the Conductor.",
+      "elements": [
+        "Prismatic",
+        "Solar",
+        "Arc",
+        "Void"
+      ],
+      "weapons": [
+        "Sword",
+        "Auto Rifle",
+        "Sniper Rifle"
+      ]
     },
     {
-     "perk": "Unstoppable Bow",
-     "tier": 1,
-     "element": "",
-     "elements": [],
-     "weapons": [
-      "Bow"
-     ],
-     "champion": "Unstoppable",
-     "type": "champion",
-     "desc": "Crossbows, and Bows that have been fully drawn for a short time, fire a powerful explosive payload that stuns unshielded combatants. Strong against [Stagger] Unstoppable Champions.",
-     "hash": 4217417021
+      "name": "Tablet of Ruin",
+      "hash": null,
+      "source": "In-game screenshots, 2026-06-16",
+      "tiers": 3,
+      "perks": [
+        {
+          "perk": "To Shreds",
+          "tier": 2,
+          "element": "Strand",
+          "elements": [
+            "Strand"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Dealing sustained damage to severed targets unravels them. Defeating a severed target creates a hotspot of Strand energy granting Woven Mail to nearby allies for a short duration.",
+          "hash": null
+        },
+        {
+          "perk": "Limit Break",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Casting a Super while you are critically wounded or have an elemental buff matching your Super element grants a period of increased Super damage.",
+          "hash": null
+        },
+        {
+          "perk": "Void Flux",
+          "tier": 2,
+          "element": "Void",
+          "elements": [
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Defeating weakened targets with a Void weapon applies Volatile to nearby targets. Powerful targets increase the radius of the explosion.",
+          "hash": null
+        },
+        {
+          "perk": "Defibrillating Blast",
+          "tier": 2,
+          "element": "Arc",
+          "elements": [
+            "Arc"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Stunning a Champion grants maximum stacks of Bolt Charge. Damaging targets with Bolt Charge bolts jolts them and heals you.",
+          "hash": null
+        },
+        {
+          "perk": "Heavy Ordnance Regeneration",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Machine Gun",
+            "Rocket Launcher"
+          ],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Dealing sustained damage to targets with a Heavy Machine Gun or Rocket Launcher grants damage resistance and increases grenade and melee regeneration for a short duration. While active, defeating powerful combatants disorients nearby rank-and-file combatants.",
+          "hash": null
+        },
+        {
+          "perk": "Elemental Supercharger",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "Defeating exhausted or severed targets with weapons that match your Super element grants Super energy. Exhausted targets deal reduced outgoing damage.",
+          "hash": null
+        },
+        {
+          "perk": "Particle Reconstruction",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Fusion Rifle",
+            "Linear Fusion Rifle"
+          ],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Dealing sustained damage with Fusion Rifles or Linear Fusion Rifles partially refills the magazine from reserves and grants them bonus damage for a short duration against that target.",
+          "hash": null
+        },
+        {
+          "perk": "Vile Weave",
+          "tier": 3,
+          "element": "Strand",
+          "elements": [
+            "Strand"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Targets hit by your Tangles are severed. Reduce Tangle cooldown by picking one up.",
+          "hash": null
+        },
+        {
+          "perk": "Maligned Harvest",
+          "tier": 3,
+          "element": "Void",
+          "elements": [
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Rapidly applying Volatile causes your next instance of Void weapon damage to create a weakening burst. Applying Weaken provides a small Void Overshield.",
+          "hash": null
+        },
+        {
+          "perk": "Flashover",
+          "tier": 3,
+          "element": "Arc",
+          "elements": [
+            "Arc"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "When you gain maximum Bolt Charge, you also become amplified. Lightning bolts deal more damage.",
+          "hash": null
+        },
+        {
+          "perk": "Horde Shuttle",
+          "tier": 3,
+          "element": "Strand",
+          "elements": [
+            "Strand"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Damaging unraveled targets with a weapon occasionally spawns a Threadling. Threadlings sever targets that they damage.",
+          "hash": null
+        },
+        {
+          "perk": "No Bell",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Glaive"
+          ],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Rapid Glaive melee final blows grant Special ammo. Blocking damage with Glaives increases their melee damage to targets.",
+          "hash": null
+        },
+        {
+          "perk": "Harsh Refraction",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Trace Rifle"
+          ],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Trace Rifles do more damage to targets afflicted by elemental debuffs matching their element type.",
+          "hash": null
+        },
+        {
+          "perk": "Gold from Lead",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "Picking up Special ammo has the chance to grant Heavy ammo.",
+          "hash": null
+        },
+        {
+          "perk": "Perpetual Destruction",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Rocket Launcher"
+          ],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Rapid final blows with non-Exotic Rocket Launchers refund ammo and increase reload speed for a short duration.",
+          "hash": null
+        },
+        {
+          "perk": "Elemental Siphon",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "Rapid final blows with a Kinetic weapon or a weapon matching your equipped Super create an Elemental pickup that matches your equipped Super. Elemental pickups grant matching Super energy when they are collected.",
+          "hash": null
+        },
+        {
+          "perk": "Photonic Flare",
+          "tier": 1,
+          "element": "Arc",
+          "elements": [
+            "Arc"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Defeating an exhausted or severed target with Arc damage releases a blinding burst. Exhausted targets deal reduced outgoing damage.",
+          "hash": null
+        },
+        {
+          "perk": "Unraveling Orbs",
+          "tier": 1,
+          "element": "Strand",
+          "elements": [
+            "Strand"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Picking up an Orb of Power or a Tangle grants Strand weapons Unraveling Rounds.",
+          "hash": null
+        },
+        {
+          "perk": "Volatile Marksman",
+          "tier": 1,
+          "element": "Void",
+          "elements": [
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Rapid Void weapon precision hits and rapid Void weapon final blows grant Volatile Rounds. Volatile detonations grant class ability energy.",
+          "hash": null
+        },
+        {
+          "perk": "Dielectric",
+          "tier": 1,
+          "element": "Arc",
+          "elements": [
+            "Arc"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "Defeating Arc debuffed targets grants Bolt Charge. Rapidly defeating Arc debuffed targets spawns an Orb of Power and heals a small portion of health.",
+          "hash": null
+        },
+        {
+          "perk": "Hold the Line",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Machine Gun",
+            "Glaive"
+          ],
+          "champion": "",
+          "type": "survivability",
+          "desc": "While surrounded, Machine Guns and Glaives gain increased reload speed and stability; final blows heal you.",
+          "hash": null
+        }
+      ],
+      "lore": "A relic from a past journey to the shattered hull of the Dreadnaught.",
+      "elements": [
+        "Arc",
+        "Strand",
+        "Void",
+        "Prismatic"
+      ],
+      "weapons": [
+        "Glaive",
+        "Rocket Launcher",
+        "Fusion Rifle"
+      ]
     },
     {
-     "perk": "Stunning Fusion",
-     "tier": 1,
-     "element": "",
-     "elements": [],
-     "weapons": [
-      "Linear Fusion Rifle",
-      "Fusion Rifle"
-     ],
-     "champion": "Unstoppable",
-     "type": "champion",
-     "desc": "Aiming down the sights of a Fusion Rifle or Linear Fusion Rifle for a short time loads a powerful payload that stuns unshielded combatants.   Strong against [Stagger] Unstoppable Champions.",
-     "hash": 4217417022
+      "name": "Slayer Baron Apothecary Satchel",
+      "hash": null,
+      "source": "In-game screenshots, 2026-06-16",
+      "tiers": 3,
+      "perks": [
+        {
+          "perk": "Old God's Rite",
+          "tier": 3,
+          "element": "Void",
+          "elements": [
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "weapon",
+          "desc": "After picking up a Void Breach, dealing damage with a Void weapon creates a rain of seeking projectiles.",
+          "hash": null
+        },
+        {
+          "perk": "Hail the Storm",
+          "tier": 3,
+          "element": "Stasis",
+          "elements": [
+            "Stasis"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Shattering frozen targets and Stasis crystals deals increased damage. Shattering Stasis crystals releases shards of ice that damage and slow targets.",
+          "hash": null
+        },
+        {
+          "perk": "Debilitating Wave",
+          "tier": 3,
+          "element": "",
+          "elements": [
+            "Arc",
+            "Void",
+            "Stasis"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Finishers emit a damaging wave that matches the element of your currently equipped Super. Arc, Void, and Stasis waves apply Blind, Weaken, and Slow respectively.",
+          "hash": null
+        },
+        {
+          "perk": "Weakened Clear",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Grenade Launcher"
+          ],
+          "champion": "",
+          "type": "weapon",
+          "desc": "When using a Grenade Launcher, damaging a boss, damaging a Champion, or breaking a combatant's shield reloads your stowed weapons and weakens the combatant.",
+          "hash": null
+        },
+        {
+          "perk": "Retinal Burn",
+          "tier": 3,
+          "element": "Arc",
+          "elements": [
+            "Arc"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Rapid Arc weapon precision hits consume an Armor Charge to trigger a blinding burst at the target's location.",
+          "hash": null
+        },
+        {
+          "perk": "Curative Orbs",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "The first time you break a target's shield or break the shield of a Guardian using their Super, you create an Orb of Power. Collecting an Elemental pickup, collecting an Orb of Power, or destroying a Tangle grants you a small amount of health.",
+          "hash": null
+        },
+        {
+          "perk": "Void Renewal",
+          "tier": 3,
+          "element": "Void",
+          "elements": [
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "While Devour is active, Void weapon final blows have a chance to generate a Void Breach. Picking up a Void Breach increases weapon reload and handling; Shotguns and Grenade Launchers are also reloaded from reserves.",
+          "hash": null
+        },
+        {
+          "perk": "Arc Compounding",
+          "tier": 2,
+          "element": "Arc",
+          "elements": [
+            "Arc"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Arc sources deal increased damage to Blind targets.",
+          "hash": null
+        },
+        {
+          "perk": "Kinetic Impacts",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Grenade Launcher"
+          ],
+          "champion": "Unstoppable",
+          "type": "champion",
+          "desc": "Sustained damage with a Grenade Launcher increases the reload speed of Grenade Launchers and triggers a damaging Kinetic shockwave. This shockwave can stun Unstoppable Champions.",
+          "hash": null
+        },
+        {
+          "perk": "Served Cold",
+          "tier": 2,
+          "element": "",
+          "elements": [
+            "Stasis",
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "Picking up a Stasis Shard grants you class ability energy. Picking up a Void Breach grants you melee energy.",
+          "hash": null
+        },
+        {
+          "perk": "Conductive Cosmic Crystal",
+          "tier": 2,
+          "element": "",
+          "elements": [
+            "Arc",
+            "Void",
+            "Stasis"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Your Arc and Void abilities deal bonus damage to targets that are affected by a Stasis debuff.",
+          "hash": null
+        },
+        {
+          "perk": "Supernova",
+          "tier": 2,
+          "element": "Void",
+          "elements": [
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Picking up a Void Breach causes your next source of Void damage to create a large weakening pulse.",
+          "hash": null
+        },
+        {
+          "perk": "Brain Freeze",
+          "tier": 2,
+          "element": "Stasis",
+          "elements": [
+            "Stasis"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Frozen combatants become surrounded by chilling fog, which slows combatants that aren't already.",
+          "hash": null
+        },
+        {
+          "perk": "Frost Renewal",
+          "tier": 2,
+          "element": "Stasis",
+          "elements": [
+            "Stasis"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "While you have Frost Armor, taking critical damage releases a burst that freezes nearby combatants and grants Frost Armor to you and nearby allies.",
+          "hash": null
+        },
+        {
+          "perk": "Killing Breeze",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Rapid weapon final blows grant you a bonus to mobility.",
+          "hash": null
+        },
+        {
+          "perk": "The Thick of It",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "Rapid final blows while surrounded grant you Armor Charge. While you are surrounded, your weapons have increased handling; Swords gain increased charge rate.",
+          "hash": null
+        },
+        {
+          "perk": "Trace Evidence",
+          "tier": 1,
+          "element": "Arc",
+          "elements": [
+            "Arc"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "Rapid precision hits or rapid final blows on targets affected by Jolt or Blind will generate Ionic Traces. Picking up an Ionic Trace grants an Armor Charge.",
+          "hash": null
+        },
+        {
+          "perk": "Power from Pain",
+          "tier": 1,
+          "element": "Void",
+          "elements": [
+            "Void"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Rapid final blows against weakened combatants grants you Devour and creates a Void Breach.",
+          "hash": null
+        },
+        {
+          "perk": "Total Carnage",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "After finishing a powerful combatant, gain temporary damage resistance and replenish health.",
+          "hash": null
+        },
+        {
+          "perk": "Crystalline Converter",
+          "tier": 1,
+          "element": "Stasis",
+          "elements": [
+            "Stasis"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "After activating your class ability, your next Stasis weapon final blow creates a Stasis Shard. Gather Stasis Shards to gain stacks of Crystalline Converter, which cause your next powered Stasis melee hit to create Stasis crystals equal to the number of stacks you have.",
+          "hash": null
+        },
+        {
+          "perk": "Wind Chill",
+          "tier": 1,
+          "element": "Stasis",
+          "elements": [
+            "Stasis"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Rapid Stasis weapon hits grant you a stack of Frost Armor; hits against slowed or frozen targets also create a Stasis Shard.",
+          "hash": null
+        }
+      ],
+      "lore": "A relic from a past journey to serve the Eliksni people as Slayer Baron.",
+      "elements": [
+        "Stasis",
+        "Void",
+        "Arc"
+      ],
+      "weapons": [
+        "Grenade Launcher"
+      ]
     },
     {
-     "perk": "Shield-Shattering Rounds",
-     "tier": 1,
-     "element": "",
-     "elements": [],
-     "weapons": [
-      "Machine Gun"
-     ],
-     "champion": "Barrier",
-     "type": "champion",
-     "desc": "Your Machine Guns fire shield-piercing rounds and stun [Shield-Piercing] Barrier Champions.",
-     "hash": 4217417023
-    },
-    {
-     "perk": "Impact, Shock, Gravity",
-     "tier": 2,
-     "element": "Arc",
-     "elements": [
-      "Arc",
-      "Void"
-     ],
-     "weapons": [],
-     "champion": "",
-     "type": "economy",
-     "desc": "Grants access to the Helmet mods: Kinetic/Void Siphon and Kinetic/Arc Siphon.  These mods combine two elemental siphons at a discounted cost.",
-     "hash": 3619040072
-    },
-    {
-     "perk": "Gravitic-Voltaic Charge",
-     "tier": 2,
-     "element": "Arc",
-     "elements": [
-      "Arc",
-      "Void"
-     ],
-     "weapons": [],
-     "champion": "",
-     "type": "economy",
-     "desc": "While you have an Arc or Void Super equipped, increase the maximum number of stacks of Armor Charge you can carry by 1.",
-     "hash": 3619040075
-    },
-    {
-     "perk": "Expert Handling",
-     "tier": 2,
-     "element": "",
-     "elements": [],
-     "weapons": [],
-     "champion": "",
-     "type": "weapon",
-     "desc": "Weapon final blows grant a stacking bonus to stability which resets on weapon reload or stow. Swords gain Guard Resistance.",
-     "hash": 3619040074
-    },
-    {
-     "perk": "Fastest Draw",
-     "tier": 2,
-     "element": "",
-     "elements": [],
-     "weapons": [],
-     "champion": "",
-     "type": "weapon",
-     "desc": "If the first shot shortly after reloading or readying your weapon is a precision hit, gain flinch resistance.",
-     "hash": 3619040077
-    },
-    {
-     "perk": "Elemental Siphon",
-     "tier": 2,
-     "element": "",
-     "elements": [],
-     "weapons": [],
-     "champion": "",
-     "type": "economy",
-     "desc": "Rapid final blows with a Kinetic weapon or a weapon matching your equipped Super create an Elemental pickup that matches your equipped Super.",
-     "hash": 3619040076
-    },
-    {
-     "perk": "Concentrated Forward Firepower",
-     "tier": 2,
-     "element": "",
-     "elements": [],
-     "weapons": [
-      "Fusion Rifle",
-      "Linear Fusion Rifle",
-      "Machine Gun"
-     ],
-     "champion": "",
-     "type": "weapon",
-     "desc": "Sustained damage from Fusion Rifles, Linear Fusion Rifles, and Machine Guns grants those weapons bonus stability, range, and aim assist for a short time.",
-     "hash": 3619040079
-    },
-    {
-     "perk": "Vanguard Surplus Discounts",
-     "tier": 2,
-     "element": "",
-     "elements": [],
-     "weapons": [],
-     "champion": "",
-     "type": "utility",
-     "desc": "All Ammo Finder mods are discounted.",
-     "hash": 3619040078
-    },
-    {
-     "perk": "Press The Advantage",
-     "tier": 3,
-     "element": "",
-     "elements": [],
-     "weapons": [],
-     "champion": "",
-     "type": "weapon",
-     "desc": "Breaking a combatant's shield grants increased weapon stability, handling, and reload speed. Swords gain increased guard resistance.",
-     "hash": 3834273543
-    },
-    {
-     "perk": "Kinetic Synthesis",
-     "tier": 3,
-     "element": "",
-     "elements": [],
-     "weapons": [],
-     "champion": "",
-     "type": "weapon",
-     "desc": "Sustained Kinetic weapon damage and rapid final blows have a chance to generate a unique ammo brick. Collecting this brick will grant ammo to equipped Kinetic damage weapons and grant Special and Heavy ammo progress.",
-     "hash": 3834273540
-    },
-    {
-     "perk": "Reload at Range",
-     "tier": 3,
-     "element": "",
-     "elements": [],
-     "weapons": [
-      "Bow",
-      "Sniper Rifle"
-     ],
-     "champion": "",
-     "type": "weapon",
-     "desc": "Precision hits with Bows and Sniper Rifles grant a stacking bonus to their reload speed.",
-     "hash": 3834273541
-    },
-    {
-     "perk": "Riposte",
-     "tier": 3,
-     "element": "",
-     "elements": [],
-     "weapons": [
-      "Sword"
-     ],
-     "champion": "Unstoppable",
-     "type": "champion",
-     "desc": "Shortly after guarding with a Sword, your light and heavy attacks stun unshielded combatants. Strong against [Stagger] Unstoppable Champions.",
-     "hash": 3834273538
-    },
-    {
-     "perk": "Power from Pain",
-     "tier": 3,
-     "element": "",
-     "elements": [],
-     "weapons": [],
-     "champion": "",
-     "type": "survivability",
-     "desc": "Rapid final blows against weakened combatants grant you Devour.",
-     "hash": 3834273539
-    },
-    {
-     "perk": "Fierce Proxemics",
-     "tier": 3,
-     "element": "",
-     "elements": [],
-     "weapons": [],
-     "champion": "",
-     "type": "economy",
-     "desc": "Finisher final blows grant grenade and melee energy.",
-     "hash": 3834273536
-    },
-    {
-     "perk": "Rapid Remedy",
-     "tier": 3,
-     "element": "",
-     "elements": [],
-     "weapons": [
-      "Machine Gun"
-     ],
-     "champion": "",
-     "type": "survivability",
-     "desc": "Machine Gun rapid final blows heal you.",
-     "hash": 3834273537
-    },
-    {
-     "perk": "Dielectric",
-     "tier": 4,
-     "element": "Arc",
-     "elements": [
-      "Arc"
-     ],
-     "weapons": [],
-     "champion": "",
-     "type": "economy",
-     "desc": "Defeating [Arc]Arc debuffed targets grants Bolt Charge.  Rapidly defeating Arc debuffed targets spawns an Orb of Power and heals a small portion of health.",
-     "hash": 2903198438
-    },
-    {
-     "perk": "Armorsmith",
-     "tier": 4,
-     "element": "",
-     "elements": [],
-     "weapons": [],
-     "champion": "",
-     "type": "survivability",
-     "desc": "Breaking a combatant's shield temporarily grants you damage resistance and increased melee damage.",
-     "hash": 2903198437
-    },
-    {
-     "perk": "Counter Energy",
-     "tier": 4,
-     "element": "",
-     "elements": [],
-     "weapons": [],
-     "champion": "",
-     "type": "utility",
-     "desc": "When you or a member of your fireteam stuns a champion, you gain energy for your least-charged ability.",
-     "hash": 2903198436
-    },
-    {
-     "perk": "Combination Argent Blade",
-     "tier": 4,
-     "element": "",
-     "elements": [],
-     "weapons": [
-      "Sword"
-     ],
-     "champion": "",
-     "type": "weapon",
-     "desc": "Briefly pause after executing a light attack, then follow it up with a light or heavy attack to empower your Sword for a short time, granting it bonus damage and charge rate.",
-     "hash": 2903198435
-    },
-    {
-     "perk": "Singularity Blade",
-     "tier": 4,
-     "element": "Void",
-     "elements": [
-      "Void"
-     ],
-     "weapons": [
-      "Sword"
-     ],
-     "champion": "",
-     "type": "survivability",
-     "desc": "While you have a Void elemental buff, melee and Sword hits weaken targets, while melee and Sword final blows create a weakening burst.",
-     "hash": 2903198434
-    },
-    {
-     "perk": "Blinding Jolts",
-     "tier": 4,
-     "element": "Arc",
-     "elements": [
-      "Arc"
-     ],
-     "weapons": [],
-     "champion": "",
-     "type": "utility",
-     "desc": "Final blows on jolted combatants blind nearby combatants.",
-     "hash": 2903198433
-    },
-    {
-     "perk": "Precision Equity",
-     "tier": 4,
-     "element": "",
-     "elements": [],
-     "weapons": [],
-     "champion": "",
-     "type": "economy",
-     "desc": "Precision final blows build progress towards a large Orb of Power that also grants bonus weapon damage on pickup. Higher ranked targets grant more progress.",
-     "hash": 2903198432
-    },
-    {
-     "perk": "Elemental Orbs: Arc",
-     "tier": 5,
-     "element": "Arc",
-     "elements": [
-      "Arc"
-     ],
-     "weapons": [],
-     "champion": "",
-     "type": "economy",
-     "desc": "[Arc]Arc weapon final blows have a chance to spawn an Arc Elemental Orb. Arc Orbs can be thrown or shot to create an Arc explosion that jolts targets it damages.",
-     "hash": 2742146821
-    },
-    {
-     "perk": "Kinetic Rupture",
-     "tier": 5,
-     "element": "",
-     "elements": [],
-     "weapons": [],
-     "champion": "Unstoppable",
-     "type": "champion",
-     "desc": "Kinetic weapon damage against a powerful combatant has a chance to create a Kinetic Rupture. Targeting this Rupture causes a damaging explosion that staggers combatants. Strong against [Stagger] Unstoppable Champions.",
-     "hash": 2742146822
-    },
-    {
-     "perk": "Sniper's Meditation",
-     "tier": 5,
-     "element": "",
-     "elements": [],
-     "weapons": [
-      "Sniper Rifle"
-     ],
-     "champion": "",
-     "type": "weapon",
-     "desc": "Sniper Rifle hits grant stacking Sniper Rifle damage, stability, and reload bonuses for a short time. Heavy ammo Sniper Rifle hits count as more than one hit.",
-     "hash": 2742146823
-    },
-    {
-     "perk": "Sword Storm Combo",
-     "tier": 5,
-     "element": "",
-     "elements": [],
-     "weapons": [
-      "Sword"
-     ],
-     "champion": "",
-     "type": "utility",
-     "desc": "Performing three Sword light attacks followed by a heavy attack summons penumbral blades that surround you to damage and disorient combatants. Sword final blows extend the duration of these penumbral blades.",
-     "hash": 2742146816
-    },
-    {
-     "perk": "Void Infestation",
-     "tier": 5,
-     "element": "Void",
-     "elements": [
-      "Void"
-     ],
-     "weapons": [],
-     "champion": "",
-     "type": "survivability",
-     "desc": "Defeating a weakened target spawns a tracking projectile that weakens other targets.",
-     "hash": 2742146817
-    },
-    {
-     "perk": "Tazer Tag",
-     "tier": 5,
-     "element": "Arc",
-     "elements": [
-      "Arc"
-     ],
-     "weapons": [],
-     "champion": "",
-     "type": "utility",
-     "desc": "Arc-powered melee hits jolt combatants and deal further damage for a short duration.",
-     "hash": 2742146818
-    },
-    {
-     "perk": "Sticker Shock",
-     "tier": 5,
-     "element": "Arc",
-     "elements": [
-      "Arc"
-     ],
-     "weapons": [],
-     "champion": "",
-     "type": "utility",
-     "desc": "Arc Flux, Magnetic, and Fusion Grenades deal more damage when attached to combatants; on final blows, they release several micro-missiles that seek nearby combatants.",
-     "hash": 2742146819
+      "name": "Queensfoil Censer",
+      "hash": null,
+      "source": "In-game screenshots, 2026-06-16",
+      "tiers": 3,
+      "perks": [
+        {
+          "perk": "To Shreds",
+          "tier": 3,
+          "element": "Strand",
+          "elements": [
+            "Strand"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Dealing sustained damage to severed targets unravels them. Defeating a severed target creates a hotspot of Strand energy granting Woven Mail to nearby allies for a short duration.",
+          "hash": null
+        },
+        {
+          "perk": "Frigid Glare",
+          "tier": 3,
+          "element": "Stasis",
+          "elements": [
+            "Stasis"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "While Frost Armor is active, Stasis precision final blows cause combatants to release a freezing burst.",
+          "hash": null
+        },
+        {
+          "perk": "Solo Operative",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "weapon",
+          "desc": "While you are the only member of your fireteam, precision weapon final blows increase weapon damage until you are defeated.",
+          "hash": null
+        },
+        {
+          "perk": "Rays of Precision",
+          "tier": 3,
+          "element": "Solar",
+          "elements": [
+            "Solar"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "While radiant, Solar precision final blows cause combatants to ignite.",
+          "hash": null
+        },
+        {
+          "perk": "Hail the Storm",
+          "tier": 3,
+          "element": "Stasis",
+          "elements": [
+            "Stasis"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Shattering frozen targets and Stasis crystals deals increased damage. Shattering Stasis crystals releases shards of ice that damage and slow targets.",
+          "hash": null
+        },
+        {
+          "perk": "Horde Shuttle",
+          "tier": 3,
+          "element": "Strand",
+          "elements": [
+            "Strand"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Damaging unraveled targets with a weapon occasionally spawns a Threadling. Threadlings sever targets that they damage.",
+          "hash": null
+        },
+        {
+          "perk": "Perpetual Destruction",
+          "tier": 3,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Rocket Launcher"
+          ],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Rapid final blows with non-Exotic Rocket Launchers refund ammo and increase reload speed for a short duration.",
+          "hash": null
+        },
+        {
+          "perk": "Argent Ordnance",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Rocket Launcher"
+          ],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Firing a Rocket Launcher consumes one stack of Armor Charge, granting increased damage and reload speed until you reload or stow your Rocket Launcher.",
+          "hash": null
+        },
+        {
+          "perk": "Unraveling Orbs",
+          "tier": 2,
+          "element": "Strand",
+          "elements": [
+            "Strand"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Picking up an Orb of Power or a Tangle grants Strand weapons Unraveling Rounds.",
+          "hash": null
+        },
+        {
+          "perk": "Pillar of Ice",
+          "tier": 2,
+          "element": "Stasis",
+          "elements": [
+            "Stasis"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Defeating a frozen target spawns Stasis crystals.",
+          "hash": null
+        },
+        {
+          "perk": "Revitalizing Blast",
+          "tier": 2,
+          "element": "Solar",
+          "elements": [
+            "Solar"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Stunning a Champion causes it to ignite and clears your shield stun.",
+          "hash": null
+        },
+        {
+          "perk": "Anti-Champion Nosecone",
+          "tier": 2,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Rocket Launcher"
+          ],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Rocket Launchers deal increased damage to Champions.",
+          "hash": null
+        },
+        {
+          "perk": "Dragon's Bite",
+          "tier": 2,
+          "element": "",
+          "elements": [
+            "Strand",
+            "Stasis"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Breaking a combatant's shield with a Strand or Stasis weapon has a chance to suspend or freeze that combatant.",
+          "hash": null
+        },
+        {
+          "perk": "Creeping Chill",
+          "tier": 2,
+          "element": "Stasis",
+          "elements": [
+            "Stasis"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Stasis final blows against slowed or frozen targets release a burst that slows combatants and grants Frost Armor to allies caught in the blast.",
+          "hash": null
+        },
+        {
+          "perk": "Blast Radius",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [
+            "Rocket Launcher",
+            "Grenade Launcher"
+          ],
+          "champion": "",
+          "type": "economy",
+          "desc": "Rapid final blows with Rocket Launchers and Grenade Launchers grant Armor Charge.",
+          "hash": null
+        },
+        {
+          "perk": "Kindling Trigger",
+          "tier": 1,
+          "element": "Solar",
+          "elements": [
+            "Solar"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "weapon",
+          "desc": "Radiant causes Solar weapons to apply scorch to unscorched combatants.",
+          "hash": null
+        },
+        {
+          "perk": "Wished into Being",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "economy",
+          "desc": "While your Super is nearly fully-charged, ability final blows spawn Orbs of Power.",
+          "hash": null
+        },
+        {
+          "perk": "Armorsmith",
+          "tier": 1,
+          "element": "",
+          "elements": [],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Breaking a combatant's shield temporarily grants you damage resistance and increased melee damage.",
+          "hash": null
+        },
+        {
+          "perk": "Heart of the Flame",
+          "tier": 1,
+          "element": "Solar",
+          "elements": [
+            "Solar"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "utility",
+          "desc": "Casting your Solar Super grants nearby allies radiant and increases the damage of your Super for each nearby ally.",
+          "hash": null
+        },
+        {
+          "perk": "Torch",
+          "tier": 1,
+          "element": "",
+          "elements": [
+            "Solar",
+            "Strand",
+            "Stasis"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "weapon",
+          "desc": "While radiant, deal increased weapon damage to combatants affected by Strand and Stasis debuffs.",
+          "hash": null
+        },
+        {
+          "perk": "Fever and Chill",
+          "tier": 1,
+          "element": "",
+          "elements": [
+            "Solar",
+            "Stasis"
+          ],
+          "weapons": [],
+          "champion": "",
+          "type": "survivability",
+          "desc": "Rapid precision hits with Solar weapons grant Radiant. Rapid precision hits with Stasis weapons grant Frost Armor.",
+          "hash": null
+        }
+      ],
+      "lore": "A relic from a past journey to form a tenuous alliance with Riven, the Ahamkara.",
+      "elements": [
+        "Solar",
+        "Strand",
+        "Stasis"
+      ],
+      "weapons": [
+        "Rocket Launcher",
+        "Grenade Launcher"
+      ]
     }
-   ]
-  }
- ]
+  ]
 }

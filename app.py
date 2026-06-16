@@ -1301,13 +1301,13 @@ def _artifact_match(p, elem):
 def recommend_artifact(elem, a):
     if not ARTIFACTS:
         return None
-    art = ARTIFACTS[0]  # the live seasonal artifact
     wtype = a.get("weapon_type", "")
     goals = (a.get("main_goal"), a.get("second_goal"), a.get("optional_goal"))
+    tier_weight = {3: 1.0, 2: 0.9, 1: 0.8}
 
     def pscore(p):
         s = 0.0
-        els = p.get("elements", [])
+        els = p.get("elements", []) or ([p["element"]] if p.get("element") else [])
         if elem == "Prismatic":
             s += 1.5 if els else 0.0
         elif elem in els:
@@ -1319,16 +1319,33 @@ def recommend_artifact(elem, a):
             s += 1.5
         elif t == "survivability" and "Survivability" in goals:
             s += 1.0
+        elif t == "utility":
+            s += 0.5
         return s
 
+    def artifact_fit(art):
+        total = 0.0
+        for p in art.get("perks", []):
+            if p.get("champion"):
+                continue
+            total += pscore(p) * tier_weight.get(p.get("tier"), 0.9)
+        for e in (art.get("elements") or []):
+            if e == elem or (elem == "Prismatic" and e):
+                total += 1.0
+        if wtype and wtype in (art.get("weapons") or []):
+            total += 1.0
+        return total
+
+    ranking = sorted(ARTIFACTS, key=lambda art: (-artifact_fit(art), art["name"]))
+    art = ranking[0]
     eligible = [p for p in art["perks"] if not p.get("champion")]
     ranked = sorted(eligible, key=lambda p: (-pscore(p), p.get("tier", 9), p["perk"]))
     picks = [p for p in ranked if pscore(p) > 0][:8] or ranked[:6]
+    alts = [other["name"] for other in ranking[1:3] if artifact_fit(other) > 0]
     return {
         "name": art["name"], "source": art.get("source", ""),
-        "perks": picks, "alts": [],
+        "perks": picks, "alts": alts,
     }
-
 
 def _set_bonus(bonuses, count):
     for b in bonuses:
