@@ -234,7 +234,7 @@
   "hash": 2489016648,
   "ammo": "Special",
   "type": "Shotgun",
-  "element": "Arc",
+  "element": "Void",
   "perks": [
    "Rifled Barrel",
    "Smoothbore",
@@ -1998,7 +1998,7 @@
   "hash": 963574173,
   "ammo": "Primary",
   "type": "Hand Cannon",
-  "element": "Solar",
+  "element": "Void",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -2095,7 +2095,7 @@
   "hash": 1051949956,
   "ammo": "Primary",
   "type": "Sidearm",
-  "element": "Solar",
+  "element": "Arc",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -3743,7 +3743,7 @@
   "hash": 4152016199,
   "ammo": "Primary",
   "type": "Hand Cannon",
-  "element": "",
+  "element": "Strand",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -4749,7 +4749,7 @@
   "hash": 2328923181,
   "ammo": "Primary",
   "type": "Sidearm",
-  "element": "",
+  "element": "Strand",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -5078,7 +5078,7 @@
   "hash": 3327901954,
   "ammo": "Primary",
   "type": "Submachine Gun",
-  "element": "Solar",
+  "element": "Void",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -8166,7 +8166,7 @@
   "hash": 2831259642,
   "ammo": "Primary",
   "type": "Pulse Rifle",
-  "element": "Arc",
+  "element": "Solar",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -14199,7 +14199,7 @@
   "hash": 218787951,
   "ammo": "Special",
   "type": "Shotgun",
-  "element": "Arc",
+  "element": "Solar",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -14251,7 +14251,7 @@
   "hash": 4236134153,
   "ammo": "Primary",
   "type": "Pulse Rifle",
-  "element": "",
+  "element": "Stasis",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -14625,7 +14625,7 @@
   "hash": 1402874079,
   "ammo": "Special",
   "type": "Shotgun",
-  "element": "",
+  "element": "Stasis",
   "perks": [
    "Rifled Barrel",
    "Smoothbore",
@@ -15320,7 +15320,7 @@
   "hash": 177568179,
   "ammo": "Primary",
   "type": "Auto Rifle",
-  "element": "",
+  "element": "Stasis",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -17250,7 +17250,7 @@
   "hash": 1567585973,
   "ammo": "Primary",
   "type": "Hand Cannon",
-  "element": "",
+  "element": "Stasis",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -21669,7 +21669,7 @@
   "hash": 34731066,
   "ammo": "Primary",
   "type": "Pulse Rifle",
-  "element": "",
+  "element": "Strand",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -24094,7 +24094,7 @@
   "hash": 195440257,
   "ammo": "Heavy",
   "type": "Grenade Launcher",
-  "element": "Solar",
+  "element": "Arc",
   "perks": [
    "Volatile Launch",
    "Confined Launch",
@@ -24851,7 +24851,7 @@
   "hash": 3027844940,
   "ammo": "Special",
   "type": "Fusion Rifle",
-  "element": "Void",
+  "element": "Solar",
   "perks": [
    "Signal MS5",
    "Impulse MS3",
@@ -26742,7 +26742,7 @@
   "hash": 2831259643,
   "ammo": "Primary",
   "type": "Pulse Rifle",
-  "element": "",
+  "element": "Strand",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -30693,7 +30693,7 @@
   "hash": 2490460292,
   "ammo": "Heavy",
   "type": "Sword",
-  "element": "Arc",
+  "element": "Void",
   "perks": [
    "Hungry Edge",
    "Enduring Blade",
@@ -32340,7 +32340,7 @@
   "hash": 3132669561,
   "ammo": "Heavy",
   "type": "Machine Gun",
-  "element": "Void",
+  "element": "Solar",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -32827,7 +32827,7 @@
   "hash": 1517780158,
   "ammo": "Special",
   "type": "Shotgun",
-  "element": "Void",
+  "element": "Arc",
   "perks": [
    "Rifled Barrel",
    "Smoothbore",
@@ -33128,7 +33128,7 @@
   "hash": 1884897338,
   "ammo": "Primary",
   "type": "Auto Rifle",
-  "element": "",
+  "element": "Strand",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -33188,7 +33188,7 @@
   "hash": 417100299,
   "ammo": "Primary",
   "type": "Scout Rifle",
-  "element": "",
+  "element": "Strand",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -33715,7 +33715,7 @@
   "hash": 4045298483,
   "ammo": "Primary",
   "type": "Sidearm",
-  "element": "Solar",
+  "element": "Arc",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -34595,7 +34595,7 @@
   "hash": 3790632261,
   "ammo": "Primary",
   "type": "Scout Rifle",
-  "element": "",
+  "element": "Strand",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -34784,7 +34784,7 @@
   "hash": 1094998581,
   "ammo": "Primary",
   "type": "Combat Bow",
-  "element": "",
+  "element": "Stasis",
   "perks": [
    "Agile Bowstring",
    "Tactile String",
@@ -35066,7 +35066,7 @@
   "hash": 2204165992,
   "ammo": "Primary",
   "type": "Pulse Rifle",
-  "element": "",
+  "element": "Stasis",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -36456,7 +36456,7 @@
   "hash": 960948343,
   "ammo": "Primary",
   "type": "Hand Cannon",
-  "element": "",
+  "element": "Arc",
   "perks": [
    "Arrowhead Brake",
    "Chambered Compensator",
@@ -39084,7 +39084,7 @@
   "hash": 2039776723,
   "ammo": "Heavy",
   "type": "Grenade Launcher",
-  "element": "Solar",
+  "element": "Strand",
   "perks": [
    "Volatile Launch",
    "Confined Launch",
