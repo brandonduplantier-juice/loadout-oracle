@@ -120,7 +120,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.14"
+APP_VERSION = "0.9.15"
 BUILD_DATE = "2026-06-15"
 
 
@@ -921,21 +921,24 @@ def _subclass_overrides(sc, build):
 
 
 def _mod_hashes(gen):
-    """Collect manifest hashes for any recommended mods we have hashes for."""
-    out, seen = [], set()
-    for _slot, txt in (gen.get("armor_mods") or []):
-        for piece in re.split(r",", txt):
-            nm = re.sub(r"\s*x\d+\s*$", "", piece.strip())
-            if nm in ARMOR_MOD_HASHES and nm not in seen:
-                out.append(int(ARMOR_MOD_HASHES[nm]))
-                seen.add(nm)
+    """Manifest hashes for the build's armor mods, one entry per copy.
+
+    Source is the budgeted armor_loadout only. armor_mods is a second, legacy
+    recommender; feeding both put the union of two mod sets into each slot and
+    pushed past the 10 energy budget, which is why the DIM optimizer returned no
+    builds. Stacked mods (x2, x3) are emitted once per copy because DIM's mods
+    list represents each copy as a repeated hash; collapsing them dropped copies.
+    """
+    out = []
     for _slot, info in (gen.get("armor_loadout") or {}).items():
         for m in (info.get("mods") or []):
-            nm = m.get("mod") if isinstance(m, dict) else m
-            nm = re.sub(r"\s*x\d+\s*$", "", str(nm or "").strip())
-            if nm in ARMOR_MOD_HASHES and nm not in seen:
-                out.append(int(ARMOR_MOD_HASHES[nm]))
-                seen.add(nm)
+            raw = str((m.get("mod") if isinstance(m, dict) else m) or "").strip()
+            mt = re.search(r"x(\d+)\s*$", raw)
+            count = int(mt.group(1)) if mt else 1
+            nm = re.sub(r"\s*x\d+\s*$", "", raw)
+            h = ARMOR_MOD_HASHES.get(nm)
+            if h:
+                out.extend([int(h)] * count)
     return out
 
 
