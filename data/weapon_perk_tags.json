@@ -1,0 +1,41 @@
+{
+ "_comment": "Perk -> build-page modifiers, same vocabulary as DIM2MOD (Damage, Add Clear, Ability Regen, Survivability, Healing, Crowd Control, Team Buff, Utility, Mobility). The recommender translates these through DIM2MOD to internal tags and scores a weapon by overlap with the build's pref set, exactly like armor mods. Perks not listed contribute no tags. Element match is handled separately from the weapon's element field. Edit freely.",
+
+ "Demolitionist": ["Ability Regen"],
+ "Adrenaline Junkie": ["Damage", "Ability Regen"],
+ "Pugilist": ["Ability Regen"],
+ "Wellspring": ["Ability Regen"],
+
+ "Voltshot": ["Add Clear"],
+ "Jolting Feedback": ["Add Clear"],
+ "Discord": ["Add Clear"],
+ "Incandescent": ["Add Clear"],
+ "Dragonfly": ["Add Clear"],
+ "Hatchling": ["Add Clear"],
+ "Headstone": ["Add Clear", "Crowd Control"],
+ "Destabilizing Rounds": ["Add Clear"],
+ "Chain Reaction": ["Add Clear"],
+ "Golden Tricorn": ["Add Clear", "Damage"],
+
+ "Repulsor Brace": ["Survivability"],
+ "Slice": ["Crowd Control"],
+ "Chill Clip": ["Crowd Control"],
+ "Withering Gaze": ["Crowd Control"],
+ "Unrelenting": ["Healing", "Survivability"],
+
+ "Subsistence": ["Utility"],
+ "Envious Assassin": ["Utility", "Damage"],
+ "Reconstruction": ["Damage"],
+ "Envious Arsenal": ["Damage"],
+ "Bait and Switch": ["Damage"],
+ "Target Lock": ["Damage"],
+ "Killing Tally": ["Damage"],
+ "Onslaught": ["Damage"],
+ "One for All": ["Damage"],
+ "Surrounded": ["Damage"],
+ "Frenzy": ["Damage"],
+ "Kill Clip": ["Damage"],
+ "Rampage": ["Damage"],
+ "Vorpal Weapon": ["Damage"],
+ "Focused Fury": ["Damage"]
+}
