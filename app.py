@@ -120,7 +120,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.13"
+APP_VERSION = "0.9.14"
 BUILD_DATE = "2026-06-15"
 
 
@@ -957,6 +957,13 @@ def build_dim_loadout(gen):
         h = _hash_for(exo[0])
         if h:
             params["exoticArmorHash"] = int(h)
+    # weapons: equip the build's exotic weapon by hash so DIM actually loads it.
+    # Armor is left to the optimizer via exoticArmorHash and statConstraints, but a
+    # weapon is a specific item, so it must be in equipped or the slot stays empty.
+    for nm in _slot_names(build.get("Exotic Weapon")):
+        h = _hash_for(nm)
+        if h:
+            equipped.append({"hash": int(h)})
     scs = []
     for s in gen.get("stat_priority", []):
         sh = STAT_HASHES.get(s["stat"])
