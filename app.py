@@ -145,7 +145,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.16"
+APP_VERSION = "0.9.17"
 BUILD_DATE = "2026-06-15"
 
 
@@ -1314,8 +1314,6 @@ def recommend_artifact(elem, a):
             s += 3.0
         if wtype and wtype in p.get("weapons", []):
             s += 3.0
-        if p.get("champion"):
-            s += 2.0  # champion mods enable content, always worth surfacing
         t = p.get("type", "")
         if t == "economy":
             s += 1.5
@@ -1323,7 +1321,8 @@ def recommend_artifact(elem, a):
             s += 1.0
         return s
 
-    ranked = sorted(art["perks"], key=lambda p: (-pscore(p), p.get("tier", 9), p["perk"]))
+    eligible = [p for p in art["perks"] if not p.get("champion")]
+    ranked = sorted(eligible, key=lambda p: (-pscore(p), p.get("tier", 9), p["perk"]))
     picks = [p for p in ranked if pscore(p) > 0][:8] or ranked[:6]
     return {
         "name": art["name"], "source": art.get("source", ""),
