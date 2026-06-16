@@ -69,6 +69,31 @@ except FileNotFoundError:
 with open(os.path.join(BASE, "data", "gear_sets.json"), encoding="utf-8") as f:
     GEAR_SETS = json.load(f)
 
+# Weapon recommendation data. weapon_perks.json: name -> {hash, slot, ammo, element,
+# perks}. weapon_perk_tags.json: perk -> [build-page modifiers]. Both optional; if
+# absent the weapon recommender simply returns nothing and the app is unchanged.
+try:
+    with open(os.path.join(BASE, "data", "weapon_perks.json"), encoding="utf-8") as f:
+        WEAPON_PERKS = json.load(f)
+    for _wnm, _wv in WEAPON_PERKS.items():
+        _wv["name"] = _wnm
+except FileNotFoundError:
+    WEAPON_PERKS = {}
+try:
+    with open(os.path.join(BASE, "data", "weapon_perk_tags.json"), encoding="utf-8") as f:
+        WEAPON_PERK_TAGS = {k: v for k, v in json.load(f).items() if k != "_comment"}
+except FileNotFoundError:
+    WEAPON_PERK_TAGS = {}
+
+# Complete modifier -> internal tag map. Mirrors DIM2MOD but fills the entries
+# DIM2MOD leaves empty (Utility, Team Buff, Mobility) so every tagged perk scores.
+PERK_MOD2TAG = {
+    "Damage": ["damage"], "Add Clear": ["orb", "ammo"], "Ability Regen": ["ability_regen"],
+    "Survivability": ["survivability"], "Healing": ["healing", "survivability"],
+    "Crowd Control": ["orb", "utility"], "Team Buff": ["orb"], "Utility": ["utility"],
+    "Mobility": ["weapon_handling"],
+}
+
 # Prismatic exotic class items (Essentialism / Stoicism / Solipsism).
 # Static file is the verified Final Shape launch set with synergy tags.
 # If the dim_refs puller has written the live-manifest set, fold in any
@@ -120,7 +145,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.15"
+APP_VERSION = "0.9.16"
 BUILD_DATE = "2026-06-15"
 
 
@@ -483,6 +508,62 @@ def classify_community(cls, elem, build):
     return {"archetype": arche, "share": share, "note": note}
 
 
+def _perk_internal_tags(perk):
+    out = set()
+    for mod in WEAPON_PERK_TAGS.get(perk, []):
+        out.update(PERK_MOD2TAG.get(mod, []))
+    return out
+
+
+def _weapon_score(w, pref, elem, elem_bonus):
+    provided, driving = set(), []
+    for p in w.get("perks", []):
+        ti = _perk_internal_tags(p)
+        if ti:
+            provided |= ti
+            driving.append(p)
+    s = sum(pref.get(t, 0) for t in provided)
+    if w.get("element") and w["element"] == elem:
+        s += elem_bonus
+    s += 0.1 * len(driving)
+    return s, driving
+
+
+def recommend_weapons(elem, a, build):
+    """Pick a legendary for each weapon slot the exotic does not occupy. Kinetic
+    and Energy use the build's goal tags and a strong element match; Power leans
+    damage since the heavy is the build's DPS weapon. Returns {slot: {...}} keyed
+    by Kinetic / Energy / Power, advisory: DIM equips whatever copy the player
+    owns of the chosen hash, perks are the matched traits to chase."""
+    if not WEAPON_PERKS:
+        return {}
+    pref = {t: 1.0 for t in _build_tags(a)}
+    dmg = dict(pref)
+    dmg["damage"] = dmg.get("damage", 0) + 3.0
+    exo_slot = ""
+    for nm in _slot_names(build.get("Exotic Weapon")):
+        w = WEAPON_PERKS.get(nm)
+        if w:
+            exo_slot = w.get("slot", "")
+            break
+    out = {}
+    for slot in ("Kinetic", "Energy", "Power"):
+        if slot == exo_slot:
+            continue
+        pref_s = dmg if slot == "Power" else pref
+        eb = 1.5 if slot == "Power" else 3.0
+        pool = [w for w in WEAPON_PERKS.values()
+                if w.get("slot") == slot and w.get("perks")]
+        if not pool:
+            continue
+        best = max(pool, key=lambda w: _weapon_score(w, pref_s, elem, eb)[0])
+        _, driving = _weapon_score(best, pref_s, elem, eb)
+        out[slot] = {"name": best["name"], "hash": best["hash"],
+                     "element": best.get("element", ""), "ammo": best.get("ammo", ""),
+                     "type": best.get("type", ""), "perks": driving[:4]}
+    return out
+
+
 def construct(a):
     w = goal_weights(a)
     classes = [a["cls"]] if a.get("cls", "Any") != "Any" else list(CLASSES)
@@ -523,6 +604,7 @@ def construct(a):
     best["community"] = classify_community(best["cls"], best["elem"], best["build"])
     best["exotic_class_item"] = recommend_exotic_class_item(
         best["cls"], a, best["build"], best["elem"])
+    best["weapon_recs"] = recommend_weapons(best["elem"], a, best["build"])
     return best
 
 
@@ -967,6 +1049,11 @@ def build_dim_loadout(gen):
         h = _hash_for(nm)
         if h:
             equipped.append({"hash": int(h)})
+    # legendary picks from the weapon recommender fill the other two slots
+    for _slot, _rec in (gen.get("weapon_recs") or {}).items():
+        _rh = _rec.get("hash")
+        if _rh:
+            equipped.append({"hash": int(_rh)})
     scs = []
     for s in gen.get("stat_priority", []):
         sh = STAT_HASHES.get(s["stat"])
