@@ -90,7 +90,9 @@
      "tier": 1,
      "element": "",
      "elements": [],
-     "weapons": [],
+     "weapons": [
+      "Machine Gun"
+     ],
      "champion": "Barrier",
      "type": "champion",
      "desc": "Your Machine Guns fire shield-piercing rounds and stun [Shield-Piercing] Barrier Champions.",
@@ -162,7 +164,11 @@
      "tier": 2,
      "element": "",
      "elements": [],
-     "weapons": [],
+     "weapons": [
+      "Fusion Rifle",
+      "Linear Fusion Rifle",
+      "Machine Gun"
+     ],
      "champion": "",
      "type": "weapon",
      "desc": "Sustained damage from Fusion Rifles, Linear Fusion Rifles, and Machine Guns grants those weapons bonus stability, range, and aim assist for a short time.",
@@ -206,7 +212,10 @@
      "tier": 3,
      "element": "",
      "elements": [],
-     "weapons": [],
+     "weapons": [
+      "Bow",
+      "Sniper Rifle"
+     ],
      "champion": "",
      "type": "weapon",
      "desc": "Precision hits with Bows and Sniper Rifles grant a stacking bonus to their reload speed.",
@@ -326,8 +335,10 @@
     {
      "perk": "Blinding Jolts",
      "tier": 4,
-     "element": "",
-     "elements": [],
+     "element": "Arc",
+     "elements": [
+      "Arc"
+     ],
      "weapons": [],
      "champion": "",
      "type": "utility",
