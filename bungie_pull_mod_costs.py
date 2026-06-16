@@ -103,9 +103,15 @@ def main():
     v2_copies = {}  # (category, display name) -> [costs across non-redacted copies]
     for h, it in items.items():
         ec = energy_of(it)
-        if ec is None or it.get("redacted"):
+        if ec is None:
             continue
+        # Trust explicit hashes even when redacted. Curated dim_refs hashes point at
+        # real items whose energy cost is correct (e.g. Time Dilation = 3) even though
+        # the manifest flags them redacted. Redacted items are skipped only for the
+        # fuzzy name and modal resolution below, where they would pollute results.
         cost_by_hash[int(h)] = ec
+        if it.get("redacted"):
+            continue
         nm = norm((it.get("displayProperties") or {}).get("name", ""))
         if not nm:
             continue

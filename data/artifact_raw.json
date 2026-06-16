@@ -1,0 +1,251 @@
+{
+ "name": "Implement of Curiosity",
+ "hash": 2894222926,
+ "tiers": [
+  {
+   "index": 0,
+   "title": "Tier 1",
+   "unlock_requirement": "",
+   "mods": [
+    {
+     "name": "Anti-Barrier Hand Cannon",
+     "cost": null,
+     "desc": "Your equipped Hand Cannons fire shield-piercing rounds and stun [Shield-Piercing] Barrier Champions.",
+     "hash": 4217417017
+    },
+    {
+     "name": "Anti-Barrier Sniper Rifle",
+     "cost": null,
+     "desc": "Your equipped Sniper Rifles fire shield-piercing rounds and stun [Shield-Piercing] Barrier Champions.",
+     "hash": 4217417018
+    },
+    {
+     "name": "Overload Pulse Rifle",
+     "cost": null,
+     "desc": "Your equipped Pulse Rifles fire disrupting rounds which stun the target, delaying ability energy regeneration and lowering combatant damage output.\n\nStrong against [Disruption] Overload Champions.",
+     "hash": 4217417019
+    },
+    {
+     "name": "Overload Submachine Gun",
+     "cost": null,
+     "desc": "Your equipped Submachine Guns fire disrupting rounds which stun the target, delaying ability energy regeneration and lowering combatant damage output.\n\nStrong against [Disruption] Overload Champions.",
+     "hash": 4217417020
+    },
+    {
+     "name": "Unstoppable Bow",
+     "cost": null,
+     "desc": "Crossbows, and Bows that have been fully drawn for a short time, fire a powerful explosive payload that stuns unshielded combatants. Strong against [Stagger] Unstoppable Champions.",
+     "hash": 4217417021
+    },
+    {
+     "name": "Stunning Fusion",
+     "cost": null,
+     "desc": "Aiming down the sights of a Fusion Rifle or Linear Fusion Rifle for a short time loads a powerful payload that stuns unshielded combatants. \n\nStrong against [Stagger] Unstoppable Champions.",
+     "hash": 4217417022
+    },
+    {
+     "name": "Shield-Shattering Rounds",
+     "cost": null,
+     "desc": "Your Machine Guns fire shield-piercing rounds and stun [Shield-Piercing] Barrier Champions.",
+     "hash": 4217417023
+    }
+   ]
+  },
+  {
+   "index": 1,
+   "title": "Tier 2",
+   "unlock_requirement": "",
+   "mods": [
+    {
+     "name": "Impact, Shock, Gravity",
+     "cost": null,
+     "desc": "Grants access to the Helmet mods: Kinetic/Void Siphon and Kinetic/Arc Siphon.\n\nThese mods combine two elemental siphons at a discounted cost.",
+     "hash": 3619040072
+    },
+    {
+     "name": "Gravitic-Voltaic Charge",
+     "cost": null,
+     "desc": "While you have an Arc or Void Super equipped, increase the maximum number of stacks of Armor Charge you can carry by 1.",
+     "hash": 3619040075
+    },
+    {
+     "name": "Expert Handling",
+     "cost": null,
+     "desc": "Weapon final blows grant a stacking bonus to stability which resets on weapon reload or stow. Swords gain Guard Resistance.",
+     "hash": 3619040074
+    },
+    {
+     "name": "Fastest Draw",
+     "cost": null,
+     "desc": "If the first shot shortly after reloading or readying your weapon is a precision hit, gain flinch resistance.",
+     "hash": 3619040077
+    },
+    {
+     "name": "Elemental Siphon",
+     "cost": null,
+     "desc": "Rapid final blows with a Kinetic weapon or a weapon matching your equipped Super create an Elemental pickup that matches your equipped Super.",
+     "hash": 3619040076
+    },
+    {
+     "name": "Concentrated Forward Firepower",
+     "cost": null,
+     "desc": "Sustained damage from Fusion Rifles, Linear Fusion Rifles, and Machine Guns grants those weapons bonus stability, range, and aim assist for a short time.",
+     "hash": 3619040079
+    },
+    {
+     "name": "Vanguard Surplus Discounts",
+     "cost": null,
+     "desc": "All Ammo Finder mods are discounted.",
+     "hash": 3619040078
+    }
+   ]
+  },
+  {
+   "index": 2,
+   "title": "Tier 3",
+   "unlock_requirement": "",
+   "mods": [
+    {
+     "name": "Press The Advantage",
+     "cost": null,
+     "desc": "Breaking a combatant's shield grants increased weapon stability, handling, and reload speed. Swords gain increased guard resistance.",
+     "hash": 3834273543
+    },
+    {
+     "name": "Kinetic Synthesis",
+     "cost": null,
+     "desc": "Sustained Kinetic weapon damage and rapid final blows have a chance to generate a unique ammo brick. Collecting this brick will grant ammo to equipped Kinetic damage weapons and grant Special and Heavy ammo progress.",
+     "hash": 3834273540
+    },
+    {
+     "name": "Reload at Range",
+     "cost": null,
+     "desc": "Precision hits with Bows and Sniper Rifles grant a stacking bonus to their reload speed.",
+     "hash": 3834273541
+    },
+    {
+     "name": "Riposte",
+     "cost": null,
+     "desc": "Shortly after guarding with a Sword, your light and heavy attacks stun unshielded combatants. Strong against [Stagger] Unstoppable Champions.",
+     "hash": 3834273538
+    },
+    {
+     "name": "Power from Pain",
+     "cost": null,
+     "desc": "Rapid final blows against weakened combatants grant you Devour.",
+     "hash": 3834273539
+    },
+    {
+     "name": "Fierce Proxemics",
+     "cost": null,
+     "desc": "Finisher final blows grant grenade and melee energy.",
+     "hash": 3834273536
+    },
+    {
+     "name": "Rapid Remedy",
+     "cost": null,
+     "desc": "Machine Gun rapid final blows heal you.",
+     "hash": 3834273537
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "title": "Tier 4",
+   "unlock_requirement": "",
+   "mods": [
+    {
+     "name": "Dielectric",
+     "cost": null,
+     "desc": "Defeating [Arc]Arc debuffed targets grants Bolt Charge.\n\nRapidly defeating Arc debuffed targets spawns an Orb of Power and heals a small portion of health.",
+     "hash": 2903198438
+    },
+    {
+     "name": "Armorsmith",
+     "cost": null,
+     "desc": "Breaking a combatant's shield temporarily grants you damage resistance and increased melee damage.",
+     "hash": 2903198437
+    },
+    {
+     "name": "Counter Energy",
+     "cost": null,
+     "desc": "When you or a member of your fireteam stuns a champion, you gain energy for your least-charged ability.",
+     "hash": 2903198436
+    },
+    {
+     "name": "Combination Argent Blade",
+     "cost": null,
+     "desc": "Briefly pause after executing a light attack, then follow it up with a light or heavy attack to empower your Sword for a short time, granting it bonus damage and charge rate.",
+     "hash": 2903198435
+    },
+    {
+     "name": "Singularity Blade",
+     "cost": null,
+     "desc": "While you have a Void elemental buff, melee and Sword hits weaken targets, while melee and Sword final blows create a weakening burst.",
+     "hash": 2903198434
+    },
+    {
+     "name": "Blinding Jolts",
+     "cost": null,
+     "desc": "Final blows on jolted combatants blind nearby combatants.",
+     "hash": 2903198433
+    },
+    {
+     "name": "Precision Equity",
+     "cost": null,
+     "desc": "Precision final blows build progress towards a large Orb of Power that also grants bonus weapon damage on pickup. Higher ranked targets grant more progress.",
+     "hash": 2903198432
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "title": "Tier 5",
+   "unlock_requirement": "",
+   "mods": [
+    {
+     "name": "Elemental Orbs: Arc",
+     "cost": null,
+     "desc": "[Arc]Arc weapon final blows have a chance to spawn an Arc Elemental Orb. Arc Orbs can be thrown or shot to create an Arc explosion that jolts targets it damages.",
+     "hash": 2742146821
+    },
+    {
+     "name": "Kinetic Rupture",
+     "cost": null,
+     "desc": "Kinetic weapon damage against a powerful combatant has a chance to create a Kinetic Rupture. Targeting this Rupture causes a damaging explosion that staggers combatants. Strong against [Stagger] Unstoppable Champions.",
+     "hash": 2742146822
+    },
+    {
+     "name": "Sniper's Meditation",
+     "cost": null,
+     "desc": "Sniper Rifle hits grant stacking Sniper Rifle damage, stability, and reload bonuses for a short time. Heavy ammo Sniper Rifle hits count as more than one hit.",
+     "hash": 2742146823
+    },
+    {
+     "name": "Sword Storm Combo",
+     "cost": null,
+     "desc": "Performing three Sword light attacks followed by a heavy attack summons penumbral blades that surround you to damage and disorient combatants. Sword final blows extend the duration of these penumbral blades.",
+     "hash": 2742146816
+    },
+    {
+     "name": "Void Infestation",
+     "cost": null,
+     "desc": "Defeating a weakened target spawns a tracking projectile that weakens other targets.",
+     "hash": 2742146817
+    },
+    {
+     "name": "Tazer Tag",
+     "cost": null,
+     "desc": "Arc-powered melee hits jolt combatants and deal further damage for a short duration.",
+     "hash": 2742146818
+    },
+    {
+     "name": "Sticker Shock",
+     "cost": null,
+     "desc": "Arc Flux, Magnetic, and Fusion Grenades deal more damage when attached to combatants; on final blows, they release several micro-missiles that seek nearby combatants.",
+     "hash": 2742146819
+    }
+   ]
+  }
+ ]
+}
