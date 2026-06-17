@@ -1971,6 +1971,12 @@ def _ability_locked_ok(name, cls, elem):
 
 def assemble2(cls,elem,a,w):
     engine=a.get('engine','Any');base_verbs=set(ENGINES.get(engine,('',set()))[1]);verbs=set(base_verbs)
+    # Map each element-coded verb to its element, to detect an exotic whose signature
+    # is locked to a different subclass (Crown of Tempests' Arc regen is dead on Strand).
+    VERB_ELEM={}
+    for _e,_vs in ENGINES.values():
+        if _e in ELEMENTS and _e!='Prismatic':
+            for _v in _vs: VERB_ELEM[_v]=_e
     single='Single-target' in (a.get('goal'),a.get('goal2'))
     if single: verbs|=DAMAGE_AMP
     produced,consumed=set(),set();build={};total=0.0;chosen_aspects=[]
@@ -2003,7 +2009,13 @@ def assemble2(cls,elem,a,w):
                 else:
                     ev=evget(it['name'])&fitv
                 s=4.0*len(ev)+0.4*item_score(it,w)
-                if cat=='Exotic Armor': s+=goal_fit(it)
+                if cat=='Exotic Armor':
+                    s+=goal_fit(it)
+                    # an exotic whose only engine verbs are locked to another element
+                    # cannot fire here, so its ability-regen tagw is misleading: penalize
+                    exo_el={VERB_ELEM[v] for v in evget(it['name']) if v in VERB_ELEM}
+                    if exo_el and elem!='Prismatic' and elem not in exo_el:
+                        s-=8.0
                 if cat=='Exotic Weapon' and single: s+=(50.0 if it['name'] in DPS_GUNS else 0.0)+2.0*item_score(it,{'Damage':3})
                 return s+1e-6*len(it['name'])
             chosen=max(cands,key=sc)
