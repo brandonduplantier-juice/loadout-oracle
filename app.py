@@ -591,6 +591,7 @@ def recommend_weapons(elem, a, build):
 
 
 def construct(a):
+    a = _normalize_answers(a)
     w = goal_weights(a)
     classes = [a["cls"]] if a.get("cls", "Any") != "Any" else list(CLASSES)
     fa = a.get("build_exotic_armor", "Any")
@@ -1661,6 +1662,7 @@ def enrich_curated(b):
     generated loadout's format and detail."""
     elem = b["element"]
     a = _curated_answers(b)
+    a = _normalize_answers(a)
     build = {cat: _resolve_items(cat, b.get(field), elem)
              for _lab, cat, field in CUR_SLOTS}
     slots_view = [(lab, build[cat]) for lab, cat, _field in CUR_SLOTS]
@@ -1763,3 +1765,304 @@ def back(step):
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="127.0.0.1", port=port, debug=True)
+
+
+# ============ PORTED SYNERGY ENGINE (was synergy_full prototype) ============
+
+ENGINES = {
+    'Jolt':('Arc',{'Jolt','Ionic Trace','Amplified'}),'Amplified':('Arc',{'Amplified','Ionic Trace','Jolt'}),
+    'Bolt Charge':('Arc',{'Jolt','Amplified','Ionic Trace'}),'Devour':('Void',{'Devour','Void Breach','Healing'}),
+    'Volatile':('Void',{'Volatile','Void Breach','Weaken'}),'Invisibility':('Void',{'Void Overshield','Volatile','Weaken'}),
+    'Radiant':('Solar',{'Radiant','Restoration','Scorch'}),'Ignition':('Solar',{'Scorch','Radiant'}),
+    'Frost Armor':('Stasis',{'Frost Armor','Stasis Shard','Slow'}),'Shatter':('Stasis',{'Freeze','Stasis Shard','Slow'}),
+    'Woven Mail':('Strand',{'Woven Mail','Tangle','Sever'}),'Threadlings':('Strand',{'Threadling','Tangle','Unravel'}),
+    'Suspend':('Strand',{'Suspend','Tangle','Unravel'}),'Transcendence':('Prismatic',{'Transcendence','Empower','Ability Energy'}),
+}
+DAMAGE_AMP = {'Radiant','Weaken','Empower','Volatile'}   # single-target stacks damage buffs
+EXOTIC_VERBS = {
+    "Fallen Sunstar":["Ionic Trace","Amplified"],"Crown of Tempests":["Jolt","Ionic Trace"],"Geomag Stabilizers":["Ionic Trace","Amplified"],
+    "Getaway Artist":["Amplified","Jolt","Ionic Trace"],"Ballidorse Wrathweavers":["Frost Armor","Stasis Shard"],
+    "Rime-Coat Raiment":["Frost Armor","Stasis Shard","Slow"],"Osmiomancy Gloves":["Slow","Freeze","Stasis Shard"],
+    "Contraverse Hold":["Devour","Void Breach"],"Secant Filaments":["Devour","Void Overshield"],"Nothing Manacles":["Void Breach"],
+    "Briarbinds":["Void Breach"],"Sunbracers":["Scorch"],"Starfire Protocol":["Scorch","Ability Energy"],"Dawn Chorus":["Scorch","Radiant"],
+    "Speaker's Sight":["Radiant","Healing"],"Swarmers":["Threadling","Tangle","Unravel"],"Mothkeeper's Wraps":["Woven Mail"],
+    "Mataiodoxía":["Transcendence"],"Gyrfalcon's Hauberk":["Volatile","Void Breach"],"Omnioculus":["Weaken"],
+    "Cyrtarachne's Facade":["Woven Mail"],"Mask of Fealty":["Sever","Tangle"],"Renewal Grasps":["Slow","Frost Armor"],"Mask of Bakris":["Slow"],
+    "Liar's Handshake":["Amplified"],"Raiden Flux":["Amplified"],"Celestial Nighthawk":["Damage"],"Star-Eater Scales":["Damage"],"Foetracer":["Weaken"],
+    "Pyrogale Gauntlets":["Scorch"],"Hallowfire Heart":["Scorch","Ability Energy"],"Khepri's Horn":["Scorch"],
+    "Cadmus Ridge Lancecap":["Stasis Shard","Frost Armor"],"Hoarfrost-Z":["Stasis Shard","Frost Armor"],"Icefall Mantle":["Frost Armor"],
+    "Abeyant Leap":["Suspend","Sever","Woven Mail"],"Point-Contact Cannon Brace":["Jolt"],"An Insurmountable Skullfort":["Amplified"],
+    "Eternal Warrior":["Amplified"],"Doom Fang Pauldron":["Void Overshield","Volatile"],"Helm of Saint-14":["Void Overshield"],"Ursa Furiosa":["Void Overshield"],
+    "Trinity Ghoul":["Jolt"],"Coldheart":["Ionic Trace"],"Riskrunner":["Amplified","Jolt"],"Centrifuse":["Jolt","Amplified"],
+    "Delicate Tomb":["Ionic Trace","Amplified"],"Sunshot":["Scorch"],"Polaris Lance":["Scorch"],"Skyburner's Oath":["Scorch"],
+    "Dragon's Breath":["Scorch"],"Ticuu's Divination":["Scorch","Radiant"],"Graviton Lance":["Weaken"],
+    "Collective Obligation":["Volatile","Weaken","Devour"],"Tractor Cannon":["Weaken"],"Ruinous Effigy":["Volatile","Weaken"],
+    "Conditional Finality":["Freeze","Scorch"],"Verglas Curve":["Stasis Shard","Freeze"],"Cryosthesia 77K":["Freeze"],
+    "Wicked Implement":["Slow","Freeze","Stasis Shard"],"Ager's Scepter":["Slow","Stasis Shard"],"Salvation's Grip":["Stasis Shard","Freeze"],
+    "Quicksilver Storm":["Tangle","Unravel"],"Final Warning":["Tangle"],"Wish-Keeper":["Suspend","Tangle"],"Euphony":["Tangle","Threadling"],
+}
+DPS_GUNS = {"One Thousand Voices","Whisper of the Worm","Izanagi's Burden","Still Hunt","The Lament","Sleeper Simulant","D.A.R.C.I.",
+    "Leviathan's Breath","Deathbringer","Gjallarhorn","Two-Tailed Fox","Microcosm","Grand Overture","Eyes of Tomorrow","Cloudstrike","Xenophage"}
+
+VERB_PATTERNS=[('Jolt',r'jolt'),('Volatile',r'volatile'),('Scorch',r'scorch|ignit'),('Slow',r'\bslow'),('Freeze',r'frozen|freez'),
+ ('Weaken',r'weaken'),('Sever',r'sever'),('Suspend',r'suspend'),('Unravel',r'unravel'),('Threadling',r'threadling'),('Tangle',r'tangle'),
+ ('Devour',r'devour'),('Frost Armor',r'frost armor'),('Radiant',r'radiant'),('Amplified',r'amplif'),('Woven Mail',r'woven mail'),
+ ('Void Overshield',r'overshield'),('Restoration',r'restoration|\bcure'),('Void Breach',r'void breach'),('Stasis Shard',r'stasis shard'),
+ ('Ionic Trace',r'ionic trace'),('Orbs',r'orb of power|\borbs?\b'),('Armor Charge',r'armor charge'),
+ ('Ability Energy',r'ability energy|melee energy|class ability energy|grenade energy|energy to your'),('Healing',r'\bheal|health'),
+ ('Transcendence',r'transcend'),('Empower',r'empower')]
+CONS_HINTS=['while you have','while you are','while ','picking up','collecting','consume','against','affected by','debuffed','shattering']
+def derive_econ(desc):
+    d=' '+(desc or '').lower()+' ';prod,cons=set(),set()
+    for verb,pat in VERB_PATTERNS:
+        m=re.search(pat,d)
+        if not m: continue
+        pre=d[max(0,m.start()-32):m.start()]
+        (cons if any(h in pre for h in CONS_HINTS) else prod).add(verb)
+    return prod,cons
+for art in ARTIFACTS:
+    for p in art.get('perks',[]):
+        pr,co=derive_econ(p.get('desc',''));p['prod'],p['cons']=sorted(pr),sorted(co)
+
+LOOP_WEIGHT={"Orbs":2.0,"Armor Charge":1.5,"Empower":0.4,"Healing":0.6,"Ability Energy":0.8,"Damage":0.8,"Transcendence":2.5,
+ "Devour":2.2,"Void Breach":2.0,"Volatile":1.8,"Weaken":1.2,"Void Overshield":1.4,"Jolt":1.8,"Ionic Trace":1.6,"Amplified":1.2,
+ "Frost Armor":1.8,"Stasis Shard":1.5,"Slow":1.0,"Freeze":1.6,"Scorch":1.6,"Radiant":1.4,"Restoration":1.2,"Woven Mail":1.6,
+ "Tangle":1.3,"Threadling":1.6,"Unravel":1.3,"Sever":1.0,"Suspend":1.3,"Crowd Control":1.0,"Team Buff":0.8}
+
+GOALW={'Single-target':[('Damage',1.0)],'Add clear':[('Add Clear',1.0)],'Survive':[('Survivability',1.0)],
+ 'Support':[('Team Buff',0.6),('Healing',0.6)],'Ability spam':[('Ability Regen',1.0)]}
+def goal_weights2(a):
+    w={}
+    for k,m in (('goal',3),('goal2',2)):
+        for tag,v in GOALW.get(a.get(k,'Any'),[]): w[tag]=w.get(tag,0)+v*m
+    for tag,v in ACTIVITY_TAGS.get(a.get('activity','Any'),[]): w[tag]=w.get(tag,0)+v
+    return w
+
+def engine_contribution(it,verbs,produced,consumed):
+    ip,ic=set(it.get('prod',[]) or [])&verbs,set(it.get('cons',[]) or [])&verbs
+    return 2.0*(len(ip&(consumed-produced))+len(ic&(produced-consumed)))+0.6*len(ip|ic)
+
+_man=json.load(open(os.path.join(BASE, "data", "exotic_verbs.json"), encoding="utf-8"))
+try: FRAG_SLOTS=json.load(open(os.path.join(BASE, "data", "aspect_frag_slots.json"), encoding="utf-8"))
+except Exception: pass
+# Thruster, Acrobat's Dodge, Phoenix Dive (class abilities) and Blink (movement) are each
+# exclusive to one base subclass AND legal on Prismatic (per Bungie / Destinypedia). The flat
+# element tag cannot say "Arc OR Prismatic", so gate them explicitly instead of mis-tagging.
+_DUAL={"Acrobat's Dodge":("Hunter",("Arc",)),"Thruster":("Titan",("Arc",)),"Phoenix Dive":("Warlock",("Solar",))}
+def _dual_state(name,cls,elem):
+    # True = must be available here, False = must be excluded here, None = not a dual ability
+    if name=='Blink':
+        return (cls=='Hunter' and elem in ('Arc','Prismatic')) or (cls=='Warlock' and elem in ('Void','Prismatic'))
+    if name in _DUAL:
+        c,bases=_DUAL[name]; return cls==c and (elem in bases or elem=='Prismatic')
+    return None
+_DUAL_ITEMS=[it for it in POOL if it['name'] in (set(_DUAL)|{'Blink'})]
+_orig_gated=gated
+def gated2(cat,cls,elem):
+    out=[it for it in _orig_gated(cat,cls,elem) if _dual_state(it['name'],cls,elem) is not False]
+    have={it['name'] for it in out}
+    for it in _DUAL_ITEMS:
+        nm=it['name']
+        if it.get('category')==cat and nm not in have and _dual_state(nm,cls,elem) is True and it.get('class') in (cls,'Any'):
+            out.append(it); have.add(nm)
+    return out
+gated=gated2
+EV={name.lower():list(info['prod']) for name,info in _man.items() if info.get('prod')}
+# small hand-fix for exotics the text heuristic missed or mistagged (engine-critical only)
+OVERRIDE={
+ # Arc
+ "Fallen Sunstar":["Ionic Trace","Amplified"],"Crown of Tempests":["Jolt","Ionic Trace"],"Getaway Artist":["Amplified","Jolt"],
+ "Geomag Stabilizers":["Ionic Trace","Amplified"],"Point-Contact Cannon Brace":["Jolt"],"An Insurmountable Skullfort":["Amplified"],
+ "Eternal Warrior":["Amplified"],"Liar's Handshake":["Amplified"],"Trinity Ghoul":["Jolt"],"Coldheart":["Ionic Trace"],
+ "Riskrunner":["Amplified","Jolt"],"Centrifuse":["Jolt","Amplified"],"Delicate Tomb":["Ionic Trace","Amplified"],
+ # Void
+ "Contraverse Hold":["Devour","Void Breach"],"Secant Filaments":["Devour","Void Overshield"],"Nothing Manacles":["Void Breach"],
+ "Gyrfalcon's Hauberk":["Volatile","Void Breach"],"Doom Fang Pauldron":["Void Overshield","Volatile"],"Astrocyte Verse":["Volatile"],
+ "Collective Obligation":["Volatile","Weaken"],"Tractor Cannon":["Weaken"],"Graviton Lance":["Weaken"],
+ # Solar
+ "Pyrogale Gauntlets":["Scorch"],"Sunbracers":["Scorch"],"Starfire Protocol":["Scorch","Ability Energy"],"Dawn Chorus":["Scorch","Radiant"],
+ "Hallowfire Heart":["Scorch"],"Speaker's Sight":["Radiant","Healing"],"Celestial Nighthawk":["Damage"],"Sunshot":["Scorch"],
+ "Polaris Lance":["Scorch"],"Ticuu's Divination":["Scorch","Radiant"],
+ # Stasis
+ "Ballidorse Wrathweavers":["Frost Armor","Stasis Shard"],"Rime-coat Raiment":["Frost Armor","Stasis Shard"],
+ "Cadmus Ridge Lancecap":["Stasis Shard","Frost Armor"],"Renewal Grasps":["Slow","Frost Armor"],"Mask of Bakris":["Slow"],
+ "Osmiomancy Gloves":["Slow","Freeze","Stasis Shard"],"Wicked Implement":["Slow","Freeze","Stasis Shard"],
+ "Verglas Curve":["Stasis Shard","Freeze"],"Conditional Finality":["Freeze","Scorch"],
+ # Strand
+ "Swarmers":["Threadling","Tangle","Unravel"],"Cyrtarachne's Facade":["Woven Mail"],"Abeyant Leap":["Suspend","Sever","Woven Mail"],
+ "Mask of Fealty":["Sever","Tangle"],"Mothkeeper's Wraps":["Woven Mail"],"Quicksilver Storm":["Tangle","Unravel"],
+ "Euphony":["Tangle","Threadling"],"Final Warning":["Tangle"],
+ # Prismatic
+ "Mataiodoxía":["Transcendence"],
+}
+for name,vl in OVERRIDE.items(): EV[name.lower()]=list(vl)
+WELEM={name.lower():(info.get('element') or '') for name,info in _man.items() if info.get('slot')=='weapon'}
+# exotics whose effect is dead without a specific slot pick; force that pick when the exotic is equipped
+EXOTIC_FORCE={
+ "Boots of the Assembler":{"Class Ability":"Healing Rift"},
+ "Speaker's Sight":{"Class Ability":"Healing Rift"},
+}
+
+def assemble2(cls,elem,a,w):
+    engine=a.get('engine','Any');base_verbs=set(ENGINES.get(engine,('',set()))[1]);verbs=set(base_verbs)
+    single='Single-target' in (a.get('goal'),a.get('goal2'))
+    if single: verbs|=DAMAGE_AMP
+    produced,consumed=set(),set();build={};total=0.0;chosen_aspects=[]
+    def evget(name): return set(EV.get(name.lower(),[]))
+    def fold(it): produced.update(it.get('prod',[]) or []);consumed.update(it.get('cons',[]) or [])
+    _goal=a.get('goal','')
+    def goal_fit(it):
+        # small nudge so the keystone exotic serves the primary goal; never overrides
+        # the +4 per engine-verb term, so engine keystones are unaffected.
+        tw=it.get('tagw') or {}
+        if not tw: return 0.0
+        dom=max(tw,key=tw.get)
+        if _goal=='Single-target': return 0.3 if dom=='Damage' else (-0.3 if dom in ('Survivability','Healing','Team Buff') else 0.0)
+        if _goal in ('Survive','Support'): return 0.3 if dom in ('Survivability','Healing','Team Buff') else (-0.3 if dom=='Damage' else 0.0)
+        if _goal=='Add clear': return 0.3 if dom in ('Add Clear','Crowd Control') else 0.0
+        if _goal=='Ability spam': return 0.3 if dom=='Ability Regen' else 0.0
+        return 0.0
+    def pick_exotic(cat,pin):
+        cands=gated(cat,cls,elem);chosen=None
+        fitv=verbs if cat=='Exotic Weapon' else base_verbs   # armor stays on engine; weapon may chase damage amp
+        if pin not in ('Any','',None):
+            fi=find_pool_item(cat,pin)
+            if fi and fi.get('class') in ('Any',cls): chosen=fi
+        if chosen is None and cands:
+            def sc(it):
+                if cat=='Exotic Weapon':
+                    wel=WELEM.get(it['name'].lower(),'')
+                    on=(elem=='Prismatic') or (wel==elem)
+                    ev=(evget(it['name'])&fitv) if on else set()
+                else:
+                    ev=evget(it['name'])&fitv
+                s=4.0*len(ev)+0.4*item_score(it,w)
+                if cat=='Exotic Armor': s+=goal_fit(it)
+                if cat=='Exotic Weapon' and single: s+=(50.0 if it['name'] in DPS_GUNS else 0.0)+2.0*item_score(it,{'Damage':3})
+                return s+1e-6*len(it['name'])
+            chosen=max(cands,key=sc)
+        if chosen is None: return None
+        it=dict(chosen);it['prod']=sorted(set(it.get('prod',[]) or [])|evget(chosen['name']));return it
+    ea=pick_exotic('Exotic Armor',a.get('build_exotic_armor','Any'));ew=pick_exotic('Exotic Weapon',a.get('build_exotic_weapon','Any'))
+    if ea: fold(ea)
+    if ew: fold(ew)
+    for cat,need in SLOTS:
+        if cat=='Exotic Armor': picks=[ea] if ea else []
+        elif cat=='Exotic Weapon': picks=[ew] if ew else []
+        else:
+            n=need
+            if cat=='Fragment' and chosen_aspects:
+                n=max(1,sum(int(FRAG_SLOTS.get(x['name'],x.get('frag_slots',2)) or 2) for x in chosen_aspects))
+            cands=gated(cat,cls,elem);picks=[]
+            forced=None
+            for exo in (ea,ew):
+                if exo and exo['name'] in EXOTIC_FORCE and cat in EXOTIC_FORCE[exo['name']]:
+                    forced=EXOTIC_FORCE[exo['name']][cat]
+            if forced:
+                fi=next((c for c in cands if c['name']==forced),None)
+                if fi: picks.append(fi);cands.remove(fi);fold(fi)
+            for _ in range(n-len(picks)):
+                if not cands: break
+                b=max(cands,key=lambda it:item_score(it,w)+engine_contribution(it,verbs,produced,consumed)+1e-6*len(it['name']))
+                picks.append(b);cands.remove(b);fold(b)
+        scored=[{'item':p,'score':round(item_score(p,w),1)} for p in picks]
+        build[cat]=scored
+        if cat=='Aspect': chosen_aspects=[x['item'] for x in scored]
+        total+=sum(x['score'] for x in scored)
+    return build,round(total,1)
+
+def recommend_artifact2(elem,a):
+    if not ARTIFACTS: return None
+    engine=a.get('engine','Any');verbs=set(ENGINES.get(engine,('',set()))[1])
+    if 'Single-target' in (a.get('goal'),a.get('goal2')): verbs|=DAMAGE_AMP
+    def pem(p):
+        els=p.get('elements') or ([p['element']] if p.get('element') else [])
+        return 1 if (elem=='Prismatic' and els) or elem in els else 0
+    best,bs=None,-1
+    for art in ARTIFACTS:
+        perks=[p for p in art['perks'] if not p.get('champion')]
+        em=sum(pem(p) for p in perks);vs=sum(len((set(p.get('prod',[]))|set(p.get('cons',[])))&verbs) for p in perks)
+        sc=3.0*em+1.0*vs+2.0*(elem in (art.get('elements') or []))
+        if sc>bs: best,bs=art,sc
+    perks=[p for p in best['perks'] if not p.get('champion')]
+    ranked=sorted(perks,key=lambda p:(-(len((set(p.get('prod',[]))|set(p.get('cons',[])))&verbs)),-pem(p),p.get('tier',9),p['perk']))
+    return {'name':best['name'],'source':best.get('source',''),'perks':ranked[:8],'alts':[]}
+
+_orig_gear=recommend_gear_set
+def recommend_gear_set2(elem,a):
+    GS=GEAR_SETS
+    if not GS: return None
+    engine=a.get('engine','Any');verbs=set(ENGINES.get(engine,('',set()))[1])
+    if 'Single-target' in (a.get('goal'),a.get('goal2')): verbs|=DAMAGE_AMP
+    el=(elem or '').lower()
+    goalwords={'Survive':['heal','shield','resist','health'],'Support':['ally','allies','fireteam','heal'],
+               'Add clear':['orb','combatant','ammo'],'Single-target':['damage','boss','final blow'],
+               'Ability spam':['grenade','melee','ability','energy']}
+    sig=set()
+    for k in ('goal','goal2'):
+        for wd in goalwords.get(a.get(k,''),[]): sig.add(wd)
+    ranked=[]
+    for sname,bonuses in GS.items():
+        text=' '.join((b['perk']+' '+b['desc']).lower() for b in bonuses)
+        pr,co=derive_econ(text)
+        vscore=len((set(pr)|set(co))&verbs)
+        escore=1 if (el and el!='prismatic' and el in text) else 0
+        gscore=sum(1 for wd in sig if wd in text)
+        ranked.append((3*vscore+3*escore+gscore,sname,bonuses))
+    ranked.sort(key=lambda x:-x[0])
+    if not ranked or ranked[0][0]==0: return _orig_gear(elem,a)
+    best=ranked[0];four=_set_bonus(best[2],4)
+    out={'name':best[1],'four':{'perk':four['perk'],'desc':four['desc']} if four else None,'two_two':[]}
+    for sc,sname,bonuses in ranked[:2]:
+        two=_set_bonus(bonuses,2)
+        if two: out['two_two'].append({'name':sname,'perk':two['perk'],'desc':two['desc']})
+    return out
+goal_weights=goal_weights2;assemble=assemble2;recommend_artifact=recommend_artifact2;recommend_gear_set=recommend_gear_set2
+
+# ---- synergy engine: answer normalization (bridges wizard vocab to the engine) ----
+G2OLD = {'Single-target': 'Max Damage', 'Add clear': 'Add Clear', 'Survive': 'High Survivability',
+         'Support': 'Team Buff', 'Ability spam': 'Ability Spam', 'Any': 'Any'}
+DPROF = {'Single-target': 'Boss DPS', 'Add clear': 'Add Clear', 'Survive': 'Support',
+         'Support': 'Support', 'Ability spam': 'Sustained', 'Any': 'Any'}
+OLD2NEW = {'Max Damage': 'Single-target', 'Boss DPS': 'Single-target', 'Add Clear': 'Add clear',
+           'Crowd Control': 'Add clear', 'High Survivability': 'Survive', 'Solo': 'Survive',
+           'Healing': 'Support', 'Team Buff': 'Support', 'Ability Spam': 'Ability spam',
+           'Utility': 'Any', 'Any': 'Any'}
+NEW_GOALS = {'Single-target', 'Add clear', 'Survive', 'Support', 'Ability spam'}
+
+
+def _to_new_goal(v):
+    return v if v in NEW_GOALS else OLD2NEW.get(v, 'Any')
+
+
+def _normalize_answers(a):
+    """Fill the new keys the engine reads (goal, goal2) from whatever goal vocab the
+    wizard supplied, and back-fill the old-vocab keys the un-ported helpers read, without
+    clobbering an explicit pick the user already made."""
+    a = dict(a)
+    if a.get('goal') not in NEW_GOALS:
+        a['goal'] = _to_new_goal(a.get('main_goal', 'Any'))
+    if a.get('goal2') not in NEW_GOALS:
+        a['goal2'] = _to_new_goal(a.get('second_goal', 'Any'))
+    g, g2 = a['goal'], a['goal2']
+    a.setdefault('engine', 'Any')
+    a.setdefault('playstyle', 'Any')
+    if a.get('main_goal', 'Any') in ('Any', None):
+        a['main_goal'] = G2OLD.get(g, 'Any')
+    if a.get('second_goal', 'Any') in ('Any', None):
+        a['second_goal'] = G2OLD.get(g2, 'Any')
+    a.setdefault('optional_goal', 'Any')
+    if a.get('damage_profile', 'Any') in ('Any', None):
+        a['damage_profile'] = DPROF.get(g, 'Any')
+    if a.get('survivability', 'Any') in ('Any', None):
+        a['survivability'] = 'High' if 'Survive' in (g, g2) else 'Any'
+    if a.get('team_role', 'Any') in ('Any', None):
+        a['team_role'] = 'Support' if 'Support' in (g, g2) else ('DPS' if 'Single-target' in (g, g2) else 'Flex')
+    ps = a.get('playstyle', 'Any')
+    if a.get('ability_focus', 'Any') in ('Any', None):
+        a['ability_focus'] = 'High' if ps == 'Ability' else 'Any'
+    if a.get('super_focus', 'Any') in ('Any', None):
+        a['super_focus'] = 'High' if ps == 'Super' else 'Any'
+    if a.get('weapon_focus', 'Any') in ('Any', None):
+        a['weapon_focus'] = 'High' if ps == 'Weapon' else 'Any'
+    return a
