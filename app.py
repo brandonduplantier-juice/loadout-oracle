@@ -164,7 +164,7 @@ monitoring.install(app)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.20"
+APP_VERSION = "0.9.21"
 BUILD_DATE = "2026-06-15"
 
 
@@ -889,6 +889,9 @@ def recommend_armor_loadout(elem, a, build=None, artifact=None):
         # synergy, and leave any leftover energy free for the user's own general mod. Each
         # mod copy occupies one slot, so a stacked mod (Surge x3) uses three of the three.
         SPECIFIC_SLOTS = 3
+        # a non-anchor, non-loop mod must match the goal at least this strongly (sum of
+        # build-tag preference) to earn a slot, otherwise the slot is left open.
+        MOD_KEEP_FLOOR = 2.5
         counts = {}  # name -> [cost, desc, count, harmonic, base_cost]
         def slots_used():
             return sum(c[2] for c in counts.values())
@@ -906,6 +909,14 @@ def recommend_armor_loadout(elem, a, build=None, artifact=None):
                 if not relevant(m):
                     continue
                 name = eff_name(m)
+                # earn the slot, do not just fill it: keep a mod only if it anchors the
+                # element (Surge/Siphon/Resistance), closes one of the build's loops, or
+                # strongly matches the goal. Otherwise leave the slot open for the user.
+                mp_g, mc_g = mod_econ(name)
+                closes = bool((mc_g & build_prod) or (mp_g & build_cons))
+                if not (m["elem"] or closes
+                        or sum(pref.get(t, 0) for t in m["tags"]) >= MOD_KEEP_FLOOR):
+                    continue
                 c = counts.setdefault(name, [eff_cost(m), m["desc"], 0,
                                              m.get("harmonic", False), m["cost"]])
                 if c[2] >= m.get("max_copies", 1) or eff_cost(m) > budget:
