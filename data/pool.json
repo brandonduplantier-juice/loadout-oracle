@@ -2224,17 +2224,15 @@
 "class": "Hunter",
 "element": "Any",
 "name": "Fortune’s Favor",
-"goal_tags": "Survivability, Healing, Ability Regen",
-"flex_type": "Damage, Add Clear",
+"goal_tags": "Survivability, Damage, Utility",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/aef3f0c6823ea0564d94ff81b40552f0.jpg",
 "tagw": {
-"Survivability": 0.293,
-"Healing": 0.244,
-"Ability Regen": 0.244,
-"Damage": 0.11,
-"Add Clear": 0.11
+"Survivability": 0.4,
+"Damage": 0.35,
+"Utility": 0.25
 },
-"tier": "Survivability hybrid",
+"tier": "Survivability + Damage",
 "prod": [
 "Ability Energy",
 "Damage",
@@ -2565,17 +2563,15 @@
 "class": "Hunter",
 "element": "Any",
 "name": "Mothkeeper’s Wraps",
-"goal_tags": "Add Clear, Survivability, Crowd Control",
-"flex_type": "Ability Regen, Damage",
+"goal_tags": "Crowd Control, Team Buff, Add Clear",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/e53f09086747c03e79325763327af977.jpg",
 "tagw": {
-"Add Clear": 0.293,
-"Survivability": 0.244,
-"Crowd Control": 0.244,
-"Ability Regen": 0.11,
-"Damage": 0.11
+"Crowd Control": 0.38,
+"Team Buff": 0.32,
+"Add Clear": 0.3
 },
-"tier": "Add Clear hybrid",
+"tier": "Crowd Control hybrid",
 "prod": [
 "Ability Energy",
 "Crowd Control",
@@ -4654,13 +4650,13 @@
 "class": "Warlock",
 "element": "Any",
 "name": "Rime-Coat Raiment",
-"goal_tags": "Crowd Control",
-"flex_type": "Survivability, Damage",
+"goal_tags": "Crowd Control, Add Clear, Survivability",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/16001620c3ec683e805fe68017167b69.jpg",
 "tagw": {
-"Crowd Control": 0.571,
-"Survivability": 0.214,
-"Damage": 0.214
+"Crowd Control": 0.5,
+"Add Clear": 0.27,
+"Survivability": 0.23
 },
 "tier": "Crowd Control",
 "prod": [
