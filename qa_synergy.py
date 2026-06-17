@@ -31,12 +31,12 @@ GENERIC = {"Orbs","Ability Energy","Armor Charge"}  # near-universal, not elemen
 
 # verb -> text keyword(s) for grounding (specific verbs only; vague ones skipped)
 VERB_KW = {
- "Ionic Trace":["ionic trace"],"Amplified":["amplified","amplify"],"Jolt":["jolt"],
+ "Ionic Trace":["ionic trace","bolt charge"],"Amplified":["amplif"],"Jolt":["jolt"],
  "Scorch":["scorch","ignit"],"Radiant":["radiant"],"Restoration":["restoration"],
  "Void Breach":["void breach"],"Volatile":["volatile"],"Weaken":["weaken"],
  "Devour":["devour"],"Void Overshield":["overshield"],
- "Freeze":["freeze","frozen"],"Slow":["slow"],"Stasis Shard":["shard"],"Frost Armor":["frost armor"],
- "Tangle":["tangle"],"Sever":["sever"],"Suspend":["suspend"],"Threadling":["threadling"],
+ "Freeze":["freeze","frozen"],"Slow":["slow"],"Stasis Shard":["shard","shatter"],"Frost Armor":["frost armor"],
+ "Tangle":["tangle","grapple"],"Sever":["sever"],"Suspend":["suspend"],"Threadling":["threadling"],
  "Unravel":["unravel"],"Woven Mail":["woven mail"],"Transcendence":["transcend"],
  "Empower":["radiant","empowering","weapons of light","well of radiance"],
 }

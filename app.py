@@ -164,7 +164,7 @@ monitoring.install(app)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.17"
+APP_VERSION = "0.9.18"
 BUILD_DATE = "2026-06-15"
 
 
@@ -527,7 +527,7 @@ def compute_synergy(build, mods_loadout):
     for k in set(list(prod) + list(cons)):
         P = list(prod.get(k, []))
         C = list(cons.get(k, []))
-        cross = [n for n in P if n not in C] or [n for n in C if n not in P] or (len(P) > 1)
+        cross = [n for n in P if n not in C] or [n for n in C if n not in P]
         if P and C and cross:
             strength = min(len(P), len(C))
             contrib = strength * LOOP_WEIGHT.get(k, 1.0)
@@ -1267,9 +1267,12 @@ def post_dim_share(loadout):
         except Exception:
             detail = ""
         print("[dim_share] auth HTTPError", e.code, detail)
+        monitoring.alert("dim_auth_http_" + str(e.code),
+                         "DIM share auth failed: HTTP %s %s" % (e.code, detail[:150]))
         return None, "auth_http_" + str(e.code) + (": " + detail if detail else "")
     except Exception as e:
         print("[dim_share] auth error", e)
+        monitoring.alert("dim_auth_error", "DIM share auth failed: %s" % str(e)[:150])
         return None, "auth_error: " + str(e)[:150]
     payload = {"loadout": loadout, "platformMembershipId": platform_mid}
     try:
@@ -2014,7 +2017,11 @@ def assemble2(cls,elem,a,w):
                     # an exotic whose only engine verbs are locked to another element
                     # cannot fire here, so its ability-regen tagw is misleading: penalize
                     exo_el={VERB_ELEM[v] for v in evget(it['name']) if v in VERB_ELEM}
-                    if exo_el and elem!='Prismatic' and elem not in exo_el:
+                    # Non-Prismatic: the lock must match the build element. Generic
+                    # Prismatic (no engine pinned): the run element is uncommitted, so a
+                    # single-element-locked exotic is a gamble; disfavor it in favor of
+                    # an element-agnostic one. A pinned engine opts back in.
+                    if exo_el and elem not in exo_el and (elem!='Prismatic' or not base_verbs):
                         s-=8.0
                 if cat=='Exotic Weapon' and single: s+=(50.0 if it['name'] in DPS_GUNS else 0.0)+2.0*item_score(it,{'Damage':3})
                 return s+1e-6*len(it['name'])
