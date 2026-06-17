@@ -30,9 +30,13 @@
   <div class="synhead"><span class="synlabel">Synergy loops</span><span class="synscore" title="sum of closed producer to consumer loops">{{ syn.score }}</span></div>
   {% if community %}<p class="synnote">{{ community.note }}</p>{% endif %}
   {% for L in syn.loops %}
-  <div class="looprow"><span class="verb">{{ L.verb }}</span><span class="lflow">{{ L.from|join(', ') }} <span class="arrow">&rarr;</span> {{ L.to|join(', ') }}</span></div>
+  <div class="looprow">
+    <div class="loophead"><span class="verb">{{ L.verb }}</span>{% if L.desc %}<span class="verbdesc">{{ L.desc }}</span>{% endif %}</div>
+    <div class="lflow"><span class="lcap">Produced by</span>{{ L.from|join(', ') }}</div>
+    <div class="lflow"><span class="lcap">Used by</span>{{ L.to|join(', ') }}</div>
+  </div>
   {% endfor %}
-  <p class="synnote">Each row is something the build produces feeding something that consumes it. More closed loops means the build sustains itself instead of relying on one item.</p>
+  <p class="synnote">Each loop is a game effect this build creates and then spends. The items under "Produced by" generate it; the items under "Used by" turn it back into damage, healing, or ability energy. When the same item appears on both sides, the build feeds itself instead of leaning on one piece.</p>
 </div>
 {% endif %}
 {%- endmacro %}

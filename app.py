@@ -462,6 +462,40 @@ LOOP_WEIGHT = {"Orbs": 3.0, "Ability Energy": 2.5, "Empower": 2.0, "Transcendenc
                "Healing": 1.5, "Crowd Control": 1.2, "Damage": 1.0, "Armor Charge": 1.5}
 
 
+VERB_INFO = {
+    "Orbs": "Orbs of Power. Picking one up returns ability energy and triggers your Armor Charge mods.",
+    "Ability Energy": "Direct grenade, melee, or class ability energy, so your abilities come back faster.",
+    "Empower": "A damage buff to your weapons and abilities, such as from an Empowering Rift.",
+    "Armor Charge": "Stacks stored on your armor that power Surge, Kickstart, and other charged mods.",
+    "Transcendence": "The Prismatic meter. Filling both halves grants a buffed state with a unique grenade.",
+    "Damage": "A flat increase to the damage this build deals.",
+    "Team Buff": "An effect that helps your whole fireteam, not just you.",
+    "Jolt": "Jolted targets chain lightning to nearby enemies when hit. Strong add clear and Arc energy.",
+    "Ionic Trace": "A streak of Arc energy that races to you and refunds ability energy.",
+    "Amplified": "An Arc buff granting faster movement, reload, and handling after rapid Arc kills.",
+    "Devour": "Kills restore full health and refill your grenade. A self-sustaining survival loop.",
+    "Void Breach": "A pickup from Void ability kills that grants ability energy.",
+    "Volatile": "Volatile targets explode in a Void blast when hit, spreading to nearby enemies.",
+    "Weaken": "Weakened targets take more damage from every source. A team-wide damage debuff.",
+    "Void Overshield": "A protective Void shield layered on top of your health.",
+    "Scorch": "Stacking Solar burn. At 100 stacks the target ignites for a large explosion.",
+    "Radiant": "A Solar buff that raises your weapon damage and pierces some enemy shields.",
+    "Restoration": "Heals you over time and keeps most incoming hits from stopping the heal.",
+    "Healing": "Restores your health, through cure or restoration.",
+    "Freeze": "Locks a target in place, unable to act, until the freeze is broken.",
+    "Slow": "Hampers a target's movement, aim, and abilities. Enough stacks will freeze it.",
+    "Stasis Shard": "A shard from shattering frozen targets. Collecting it grants Frost Armor and energy.",
+    "Frost Armor": "A stacking Stasis buff that adds damage resistance.",
+    "Woven Mail": "A Strand buff that gives strong damage resistance.",
+    "Threadling": "A small Strand creature that seeks and attacks nearby enemies. Add clear.",
+    "Suspend": "Lifts and holds a target helpless in the air. Strong crowd control.",
+    "Tangle": "A Strand knot from kills. Shoot or throw it to burst and spread Strand effects.",
+    "Unravel": "Unraveled targets fire seeking threads at nearby enemies when hit. Add clear.",
+    "Sever": "Cuts a target's outgoing damage so it hits you and allies for less.",
+    "Crowd Control": "Effects that lock down or disable enemies, like freeze, suspend, or blind.",
+}
+
+
 def compute_synergy(build, mods_loadout):
     """Detect closed producer to consumer loops across the assembled build and
     its mod set. This is the 'everything feeding into things' score."""
@@ -497,7 +531,8 @@ def compute_synergy(build, mods_loadout):
             strength = min(len(P), len(C))
             contrib = strength * LOOP_WEIGHT.get(k, 1.0)
             score += contrib
-            loops.append({"verb": k, "from": P[:3], "to": C[:3], "w": round(contrib, 1)})
+            loops.append({"verb": k, "desc": VERB_INFO.get(k, ""),
+                          "from": P[:3], "to": C[:3], "w": round(contrib, 1)})
     loops.sort(key=lambda l: -l["w"])
     return {"loops": loops[:6], "score": round(score, 1)}
 

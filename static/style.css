@@ -354,10 +354,12 @@ details.howto[open] > summary { border-bottom: 1px solid var(--line); }
 .synlabel { font-family: Saira, sans-serif; font-weight: 700; font-size: 15px; color: var(--text); }
 .synscore { font-family: Saira, sans-serif; font-weight: 700; font-size: 20px; color: var(--accent); }
 .synnote { font-size: 12px; color: var(--muted); margin: 4px 0 10px; line-height: 1.5; }
-.looprow { display: flex; gap: 10px; align-items: baseline; padding: 4px 0; border-top: 1px solid rgba(255,255,255,.05); }
-.verb { font-family: Saira, sans-serif; font-weight: 600; font-size: 12px; color: var(--accent); min-width: 110px; }
-.lflow { font-size: 12px; color: var(--text); line-height: 1.4; }
-.lflow .arrow { color: var(--muted); margin: 0 4px; }
+.looprow { display: block; padding: 8px 0; border-top: 1px solid rgba(255,255,255,.05); }
+.loophead { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; margin-bottom: 4px; }
+.verb { font-family: Saira, sans-serif; font-weight: 600; font-size: 13px; color: var(--accent); }
+.verbdesc { font-size: 12px; color: var(--muted); line-height: 1.45; flex: 1 1 60%; }
+.lflow { font-size: 12px; color: var(--text); line-height: 1.45; padding: 1px 0; }
+.lcap { display: inline-block; min-width: 92px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
 
 /* ---- stepper glyph (element symbol replaces the Loadout diamond) ---- */
 .diamond.hasglyph {
