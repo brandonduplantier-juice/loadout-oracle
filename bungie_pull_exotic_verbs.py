@@ -107,9 +107,15 @@ def main():
 
                 pl = by_hash.get(h) if h else None
 
-                if pl:
-
-                    texts.append((pl.get("displayProperties") or {}).get("description", ""))
+                if not pl:
+                    continue
+                # only the exotic intrinsic perk carries its real mechanics. ornaments,
+                # shaders, mods, and empty plugs leak unrelated tokens into verb
+                # extraction (shader flavor text tagged The Stag with a bogus Scorch).
+                # restrict to intrinsic plugs and skip everything cosmetic or modular.
+                if "intrinsic" not in ((pl.get("itemTypeDisplayName") or "").lower()):
+                    continue
+                texts.append((pl.get("displayProperties") or {}).get("description", ""))
 
         desc = " ".join(t for t in texts if t)
 

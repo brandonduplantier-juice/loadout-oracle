@@ -1,62 +1,242 @@
 {
- "Arc Soul": 2,
- "Ascension": 2,
- "Banner of War": 2,
- "Bastion": 3,
- "Bleak Watcher": 2,
- "Chaos Accelerant": 2,
- "Child of the Old Gods": 3,
- "Consecration": 2,
- "Controlled Demolition": 2,
- "Crackshot": 2,
- "Cryoclasm": 3,
- "Diamond Lance": 3,
- "Drengr's Lash": 3,
- "Electrostatic Mind": 2,
- "Ensnaring Slam": 2,
- "Feed the Void": 2,
- "Flechette Storm": 2,
- "Flow State": 2,
- "Frostpulse": 3,
- "Glacial Harvest": 2,
- "Grim Harvest": 2,
- "Gunpowder Gamble": 3,
- "Heat Rises": 2,
- "Hellion": 2,
- "Howl of the Storm": 2,
- "Icarus Dash": 3,
- "Iceflare Bolts": 2,
- "Into the Fray": 2,
- "Ionic Sentry": 2,
- "Juggernaut": 2,
- "Knock 'Em Down": 2,
- "Knockout": 2,
- "Lethal Current": 2,
- "Lightning Surge": 3,
- "Mindspun Invocation": 2,
- "Offensive Bulwark": 2,
- "On Your Mark": 3,
- "On the Prowl": 3,
- "Roaring Flames": 2,
- "Shatterdive": 3,
- "Shieldburst": 3,
- "Sol Invictus": 2,
- "Soul Siphon": 3,
- "Storm's Keep": 2,
- "Stylish Executioner": 2,
- "Tectonic Harvest": 2,
- "Tempest Strike": 2,
- "The Wanderer": 2,
- "Threaded Specter": 3,
- "Touch of Flame": 2,
- "Touch of Thunder": 2,
- "Touch of Winter": 2,
- "Trapper's Ambush": 2,
- "Unbreakable": 3,
- "Vanishing Step": 2,
- "Weaver's Call": 3,
- "Weavewalk": 3,
- "Whirling Maelstrom": 2,
- "Widow's Silk": 3,
- "Winter's Shroud": 2
+ "Arc Soul": {
+  "native": 2,
+  "prism": 2
+ },
+ "Ascension": {
+  "native": 2,
+  "prism": 3
+ },
+ "Banner of War": {
+  "native": 2,
+  "prism": 2
+ },
+ "Bastion": {
+  "native": 3,
+  "prism": 3
+ },
+ "Bleak Watcher": {
+  "native": 2,
+  "prism": 2
+ },
+ "Chaos Accelerant": {
+  "native": 2,
+  "prism": 2
+ },
+ "Child of the Old Gods": {
+  "native": 3,
+  "prism": 3
+ },
+ "Consecration": {
+  "native": 2,
+  "prism": 3
+ },
+ "Controlled Demolition": {
+  "native": 2,
+  "prism": 2
+ },
+ "Crackshot": {
+  "native": 2,
+  "prism": 2
+ },
+ "Cryoclasm": {
+  "native": 3,
+  "prism": 3
+ },
+ "Diamond Lance": {
+  "native": 3,
+  "prism": 3
+ },
+ "Drengr's Lash": {
+  "native": 3,
+  "prism": 3
+ },
+ "Electrostatic Mind": {
+  "native": 2,
+  "prism": 2
+ },
+ "Ensnaring Slam": {
+  "native": 2,
+  "prism": 2
+ },
+ "Feed the Void": {
+  "native": 2,
+  "prism": 2
+ },
+ "Flechette Storm": {
+  "native": 2,
+  "prism": 2
+ },
+ "Flow State": {
+  "native": 2,
+  "prism": 2
+ },
+ "Frostpulse": {
+  "native": 3,
+  "prism": 3
+ },
+ "Glacial Harvest": {
+  "native": 2,
+  "prism": 2
+ },
+ "Grim Harvest": {
+  "native": 2,
+  "prism": 2
+ },
+ "Gunpowder Gamble": {
+  "native": 2,
+  "prism": 3
+ },
+ "Heat Rises": {
+  "native": 2,
+  "prism": 2
+ },
+ "Hellion": {
+  "native": 2,
+  "prism": 2
+ },
+ "Howl of the Storm": {
+  "native": 2,
+  "prism": 2
+ },
+ "Icarus Dash": {
+  "native": 3,
+  "prism": 3
+ },
+ "Iceflare Bolts": {
+  "native": 2,
+  "prism": 2
+ },
+ "Into the Fray": {
+  "native": 2,
+  "prism": 2
+ },
+ "Ionic Sentry": {
+  "native": 2,
+  "prism": 2
+ },
+ "Juggernaut": {
+  "native": 2,
+  "prism": 2
+ },
+ "Knock 'Em Down": {
+  "native": 2,
+  "prism": 2
+ },
+ "Knockout": {
+  "native": 2,
+  "prism": 2
+ },
+ "Lethal Current": {
+  "native": 2,
+  "prism": 2
+ },
+ "Lightning Surge": {
+  "native": 3,
+  "prism": 3
+ },
+ "Mindspun Invocation": {
+  "native": 2,
+  "prism": 2
+ },
+ "Offensive Bulwark": {
+  "native": 2,
+  "prism": 2
+ },
+ "On Your Mark": {
+  "native": 3,
+  "prism": 3
+ },
+ "On the Prowl": {
+  "native": 3,
+  "prism": 3
+ },
+ "Roaring Flames": {
+  "native": 2,
+  "prism": 2
+ },
+ "Shatterdive": {
+  "native": 3,
+  "prism": 3
+ },
+ "Shieldburst": {
+  "native": 3,
+  "prism": 3
+ },
+ "Sol Invictus": {
+  "native": 2,
+  "prism": 2
+ },
+ "Soul Siphon": {
+  "native": 3,
+  "prism": 3
+ },
+ "Storm's Keep": {
+  "native": 2,
+  "prism": 2
+ },
+ "Stylish Executioner": {
+  "native": 2,
+  "prism": 2
+ },
+ "Tectonic Harvest": {
+  "native": 2,
+  "prism": 2
+ },
+ "Tempest Strike": {
+  "native": 2,
+  "prism": 2
+ },
+ "The Wanderer": {
+  "native": 2,
+  "prism": 2
+ },
+ "Threaded Specter": {
+  "native": 3,
+  "prism": 3
+ },
+ "Touch of Flame": {
+  "native": 2,
+  "prism": 2
+ },
+ "Touch of Thunder": {
+  "native": 2,
+  "prism": 2
+ },
+ "Touch of Winter": {
+  "native": 2,
+  "prism": 2
+ },
+ "Trapper's Ambush": {
+  "native": 2,
+  "prism": 2
+ },
+ "Unbreakable": {
+  "native": 3,
+  "prism": 3
+ },
+ "Vanishing Step": {
+  "native": 2,
+  "prism": 2
+ },
+ "Weaver's Call": {
+  "native": 2,
+  "prism": 3
+ },
+ "Weavewalk": {
+  "native": 3,
+  "prism": 3
+ },
+ "Whirling Maelstrom": {
+  "native": 2,
+  "prism": 2
+ },
+ "Widow's Silk": {
+  "native": 3,
+  "prism": 3
+ },
+ "Winter's Shroud": {
+  "native": 2,
+  "prism": 3
+ }
 }

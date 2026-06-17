@@ -164,7 +164,7 @@ monitoring.install(app)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.23"
+APP_VERSION = "0.9.24"
 BUILD_DATE = "2026-06-15"
 
 
@@ -2109,7 +2109,18 @@ def assemble2(cls,elem,a,w):
         else:
             n=need
             if cat=='Fragment' and chosen_aspects:
-                n=max(1,sum(int(FRAG_SLOTS.get(x['name'],x.get('frag_slots',2)) or 2) for x in chosen_aspects))
+                def _frag_slots(it):
+                    # fragment count is element-dependent: an aspect grants a different
+                    # number of fragment slots on Prismatic than on its native subclass
+                    # (Hellion is 2 on Solar, 3 on Prismatic). data may be the per-element
+                    # form {native,prism} or the legacy flat int; handle both.
+                    v=FRAG_SLOTS.get(it['name'])
+                    if isinstance(v,dict):
+                        key='prism' if elem=='Prismatic' else 'native'
+                        return int(v.get(key) or v.get('native') or v.get('prism') or it.get('frag_slots',2) or 2)
+                    if v is not None: return int(v or 2)
+                    return int(it.get('frag_slots',2) or 2)
+                n=max(1,sum(_frag_slots(x) for x in chosen_aspects))
             cands=gated(cat,cls,elem);picks=[]
             forced=None
             for exo in (ea,ew):
