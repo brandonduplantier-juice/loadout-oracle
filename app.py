@@ -164,7 +164,7 @@ monitoring.install(app)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.21"
+APP_VERSION = "0.9.22"
 BUILD_DATE = "2026-06-15"
 
 
@@ -1938,6 +1938,13 @@ def gated2(cat,cls,elem):
     return out
 gated=gated2
 EV={name.lower():list(info['prod']) for name,info in _man.items() if info.get('prod')}
+# curated EV corrections for puller contamination: it derives verbs from all socket
+# text (ornaments, shaders), so cosmetic flavor leaks in as spurious verbs. The Stag's
+# 'Scorch' is shader text, not its perk, and wrongly trips the element-lock penalty on
+# non-Solar survive builds. Superseded once the intrinsic-only puller is re-pulled.
+_EV_DROP={'the stag':{'Scorch'}}
+for _k,_d in _EV_DROP.items():
+    if _k in EV: EV[_k]=[v for v in EV[_k] if v not in _d]
 # small hand-fix for exotics the text heuristic missed or mistagged (engine-critical only)
 OVERRIDE={
  # Arc

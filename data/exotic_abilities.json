@@ -1,30 +1,107 @@
 {
- "Young Ahamkara's Spine": {"Grenade": "Tripmine Grenade"},
- "Shinobu's Vow": {"Grenade": "Skip Grenade"},
- "Lucky Raspberry": {"Grenade": "Arcbolt Grenade"},
- "Renewal Grasps": {"Grenade": "Duskfield Grenade"},
- "Nothing Manacles": {"Grenade": "Scatter Grenade"},
- "Osmiomancy Gloves": {"Grenade": "Coldsnap Grenade"},
- "Cyrtarachne's Facade": {"Grenade": "Grapple"},
- "Ashen Wake": {"Grenade": "Fusion Grenade"},
- "Starfire Protocol": {"Grenade": "Fusion Grenade"},
- "Wishful Ignorance": {"Melee": "Frenzied Blade"},
- "Second Chance": {"Melee": "Shield Throw"},
- "Mask of Fealty": {"Melee": "Withering Blade"},
- "Point-Contact Cannon Brace": {"Melee": "Thunderclap"},
- "Cuirass of the Falling Star": {"Super": "Thundercrash"},
- "Pyrogale Gauntlets": {"Super": "Burning Maul"},
- "Geomag Stabilizers": {"Super": "Chaos Reach"},
- "Blight Ranger": {"Super": "Arc Staff"},
- "Raiden Flux": {"Super": "Arc Staff"},
- "Gwisin Vest": {"Super": "Spectral Blades"},
- "Dawn Chorus": {"Super": "Daybreak"},
- "Helm of Saint-14": {"Super": "Ward of Dawn"},
- "Phoenix Protocol": {"Super": "Well of Radiance"},
- "Shards of Galanor": {"Super": "Blade Barrage"},
- "Ursa Furiosa": {"Super": "Sentinel Shield"},
- "Doom Fang Pauldron": {"Super": "Sentinel Shield"},
- "Stormdancer's Brace": {"Super": "Stormtrance"},
- "Ballidorse Wrathweavers": {"Super": "Winter's Wrath"},
- "Skull of Dire Ahamkara": {"Super": "Nova Bomb: Cataclysm"}
+ "Abeyant Leap": {
+  "Aspect": "Drengr's Lash"
+ },
+ "Ashen Wake": {
+  "Grenade": "Fusion Grenade"
+ },
+ "Athrys's Embrace": {
+  "Melee": "Weighted Throwing Knife"
+ },
+ "Ballidorse Wrathweavers": {
+  "Super": "Winter's Wrath"
+ },
+ "Blight Ranger": {
+  "Super": "Arc Staff"
+ },
+ "Briarbinds": {
+  "Aspect": "Child of the Old Gods"
+ },
+ "Cadmus Ridge Lancecap": {
+  "Aspect": "Diamond Lance"
+ },
+ "Caliban's Hand": {
+  "Melee": "Proximity Explosive Knife"
+ },
+ "Celestial Nighthawk": {
+  "Super": "Golden Gun: Deadshot"
+ },
+ "Cuirass of the Falling Star": {
+  "Super": "Thundercrash"
+ },
+ "Cyrtarachne's Facade": {
+  "Grenade": "Grapple"
+ },
+ "Dawn Chorus": {
+  "Super": "Daybreak"
+ },
+ "Doom Fang Pauldron": {
+  "Super": "Sentinel Shield"
+ },
+ "Geomag Stabilizers": {
+  "Super": "Chaos Reach"
+ },
+ "Gwisin Vest": {
+  "Super": "Spectral Blades"
+ },
+ "Helm of Saint-14": {
+  "Super": "Ward of Dawn"
+ },
+ "Lucky Raspberry": {
+  "Grenade": "Arcbolt Grenade"
+ },
+ "Mask of Fealty": {
+  "Melee": "Withering Blade"
+ },
+ "Nothing Manacles": {
+  "Grenade": "Scatter Grenade"
+ },
+ "Osmiomancy Gloves": {
+  "Grenade": "Coldsnap Grenade"
+ },
+ "Phoenix Cradle": {
+  "Aspect": "Sol Invictus"
+ },
+ "Phoenix Protocol": {
+  "Super": "Well of Radiance"
+ },
+ "Point-Contact Cannon Brace": {
+  "Melee": "Thunderclap"
+ },
+ "Pyrogale Gauntlets": {
+  "Super": "Burning Maul"
+ },
+ "Raiden Flux": {
+  "Super": "Arc Staff"
+ },
+ "Renewal Grasps": {
+  "Grenade": "Duskfield Grenade"
+ },
+ "Second Chance": {
+  "Melee": "Shield Throw"
+ },
+ "Shards of Galanor": {
+  "Super": "Blade Barrage"
+ },
+ "Shinobu's Vow": {
+  "Grenade": "Skip Grenade"
+ },
+ "Skull of Dire Ahamkara": {
+  "Super": "Nova Bomb: Cataclysm"
+ },
+ "Starfire Protocol": {
+  "Grenade": "Fusion Grenade"
+ },
+ "Stormdancer's Brace": {
+  "Super": "Stormtrance"
+ },
+ "Ursa Furiosa": {
+  "Super": "Sentinel Shield"
+ },
+ "Wishful Ignorance": {
+  "Melee": "Frenzied Blade"
+ },
+ "Young Ahamkara's Spine": {
+  "Grenade": "Tripmine Grenade"
+ }
 }
