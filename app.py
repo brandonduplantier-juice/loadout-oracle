@@ -164,7 +164,7 @@ monitoring.install(app)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.18"
+APP_VERSION = "0.9.19"
 BUILD_DATE = "2026-06-15"
 
 
@@ -1980,6 +1980,9 @@ def assemble2(cls,elem,a,w):
     for _e,_vs in ENGINES.values():
         if _e in ELEMENTS and _e!='Prismatic':
             for _v in _vs: VERB_ELEM[_v]=_e
+    # verbs whose value does not depend on the build element; an exotic carrying one of
+    # these still works off-element, so it is exempt from the element-lock penalty below.
+    EXO_AGNOSTIC={'Orbs','Ability Energy','Armor Charge','Damage','Team Buff','Healing'}
     single='Single-target' in (a.get('goal'),a.get('goal2'))
     if single: verbs|=DAMAGE_AMP
     produced,consumed=set(),set();build={};total=0.0;chosen_aspects=[]
@@ -2016,12 +2019,15 @@ def assemble2(cls,elem,a,w):
                     s+=goal_fit(it)
                     # an exotic whose only engine verbs are locked to another element
                     # cannot fire here, so its ability-regen tagw is misleading: penalize
-                    exo_el={VERB_ELEM[v] for v in evget(it['name']) if v in VERB_ELEM}
+                    exo_v=evget(it['name']); exo_el={VERB_ELEM[v] for v in exo_v if v in VERB_ELEM}
                     # Non-Prismatic: the lock must match the build element. Generic
                     # Prismatic (no engine pinned): the run element is uncommitted, so a
                     # single-element-locked exotic is a gamble; disfavor it in favor of
-                    # an element-agnostic one. A pinned engine opts back in.
-                    if exo_el and elem not in exo_el and (elem!='Prismatic' or not base_verbs):
+                    # an element-agnostic one. A pinned engine opts back in. Exotics that
+                    # also carry a universal verb (Healing, Team Buff, Orbs, etc.) are
+                    # exempt: that value works on any subclass, so the penalty would wrongly
+                    # bury real support/healing exotics (Speaker's Sight, Apotheosis Veil).
+                    if exo_el and not (exo_v & EXO_AGNOSTIC) and elem not in exo_el and (elem!='Prismatic' or not base_verbs):
                         s-=8.0
                 if cat=='Exotic Weapon' and single: s+=(50.0 if it['name'] in DPS_GUNS else 0.0)+2.0*item_score(it,{'Damage':3})
                 return s+1e-6*len(it['name'])
