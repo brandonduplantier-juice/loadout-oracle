@@ -6,8 +6,12 @@ filters the "No mod currently selected" placeholder. It MERGES with the existing
 hand-verified file, never dropping a verified entry.
 
 Conservative: links a slot only when exactly ONE ability of that slot is named.
-Needs env BUNGIE_API_KEY. Run from repo root: python exotic_link2.py
-Then review the printed additions before committing data/exotic_abilities.json.
+Needs env BUNGIE_API_KEY. Run from repo root:
+  python exotic_link2.py                  # refresh exotic_effects.json cache + print
+                                          # discovered links. Does NOT touch
+                                          # exotic_abilities.json (safe for a cache refresh).
+  python exotic_link2.py --write-abilities  # also merge + write exotic_abilities.json,
+                                          # then review the printed additions before committing.
 """
 import json, os, re, sys, urllib.request
 
@@ -86,11 +90,17 @@ def main():
             if len(hits) == 1: links[slot] = hits[0]
         if links: discovered[nm] = links
     merged = dict(discovered); merged.update(existing)   # verified seed always wins
-    json.dump(merged, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     new = {k: v for k, v in discovered.items() if k not in existing}
+    write_abilities = "--write-abilities" in sys.argv
+    if write_abilities:
+        json.dump(merged, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print("exotics with text: %d | no text: %d" % (len(exotics) - no_text, no_text))
-    print("verified (kept): %d | newly discovered: %d | total written: %d" % (len(existing), len(new), len(merged)))
-    print("--- NEW links to review ---")
+    if write_abilities:
+        print("verified (kept): %d | newly discovered: %d | total written: %d -> %s"
+              % (len(existing), len(new), len(merged), OUT))
+    else:
+        print("cache refreshed; %s NOT modified (pass --write-abilities to regenerate it)" % OUT)
+    print("--- discovered links (review before any commit) ---")
     for k, v in sorted(new.items()): print("  %-30s %s" % (k, v))
 
 if __name__ == "__main__":
