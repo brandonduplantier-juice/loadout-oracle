@@ -440,8 +440,7 @@ def mod_econ(name):
     if "Siphon" in name:
         p.add("Orbs")
     if "Surge" in name:
-        p.add("Empower")
-        c.add("Armor Charge")
+        c.add("Armor Charge")  # Surge spends Armor Charge for weapon damage; not the Empower buff
     if name in ("Recuperation", "Better Already"):
         c.add("Orbs")
     if name in ("Absolution", "Innervation", "Invigoration"):
