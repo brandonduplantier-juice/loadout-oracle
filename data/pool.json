@@ -12716,13 +12716,15 @@
 "class": "Any",
 "element": "Any",
 "name": "Revision Zero",
-"goal_tags": "Survivability",
+"goal_tags": "Damage, Utility, Add Clear",
 "flex_type": "-",
 "icon": "/common/destiny2_content/icons/040a104defcc7011b570886e3ec3c73f.jpg",
 "tagw": {
-"Survivability": 1.0
+"Damage": 0.45,
+"Utility": 0.35,
+"Add Clear": 0.2
 },
-"tier": "Survivability",
+"tier": "Damage",
 "prod": [],
 "cons": [
 "Healing"
@@ -13812,13 +13814,14 @@
 "class": "Any",
 "element": "Any",
 "name": "Wish-Ender",
-"goal_tags": "Survivability",
+"goal_tags": "Utility, Damage",
 "flex_type": "-",
 "icon": "/common/destiny2_content/icons/8e5d7a68305a0d1e53ccade9398c7e8b.jpg",
 "tagw": {
-"Survivability": 1.0
+"Utility": 0.55,
+"Damage": 0.45
 },
-"tier": "Survivability",
+"tier": "Utility + Damage",
 "prod": [],
 "cons": [
 "Healing"
