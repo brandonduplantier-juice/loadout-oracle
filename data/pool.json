@@ -1907,17 +1907,16 @@
 "class": "Hunter",
 "element": "Any",
 "name": "Marksman's Dodge",
-"goal_tags": "Team Buff, Mobility",
-"flex_type": "Damage, Survivability, Utility",
+"goal_tags": "Utility, Mobility",
+"flex_type": "Damage, Survivability",
 "icon": "/common/destiny2_content/icons/6148e0135ab295e24888a4b083e4e480.png",
 "tagw": {
-"Team Buff": 0.338,
-"Mobility": 0.282,
-"Damage": 0.127,
-"Survivability": 0.127,
-"Utility": 0.127
+"Utility": 0.42,
+"Mobility": 0.33,
+"Damage": 0.13,
+"Survivability": 0.12
 },
-"tier": "Team Buff + Mobility",
+"tier": "Utility + Mobility",
 "prod": [
 "Damage",
 "Team Buff"
@@ -2028,18 +2027,17 @@
 "class": "Warlock",
 "element": "Any",
 "name": "Phoenix Dive",
-"goal_tags": "Add Clear, Healing, Team Buff",
-"flex_type": "Ability Regen, Survivability, Damage",
+"goal_tags": "Healing, Team Buff, Survivability",
+"flex_type": "Ability Regen, Add Clear",
 "icon": "/common/destiny2_content/icons/344563b4a5bee94734c4499ef83a6ac2.jpg",
 "tagw": {
-"Add Clear": 0.264,
-"Healing": 0.22,
-"Team Buff": 0.22,
-"Ability Regen": 0.099,
-"Survivability": 0.099,
-"Damage": 0.099
+"Healing": 0.34,
+"Team Buff": 0.24,
+"Survivability": 0.22,
+"Ability Regen": 0.1,
+"Add Clear": 0.1
 },
-"tier": "Add Clear hybrid",
+"tier": "Healing",
 "prod": [
 "Ability Energy",
 "Damage",
@@ -7383,17 +7381,17 @@
 "class": "Any",
 "element": "Stasis",
 "name": "Coldsnap Grenade",
-"goal_tags": "Add Clear, Crowd Control",
-"flex_type": "Ability Regen, Survivability, Damage",
+"goal_tags": "Crowd Control, Add Clear",
+"flex_type": "Survivability, Ability Regen, Damage",
 "icon": "/common/destiny2_content/icons/ff53139f18628530891598936e7a8c13.png",
 "tagw": {
-"Add Clear": 0.338,
-"Crowd Control": 0.282,
-"Ability Regen": 0.127,
-"Survivability": 0.127,
-"Damage": 0.127
+"Crowd Control": 0.45,
+"Add Clear": 0.22,
+"Survivability": 0.13,
+"Ability Regen": 0.12,
+"Damage": 0.08
 },
-"tier": "Add Clear + Crowd Control",
+"tier": "Crowd Control",
 "prod": [
 "Ability Energy",
 "Crowd Control",
@@ -7542,14 +7540,15 @@
 "class": "Any",
 "element": "Strand",
 "name": "Shackle Grenade",
-"goal_tags": "Add Clear",
+"goal_tags": "Crowd Control, Add Clear",
 "flex_type": "Ability Regen",
 "icon": "/common/destiny2_content/icons/a2c73298753fdd565a22d3d6712820ab.jpg",
 "tagw": {
-"Add Clear": 0.727,
-"Ability Regen": 0.273
+"Crowd Control": 0.55,
+"Add Clear": 0.27,
+"Ability Regen": 0.18
 },
-"tier": "Add Clear + Ability Regen",
+"tier": "Crowd Control",
 "prod": [
 "Ability Energy",
 "Orbs",
@@ -7719,17 +7718,17 @@
 "class": "Any",
 "element": "Void",
 "name": "Suppressor Grenade",
-"goal_tags": "Add Clear, Crowd Control",
-"flex_type": "Ability Regen, Survivability, Damage",
+"goal_tags": "Crowd Control",
+"flex_type": "Survivability, Add Clear, Ability Regen, Damage",
 "icon": "/common/destiny2_content/icons/17372092d1add4cf52bb4862037b418c.jpg",
 "tagw": {
-"Add Clear": 0.338,
-"Crowd Control": 0.282,
-"Ability Regen": 0.127,
-"Survivability": 0.127,
-"Damage": 0.127
+"Crowd Control": 0.5,
+"Survivability": 0.18,
+"Add Clear": 0.16,
+"Ability Regen": 0.1,
+"Damage": 0.06
 },
-"tier": "Add Clear + Crowd Control",
+"tier": "Crowd Control",
 "prod": [
 "Ability Energy",
 "Crowd Control",
@@ -8036,15 +8035,16 @@
 "class": "Titan",
 "element": "Prismatic",
 "name": "Shackle Grenade",
-"goal_tags": "Add Clear",
+"goal_tags": "Crowd Control, Add Clear",
 "flex_type": "Ability Regen",
 "icon": "/common/destiny2_content/icons/a2c73298753fdd565a22d3d6712820ab.jpg",
 "origin": "Strand",
 "tagw": {
-"Add Clear": 0.727,
-"Ability Regen": 0.273
+"Crowd Control": 0.55,
+"Add Clear": 0.27,
+"Ability Regen": 0.18
 },
-"tier": "Add Clear + Ability Regen",
+"tier": "Crowd Control",
 "prod": [
 "Ability Energy",
 "Orbs",
@@ -8059,18 +8059,18 @@
 "class": "Titan",
 "element": "Prismatic",
 "name": "Suppressor Grenade",
-"goal_tags": "Add Clear, Crowd Control",
-"flex_type": "Ability Regen, Survivability, Damage",
+"goal_tags": "Crowd Control",
+"flex_type": "Survivability, Add Clear, Ability Regen, Damage",
 "icon": "/common/destiny2_content/icons/17372092d1add4cf52bb4862037b418c.jpg",
 "origin": "Void",
 "tagw": {
-"Add Clear": 0.338,
-"Crowd Control": 0.282,
-"Ability Regen": 0.127,
-"Survivability": 0.127,
-"Damage": 0.127
+"Crowd Control": 0.5,
+"Survivability": 0.18,
+"Add Clear": 0.16,
+"Ability Regen": 0.1,
+"Damage": 0.06
 },
-"tier": "Add Clear + Crowd Control",
+"tier": "Crowd Control",
 "prod": [
 "Ability Energy",
 "Crowd Control",
@@ -8112,18 +8112,18 @@
 "class": "Warlock",
 "element": "Prismatic",
 "name": "Coldsnap Grenade",
-"goal_tags": "Add Clear, Crowd Control",
-"flex_type": "Ability Regen, Survivability, Damage",
+"goal_tags": "Crowd Control, Add Clear",
+"flex_type": "Survivability, Ability Regen, Damage",
 "icon": "/common/destiny2_content/icons/ff53139f18628530891598936e7a8c13.png",
 "origin": "Stasis",
 "tagw": {
-"Add Clear": 0.338,
-"Crowd Control": 0.282,
-"Ability Regen": 0.127,
-"Survivability": 0.127,
-"Damage": 0.127
+"Crowd Control": 0.45,
+"Add Clear": 0.22,
+"Survivability": 0.13,
+"Ability Regen": 0.12,
+"Damage": 0.08
 },
-"tier": "Add Clear + Crowd Control",
+"tier": "Crowd Control",
 "prod": [
 "Ability Energy",
 "Crowd Control",
@@ -8271,15 +8271,16 @@
 "class": "Hunter",
 "element": "Arc",
 "name": "Disorienting Blow",
-"goal_tags": "Damage, Crowd Control",
-"flex_type": "Survivability",
+"goal_tags": "Crowd Control, Damage",
+"flex_type": "Ability Regen, Survivability",
 "icon": "/common/destiny2_content/icons/0ac85c928868a34d47dba95dcff2da2a.jpg",
 "tagw": {
-"Damage": 0.453,
-"Crowd Control": 0.377,
-"Survivability": 0.17
+"Crowd Control": 0.45,
+"Damage": 0.3,
+"Ability Regen": 0.15,
+"Survivability": 0.1
 },
-"tier": "Damage + Crowd Control",
+"tier": "Crowd Control",
 "prod": [
 "Amplified",
 "Crowd Control",
@@ -8377,18 +8378,18 @@
 "class": "Hunter",
 "element": "Prismatic",
 "name": "Threaded Spike",
-"goal_tags": "Survivability, Ability Regen, Crowd Control",
-"flex_type": "Damage, Add Clear",
+"goal_tags": "Ability Regen, Damage",
+"flex_type": "Add Clear, Crowd Control, Survivability",
 "icon": "/common/destiny2_content/icons/46620e1f142778a0d429be7a12c39f21.png",
 "origin": "Strand",
 "tagw": {
-"Survivability": 0.293,
-"Ability Regen": 0.244,
-"Crowd Control": 0.244,
-"Damage": 0.11,
-"Add Clear": 0.11
+"Ability Regen": 0.34,
+"Damage": 0.22,
+"Add Clear": 0.18,
+"Crowd Control": 0.16,
+"Survivability": 0.1
 },
-"tier": "Survivability hybrid",
+"tier": "Ability Regen",
 "prod": [
 "Ability Energy",
 "Crowd Control",
@@ -8564,17 +8565,17 @@
 "class": "Hunter",
 "element": "Strand",
 "name": "Threaded Spike",
-"goal_tags": "Survivability, Ability Regen, Crowd Control",
-"flex_type": "Damage, Add Clear",
+"goal_tags": "Ability Regen, Damage",
+"flex_type": "Add Clear, Crowd Control, Survivability",
 "icon": "/common/destiny2_content/icons/46620e1f142778a0d429be7a12c39f21.png",
 "tagw": {
-"Survivability": 0.293,
-"Ability Regen": 0.244,
-"Crowd Control": 0.244,
-"Damage": 0.11,
-"Add Clear": 0.11
+"Ability Regen": 0.34,
+"Damage": 0.22,
+"Add Clear": 0.18,
+"Crowd Control": 0.16,
+"Survivability": 0.1
 },
-"tier": "Survivability hybrid",
+"tier": "Ability Regen",
 "prod": [
 "Ability Energy",
 "Crowd Control",
@@ -8598,16 +8599,16 @@
 "class": "Hunter",
 "element": "Void",
 "name": "Phantom Surge",
-"goal_tags": "Survivability, Ability Regen",
-"flex_type": "Damage, Add Clear",
+"goal_tags": "Damage, Survivability, Ability Regen",
+"flex_type": "Add Clear",
 "icon": "/common/destiny2_content/icons/5f6ac1ed35c8bc852230121ea67a07d7.jpg",
 "tagw": {
-"Survivability": 0.387,
-"Ability Regen": 0.323,
-"Damage": 0.145,
-"Add Clear": 0.145
+"Damage": 0.37,
+"Survivability": 0.26,
+"Ability Regen": 0.22,
+"Add Clear": 0.15
 },
-"tier": "Survivability + Ability Regen",
+"tier": "Damage",
 "prod": [
 "Ability Energy",
 "Damage",
@@ -8692,19 +8693,17 @@
 "class": "Titan",
 "element": "Arc",
 "name": "Seismic Strike",
-"goal_tags": "Ability Regen, Crowd Control, Mobility",
-"flex_type": "Damage, Add Clear, Survivability, Utility",
+"goal_tags": "Crowd Control, Damage",
+"flex_type": "Mobility, Ability Regen, Add Clear",
 "icon": "/common/destiny2_content/icons/ef72ed2a57e2cf3405e72b93f2218e50.jpg",
 "tagw": {
-"Ability Regen": 0.24,
-"Crowd Control": 0.2,
-"Mobility": 0.2,
-"Damage": 0.09,
-"Add Clear": 0.09,
-"Survivability": 0.09,
-"Utility": 0.09
+"Crowd Control": 0.4,
+"Damage": 0.22,
+"Mobility": 0.16,
+"Ability Regen": 0.14,
+"Add Clear": 0.08
 },
-"tier": "Ability Regen",
+"tier": "Crowd Control",
 "prod": [
 "Ability Energy",
 "Amplified",
@@ -9205,19 +9204,18 @@
 "class": "Warlock",
 "element": "Prismatic",
 "name": "Penumbral Blast",
-"goal_tags": "Add Clear, Crowd Control, Team Buff",
+"goal_tags": "Crowd Control, Add Clear",
 "flex_type": "Ability Regen, Survivability, Damage",
 "icon": "/common/destiny2_content/icons/f77faacb093918106f28b2b49e168264.png",
 "origin": "Stasis",
 "tagw": {
-"Add Clear": 0.264,
-"Crowd Control": 0.22,
-"Team Buff": 0.22,
-"Ability Regen": 0.099,
-"Survivability": 0.099,
-"Damage": 0.099
+"Crowd Control": 0.48,
+"Add Clear": 0.22,
+"Ability Regen": 0.12,
+"Survivability": 0.1,
+"Damage": 0.08
 },
-"tier": "Add Clear hybrid",
+"tier": "Crowd Control",
 "prod": [
 "Ability Energy",
 "Crowd Control",
@@ -9310,18 +9308,17 @@
 "class": "Warlock",
 "element": "Stasis",
 "name": "Penumbral Blast",
-"goal_tags": "Add Clear, Crowd Control, Team Buff",
+"goal_tags": "Crowd Control, Add Clear",
 "flex_type": "Ability Regen, Survivability, Damage",
 "icon": "/common/destiny2_content/icons/f77faacb093918106f28b2b49e168264.png",
 "tagw": {
-"Add Clear": 0.264,
-"Crowd Control": 0.22,
-"Team Buff": 0.22,
-"Ability Regen": 0.099,
-"Survivability": 0.099,
-"Damage": 0.099
+"Crowd Control": 0.48,
+"Add Clear": 0.22,
+"Ability Regen": 0.12,
+"Survivability": 0.1,
+"Damage": 0.08
 },
-"tier": "Add Clear hybrid",
+"tier": "Crowd Control",
 "prod": [
 "Ability Energy",
 "Crowd Control",
@@ -9765,18 +9762,17 @@
 "class": "Hunter",
 "element": "Prismatic",
 "name": "Silkstrike",
-"goal_tags": "Survivability, Team Buff, Mobility",
-"flex_type": "Damage, Utility",
+"goal_tags": "Damage, Add Clear",
+"flex_type": "Mobility, Survivability",
 "icon": "/common/destiny2_content/icons/3da7e8684b09600e90ea5c16f1edebe0.png",
 "origin": "Strand",
 "tagw": {
-"Survivability": 0.293,
-"Team Buff": 0.244,
-"Mobility": 0.244,
-"Damage": 0.11,
-"Utility": 0.11
+"Damage": 0.48,
+"Add Clear": 0.24,
+"Mobility": 0.18,
+"Survivability": 0.1
 },
-"tier": "Survivability hybrid",
+"tier": "Damage",
 "prod": [
 "Damage",
 "Orbs",
@@ -9935,17 +9931,16 @@
 "class": "Hunter",
 "element": "Strand",
 "name": "Silkstrike",
-"goal_tags": "Survivability, Team Buff, Mobility",
-"flex_type": "Damage, Utility",
+"goal_tags": "Damage, Add Clear",
+"flex_type": "Mobility, Survivability",
 "icon": "/common/destiny2_content/icons/3da7e8684b09600e90ea5c16f1edebe0.png",
 "tagw": {
-"Survivability": 0.293,
-"Team Buff": 0.244,
-"Mobility": 0.244,
-"Damage": 0.11,
-"Utility": 0.11
+"Damage": 0.48,
+"Add Clear": 0.24,
+"Mobility": 0.18,
+"Survivability": 0.1
 },
-"tier": "Survivability hybrid",
+"tier": "Damage",
 "prod": [
 "Damage",
 "Orbs",
@@ -10034,14 +10029,16 @@
 "class": "Hunter",
 "element": "Void",
 "name": "Spectral Blades",
-"goal_tags": "Survivability, Utility",
-"flex_type": "-",
+"goal_tags": "Damage, Survivability",
+"flex_type": "Add Clear, Crowd Control",
 "icon": "/common/destiny2_content/icons/1fbfacd5dfe847c5cd0262c5616653ff.png",
 "tagw": {
-"Survivability": 0.545,
-"Utility": 0.455
+"Damage": 0.42,
+"Survivability": 0.24,
+"Add Clear": 0.18,
+"Crowd Control": 0.16
 },
-"tier": "Survivability + Utility",
+"tier": "Damage",
 "prod": [
 "Damage",
 "Devour",
@@ -10061,15 +10058,16 @@
 "class": "Titan",
 "element": "Arc",
 "name": "Fists of Havoc",
-"goal_tags": "Survivability, Crowd Control",
-"flex_type": "Damage",
+"goal_tags": "Damage, Crowd Control, Add Clear",
+"flex_type": "Survivability",
 "icon": "/common/destiny2_content/icons/5bc4f4029b38fd41d0232460b4295600.png",
 "tagw": {
-"Survivability": 0.453,
-"Crowd Control": 0.377,
-"Damage": 0.17
+"Damage": 0.45,
+"Crowd Control": 0.25,
+"Add Clear": 0.2,
+"Survivability": 0.1
 },
-"tier": "Survivability + Crowd Control",
+"tier": "Damage",
 "prod": [
 "Amplified",
 "Crowd Control",
