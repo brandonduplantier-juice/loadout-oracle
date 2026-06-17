@@ -3411,11 +3411,13 @@
 "class": "Titan",
 "element": "Any",
 "name": "Hazardous Propulsion",
-"goal_tags": "Damage",
-"flex_type": "-",
+"goal_tags": "Damage, Add Clear, Ability Regen",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/54ff2f91d443bac8714037a2d37c77d7.jpg",
 "tagw": {
-"Damage": 1.0
+"Damage": 0.5,
+"Add Clear": 0.3,
+"Ability Regen": 0.2
 },
 "tier": "Damage",
 "prod": [
@@ -3990,13 +3992,14 @@
 "class": "Titan",
 "element": "Any",
 "name": "Wormgod Caress",
-"goal_tags": "Damage",
-"flex_type": "-",
+"goal_tags": "Damage, Add Clear",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/3baea5888219c87acd58d177ae70f2c2.jpg",
 "tagw": {
-"Damage": 1.0
+"Damage": 0.72,
+"Add Clear": 0.28
 },
-"tier": "Damage",
+"tier": "Damage + Add Clear",
 "prod": [
 "Damage"
 ],
@@ -4106,13 +4109,16 @@
 "class": "Warlock",
 "element": "Any",
 "name": "Briarbinds",
-"goal_tags": "Damage",
-"flex_type": "-",
+"goal_tags": "Add Clear, Damage, Ability Regen",
+"flex_type": "Survivability",
 "icon": "/common/destiny2_content/icons/40c71ab1a41498619b8e76def4be6dc3.jpg",
 "tagw": {
-"Damage": 1.0
+"Add Clear": 0.35,
+"Damage": 0.3,
+"Ability Regen": 0.2,
+"Survivability": 0.15
 },
-"tier": "Damage",
+"tier": "Add Clear + Damage",
 "prod": [
 "Damage"
 ],
@@ -4964,13 +4970,14 @@
 "class": "Warlock",
 "element": "Any",
 "name": "Winter's Guile",
-"goal_tags": "Damage",
-"flex_type": "-",
+"goal_tags": "Damage, Ability Regen",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/0c586f183b821e16dd9b696c8e871d2b.jpg",
 "tagw": {
-"Damage": 1.0
+"Damage": 0.7,
+"Ability Regen": 0.3
 },
-"tier": "Damage",
+"tier": "Damage + Ability Regen",
 "prod": [
 "Damage"
 ],
@@ -11178,13 +11185,14 @@
 "class": "Any",
 "element": "Any",
 "name": "Choir of One",
-"goal_tags": "Damage",
-"flex_type": "-",
+"goal_tags": "Damage, Utility",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/80cc90861aa83c63de2273457a6c9345.jpg",
 "tagw": {
-"Damage": 1.0
+"Damage": 0.8,
+"Utility": 0.2
 },
-"tier": "Damage",
+"tier": "Damage + Utility",
 "prod": [
 "Damage",
 "Orbs"
@@ -11221,13 +11229,14 @@
 "class": "Any",
 "element": "Any",
 "name": "Coldheart",
-"goal_tags": "Damage",
-"flex_type": "-",
+"goal_tags": "Damage, Add Clear",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/2a2a95b819312fc6fef728911cfd6fa2.jpg",
 "tagw": {
-"Damage": 1.0
+"Damage": 0.8,
+"Add Clear": 0.2
 },
-"tier": "Damage",
+"tier": "Damage + Add Clear",
 "prod": [
 "Damage",
 "Orbs"
@@ -11957,12 +11966,13 @@
 "element": "Any",
 "name": "Hawkmoon",
 "goal_tags": "Damage",
-"flex_type": "-",
+"flex_type": "Utility",
 "icon": "/common/destiny2_content/icons/cef1290d58a2d94d1437e1e569fa7996.jpg",
 "tagw": {
-"Damage": 1.0
+"Damage": 0.85,
+"Utility": 0.15
 },
-"tier": "Damage",
+"tier": "Damage + Utility",
 "prod": [
 "Damage",
 "Orbs"
@@ -12082,12 +12092,13 @@
 "element": "Any",
 "name": "Izanagi's Burden",
 "goal_tags": "Damage",
-"flex_type": "-",
+"flex_type": "Utility",
 "icon": "/common/destiny2_content/icons/8763caf9bfb147a41f3e34ec7eaf876b.jpg",
 "tagw": {
-"Damage": 1.0
+"Damage": 0.85,
+"Utility": 0.15
 },
-"tier": "Damage",
+"tier": "Damage + Utility",
 "prod": [
 "Damage",
 "Orbs"
@@ -12235,13 +12246,14 @@
 "class": "Any",
 "element": "Any",
 "name": "Lord of Wolves",
-"goal_tags": "Damage",
-"flex_type": "-",
+"goal_tags": "Damage, Add Clear",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/6bd65ae8981e4cac3c00825abedd3fbb.jpg",
 "tagw": {
-"Damage": 1.0
+"Damage": 0.6,
+"Add Clear": 0.4
 },
-"tier": "Damage",
+"tier": "Damage + Add Clear",
 "prod": [
 "Damage",
 "Orbs"
@@ -12490,13 +12502,14 @@
 "class": "Any",
 "element": "Any",
 "name": "One Thousand Voices",
-"goal_tags": "Damage",
-"flex_type": "-",
+"goal_tags": "Damage, Add Clear",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/51c53df606cca474dce3cadbf7d5ce28.jpg",
 "tagw": {
-"Damage": 1.0
+"Damage": 0.7,
+"Add Clear": 0.3
 },
-"tier": "Damage",
+"tier": "Damage + Add Clear",
 "prod": [
 "Damage",
 "Orbs"
@@ -12888,13 +12901,14 @@
 "class": "Any",
 "element": "Any",
 "name": "Sleeper Simulant",
-"goal_tags": "Damage",
-"flex_type": "-",
+"goal_tags": "Damage, Add Clear",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/af232d6f94c12a4cf1080e659264294f.jpg",
 "tagw": {
-"Damage": 1.0
+"Damage": 0.7,
+"Add Clear": 0.3
 },
-"tier": "Damage",
+"tier": "Damage + Add Clear",
 "prod": [
 "Damage",
 "Orbs"
@@ -13073,13 +13087,14 @@
 "class": "Any",
 "element": "Any",
 "name": "The Chaperone",
-"goal_tags": "Damage",
-"flex_type": "-",
+"goal_tags": "Damage, Utility",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/1d387ba81462f8f5abb63b4492b10dbe.jpg",
 "tagw": {
-"Damage": 1.0
+"Damage": 0.8,
+"Utility": 0.2
 },
-"tier": "Damage",
+"tier": "Damage + Utility",
 "prod": [
 "Damage",
 "Orbs"
@@ -13401,13 +13416,14 @@
 "class": "Any",
 "element": "Any",
 "name": "Tommy's Matchbook",
-"goal_tags": "Damage",
-"flex_type": "-",
+"goal_tags": "Damage, Add Clear",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/251630147cd942ade9414781e96237ec.jpg",
 "tagw": {
-"Damage": 1.0
+"Damage": 0.75,
+"Add Clear": 0.25
 },
-"tier": "Damage",
+"tier": "Damage + Add Clear",
 "prod": [
 "Damage",
 "Orbs"
@@ -13683,13 +13699,14 @@
 "class": "Any",
 "element": "Any",
 "name": "Wavesplitter",
-"goal_tags": "Damage",
-"flex_type": "-",
+"goal_tags": "Damage, Add Clear",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/ba5b1654cbc06d0ce057f5d99b315b7e.jpg",
 "tagw": {
-"Damage": 1.0
+"Damage": 0.8,
+"Add Clear": 0.2
 },
-"tier": "Damage",
+"tier": "Damage + Add Clear",
 "prod": [
 "Damage",
 "Orbs"
@@ -13727,12 +13744,13 @@
 "element": "Any",
 "name": "Whisper of the Worm",
 "goal_tags": "Damage",
-"flex_type": "-",
+"flex_type": "Utility",
 "icon": "/common/destiny2_content/icons/e47c31826843f6fd0aa863eac6fd093e.jpg",
 "tagw": {
-"Damage": 1.0
+"Damage": 0.85,
+"Utility": 0.15
 },
-"tier": "Damage",
+"tier": "Damage + Utility",
 "prod": [
 "Damage",
 "Orbs"

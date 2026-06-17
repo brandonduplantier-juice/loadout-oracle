@@ -1882,7 +1882,7 @@ def goal_weights2(a):
     w={}
     for k,m in (('goal',3),('goal2',2)):
         for tag,v in GOALW.get(a.get(k,'Any'),[]): w[tag]=w.get(tag,0)+v*m
-    for tag,v in ACTIVITY_TAGS.get(a.get('activity','Any'),[]): w[tag]=w.get(tag,0)+v
+    for tag,v in ACTIVITY_TAGS.get(a.get('activity','Any'),[]): w[tag]=w.get(tag,0)+v*0.5  # activity is a secondary nudge, not a rival to the explicit goal
     return w
 
 def engine_contribution(it,verbs,produced,consumed):
