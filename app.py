@@ -573,6 +573,15 @@ def recommend_weapons(elem, a, build):
                 if w.get("slot") == slot and w.get("perks")]
         if not pool:
             continue
+        # The build drives one element's Surge and Siphon, so the Kinetic and Energy
+        # picks should match it when a matching weapon exists in that slot. Power stays
+        # damage-first. Prismatic runs all elements, so it is exempt. Falls back to the
+        # full pool when no element-matched weapon exists in the slot (e.g. an Arc build
+        # has no Arc weapon in the Kinetic slot).
+        if slot != "Power" and elem not in ("Prismatic", "Any", ""):
+            matched = [w for w in pool if w.get("element") == elem]
+            if matched:
+                pool = matched
         best = max(pool, key=lambda w: _weapon_score(w, pref_s, elem, eb)[0])
         _, driving = _weapon_score(best, pref_s, elem, eb)
         out[slot] = {"name": best["name"], "hash": best["hash"],
@@ -787,8 +796,16 @@ def recommend_armor_loadout(elem, a, build=None, artifact=None):
     if build and build.get("Exotic Armor"):
         exo_name = build["Exotic Armor"][0]["item"].get("name", "")
     forced = EXOTIC_OVERRIDES.get(exo_name, {})
-    # Surge has no Harmonic version, so it takes the subclass element directly.
+    # Surge has no Harmonic version, so it takes the subclass element directly. On
+    # Prismatic there is no single element, so anchor the Surge to the build's damage
+    # weapon (the exotic weapon) so the mod resolves and transfers to DIM.
     surge_el = elem if elem not in ("Prismatic", "Any", "") else ""
+    if not surge_el and build:
+        for _ewn in _slot_names(build.get("Exotic Weapon")):
+            _we = (WEAPON_PERKS.get(_ewn) or {}).get("element", "")
+            if _we in ("Arc", "Solar", "Void", "Stasis", "Strand"):
+                surge_el = _we
+            break
 
     def eff_name(m):
         # The build assumes weapons match the subclass, so for any mod that has a
@@ -817,6 +834,10 @@ def recommend_armor_loadout(elem, a, build=None, artifact=None):
 
         def relevant(m):
             name = eff_name(m)
+            # never offer an element mod we cannot resolve to a real hash (e.g. a
+            # Surge with no element on Prismatic); it would silently drop from DIM.
+            if m["elem"] and name not in ARMOR_MOD_HASHES:
+                return False
             mp, mc = mod_econ(name)
             return (m["elem"] or bool(set(m["tags"]) & set(pref))
                     or bool((mc & build_prod) or (mp & build_cons)))
@@ -850,6 +871,10 @@ def recommend_armor_loadout(elem, a, build=None, artifact=None):
                     "cost": v[0], "desc": v[1], "harmonic": v[3], "base_cost": v[4]}
                    for n, v in counts.items() if v[2] > 0]
         note = _slot_note(elem, [m["mod"] for m in modlist])
+        if any(m["harmonic"] for m in modlist):
+            note = ((note + "; ") if note else "") + (
+                "Assumes " + elem + " armor: the harmonic discount on these mods only "
+                "applies on element-matched armor, so off-element pieces will not fit them all.")
         if forced.get(slot) and forced.get("note"):
             note = forced["note"] + (("; " + note) if note else "")
         out[slot] = {"mods": modlist, "used": 10 - budget, "note": note}
@@ -1286,9 +1311,13 @@ def recommend_weapon_synergy(elem, a, build=None, artifact=None):
     elif not dps:
         mods.append({"mod": "Counterbalance Stock", "why": "general recoil control"})
 
-    primary = ("A " + we + " Primary so its kills feed your "
-               + ("" if we == "your subclass element" else we + " ")
-               + "Siphon orbs and stack Surge.")
+    if we == "your subclass element":
+        primary = ("A Primary in any of your Prismatic damage types so its kills "
+                   "feed your Siphon orbs and stack Surge.")
+    else:
+        primary = (("An " if we[:1] in "AEIOU" else "A ") + we
+                   + " Primary so its kills feed your " + we
+                   + " Siphon orbs and stack Surge.")
     heavy = ("Your exotic as the damage weapon, fed by Backup Mag."
              if has_exotic_wpn else
              "A Special or Heavy in your damage element for the damage phase.")
