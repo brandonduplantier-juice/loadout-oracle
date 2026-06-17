@@ -1576,7 +1576,7 @@ def step1():
         "build_exotic_armor": f.get("build_exotic_armor", "Any"),
         "build_exotic_weapon": f.get("build_exotic_weapon", "Any"),
     }
-    return redirect(url_for("focus"))
+    return redirect(url_for("synergy"))
 
 
 @app.route("/focus", methods=["GET", "POST"])
@@ -2069,7 +2069,7 @@ def _normalize_answers(a):
         a['team_role'] = 'Support' if 'Support' in (g, g2) else ('DPS' if 'Single-target' in (g, g2) else 'Flex')
     ps = a.get('playstyle', 'Any')
     if a.get('ability_focus', 'Any') in ('Any', None):
-        a['ability_focus'] = 'High' if ps == 'Ability' else 'Any'
+        a['ability_focus'] = 'High' if ps in ('Ability', 'Grenade', 'Melee') else 'Any'
     if a.get('super_focus', 'Any') in ('Any', None):
         a['super_focus'] = 'High' if ps == 'Super' else 'Any'
     if a.get('weapon_focus', 'Any') in ('Any', None):
