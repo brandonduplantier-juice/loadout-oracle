@@ -1,5 +1,30 @@
 __pycache__/
 *.pyc
+*.egg-info/
 .env
+*.key
 .venv/
 venv/
+
+# generated manifest caches (large, derived, rebuilt on demand)
+data/exotic_effects.json
+data/manifest_descriptions.json
+data/manifest_effects.json
+
+# diagnostics, probes, one-off fixes, experiments (throwaway)
+*_diag.py
+*_diag.txt
+add_*.py
+audit_tags*.py
+tag_audit_report.md
+_patch_app.py
+manifest_cachecheck.py
+profile_artifact_test.py
+capture_artifact.py
+fix_artifact.py
+find_stasis_aspects.py
+snap_ed.py
+compare_ed.py
+build_ed_artifact.py
+bungie_probe_aspects.py
+bungie_fix_mod_hashes.py
