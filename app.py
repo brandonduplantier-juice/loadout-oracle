@@ -164,7 +164,7 @@ monitoring.install(app)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.19"
+APP_VERSION = "0.9.20"
 BUILD_DATE = "2026-06-15"
 
 
@@ -811,7 +811,9 @@ def recommend_armor_loadout(elem, a, build=None, artifact=None):
     """Build-aware mod selection. Reads the assembled build's fragments, aspects,
     exotics, super, grenade and melee (their produced and consumed verbs and
     dominant tags), the artifact, and weapon focus, then picks mods that close
-    the build's loops. Distinct mods only; element anchors stack; sits under 10."""
+    the build's loops. Fills at most the 3 piece-specific slots, synergy-driven;
+    never assigns the general stat slot (left open for the user to set); element
+    anchors may stack across those 3 slots; stays under the 10 energy budget."""
     pref = {}
     for t in _build_tags(a):
         pref[t] = pref.get(t, 0) + 1.0
@@ -881,16 +883,24 @@ def recommend_armor_loadout(elem, a, build=None, artifact=None):
 
         ranked = sorted(cands, key=lambda m: (-score(m), eff_cost(m)))
         budget = 10
+        # Each armor piece has 1 general (stat) slot + 3 piece-specific slots. We never
+        # assign the general slot: it only adjusts stats (mobility, grenade, super, etc.)
+        # and the user sets it themselves. We fill at most the 3 specific slots, driven by
+        # synergy, and leave any leftover energy free for the user's own general mod. Each
+        # mod copy occupies one slot, so a stacked mod (Surge x3) uses three of the three.
+        SPECIFIC_SLOTS = 3
         counts = {}  # name -> [cost, desc, count, harmonic, base_cost]
+        def slots_used():
+            return sum(c[2] for c in counts.values())
         # pre-seed mods forced by a specific exotic, before the greedy fill
         for fname in forced.get(slot, []):
             m = next((x for x in cands if eff_name(x) == fname), None)
-            if m and eff_cost(m) <= budget:
+            if m and eff_cost(m) <= budget and slots_used() < SPECIFIC_SLOTS:
                 counts.setdefault(fname, [eff_cost(m), m["desc"], 0,
                                           m.get("harmonic", False), m["cost"]])[2] += 1
                 budget -= eff_cost(m)
         progress = True
-        while budget > 0 and progress:
+        while budget > 0 and slots_used() < SPECIFIC_SLOTS and progress:
             progress = False
             for m in ranked:
                 if not relevant(m):
