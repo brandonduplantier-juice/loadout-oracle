@@ -2099,15 +2099,15 @@
 "class": "Hunter",
 "element": "Any",
 "name": "Balance of Power",
-"goal_tags": "Add Clear, Utility",
-"flex_type": "Ability Regen",
+"goal_tags": "Add Clear, Survivability, Utility",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/4c9ab280a38a769fb4b3c504dadcfa78.jpg",
 "tagw": {
-"Add Clear": 0.453,
-"Utility": 0.377,
-"Ability Regen": 0.17
+"Add Clear": 0.4,
+"Survivability": 0.32,
+"Utility": 0.28
 },
-"tier": "Add Clear + Utility",
+"tier": "Add Clear + Survivability",
 "prod": [
 "Ability Energy"
 ],
@@ -2140,15 +2140,15 @@
 "class": "Hunter",
 "element": "Any",
 "name": "Caliban's Hand",
-"goal_tags": "Add Clear, Ability Regen",
-"flex_type": "Damage",
+"goal_tags": "Damage, Ability Regen, Add Clear",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/b963098bb34446a4119fccf6e3cdbfe8.jpg",
 "tagw": {
-"Add Clear": 0.453,
-"Ability Regen": 0.377,
-"Damage": 0.17
+"Damage": 0.42,
+"Ability Regen": 0.38,
+"Add Clear": 0.2
 },
-"tier": "Add Clear + Ability Regen",
+"tier": "Damage + Ability Regen",
 "prod": [
 "Ability Energy",
 "Damage"
@@ -2204,13 +2204,14 @@
 "class": "Hunter",
 "element": "Any",
 "name": "Foetracer",
-"goal_tags": "Damage",
-"flex_type": "-",
+"goal_tags": "Damage, Ability Regen",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/5f9662bd35f3a32bedde179474ee8d07.jpg",
 "tagw": {
-"Damage": 1.0
+"Damage": 0.6,
+"Ability Regen": 0.4
 },
-"tier": "Damage",
+"tier": "Damage + Ability Regen",
 "prod": [
 "Damage"
 ],
@@ -2268,13 +2269,14 @@
 "class": "Hunter",
 "element": "Any",
 "name": "Gemini Jester",
-"goal_tags": "Utility",
-"flex_type": "-",
+"goal_tags": "Crowd Control, Utility",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/9b9cf3c53c26c364532bfda3dd372827.jpg",
 "tagw": {
-"Utility": 1.0
+"Crowd Control": 0.55,
+"Utility": 0.45
 },
-"tier": "Utility",
+"tier": "Crowd Control + Utility",
 "prod": [],
 "cons": []
 },
@@ -2283,15 +2285,15 @@
 "class": "Hunter",
 "element": "Any",
 "name": "Gifted Conviction",
-"goal_tags": "Add Clear, Survivability",
-"flex_type": "Ability Regen",
+"goal_tags": "Damage, Survivability, Add Clear",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/4365fd49261fb81d069d0db10acb9fd4.jpg",
 "tagw": {
-"Add Clear": 0.453,
-"Survivability": 0.377,
-"Ability Regen": 0.17
+"Damage": 0.4,
+"Survivability": 0.35,
+"Add Clear": 0.25
 },
-"tier": "Add Clear + Survivability",
+"tier": "Damage + Survivability",
 "prod": [
 "Ability Energy"
 ],
@@ -2329,16 +2331,15 @@
 "class": "Hunter",
 "element": "Any",
 "name": "Gwisin Vest",
-"goal_tags": "Damage, Ability Regen, Utility",
-"flex_type": "Add Clear",
+"goal_tags": "Ability Regen, Survivability, Crowd Control",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/ae4ee7545ea763ea935f6386d8743361.jpg",
 "tagw": {
-"Damage": 0.329,
-"Ability Regen": 0.274,
-"Utility": 0.274,
-"Add Clear": 0.123
+"Ability Regen": 0.4,
+"Survivability": 0.3,
+"Crowd Control": 0.3
 },
-"tier": "Damage hybrid",
+"tier": "Ability Regen",
 "prod": [
 "Ability Energy",
 "Damage"
@@ -2376,15 +2377,15 @@
 "class": "Hunter",
 "element": "Any",
 "name": "Khepri's Sting",
-"goal_tags": "Damage, Ability Regen",
-"flex_type": "Add Clear",
+"goal_tags": "Crowd Control, Ability Regen, Add Clear",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/93792e77d9b88ccf77788bdd9b25b16c.jpg",
 "tagw": {
-"Damage": 0.453,
-"Ability Regen": 0.377,
-"Add Clear": 0.17
+"Crowd Control": 0.45,
+"Ability Regen": 0.35,
+"Add Clear": 0.2
 },
-"tier": "Damage + Ability Regen",
+"tier": "Crowd Control",
 "prod": [
 "Ability Energy",
 "Damage"
@@ -2480,17 +2481,15 @@
 "class": "Hunter",
 "element": "Any",
 "name": "Mask of Bakris",
-"goal_tags": "Damage, Ability Regen, Mobility",
-"flex_type": "Add Clear, Utility",
+"goal_tags": "Damage, Mobility, Survivability",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/d2fdd193c4536cbc9cdaa82e24b7125a.jpg",
 "tagw": {
-"Damage": 0.293,
-"Ability Regen": 0.244,
-"Mobility": 0.244,
-"Add Clear": 0.11,
-"Utility": 0.11
+"Damage": 0.45,
+"Mobility": 0.28,
+"Survivability": 0.27
 },
-"tier": "Damage hybrid",
+"tier": "Damage",
 "prod": [
 "Ability Energy",
 "Damage"
@@ -2504,17 +2503,15 @@
 "class": "Hunter",
 "element": "Any",
 "name": "Mask of Fealty",
-"goal_tags": "Add Clear, Ability Regen, Crowd Control",
-"flex_type": "Damage, Survivability",
+"goal_tags": "Crowd Control, Add Clear, Ability Regen",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/75cd0f60c0c568b2a9071e05a76a6f2f.jpg",
 "tagw": {
-"Add Clear": 0.293,
-"Ability Regen": 0.244,
-"Crowd Control": 0.244,
-"Damage": 0.11,
-"Survivability": 0.11
+"Crowd Control": 0.36,
+"Add Clear": 0.34,
+"Ability Regen": 0.3
 },
-"tier": "Add Clear hybrid",
+"tier": "Crowd Control hybrid",
 "prod": [
 "Ability Energy",
 "Crowd Control",
@@ -2546,15 +2543,15 @@
 "class": "Hunter",
 "element": "Any",
 "name": "Moirai",
-"goal_tags": "Add Clear, Ability Regen",
-"flex_type": "Damage",
+"goal_tags": "Ability Regen, Add Clear, Damage",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/eb2274e11a096c4c050f1be451e63391.jpg",
 "tagw": {
-"Add Clear": 0.453,
-"Ability Regen": 0.377,
-"Damage": 0.17
+"Ability Regen": 0.4,
+"Add Clear": 0.35,
+"Damage": 0.25
 },
-"tier": "Add Clear + Ability Regen",
+"tier": "Ability Regen + Add Clear",
 "prod": [
 "Ability Energy",
 "Damage"
@@ -2781,15 +2778,15 @@
 "class": "Hunter",
 "element": "Any",
 "name": "Shards of Galanor",
-"goal_tags": "Add Clear, Ability Regen",
-"flex_type": "Damage",
+"goal_tags": "Ability Regen, Damage, Add Clear",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/e266ef647863fafb1541890bcfa4a6c7.jpg",
 "tagw": {
-"Add Clear": 0.453,
-"Ability Regen": 0.377,
-"Damage": 0.17
+"Ability Regen": 0.45,
+"Damage": 0.3,
+"Add Clear": 0.25
 },
-"tier": "Add Clear + Ability Regen",
+"tier": "Ability Regen",
 "prod": [
 "Ability Energy",
 "Damage"
@@ -2874,15 +2871,15 @@
 "class": "Hunter",
 "element": "Any",
 "name": "Star-Eater Scales",
-"goal_tags": "Damage, Survivability, Healing",
-"flex_type": "-",
+"goal_tags": "Damage, Healing, Ability Regen",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/5b7f647435bbe18d2c83d3691758184c.jpg",
 "tagw": {
-"Damage": 0.375,
-"Survivability": 0.312,
-"Healing": 0.312
+"Damage": 0.45,
+"Healing": 0.28,
+"Ability Regen": 0.27
 },
-"tier": "Damage hybrid",
+"tier": "Damage",
 "prod": [
 "Damage",
 "Healing"
@@ -2897,17 +2894,15 @@
 "class": "Hunter",
 "element": "Any",
 "name": "The Bombardiers",
-"goal_tags": "Add Clear, Crowd Control",
-"flex_type": "Ability Regen, Survivability, Damage",
+"goal_tags": "Crowd Control, Add Clear, Mobility",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/be46f8bd0b86a84be7f77941a3e055fb.jpg",
 "tagw": {
-"Add Clear": 0.338,
-"Crowd Control": 0.282,
-"Ability Regen": 0.127,
-"Survivability": 0.127,
-"Damage": 0.127
+"Crowd Control": 0.4,
+"Add Clear": 0.35,
+"Mobility": 0.25
 },
-"tier": "Add Clear + Crowd Control",
+"tier": "Crowd Control + Add Clear",
 "prod": [
 "Ability Energy",
 "Crowd Control",
@@ -2963,15 +2958,15 @@
 "class": "Hunter",
 "element": "Any",
 "name": "Triton Vice",
-"goal_tags": "Add Clear, Utility",
-"flex_type": "Ability Regen",
+"goal_tags": "Utility, Damage, Add Clear",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/8f4613a7a4d1d0cac4cddb50f81d965b.jpg",
 "tagw": {
-"Add Clear": 0.453,
-"Utility": 0.377,
-"Ability Regen": 0.17
+"Utility": 0.4,
+"Damage": 0.35,
+"Add Clear": 0.25
 },
-"tier": "Add Clear + Utility",
+"tier": "Utility + Damage",
 "prod": [
 "Ability Energy"
 ],
@@ -2982,18 +2977,15 @@
 "class": "Hunter",
 "element": "Any",
 "name": "Wormhusk Crown",
-"goal_tags": "Add Clear, Healing, Team Buff",
-"flex_type": "Ability Regen, Survivability, Damage",
+"goal_tags": "Healing, Damage, Team Buff",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/791e1be2a37d4deff98d660f2d90c158.jpg",
 "tagw": {
-"Add Clear": 0.264,
-"Healing": 0.22,
-"Team Buff": 0.22,
-"Ability Regen": 0.099,
-"Survivability": 0.099,
-"Damage": 0.099
+"Healing": 0.4,
+"Damage": 0.32,
+"Team Buff": 0.28
 },
-"tier": "Add Clear hybrid",
+"tier": "Healing + Damage",
 "prod": [
 "Ability Energy",
 "Damage",
@@ -3143,15 +3135,15 @@
 "class": "Titan",
 "element": "Any",
 "name": "Arbor Warden",
-"goal_tags": "Add Clear, Ability Regen",
-"flex_type": "Damage",
+"goal_tags": "Survivability, Add Clear, Ability Regen",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/387f53c382d5e3ef7156e2149f79a57b.jpg",
 "tagw": {
-"Add Clear": 0.453,
-"Ability Regen": 0.377,
-"Damage": 0.17
+"Survivability": 0.45,
+"Add Clear": 0.28,
+"Ability Regen": 0.27
 },
-"tier": "Add Clear + Ability Regen",
+"tier": "Survivability",
 "prod": [
 "Ability Energy",
 "Damage"
@@ -3214,17 +3206,16 @@
 "class": "Titan",
 "element": "Any",
 "name": "Blastwave Striders",
-"goal_tags": "Add Clear, Survivability, Crowd Control",
-"flex_type": "Ability Regen, Damage",
+"goal_tags": "Crowd Control, Damage, Survivability",
+"flex_type": "Mobility",
 "icon": "/common/destiny2_content/icons/2867edb179061ac96f92d4eed1ceffdb.jpg",
 "tagw": {
-"Add Clear": 0.293,
-"Survivability": 0.244,
-"Crowd Control": 0.244,
-"Ability Regen": 0.11,
-"Damage": 0.11
+"Crowd Control": 0.35,
+"Damage": 0.3,
+"Survivability": 0.2,
+"Mobility": 0.15
 },
-"tier": "Add Clear hybrid",
+"tier": "Crowd Control + Damage",
 "prod": [
 "Ability Energy",
 "Crowd Control",
@@ -3336,16 +3327,15 @@
 "class": "Titan",
 "element": "Any",
 "name": "Doom Fang Pauldron",
-"goal_tags": "Survivability, Ability Regen",
-"flex_type": "Damage, Add Clear",
+"goal_tags": "Damage, Ability Regen, Survivability",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/5978e308b12744fbe33c11d3296f51e9.jpg",
 "tagw": {
-"Survivability": 0.387,
-"Ability Regen": 0.323,
-"Damage": 0.145,
-"Add Clear": 0.145
+"Damage": 0.38,
+"Ability Regen": 0.37,
+"Survivability": 0.25
 },
-"tier": "Survivability + Ability Regen",
+"tier": "Damage + Ability Regen",
 "prod": [
 "Ability Energy",
 "Damage"
@@ -3444,13 +3434,15 @@
 "class": "Titan",
 "element": "Any",
 "name": "Heart of Inmost Light",
-"goal_tags": "Damage",
-"flex_type": "-",
+"goal_tags": "Ability Regen, Damage, Survivability",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/34f23604746fc260a2153e93ccfaec7f.jpg",
 "tagw": {
-"Damage": 1.0
+"Ability Regen": 0.45,
+"Damage": 0.35,
+"Survivability": 0.2
 },
-"tier": "Damage",
+"tier": "Ability Regen",
 "prod": [
 "Damage"
 ],
@@ -3537,15 +3529,15 @@
 "class": "Titan",
 "element": "Any",
 "name": "Khepri's Horn",
-"goal_tags": "Add Clear, Ability Regen",
-"flex_type": "Damage",
+"goal_tags": "Survivability, Add Clear, Ability Regen",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/c7da6c00a574bbadaec01099a3134626.jpg",
 "tagw": {
-"Add Clear": 0.453,
-"Ability Regen": 0.377,
-"Damage": 0.17
+"Survivability": 0.36,
+"Add Clear": 0.34,
+"Ability Regen": 0.3
 },
-"tier": "Add Clear + Ability Regen",
+"tier": "Survivability hybrid",
 "prod": [
 "Ability Energy",
 "Damage"
@@ -3599,15 +3591,15 @@
 "class": "Titan",
 "element": "Any",
 "name": "Melas Panoplia",
-"goal_tags": "Add Clear, Ability Regen",
-"flex_type": "Damage",
+"goal_tags": "Damage, Ability Regen, Add Clear",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/99948048db0193791f6656def94f0605.jpg",
 "tagw": {
-"Add Clear": 0.453,
-"Ability Regen": 0.377,
-"Damage": 0.17
+"Damage": 0.38,
+"Ability Regen": 0.37,
+"Add Clear": 0.25
 },
-"tier": "Add Clear + Ability Regen",
+"tier": "Damage + Ability Regen",
 "prod": [
 "Ability Energy",
 "Damage"
@@ -3667,13 +3659,14 @@
 "class": "Titan",
 "element": "Any",
 "name": "One-Eyed Mask",
-"goal_tags": "Survivability",
-"flex_type": "-",
+"goal_tags": "Survivability, Utility",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/dd639fc06ad17e69915bf47295426ac0.jpg",
 "tagw": {
-"Survivability": 1.0
+"Survivability": 0.6,
+"Utility": 0.4
 },
-"tier": "Survivability",
+"tier": "Survivability + Utility",
 "prod": [],
 "cons": [
 "Healing"
@@ -3748,15 +3741,15 @@
 "class": "Titan",
 "element": "Any",
 "name": "Point-Contact Cannon Brace",
-"goal_tags": "Add Clear, Ability Regen",
-"flex_type": "Damage",
+"goal_tags": "Damage, Ability Regen, Crowd Control",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/1a871899e9657793c57c3916ee69d19f.jpg",
 "tagw": {
-"Add Clear": 0.453,
-"Ability Regen": 0.377,
-"Damage": 0.17
+"Damage": 0.4,
+"Ability Regen": 0.3,
+"Crowd Control": 0.3
 },
-"tier": "Add Clear + Ability Regen",
+"tier": "Damage",
 "prod": [
 "Ability Energy",
 "Damage"
@@ -3770,19 +3763,15 @@
 "class": "Titan",
 "element": "Any",
 "name": "Praxic Vestment",
-"goal_tags": "Add Clear, Crowd Control, Mobility",
-"flex_type": "Ability Regen, Survivability, Damage, Utility",
+"goal_tags": "Mobility, Damage, Add Clear",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/38c12eb0a1d063b55a5578d7d47bc275.jpg",
 "tagw": {
-"Add Clear": 0.24,
-"Crowd Control": 0.2,
-"Mobility": 0.2,
-"Ability Regen": 0.09,
-"Survivability": 0.09,
-"Damage": 0.09,
-"Utility": 0.09
+"Mobility": 0.55,
+"Damage": 0.25,
+"Add Clear": 0.2
 },
-"tier": "Add Clear",
+"tier": "Mobility",
 "prod": [
 "Ability Energy",
 "Crowd Control",
@@ -3846,15 +3835,15 @@
 "class": "Titan",
 "element": "Any",
 "name": "Second Chance",
-"goal_tags": "Damage, Survivability, Crowd Control",
-"flex_type": "-",
+"goal_tags": "Crowd Control, Ability Regen, Add Clear",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/5c2dbf43518ab15f556b39bbaac0122b.jpg",
 "tagw": {
-"Damage": 0.375,
-"Survivability": 0.312,
-"Crowd Control": 0.312
+"Crowd Control": 0.4,
+"Ability Regen": 0.35,
+"Add Clear": 0.25
 },
-"tier": "Damage hybrid",
+"tier": "Crowd Control + Ability Regen",
 "prod": [
 "Crowd Control",
 "Damage"
@@ -3869,14 +3858,14 @@
 "class": "Titan",
 "element": "Any",
 "name": "Severance Enclosure",
-"goal_tags": "Add Clear",
-"flex_type": "Ability Regen",
+"goal_tags": "Damage, Add Clear",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/f2b177993acfba4c42ff771ad6801c90.jpg",
 "tagw": {
-"Add Clear": 0.727,
-"Ability Regen": 0.273
+"Damage": 0.5,
+"Add Clear": 0.5
 },
-"tier": "Add Clear + Ability Regen",
+"tier": "Damage + Add Clear",
 "prod": [
 "Ability Energy"
 ],
@@ -4212,15 +4201,16 @@
 "class": "Warlock",
 "element": "Any",
 "name": "Contraverse Hold",
-"goal_tags": "Damage, Ability Regen",
-"flex_type": "Add Clear",
+"goal_tags": "Ability Regen, Survivability, Crowd Control",
+"flex_type": "Damage",
 "icon": "/common/destiny2_content/icons/b667fa414b7d70ed4fe8b34296c76cbb.jpg",
 "tagw": {
-"Damage": 0.453,
-"Ability Regen": 0.377,
-"Add Clear": 0.17
+"Ability Regen": 0.38,
+"Survivability": 0.3,
+"Crowd Control": 0.2,
+"Damage": 0.12
 },
-"tier": "Damage + Ability Regen",
+"tier": "Ability Regen + Survivability",
 "prod": [
 "Ability Energy",
 "Damage"
@@ -4234,15 +4224,15 @@
 "class": "Warlock",
 "element": "Any",
 "name": "Crown of Tempests",
-"goal_tags": "Add Clear, Ability Regen",
-"flex_type": "Damage",
+"goal_tags": "Ability Regen, Add Clear, Damage",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/1e807547133b3d2e1ea680858cf09176.jpg",
 "tagw": {
-"Add Clear": 0.453,
-"Ability Regen": 0.377,
-"Damage": 0.17
+"Ability Regen": 0.55,
+"Add Clear": 0.25,
+"Damage": 0.2
 },
-"tier": "Add Clear + Ability Regen",
+"tier": "Ability Regen",
 "prod": [
 "Ability Energy",
 "Damage"
@@ -4256,15 +4246,15 @@
 "class": "Warlock",
 "element": "Any",
 "name": "Dawn Chorus",
-"goal_tags": "Add Clear, Ability Regen",
-"flex_type": "Damage",
+"goal_tags": "Damage, Add Clear, Ability Regen",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/a8f5dbd6ec9c4dc9ea73700525d558c7.jpg",
 "tagw": {
-"Add Clear": 0.453,
-"Ability Regen": 0.377,
-"Damage": 0.17
+"Damage": 0.42,
+"Add Clear": 0.33,
+"Ability Regen": 0.25
 },
-"tier": "Add Clear + Ability Regen",
+"tier": "Damage + Add Clear",
 "prod": [
 "Ability Energy",
 "Damage"
@@ -4278,16 +4268,15 @@
 "class": "Warlock",
 "element": "Any",
 "name": "Deimosuffusion",
-"goal_tags": "Survivability, Healing, Crowd Control",
-"flex_type": "Damage",
+"goal_tags": "Crowd Control, Healing, Survivability",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/8d4cf66f37462c79069095736a4d7bb0.jpg",
 "tagw": {
-"Survivability": 0.329,
-"Healing": 0.274,
-"Crowd Control": 0.274,
-"Damage": 0.123
+"Crowd Control": 0.4,
+"Healing": 0.35,
+"Survivability": 0.25
 },
-"tier": "Survivability hybrid",
+"tier": "Crowd Control + Healing",
 "prod": [
 "Crowd Control",
 "Damage",
@@ -4367,13 +4356,15 @@
 "class": "Warlock",
 "element": "Any",
 "name": "Felwinter's Helm",
-"goal_tags": "Damage",
-"flex_type": "-",
+"goal_tags": "Crowd Control, Team Buff, Add Clear",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/885fcf7b139b369cb47f4548f1fb658f.jpg",
 "tagw": {
-"Damage": 1.0
+"Crowd Control": 0.55,
+"Team Buff": 0.25,
+"Add Clear": 0.2
 },
-"tier": "Damage",
+"tier": "Crowd Control",
 "prod": [
 "Damage"
 ],
@@ -4490,16 +4481,16 @@
 "class": "Warlock",
 "element": "Any",
 "name": "Mataiodoxía",
-"goal_tags": "Add Clear, Survivability, Ability Regen",
-"flex_type": "Damage",
+"goal_tags": "Crowd Control, Add Clear, Damage",
+"flex_type": "Ability Regen",
 "icon": "/common/destiny2_content/icons/86e7918a1c286c31ded3093069ddb7b5.jpg",
 "tagw": {
-"Add Clear": 0.329,
-"Survivability": 0.274,
-"Ability Regen": 0.274,
-"Damage": 0.123
+"Crowd Control": 0.35,
+"Add Clear": 0.3,
+"Damage": 0.2,
+"Ability Regen": 0.15
 },
-"tier": "Add Clear hybrid",
+"tier": "Crowd Control + Add Clear",
 "prod": [
 "Ability Energy",
 "Damage"
@@ -4514,16 +4505,15 @@
 "class": "Warlock",
 "element": "Any",
 "name": "Necrotic Grip",
-"goal_tags": "Add Clear, Mobility",
-"flex_type": "Ability Regen, Utility",
+"goal_tags": "Damage, Add Clear, Ability Regen",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/0617e95b84c4c0b7ec6511abaf4214d6.jpg",
 "tagw": {
-"Add Clear": 0.387,
-"Mobility": 0.323,
-"Ability Regen": 0.145,
-"Utility": 0.145
+"Damage": 0.42,
+"Add Clear": 0.38,
+"Ability Regen": 0.2
 },
-"tier": "Add Clear + Mobility",
+"tier": "Damage + Add Clear",
 "prod": [
 "Ability Energy"
 ],
@@ -4687,13 +4677,14 @@
 "class": "Warlock",
 "element": "Any",
 "name": "Sanguine Alchemy",
-"goal_tags": "Damage",
-"flex_type": "-",
+"goal_tags": "Damage, Survivability",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/e55c1cbf65fabab485bbc34272f59b11.jpg",
 "tagw": {
-"Damage": 1.0
+"Damage": 0.78,
+"Survivability": 0.22
 },
-"tier": "Damage",
+"tier": "Damage + Survivability",
 "prod": [
 "Damage"
 ],
@@ -4902,17 +4893,15 @@
 "class": "Warlock",
 "element": "Any",
 "name": "Verity's Brow",
-"goal_tags": "Damage, Ability Regen, Team Buff",
-"flex_type": "Add Clear, Survivability",
+"goal_tags": "Ability Regen, Damage, Team Buff",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/e3a0690cafbf8109a34231f70476c8a0.jpg",
 "tagw": {
-"Damage": 0.293,
-"Ability Regen": 0.244,
-"Team Buff": 0.244,
-"Add Clear": 0.11,
-"Survivability": 0.11
+"Ability Regen": 0.4,
+"Damage": 0.3,
+"Team Buff": 0.3
 },
-"tier": "Damage hybrid",
+"tier": "Ability Regen",
 "prod": [
 "Ability Energy",
 "Damage",
@@ -4928,17 +4917,16 @@
 "class": "Warlock",
 "element": "Any",
 "name": "Vesper of Radius",
-"goal_tags": "Add Clear, Ability Regen, Crowd Control",
-"flex_type": "Damage, Survivability",
+"goal_tags": "Add Clear, Crowd Control, Ability Regen",
+"flex_type": "Damage",
 "icon": "/common/destiny2_content/icons/f8e0d42b08a0a02f172f76d331326a8f.jpg",
 "tagw": {
-"Add Clear": 0.293,
-"Ability Regen": 0.244,
-"Crowd Control": 0.244,
-"Damage": 0.11,
-"Survivability": 0.11
+"Add Clear": 0.35,
+"Crowd Control": 0.3,
+"Ability Regen": 0.2,
+"Damage": 0.15
 },
-"tier": "Add Clear hybrid",
+"tier": "Add Clear + Crowd Control",
 "prod": [
 "Ability Energy",
 "Crowd Control",
@@ -13939,14 +13927,15 @@
 "class": "Titan",
 "element": "Prismatic",
 "name": "Stoicism",
-"goal_tags": "Add Clear",
-"flex_type": "Ability Regen",
+"goal_tags": "Add Clear, Damage, Crowd Control",
+"flex_type": "",
 "icon": "/common/destiny2_content/icons/9db95c112130c018f823f394668cfb5a.jpg",
 "tagw": {
-"Add Clear": 0.727,
-"Ability Regen": 0.273
+"Add Clear": 0.4,
+"Damage": 0.35,
+"Crowd Control": 0.25
 },
-"tier": "Add Clear + Ability Regen",
+"tier": "Add Clear + Damage",
 "prod": [
 "Ability Energy"
 ],
