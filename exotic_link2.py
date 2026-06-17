@@ -17,6 +17,8 @@ CACHE = os.path.join("data", "exotic_effects.json")
 
 def norm(s): return re.sub(r"[^a-z0-9]", "", s.lower())
 
+def _namekey(s): return s.replace("\u2019", "'").strip().lower()  # curly->straight apostrophe, case-insensitive
+
 def _get(url, key=None):
     h = {"X-API-Key": key} if key else {}
     return json.load(urllib.request.urlopen(urllib.request.Request(url, headers=h), timeout=600))
@@ -35,7 +37,7 @@ def effects(exotic_names):
     by_name = {}
     for h, it in items.items():
         nm = ((it.get("displayProperties") or {}).get("name") or "")
-        if nm: by_name.setdefault(nm, []).append(it)
+        if nm: by_name.setdefault(_namekey(nm), []).append(it)
     def intrinsic_text(it):
         parts = []
         for se in ((it.get("sockets") or {}).get("socketEntries") or []):
@@ -55,7 +57,7 @@ def effects(exotic_names):
     eff = {}
     for nm in exotic_names:
         best = ""
-        for it in by_name.get(nm, []):
+        for it in by_name.get(_namekey(nm), []):
             t = intrinsic_text(it)
             if len(t) > len(best): best = t
         if best: eff[nm] = best
