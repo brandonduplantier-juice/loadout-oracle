@@ -1569,9 +1569,8 @@ def step1():
     session["answers"] = {
         "cls": f.get("cls", "Any"),
         "element": f.get("element", "Any"),
-        "main_goal": f.get("main_goal", "Any"),
-        "second_goal": f.get("second_goal", "Any"),
-        "optional_goal": f.get("optional_goal", "Any"),
+        "goal": f.get("goal", "Any"),
+        "goal2": f.get("goal2", "Any"),
         "activity": f.get("activity", "Any"),
         "build_weapon": f.get("build_weapon", "Any").strip() or "Any",
         "build_exotic_armor": f.get("build_exotic_armor", "Any"),
@@ -1593,19 +1592,28 @@ def focus():
     return render_template("step2.html", o=OPTIONS, a=a, theme=theme(a))
 
 
+def engines_for_element(elem):
+    """The keyword engines legal for a chosen subclass element (plus Any).
+    Prismatic gets only Transcendence; Any element shows them all."""
+    allowed = ["Any"]
+    for name, (eelem, _verbs) in ENGINES.items():
+        if elem in ("Any", eelem):
+            allowed.append(name)
+    return allowed
+
+
 @app.route("/synergy", methods=["GET", "POST"])
 def synergy():
     a = session.get("answers", {})
     if request.method == "POST":
         f = request.form
         a["engine"] = f.get("engine", "Any")
-        a["damage_profile"] = f.get("damage_profile", "Any")
-        a["survivability"] = f.get("survivability", "Any")
-        a["team_role"] = f.get("team_role", "Any")
         a["playstyle"] = f.get("playstyle", "Any")
         session["answers"] = a
         return redirect(url_for("results"))
-    return render_template("step3.html", o=OPTIONS, a=a, theme=theme(a))
+    engines = engines_for_element(a.get("element", "Any"))
+    return render_template("step3.html", o=OPTIONS, a=a, theme=theme(a),
+                           engines=engines)
 
 
 CUR_SLOTS = [
@@ -1685,6 +1693,7 @@ def results():
     a = session.get("answers", {})
     if not a:
         return redirect(url_for("index"))
+    a = _normalize_answers(a)
     pool = [b for b in BUILDS if passes_hard_filters(b, a)]
     ranked = []
     for b in pool:

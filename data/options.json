@@ -16,14 +16,11 @@
  ],
  "goal": [
   "Any",
-  "Max Damage",
-  "Add Clear",
-  "High Survivability",
-  "Ability Spam",
-  "Healing",
-  "Team Buff",
-  "Utility",
-  "Solo"
+  "Single-target",
+  "Add clear",
+  "Survive",
+  "Support",
+  "Ability spam"
  ],
  "activity": [
   "Any",

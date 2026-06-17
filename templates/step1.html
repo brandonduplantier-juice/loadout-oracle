@@ -8,9 +8,8 @@
   <div class="grid">
     {{ field('cls', 'Class', o.class, a.get('cls','Any'), hard=True) }}
     {{ field('element', 'Preferred element', o.element, a.get('element','Any'), select_id='element-select') }}
-    {{ field('main_goal', 'Main goal', o.goal, a.get('main_goal','Any')) }}
-    {{ field('second_goal', 'Secondary goal', o.goal, a.get('second_goal','Any')) }}
-    {{ field('optional_goal', 'Optional goal', o.goal, a.get('optional_goal','Any')) }}
+    {{ field('goal', 'Main goal', o.goal, a.get('goal','Any')) }}
+    {{ field('goal2', 'Secondary goal', o.goal, a.get('goal2','Any')) }}
     {{ field('activity', 'Activity', o.activity, a.get('activity','Any')) }}
     <div class="full">
       <div class="field hard">
