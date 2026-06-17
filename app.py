@@ -159,6 +159,8 @@ for _cls, _live in (DIM_REFS.get("exotic_class_items") or {}).items():
 ICON_BASE = "https://www.bungie.net"
 
 app = Flask(__name__)
+import monitoring
+monitoring.install(app)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
@@ -1738,6 +1740,7 @@ def results():
     ranked.sort(key=lambda x: -x["score"])
     top = ranked[0]["score"] if ranked else 0
     gen = construct(a)
+    monitoring.check_build(a, gen)
     return render_template(
         "results.html", ranked=ranked, a=a, theme=theme(a), top=top, gen=gen,
         dim_enabled=DIM_AUTH_READY
@@ -1950,6 +1953,10 @@ try:
     EXOTIC_ABILITY = json.load(open(os.path.join(BASE, "data", "exotic_abilities.json"), encoding="utf-8"))
 except Exception:
     EXOTIC_ABILITY = {}
+try:
+    monitoring.startup_data_check(POOL, EXOTIC_ABILITY)
+except Exception:
+    pass
 
 
 def _ability_locked_ok(name, cls, elem):
