@@ -227,4 +227,88 @@
     b.addEventListener('click', function () { dimShare(b); });
   });
 </script>
+
+<style>
+  .report-btn{position:fixed;right:16px;bottom:16px;z-index:50;background:#1a1f2b;color:#e7ecf5;border:1px solid #3a4660;border-radius:8px;padding:9px 14px;font:600 13px/1 'Saira',sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+  .report-btn:hover{background:#222838;border-color:#5566aa}
+  body.report-mode .lo,body.report-mode .modrow{cursor:pointer;outline:1px dashed transparent;transition:outline-color .12s,background .12s}
+  body.report-mode .lo:hover,body.report-mode .modrow:hover{outline-color:#7a86b8}
+  .lo-flagged{outline:2px solid #e0556a !important;background:rgba(224,85,106,.13) !important;border-radius:6px}
+  .report-panel{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:rgba(4,6,10,.62)}
+  .report-card{width:min(440px,92vw);background:#10141d;border:1px solid #2c3650;border-radius:12px;padding:18px 18px 16px;box-shadow:0 16px 50px rgba(0,0,0,.6)}
+  .report-head{font:700 16px/1.2 'Saira',sans-serif;text-transform:uppercase;letter-spacing:.1em;color:#eef2fb;margin-bottom:8px}
+  .report-hint{font:400 13px/1.45 'Inter',sans-serif;color:#9aa6c0;margin:0 0 10px}
+  .report-flags{font:500 12.5px/1.4 'Inter',sans-serif;color:#cdd6ea;background:#0b0f17;border:1px solid #232c42;border-radius:7px;padding:8px 10px;margin-bottom:10px;min-height:18px}
+  .report-note{width:100%;min-height:84px;resize:vertical;background:#0b0f17;color:#e7ecf5;border:1px solid #2c3650;border-radius:7px;padding:9px 10px;font:400 13.5px/1.45 'Inter',sans-serif;box-sizing:border-box}
+  .report-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+  .report-status{font:500 12.5px/1.4 'Inter',sans-serif;color:#9aa6c0;margin-top:9px;min-height:16px}
+</style>
+<button id="report-btn" class="report-btn" type="button">Report an issue</button>
+<div id="report-panel" class="report-panel" hidden>
+  <div class="report-card">
+    <div class="report-head">Report a build issue</div>
+    <p class="report-hint">Click any slot, mod row, or section that looks wrong to flag it (click again to unflag), then describe the problem. A screenshot of the page is attached automatically.</p>
+    <div id="report-flags" class="report-flags"></div>
+    <textarea id="report-note" class="report-note" placeholder="What is wrong with this build?"></textarea>
+    <div class="report-actions">
+      <button id="report-cancel" type="button" class="btn ghost">Cancel</button>
+      <button id="report-send" type="button" class="btn primary">Send report</button>
+    </div>
+    <div id="report-status" class="report-status"></div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+(function () {
+  var btn = document.getElementById('report-btn');
+  var panel = document.getElementById('report-panel');
+  var note = document.getElementById('report-note');
+  var statusEl = document.getElementById('report-status');
+  var flagsBox = document.getElementById('report-flags');
+  var active = false;
+  function rows() { return document.querySelectorAll('.lo, .modrow'); }
+  function labelOf(el) { var k = el.querySelector('.k, .mk'); return k ? k.textContent.trim() : 'row'; }
+  function refreshFlags() {
+    var names = [];
+    document.querySelectorAll('.lo-flagged').forEach(function (el) { names.push(labelOf(el)); });
+    flagsBox.textContent = names.length ? ('Flagged: ' + names.join(', ')) : 'Nothing flagged yet (optional).';
+  }
+  function onRowClick(e) {
+    if (!active) return;
+    e.currentTarget.classList.toggle('lo-flagged'); refreshFlags(); e.stopPropagation();
+  }
+  function enter() {
+    active = true; document.body.classList.add('report-mode');
+    rows().forEach(function (el) { el.addEventListener('click', onRowClick); });
+    panel.hidden = false; statusEl.textContent = ''; refreshFlags();
+  }
+  function exit() {
+    active = false; document.body.classList.remove('report-mode');
+    rows().forEach(function (el) { el.removeEventListener('click', onRowClick); el.classList.remove('lo-flagged'); });
+    panel.hidden = true; note.value = '';
+  }
+  btn.addEventListener('click', enter);
+  document.getElementById('report-cancel').addEventListener('click', exit);
+  document.getElementById('report-send').addEventListener('click', function () {
+    var flagged = [];
+    document.querySelectorAll('.lo-flagged').forEach(function (el) { flagged.push(labelOf(el)); });
+    var sendBtn = this; sendBtn.disabled = true; statusEl.textContent = 'Capturing build\u2026';
+    var target = document.querySelector('.wrap') || document.body;
+    var shot = (typeof html2canvas === 'function')
+      ? html2canvas(target, { backgroundColor: '#0b0d12', scale: 1, useCORS: true, logging: false })
+          .then(function (c) { return c.toDataURL('image/png'); }).catch(function () { return null; })
+      : Promise.resolve(null);
+    shot.then(function (png) {
+      statusEl.textContent = 'Sending\u2026';
+      return fetch('/report_issue', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ screenshot: png, flagged: flagged, note: note.value || '', url: location.href })
+      });
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      if (d && d.ok) { statusEl.textContent = 'Report sent. Thank you.'; setTimeout(exit, 1400); }
+      else { statusEl.textContent = 'Could not send (' + ((d && d.reason) || 'error') + ').'; sendBtn.disabled = false; }
+    }).catch(function () { statusEl.textContent = 'Could not reach the server.'; sendBtn.disabled = false; });
+  });
+})();
+</script>
 {% endblock %}

@@ -26,6 +26,9 @@
  "Celestial Nighthawk": {
   "Super": "Golden Gun: Deadshot"
  },
+ "Citan's Ramparts": {
+  "Class Ability": "Towering Barricade"
+ },
  "Cuirass of the Falling Star": {
   "Super": "Thundercrash"
  },
@@ -47,11 +50,32 @@
  "Helm of Saint-14": {
   "Super": "Ward of Dawn"
  },
+ "Hoarfrost-Z": {
+  "Class Ability": "Towering Barricade"
+ },
+ "Icefall Mantle": {
+  "Class Ability": "Towering Barricade"
+ },
+ "Khepri's Horn": {
+  "Class Ability": "Towering Barricade"
+ },
+ "Khepri's Sting": {
+  "Melee": "Snare Bomb"
+ },
+ "Liar's Handshake": {
+  "Melee": "Combination Blow"
+ },
  "Lucky Raspberry": {
   "Grenade": "Arcbolt Grenade"
  },
+ "Lunafaction Boots": {
+  "Class Ability": "Empowering Rift"
+ },
  "Mask of Fealty": {
   "Melee": "Withering Blade"
+ },
+ "No Backup Plans": {
+  "Melee": "Shield Bash"
  },
  "Nothing Manacles": {
   "Grenade": "Scatter Grenade"
@@ -77,6 +101,12 @@
  "Renewal Grasps": {
   "Grenade": "Duskfield Grenade"
  },
+ "Sanguine Alchemy": {
+  "Class Ability": "Empowering Rift"
+ },
+ "Secant Filaments": {
+  "Class Ability": "Empowering Rift"
+ },
  "Second Chance": {
   "Melee": "Shield Throw"
  },
@@ -97,6 +127,9 @@
  },
  "Ursa Furiosa": {
   "Super": "Sentinel Shield"
+ },
+ "Vesper of Radius": {
+  "Class Ability": "Empowering Rift"
  },
  "Wishful Ignorance": {
   "Melee": "Frenzied Blade"

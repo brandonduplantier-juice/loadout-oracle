@@ -84,6 +84,38 @@ def alert(category, detail, dedupe_key=None):
         print("[alert-failed]", repr(e))
 
 
+def send_report(subject, body, png_bytes=None):
+    """Send a user-submitted issue report with an optional PNG attachment.
+    Reuses the alert Gmail credentials. Returns True on success, False otherwise.
+    Counts against the same daily cap as a light abuse guard."""
+    try:
+        if not _ENABLED:
+            print("[report] %s :: %s" % (subject, str(body)[:300]))
+            return False
+        today = time.strftime("%Y-%m-%d")
+        if _day["date"] != today:
+            _day["date"], _day["count"] = today, 0
+        if _day["count"] >= DAILY_MAX:
+            return False
+        _day["count"] += 1
+        msg = EmailMessage()
+        msg["Subject"] = "[Loadout Oracle] %s" % subject
+        msg["From"] = _USER
+        msg["To"] = _TO
+        msg.set_content(str(body))
+        if png_bytes:
+            msg.add_attachment(png_bytes, maintype="image", subtype="png", filename="build.png")
+        ctx = ssl.create_default_context()
+        with smtplib.SMTP("smtp.gmail.com", 587, timeout=20) as s:
+            s.starttls(context=ctx)
+            s.login(_USER, _PW)
+            s.send_message(msg)
+        return True
+    except Exception as e:
+        print("[report-failed]", repr(e))
+        return False
+
+
 # ---- build-level invariant checks (run per real request) -------------------
 
 _REQUIRED_SLOTS = ["Super", "Grenade", "Melee", "Class Ability", "Exotic Armor"]

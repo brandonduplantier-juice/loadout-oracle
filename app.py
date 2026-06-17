@@ -164,7 +164,7 @@ monitoring.install(app)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.22"
+APP_VERSION = "0.9.23"
 BUILD_DATE = "2026-06-15"
 
 
@@ -1825,6 +1825,44 @@ def dim_share():
     if url:
         return {"ok": True, "url": url}
     return {"ok": False, "reason": err or "unknown"}
+
+
+@app.route("/report_issue", methods=["POST"])
+def report_issue():
+    """User-submitted build issue report: emails the flagged parts, a note, and an
+    optional screenshot to the maintainer. Reuses the alert Gmail credentials."""
+    if not _rate_ok(_client_ip()):
+        return {"ok": False, "reason": "rate_limited"}, 429
+    data = request.get_json(force=True, silent=True) or {}
+    note = (str(data.get("note") or "")).strip()[:2000]
+    flagged = data.get("flagged") or []
+    if isinstance(flagged, list):
+        flagged = ", ".join(str(x) for x in flagged[:40])[:1000]
+    else:
+        flagged = str(flagged)[:1000]
+    page = (str(data.get("url") or ""))[:300]
+    png = None
+    shot = data.get("screenshot") or ""
+    if isinstance(shot, str) and shot.startswith("data:image/png;base64,"):
+        try:
+            raw = base64.b64decode(shot.split(",", 1)[1])
+            png = raw if 0 < len(raw) <= 6_000_000 else None
+        except Exception:
+            png = None
+    a = session.get("answers", {}) or {}
+    ctx = ", ".join("%s=%s" % (k, a.get(k)) for k in
+                    ("cls", "element", "engine", "main_goal", "second_goal",
+                     "optional_goal", "playstyle", "activity") if a.get(k))
+    body = ("User-reported build issue.\n\n"
+            "Flagged parts: %s\n\n"
+            "Note:\n%s\n\n"
+            "Build inputs: %s\n"
+            "Page: %s\n"
+            "Screenshot attached: %s\n"
+            % (flagged or "(none)", note or "(none)", ctx or "(none)", page,
+               "yes" if png else "no"))
+    ok = monitoring.send_report("Build issue report", body, png)
+    return {"ok": bool(ok)} if ok else {"ok": False, "reason": "send_failed"}
 
 
 @app.route("/back/<step>")
