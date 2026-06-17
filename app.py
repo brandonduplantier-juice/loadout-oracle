@@ -1946,6 +1946,22 @@ EXOTIC_FORCE={
  "Boots of the Assembler":{"Class Ability":"Healing Rift"},
  "Speaker's Sight":{"Class Ability":"Healing Rift"},
 }
+try:
+    EXOTIC_ABILITY = json.load(open(os.path.join(BASE, "data", "exotic_abilities.json"), encoding="utf-8"))
+except Exception:
+    EXOTIC_ABILITY = {}
+
+
+def _ability_locked_ok(name, cls, elem):
+    """An ability-locked exotic is only valid when its signature ability is legal on
+    this subclass and element. A Tripmine exotic is dead on Stasis, so drop it there."""
+    links = EXOTIC_ABILITY.get(name)
+    if not links:
+        return True
+    for slot, abil in links.items():
+        if abil not in {x["name"] for x in gated(slot, cls, elem)}:
+            return False
+    return True
 
 def assemble2(cls,elem,a,w):
     engine=a.get('engine','Any');base_verbs=set(ENGINES.get(engine,('',set()))[1]);verbs=set(base_verbs)
@@ -1967,7 +1983,7 @@ def assemble2(cls,elem,a,w):
         if _goal=='Ability spam': return 0.3 if dom=='Ability Regen' else 0.0
         return 0.0
     def pick_exotic(cat,pin):
-        cands=gated(cat,cls,elem);chosen=None
+        cands=[c for c in gated(cat,cls,elem) if _ability_locked_ok(c['name'],cls,elem)];chosen=None
         fitv=verbs if cat=='Exotic Weapon' else base_verbs   # armor stays on engine; weapon may chase damage amp
         if pin not in ('Any','',None):
             fi=find_pool_item(cat,pin)
@@ -2002,6 +2018,8 @@ def assemble2(cls,elem,a,w):
             for exo in (ea,ew):
                 if exo and exo['name'] in EXOTIC_FORCE and cat in EXOTIC_FORCE[exo['name']]:
                     forced=EXOTIC_FORCE[exo['name']][cat]
+                if exo and exo['name'] in EXOTIC_ABILITY and cat in EXOTIC_ABILITY[exo['name']]:
+                    forced=EXOTIC_ABILITY[exo['name']][cat]
             if forced:
                 fi=next((c for c in cands if c['name']==forced),None)
                 if fi: picks.append(fi);cands.remove(fi);fold(fi)
