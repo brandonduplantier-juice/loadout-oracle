@@ -79,6 +79,23 @@ try:
         _wv["name"] = _wnm
 except FileNotFoundError:
     WEAPON_PERKS = {}
+
+# Hardening: every pool Exotic Weapon must resolve to a WEAPON_PERKS entry, because
+# recommend_weapons reads the exotic's equipment slot from there to skip that slot when
+# filling legendaries. A name that does not resolve gives a blank slot and a silently
+# double-filled slot in the build. Fail loud at load instead of minting a bad loadout.
+# Set LO_WEAPON_CHECK=warn to downgrade to a logged warning (keeps the app serving).
+if WEAPON_PERKS:
+    _unmatched = sorted(p["name"] for p in POOL
+                        if p.get("category") == "Exotic Weapon" and p["name"] not in WEAPON_PERKS)
+    if _unmatched:
+        _msg = ("weapon_perks.json has no slot data for these pool Exotic Weapons, so the "
+                "weapon recommender cannot avoid their slot: " + ", ".join(_unmatched)
+                + ". Re-run the exotic-weapon manifest pull or align the names.")
+        if os.environ.get("LO_WEAPON_CHECK", "strict").lower() == "warn":
+            print("WARNING: " + _msg)
+        else:
+            raise RuntimeError(_msg)
 try:
     with open(os.path.join(BASE, "data", "weapon_perk_tags.json"), encoding="utf-8") as f:
         WEAPON_PERK_TAGS = {k: v for k, v in json.load(f).items() if k != "_comment"}
