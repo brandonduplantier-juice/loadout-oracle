@@ -1,4 +1,9 @@
 {
  "Young Ahamkara's Spine": {"Grenade": "Tripmine Grenade"},
- "Shinobu's Vow": {"Grenade": "Skip Grenade"}
+ "Shinobu's Vow": {"Grenade": "Skip Grenade"},
+ "Cuirass of the Falling Star": {"Super": "Thundercrash"},
+ "Pyrogale Gauntlets": {"Super": "Burning Maul"},
+ "Geomag Stabilizers": {"Super": "Chaos Reach"},
+ "Ashen Wake": {"Grenade": "Fusion Grenade"},
+ "Starfire Protocol": {"Grenade": "Fusion Grenade"}
 }
