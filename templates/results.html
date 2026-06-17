@@ -28,6 +28,7 @@
 {% if syn and syn.loops %}
 <div class="synergy">
   <div class="synhead"><span class="synlabel">Synergy loops</span><span class="synscore" title="sum of closed producer to consumer loops">{{ syn.score }}</span></div>
+  {% if syn.plain %}<p class="synplain">{{ syn.plain }}</p>{% endif %}
   {% if community %}<p class="synnote">{{ community.note }}</p>{% endif %}
   {% for L in syn.loops %}
   <div class="looprow">
@@ -229,6 +230,7 @@
 </script>
 
 <style>
+  .synplain{font:500 14px/1.5 'Inter',sans-serif;color:#dfe6f5;background:rgba(120,140,210,.08);border-left:3px solid #5566aa;border-radius:0 7px 7px 0;padding:9px 12px;margin:2px 0 12px}
   .report-btn{position:fixed;right:16px;bottom:16px;z-index:50;background:#1a1f2b;color:#e7ecf5;border:1px solid #3a4660;border-radius:8px;padding:9px 14px;font:600 13px/1 'Saira',sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.4)}
   .report-btn:hover{background:#222838;border-color:#5566aa}
   body.report-mode .lo,body.report-mode .modrow{cursor:pointer;outline:1px dashed transparent;transition:outline-color .12s,background .12s}

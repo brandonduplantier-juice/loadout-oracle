@@ -164,7 +164,7 @@ monitoring.install(app)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.24"
+APP_VERSION = "0.9.25"
 BUILD_DATE = "2026-06-15"
 
 
@@ -497,6 +497,55 @@ VERB_INFO = {
 }
 
 
+_VERB_PLAIN = {
+    "Orbs": "Orbs of Power", "Ability Energy": "ability energy",
+    "Armor Charge": "Armor Charge for your damage mods",
+    "Empower": "a weapon and ability damage buff", "Transcendence": "Prismatic Transcendence",
+    "Damage": "extra damage", "Jolt": "Jolt that chains lightning",
+    "Ionic Trace": "Ionic Traces that refund ability energy",
+    "Amplified": "Amplified for faster handling", "Devour": "Devour that heals you on kills",
+    "Scorch": "Scorch that builds toward Ignitions", "Ignition": "Ignitions",
+    "Restoration": "Restoration healing over time", "Radiant": "Radiant, a weapon damage buff",
+    "Volatile": "Volatile rounds", "Weaken": "Weaken on enemies", "Invisibility": "invisibility",
+    "Overshield": "an overshield", "Woven Mail": "Woven Mail resistance",
+    "Frost Armor": "Frost Armor resistance", "Freeze": "Freeze", "Slow": "Slow",
+    "Stasis Shard": "Stasis shards", "Tangle": "Tangles you can shoot", "Unravel": "Unravel",
+    "Suspend": "Suspend", "Cure": "healing", "Healing": "healing",
+    "Void Breach": "Void Breaches that refund ability energy", "Bolt Charge": "Bolt Charge",
+    "Team Buff": "a buff for your whole fireteam",
+}
+
+
+def _narr_names(lst):
+    seen = []
+    for x in lst:
+        c = x.split(" x")[0]
+        if c.startswith("Harmonic "):
+            c = c[9:]
+        if c not in seen:
+            seen.append(c)
+    seen = seen[:2]
+    if not seen:
+        return "your gear"
+    return seen[0] if len(seen) == 1 else (seen[0] + " and " + seen[1])
+
+
+def synergy_narrative(build, loops):
+    """Plain-English summary of how the build sustains itself, read off its top loops.
+    Names the producers, the effect they create, and what spends it, in one sentence."""
+    loops = loops or []
+    if not loops:
+        return ""
+    exo = ""
+    if build.get("Exotic Armor"):
+        exo = build["Exotic Armor"][0]["item"].get("name", "")
+    lead = ("Built around " + exo + ", this loadout") if exo else "This loadout"
+    lead += " sustains itself: "
+    clauses = [_narr_names(L["from"]) + " make " + _VERB_PLAIN.get(L["verb"], L["verb"])
+               + ", feeding " + _narr_names(L["to"]) for L in loops[:3]]
+    return lead + "; ".join(clauses) + "."
+
+
 def compute_synergy(build, mods_loadout):
     """Detect closed producer to consumer loops across the assembled build and
     its mod set. This is the 'everything feeding into things' score."""
@@ -535,7 +584,9 @@ def compute_synergy(build, mods_loadout):
             loops.append({"verb": k, "desc": VERB_INFO.get(k, ""),
                           "from": P[:3], "to": C[:3], "w": round(contrib, 1)})
     loops.sort(key=lambda l: -l["w"])
-    return {"loops": loops[:6], "score": round(score, 1)}
+    top = loops[:6]
+    return {"loops": top, "score": round(score, 1),
+            "plain": synergy_narrative(build, top)}
 
 
 def classify_community(cls, elem, build):
