@@ -164,7 +164,7 @@ monitoring.install(app)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.26"
+APP_VERSION = "0.9.27"
 BUILD_DATE = "2026-06-15"
 
 
