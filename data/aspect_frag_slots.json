@@ -4,8 +4,8 @@
   "prism": 2
  },
  "Ascension": {
-  "native": 2,
-  "prism": 3
+  "native": 3,
+  "prism": 2
  },
  "Banner of War": {
   "native": 2,
@@ -28,8 +28,8 @@
   "prism": 3
  },
  "Consecration": {
-  "native": 2,
-  "prism": 3
+  "native": 3,
+  "prism": 2
  },
  "Controlled Demolition": {
   "native": 2,
@@ -193,7 +193,7 @@
  },
  "Threaded Specter": {
   "native": 3,
-  "prism": 3
+  "prism": 2
  },
  "Touch of Flame": {
   "native": 2,
@@ -236,7 +236,7 @@
   "prism": 3
  },
  "Winter's Shroud": {
-  "native": 2,
-  "prism": 3
+  "native": 3,
+  "prism": 2
  }
 }

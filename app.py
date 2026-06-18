@@ -164,7 +164,7 @@ monitoring.install(app)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.28"
+APP_VERSION = "0.9.29"
 BUILD_DATE = "2026-06-15"
 
 
@@ -2014,6 +2014,8 @@ _FRAG_OVERRIDE = {
     "Consecration": {"native": 3, "prism": 2},
     "Threaded Specter": {"native": 3, "prism": 2},
     "Winter's Shroud": {"native": 3, "prism": 2},
+    "Gunpowder Gamble": {"native": 2, "prism": 3},
+    "Weaver's Call": {"native": 2, "prism": 3},
 }
 for _k, _v in _FRAG_OVERRIDE.items():
     FRAG_SLOTS[_k] = _v
