@@ -164,7 +164,7 @@ monitoring.install(app)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.29"
+APP_VERSION = "0.9.30"
 BUILD_DATE = "2026-06-15"
 
 
@@ -290,6 +290,14 @@ def item_score(item, w):
     s = 0.0
     for tag, val in w.items():
         s += val * tw.get(tag, 0.0) * 3.0
+    # boss-DPS shaping: the flat Damage tag cannot separate single-target burst from
+    # add-clear, so credit a super's curated single-target and Weaken-debuff ratings.
+    # SUPER_DPS only holds supers, so this is a no-op for every other slot.
+    if w.get("Single-target") or w.get("Debuff"):
+        d = SUPER_DPS.get(item["name"])
+        if d:
+            s += w.get("Single-target", 0) * d.get("st", 0) * 3.0
+            s += w.get("Debuff", 0) * d.get("debuff", 0) * 3.0
     # legacy binary term keeps behaviour stable when tagw is thin
     tg = _taglist(item["goal_tags"])
     fx = _taglist(item["flex_type"])
@@ -711,7 +719,7 @@ def construct(a):
     best["artifact"] = recommend_artifact(best["elem"], a)
     best["gear_set"] = recommend_gear_set(best["elem"], a)
     best["armor_loadout"] = recommend_armor_loadout(best["elem"], a, best["build"], best["artifact"])
-    best["stat_priority"] = stat_priority(a, best["elem"])
+    best["stat_priority"] = stat_priority(a, best["elem"], best["build"])
     best["weapon_synergy"] = recommend_weapon_synergy(best["elem"], a, best["build"], best["artifact"])
     best["dim_search"] = dim_search_for(best["build"])
     best["synergy"] = compute_synergy(best["build"], best["armor_loadout"])
@@ -990,24 +998,83 @@ def recommend_armor_loadout(elem, a, build=None, artifact=None):
     return out
 
 
-def stat_priority(a, elem):
-    """Order the six Armor 3.0 stats by what this build leans on."""
+# Per-super damage character. "st" = single-target boss-burst rating, "debuff" = applies a
+# Weaken-style multiplier. The flat "Damage" tag could not separate a roaming add-clear super
+# (Silkstrike) from a boss-burst super (Golden Gun) or value a Weaken tether, so on a Boss DPS
+# goal the add-clear super won. item_score reads these at scoring time (kept out of pool tagw so
+# the tag-distribution invariant holds), and stat_priority uses st to tell whether the super
+# itself is the damage source. Curated, scale 0..0.5.
+SUPER_DPS = {
+    "Golden Gun: Deadshot": {"st": 0.50},
+    "Golden Gun: Marksman": {"st": 0.50},
+    "Blade Barrage": {"st": 0.40},
+    "Nova Bomb: Cataclysm": {"st": 0.42},
+    "Nova Bomb: Vortex": {"st": 0.30},
+    "Thundercrash": {"st": 0.48},
+    "Needlestorm": {"st": 0.45},
+    "Chaos Reach": {"st": 0.40},
+    "Gathering Storm": {"st": 0.35},
+    "Storm's Edge": {"st": 0.30},
+    "Silence and Squall": {"st": 0.32},
+    "Daybreak": {"st": 0.15},
+    "Fists of Havoc": {"st": 0.20},
+    "Bladefury": {"st": 0.22},
+    "Stormtrance": {"st": 0.18},
+    "Burning Maul": {"st": 0.22},
+    "Hammer of Sol": {"st": 0.25},
+    "Sentinel Shield": {"st": 0.15},
+    "Glacial Quake": {"st": 0.12},
+    "Arc Staff": {"st": 0.15},
+    "Silkstrike": {"st": 0.15},
+    "Spectral Blades": {"st": 0.20},
+    "Nova Warp": {"st": 0.18},
+    "Winter's Wrath": {"st": 0.12},
+    "Song of Flame": {"st": 0.22},
+    "Well of Radiance": {"st": 0.10},
+    "Ward of Dawn": {"st": 0.12},
+    "Shadowshot: Deadfall": {"st": 0.10, "debuff": 0.50},
+    "Shadowshot: Moebius Quiver": {"st": 0.38, "debuff": 0.38},
+    "Twilight Arsenal": {"st": 0.38, "debuff": 0.40},
+}
+
+
+def stat_priority(a, elem, build=None):
+    """Order the six Armor 3.0 stats by what this build actually leans on.
+    A damage goal does not automatically mean Super. If the equipped super is not a
+    boss-damage super, the damage is coming from weapons, so Weapons leads. The Weapons
+    stat now governs weapon damage, reload, and reserves, so a weapon-DPS build must not
+    bury it."""
     goals = [a.get("main_goal"), a.get("second_goal"), a.get("optional_goal")]
-    if a.get("super_focus") == "High" or "Max Damage" in goals:
-        pri = "Super"
+    play = a.get("playstyle")
+    surv = a.get("survivability") == "High" or "High Survivability" in goals
+    dmg_goal = "Max Damage" in goals or a.get("damage_profile") == "Boss DPS"
+    super_name = None
+    if build and build.get("Super"):
+        try:
+            super_name = build["Super"][0]["item"]["name"]
+        except Exception:
+            super_name = None
+    super_is_damage = SUPER_DPS.get(super_name, {}).get("st", 0) >= 0.35
+    super_focused = a.get("super_focus") == "High" or play == "Super"
+
+    if super_focused or (dmg_goal and super_is_damage):
+        front = ["Super", "Weapons"]          # super burst plus weapon sustain
+    elif dmg_goal or play == "Weapon" or a.get("weapon_focus") == "High":
+        front = ["Weapons", "Health"] if surv else ["Weapons", "Super"]
     elif "Grenade" in goals or "Ability Spam" in goals or a.get("ability_focus") == "High":
-        pri = "Grenade"
+        front = ["Grenade"]
     elif "Melee" in goals:
-        pri = "Melee"
+        front = ["Melee"]
     else:
-        pri = "Health"
-    order = ["Super", "Grenade", "Melee", "Class", "Weapons", "Health"]
-    if pri in order:
-        order.remove(pri)
-        order.insert(0, pri)
-    order.remove("Health")
-    order.insert(0 if pri == "Health" else 1, "Health")
-    return [{"stat": s, "desc": STATS[s]} for s in order]
+        front = ["Health"]
+
+    seq = list(front)
+    if surv and "Health" not in seq:
+        seq.append("Health")
+    for s in ["Super", "Grenade", "Melee", "Class", "Weapons", "Health"]:
+        if s not in seq:
+            seq.append(s)
+    return [{"stat": s, "desc": STATS[s]} for s in seq]
 
 
 ECI_NEED_WEIGHTS = {
@@ -1792,7 +1859,7 @@ def enrich_curated(b):
         "armor_loadout": armor,
         "artifact": art,
         "gear_set": recommend_gear_set(elem, a),
-        "stat_priority": stat_priority(a, elem),
+        "stat_priority": stat_priority(a, elem, build),
         "weapon_synergy": recommend_weapon_synergy(elem, a, build, art),
         "synergy": compute_synergy(build, armor),
         "community": classify_community(b["class"], elem, build),
@@ -1988,7 +2055,7 @@ LOOP_WEIGHT={"Orbs":2.0,"Armor Charge":1.5,"Empower":0.4,"Healing":0.6,"Ability 
  "Frost Armor":1.8,"Stasis Shard":1.5,"Slow":1.0,"Freeze":1.6,"Scorch":1.6,"Radiant":1.4,"Restoration":1.2,"Woven Mail":1.6,
  "Tangle":1.3,"Threadling":1.6,"Unravel":1.3,"Sever":1.0,"Suspend":1.3,"Crowd Control":1.0,"Team Buff":0.8}
 
-GOALW={'Single-target':[('Damage',1.0)],'Add clear':[('Add Clear',1.0)],'Survive':[('Survivability',1.0)],
+GOALW={'Single-target':[('Damage',1.0),('Single-target',1.5),('Debuff',1.0)],'Add clear':[('Add Clear',1.0)],'Survive':[('Survivability',1.0)],
  'Support':[('Team Buff',0.6),('Healing',0.6)],'Ability spam':[('Ability Regen',1.0)]}
 def goal_weights2(a):
     w={}
