@@ -164,7 +164,7 @@ monitoring.install(app)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.25"
+APP_VERSION = "0.9.26"
 BUILD_DATE = "2026-06-15"
 
 
@@ -2004,6 +2004,19 @@ def engine_contribution(it,verbs,produced,consumed):
 _man=json.load(open(os.path.join(BASE, "data", "exotic_verbs.json"), encoding="utf-8"))
 try: FRAG_SLOTS=json.load(open(os.path.join(BASE, "data", "aspect_frag_slots.json"), encoding="utf-8"))
 except Exception: pass
+# Curated fragment-slot corrections, verified in game. The puller assigns native=min and
+# prism=max across an aspect's plug variants, assuming Prismatic grants at least as many
+# slots as the base subclass. Edge of Fate broke that: these four keep 3 slots on their base
+# subclass but were cut to 2 on Prismatic, so the manifest inverts or over-reports them.
+# Verified counts win and survive re-pulls.
+_FRAG_OVERRIDE = {
+    "Ascension": {"native": 3, "prism": 2},
+    "Consecration": {"native": 3, "prism": 2},
+    "Threaded Specter": {"native": 3, "prism": 2},
+    "Winter's Shroud": {"native": 3, "prism": 2},
+}
+for _k, _v in _FRAG_OVERRIDE.items():
+    FRAG_SLOTS[_k] = _v
 # Thruster, Acrobat's Dodge, Phoenix Dive (class abilities) and Blink (movement) are each
 # exclusive to one base subclass AND legal on Prismatic (per Bungie / Destinypedia). The flat
 # element tag cannot say "Arc OR Prismatic", so gate them explicitly instead of mis-tagging.
