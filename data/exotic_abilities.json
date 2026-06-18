@@ -8,6 +8,9 @@
  "Athrys's Embrace": {
   "Melee": "Weighted Throwing Knife"
  },
+ "Balance of Power": {
+  "Aspect": "Threaded Specter"
+ },
  "Ballidorse Wrathweavers": {
   "Super": "Winter's Wrath"
  },
@@ -38,11 +41,21 @@
  "Dawn Chorus": {
   "Super": "Daybreak"
  },
+ "Deimosuffusion": {
+  "Class Ability": "Healing Rift",
+  "Super": "Needlestorm"
+ },
  "Doom Fang Pauldron": {
   "Super": "Sentinel Shield"
  },
+ "Eunoia": {
+  "Aspect": "Hellion"
+ },
  "Geomag Stabilizers": {
   "Super": "Chaos Reach"
+ },
+ "Gifted Conviction": {
+  "Aspect": "Ascension"
  },
  "Gwisin Vest": {
   "Super": "Spectral Blades"
@@ -73,6 +86,12 @@
  },
  "Mask of Fealty": {
   "Melee": "Withering Blade"
+ },
+ "Melas Panoplia": {
+  "Melee": "Throwing Hammer"
+ },
+ "Moirai": {
+  "Melee": "Threaded Spike"
  },
  "No Backup Plans": {
   "Melee": "Shield Bash"
