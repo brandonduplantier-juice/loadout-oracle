@@ -164,7 +164,7 @@ monitoring.install(app)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.30"
+APP_VERSION = "0.9.31"
 BUILD_DATE = "2026-06-15"
 
 
@@ -2056,7 +2056,7 @@ LOOP_WEIGHT={"Orbs":2.0,"Armor Charge":1.5,"Empower":0.4,"Healing":0.6,"Ability 
  "Tangle":1.3,"Threadling":1.6,"Unravel":1.3,"Sever":1.0,"Suspend":1.3,"Crowd Control":1.0,"Team Buff":0.8}
 
 GOALW={'Single-target':[('Damage',1.0),('Single-target',1.5),('Debuff',1.0)],'Add clear':[('Add Clear',1.0)],'Survive':[('Survivability',1.0)],
- 'Support':[('Team Buff',0.6),('Healing',0.6)],'Ability spam':[('Ability Regen',1.0)]}
+ 'Support':[('Team Buff',0.6),('Healing',0.6),('Debuff',0.8)],'Ability spam':[('Ability Regen',1.0)]}
 def goal_weights2(a):
     w={}
     for k,m in (('goal',3),('goal2',2)):
@@ -2229,6 +2229,13 @@ def assemble2(cls,elem,a,w):
                     if exo_el and not (exo_v & EXO_AGNOSTIC) and elem not in exo_el and (elem!='Prismatic' or not base_verbs):
                         s-=8.0
                 if cat=='Exotic Weapon' and single: s+=(50.0 if it['name'] in DPS_GUNS else 0.0)+2.0*item_score(it,{'Damage':3})
+                if cat=='Exotic Weapon' and w.get('Debuff') and 'Weaken' in evget(it['name']):
+                    # An intrinsic weapon Weaken (Tractor, Divinity, Graviton, etc.) is a team-wide
+                    # damage multiplier that fires on any subclass, so credit it ungated by element
+                    # and scaled by the build's Debuff weight. Kept under the DPS_GUNS bonus so a
+                    # single-target goal still leads with the damage gun; this surfaces the debuff
+                    # weapon on support and enabler builds where it is the right call.
+                    s += w["Debuff"] * 3.0
                 return s+1e-6*len(it['name'])
             chosen=max(cands,key=sc)
         if chosen is None: return None
