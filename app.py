@@ -164,7 +164,7 @@ monitoring.install(app)
 app.secret_key = os.environ.get("SECRET_KEY", "loadout-oracle-local-key")
 
 # Build version, shown in the footer. Bump APP_VERSION on each meaningful change.
-APP_VERSION = "0.9.31"
+APP_VERSION = "0.9.32"
 BUILD_DATE = "2026-06-15"
 
 
@@ -2296,7 +2296,13 @@ def recommend_artifact2(elem,a):
         if sc>bs: best,bs=art,sc
     perks=[p for p in best['perks'] if not p.get('champion')]
     ranked=sorted(perks,key=lambda p:(-(len((set(p.get('prod',[]))|set(p.get('cons',[])))&verbs)),-pem(p),p.get('tier',9),p['perk']))
-    return {'name':best['name'],'source':best.get('source',''),'perks':ranked[:8],'alts':[]}
+    caps={1:2,2:3,3:2};cnt={1:0,2:0,3:0};picks=[]  # in-game artifact cap: 7 total, 2 tier-1 / 3 tier-2 / 2 tier-3
+    for p in ranked:
+        try: t=int(p.get('tier'))
+        except (TypeError,ValueError): continue  # no real tier slot, not equippable
+        if t in caps and cnt[t]<caps[t]: picks.append(p);cnt[t]+=1
+        if len(picks)>=7: break
+    return {'name':best['name'],'source':best.get('source',''),'perks':picks,'alts':[]}
 
 _orig_gear=recommend_gear_set
 def recommend_gear_set2(elem,a):
