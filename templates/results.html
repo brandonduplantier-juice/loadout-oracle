@@ -21,23 +21,18 @@
   {% endfor %}
   <div class="modrow"><span class="mk">Weapons</span><span class="mv">{{ g.weapon_synergy.primary }}<br>{{ g.weapon_synergy.heavy }}<br><b>Weapon mods:</b>{% for m in g.weapon_synergy.mods %}<span class="modpill" title="{{ m.why }}">{{ m.mod }}</span>{% endfor %}{% for m in g.weapon_synergy.mods %}<br><span class="altnote">{{ m.mod }}: {{ m.why }}</span>{% endfor %}<br><span class="altnote">{{ g.weapon_synergy.note }}</span></span></div>
   {% if g.artifact %}<div class="modrow"><span class="mk">Artifact</span><div class="mv items"><span class="anote">{{ g.artifact.name }}, unlock in this order:</span>{% for p in g.artifact.perks %}<span class="iitem">{% if p.icon %}<img class="ic sm" src="{{ ICON_BASE ~ p.icon }}" alt="" loading="lazy" onerror="this.style.display='none'">{% endif %}<span class="nm">{{ loop.index }}. {{ p.perk }}{% if p.element %} <span class="origin el-{{ p.element|lower }}">{{ p.element }}</span>{% endif %}</span></span>{% endfor %}{% if g.artifact.alts %}<span class="altnote">also strong: {{ g.artifact.alts|join(', ') }}</span>{% endif %}</div></div>{% endif %}
-  {% if g.gear_set %}<div class="modrow"><span class="mk">Gear set</span><div class="mv"><b>Run 4 pieces of {{ g.gear_set.name }}</b> + your exotic in the 5th slot.{% if g.gear_set.four %}<div class="setbonus"><span class="setcount">4pc</span> <b>{{ g.gear_set.four.perk }}</b> &middot; {{ g.gear_set.four.desc }}</div>{% endif %}{% if g.gear_set.two_two and g.gear_set.two_two|length == 2 %}<div class="altnote">Or run two different sets at 2 pieces each (not a 2 and a 4 together): {{ g.gear_set.two_two[0].name }} ({{ g.gear_set.two_two[0].perk }}) + {{ g.gear_set.two_two[1].name }} ({{ g.gear_set.two_two[1].perk }}).</div>{% endif %}</div></div>{% endif %}
+  {% if g.gear_set %}<div class="modrow"><span class="mk">Gear set</span><div class="mv"><b>Run 4 pieces of {{ g.gear_set.name }}</b> + your exotic in the 5th slot.{% if g.gear_set.four %}<div class="setbonus"><span class="setcount">4pc</span> <b>{{ g.gear_set.four.perk }}</b>{% if g.gear_set.four.rating %} <span class="setrating r{{ g.gear_set.four.rating|replace('+','plus')|replace('?','q') }}">{{ g.gear_set.four.rating }}</span>{% endif %} &middot; {{ g.gear_set.four.desc }}{% if g.gear_set.four.source %}<div class="setsrc">From: {{ g.gear_set.four.source }}{% if g.gear_set.four.source_type %} ({{ g.gear_set.four.source_type }}){% endif %}</div>{% endif %}</div>{% endif %}{% if g.gear_set.two_two and g.gear_set.two_two|length == 2 %}<div class="altnote">Or run two different sets at 2 pieces each (not a 2 and a 4 together): {{ g.gear_set.two_two[0].name }} ({{ g.gear_set.two_two[0].perk }}{% if g.gear_set.two_two[0].rating %}, {{ g.gear_set.two_two[0].rating }}{% endif %}) + {{ g.gear_set.two_two[1].name }} ({{ g.gear_set.two_two[1].perk }}{% if g.gear_set.two_two[1].rating %}, {{ g.gear_set.two_two[1].rating }}{% endif %}).</div>{% endif %}<div class="setcredit">Ratings: community tier list (LowCo + Azra), subjective and some sets untested.</div></div></div>{% endif %}
 </div>
 {%- endmacro %}
 {% macro synergy_block(syn, community) -%}
 {% if syn and syn.loops %}
 <div class="synergy">
   <div class="synhead"><span class="synlabel">Synergy loops</span><span class="synscore" title="sum of closed producer to consumer loops">{{ syn.score }}</span></div>
-  {% if syn.plain %}<p class="synplain">{{ syn.plain }}</p>{% endif %}
   {% if community %}<p class="synnote">{{ community.note }}</p>{% endif %}
   {% for L in syn.loops %}
-  <div class="looprow">
-    <div class="loophead"><span class="verb">{{ L.verb }}</span>{% if L.desc %}<span class="verbdesc">{{ L.desc }}</span>{% endif %}</div>
-    <div class="lflow"><span class="lcap">Produced by</span>{{ L.from|join(', ') }}</div>
-    <div class="lflow"><span class="lcap">Used by</span>{{ L.to|join(', ') }}</div>
-  </div>
+  <div class="looprow"><span class="verb">{{ L.verb }}</span><span class="lflow">{{ L.from|join(', ') }} <span class="arrow">&rarr;</span> {{ L.to|join(', ') }}</span></div>
   {% endfor %}
-  <p class="synnote">Each loop is a game effect this build creates and then spends. The items under "Produced by" generate it; the items under "Used by" turn it back into damage, healing, or ability energy. When the same item appears on both sides, the build feeds itself instead of leaning on one piece.</p>
+  <p class="synnote">Each row is something the build produces feeding something that consumes it. More closed loops means the build sustains itself instead of relying on one item.</p>
 </div>
 {% endif %}
 {%- endmacro %}
@@ -227,98 +222,5 @@
   document.querySelectorAll('.dimbtn').forEach(function (b) {
     b.addEventListener('click', function () { dimShare(b); });
   });
-</script>
-
-<style>
-  .synplain{font:500 14px/1.5 'Inter',sans-serif;color:#dfe6f5;background:rgba(120,140,210,.08);border-left:3px solid #5566aa;border-radius:0 7px 7px 0;padding:9px 12px;margin:2px 0 12px}
-  .report-btn{position:fixed;right:16px;bottom:16px;z-index:50;background:#1a1f2b;color:#e7ecf5;border:1px solid #3a4660;border-radius:8px;padding:9px 14px;font:600 13px/1 'Saira',sans-serif;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.4)}
-  .report-btn:hover{background:#222838;border-color:#5566aa}
-  .report-btn.is-hidden{display:none}
-  body.report-mode .lo,body.report-mode .modrow{cursor:pointer;outline:1px dashed transparent;transition:outline-color .12s,background .12s}
-  body.report-mode .lo:hover,body.report-mode .modrow:hover{outline-color:#7a86b8}
-  .lo-flagged{outline:2px solid #e0556a !important;background:rgba(224,85,106,.13) !important;border-radius:6px}
-  .report-panel{position:fixed;right:16px;bottom:16px;z-index:51;width:min(330px,92vw);background:#10141d;border:1px solid #2c3650;border-radius:12px;padding:14px;box-shadow:0 12px 40px rgba(0,0,0,.55);display:none}
-  .report-panel.open{display:block}
-  .report-head{font:700 14px/1.2 'Saira',sans-serif;text-transform:uppercase;letter-spacing:.08em;color:#eef2fb;margin-bottom:6px}
-  .report-hint{font:400 12.5px/1.4 'Inter',sans-serif;color:#9aa6c0;margin:0 0 9px}
-  .report-flags{font:500 12px/1.35 'Inter',sans-serif;color:#cdd6ea;background:#0b0f17;border:1px solid #232c42;border-radius:7px;padding:7px 9px;margin-bottom:9px;min-height:16px;max-height:72px;overflow:auto}
-  .report-note{width:100%;min-height:64px;resize:vertical;background:#0b0f17;color:#e7ecf5;border:1px solid #2c3650;border-radius:7px;padding:8px 9px;font:400 13px/1.4 'Inter',sans-serif;box-sizing:border-box}
-  .report-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}
-  .report-status{font:500 12px/1.35 'Inter',sans-serif;color:#9aa6c0;margin-top:8px;min-height:15px}
-</style>
-<button id="report-btn" class="report-btn" type="button">Report an issue</button>
-<div id="report-panel" class="report-panel">
-  <div class="report-head">Report a build issue</div>
-  <p class="report-hint">Click any slot or mod that looks wrong to flag it (click again to unflag), add a note, then send. A screenshot of the build is attached automatically.</p>
-  <div id="report-flags" class="report-flags"></div>
-  <textarea id="report-note" class="report-note" placeholder="What is wrong with this build?"></textarea>
-  <div class="report-actions">
-    <button id="report-cancel" type="button" class="btn ghost">Cancel</button>
-    <button id="report-send" type="button" class="btn primary">Send report</button>
-  </div>
-  <div id="report-status" class="report-status"></div>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script>
-(function () {
-  var btn = document.getElementById('report-btn');
-  var panel = document.getElementById('report-panel');
-  var note = document.getElementById('report-note');
-  var statusEl = document.getElementById('report-status');
-  var flagsBox = document.getElementById('report-flags');
-  var active = false;
-  function rows() { return document.querySelectorAll('.lo, .modrow'); }
-  function labelOf(el) { var k = el.querySelector('.k, .mk'); return k ? k.textContent.trim() : 'row'; }
-  function refreshFlags() {
-    var names = [];
-    document.querySelectorAll('.lo-flagged').forEach(function (el) { names.push(labelOf(el)); });
-    flagsBox.textContent = names.length ? ('Flagged: ' + names.join(', ')) : 'Nothing flagged yet (optional).';
-  }
-  function onRowClick(e) {
-    if (!active) return;
-    e.currentTarget.classList.toggle('lo-flagged'); refreshFlags(); e.preventDefault(); e.stopPropagation();
-  }
-  function enter() {
-    active = true;
-    document.body.classList.add('report-mode');
-    rows().forEach(function (el) { el.addEventListener('click', onRowClick); });
-    btn.classList.add('is-hidden');
-    panel.classList.add('open');
-    statusEl.textContent = ''; refreshFlags();
-  }
-  function exit() {
-    active = false;
-    document.body.classList.remove('report-mode');
-    rows().forEach(function (el) { el.removeEventListener('click', onRowClick); el.classList.remove('lo-flagged'); });
-    panel.classList.remove('open');
-    btn.classList.remove('is-hidden');
-    note.value = '';
-  }
-  btn.addEventListener('click', enter);
-  document.getElementById('report-cancel').addEventListener('click', exit);
-  document.getElementById('report-send').addEventListener('click', function () {
-    var flagged = [];
-    document.querySelectorAll('.lo-flagged').forEach(function (el) { flagged.push(labelOf(el)); });
-    var sendBtn = this; sendBtn.disabled = true; statusEl.textContent = 'Capturing build\u2026';
-    var target = document.querySelector('.wrap') || document.body;
-    panel.style.visibility = 'hidden';
-    var restore = function () { panel.style.visibility = ''; };
-    var shot = (typeof html2canvas === 'function')
-      ? html2canvas(target, { backgroundColor: '#0b0d12', scale: 1, useCORS: true, logging: false })
-          .then(function (c) { return c.toDataURL('image/png'); }).catch(function () { return null; })
-      : Promise.resolve(null);
-    shot.then(function (png) {
-      restore();
-      statusEl.textContent = 'Sending\u2026';
-      return fetch('/report_issue', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ screenshot: png, flagged: flagged, note: note.value || '', url: location.href })
-      });
-    }).then(function (r) { return r.json(); }).then(function (d) {
-      if (d && d.ok) { statusEl.textContent = 'Report sent. Thank you.'; sendBtn.disabled = false; setTimeout(exit, 1400); }
-      else { statusEl.textContent = 'Could not send (' + ((d && d.reason) || 'error') + ').'; sendBtn.disabled = false; }
-    }).catch(function () { restore(); statusEl.textContent = 'Could not reach the server.'; sendBtn.disabled = false; });
-  });
-})();
 </script>
 {% endblock %}

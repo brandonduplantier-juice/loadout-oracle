@@ -1,1 +1,1010 @@
-{"AION Renewal":[{"count":"2","perk":"Force Converter","desc":"After a final blow with a Rocket Launcher, Grenade Launcher, or micro-missile, sprint for a short time to gain Speed Booster."},{"count":"4","perk":"Reactive Booster","desc":"Once per activation of Force Converter, sprinting while at critical health, being suspended, or being slowed by a Stasis effect will immediately grant Speed Boo"}],"AION Adapter":[{"count":"2","perk":"Force Absorption","desc":"Final blows with a Rocket Launcher, Grenade Launcher, or micro-missile temporarily decrease incoming area-of-effect damage."},{"count":"4","perk":"Reactive Shock","desc":"When Force Absorption is active, taking melee damage causes you to emit a disorienting burst once."}],"Techsec":[{"count":"2","perk":"Wrecker","desc":"You deal significantly increased Kinetic damage to combatant shields, overshields, vehicles, and constructs. Constructs include barricades, turrets, Stasis crys"},{"count":"4","perk":"Concussive Rounds","desc":"Defeating powerful combatants or breaking a combatant shield with Kinetic damage releases a disorienting Kinetic shockwave."}],"Last Discipline":[{"count":"2","perk":"Terminal Velocity","desc":"Final blows with primary ammo weapons grant your primary ammo weapons temporarily increased reload speed."},{"count":"4","perk":"Power Loader","desc":"Picking up an Orb of Power grants Special ammo progress."}],"Collective Psyche":[{"count":"2","perk":"Accretion","desc":"Picking up an ammo brick gives you a stacking bonus to weapon swap and stow speeds until you die."},{"count":"4","perk":"Doppler Effect","desc":"Suspend, unravel, and sever effects applied to targets, and radiant and restoration effects applied to you have increased duration."}],"Bushido":[{"count":"2","perk":"Iaido","desc":"Final blows with freshly drawn or reloaded weapons heal you."},{"count":"4","perk":"Unfaltering Focus","desc":"Bow, Shotgun, or Sword final blows temporarily reduce incoming damage. Damaging targets with those weapons extends the effect."}],"Twofold Crown":[{"count":"2","perk":"Crook and Flail","desc":"Picking up an ammo brick heals you."},{"count":"4","perk":"Gift of Sight","desc":"Final blows with Primary ammo weapons grant you briefly increased radar resolution."}],"Lustrous":[{"count":"2","perk":"Photogalvanic","desc":"Receiving healing temporarily grants your Solar weapons increased flinch resistance, handling, and reload speed."},{"count":"4","perk":"Cauterize","desc":"Rapid Solar final blows heal you."}],"Smoke Jumper Set":[{"count":"2","perk":"Ride Together, Die Together","desc":"When you pick up an Orb of Power, gain a brief period of rapidly decaying damage reduction."},{"count":"4","perk":"Too Old for This","desc":"Defeating a powerful combatant with a finisher grants you Special ammo progress and replenishes a small amount of health."}],"Disaster Corps Set":[{"count":"2","perk":"Pleas Heard","desc":"Reloading an Auto Rifle, Scout Rifle, or Sidearm after a final blow slowly restores health until you reenter combat."},{"count":"4","perk":"Magnificent Duty","desc":"When you reach critical health or heal an ally at critical health, Auto Rifles, Scout Rifles, and Sidearms gain a period of increased range, stability, and relo"}],"Wayward Psyche Set":[{"count":"2","perk":"Special Relativity","desc":"Picking up ammo reloads stowed Special weapons from reserves."},{"count":"4","perk":"Superluminal Motion","desc":"After dealing damage with your Super, health and shields regenerate over time while you are in motion. Additional Super damage refreshes this effect."}],"Iron Panoply Set":[{"count":"2","perk":"Vigilant Watch","desc":"As your health gets lower, your weapons gain increased stability and handling. Weapon final blows while your shields are depleted heal you."},{"count":"4","perk":"Iron Conviction","desc":"When your shields become broken, you gain increased ammo generation, flinch resistance, and damage resistance against nearby combatants for a short time. Final "}],"Ferropotent":[{"count":"2","perk":"Rapid Repair","desc":"When your shields begin to regenerate, you gain flinch resistance and damage resistance for a short time."},{"count":"4","perk":"Built from Scratch","desc":"While your reserves are low, combatant final blows with weapons provide additional ammo progress based on their ammo type.  Primary ammo weapons boost Special a"}],"Wild Anthem":[{"count":"2","perk":"Fanfare","desc":"Gain increased reload speed for the bottom half of your equipped weapon's magazine."},{"count":"4","perk":"Suros Harmony","desc":"Reloading a weapon grants it a bonus to handling and reduces incoming flinch for a short time. Weapons with the SUROS Synergy Origin Trait are granted increased"}],"Sage Protector":[{"count":"2","perk":"Combat Meditation","desc":"Sword hits return grenade and class energy. Bonus energy is granted if Blade Focus is active."},{"count":"4","perk":"Blade Focus","desc":"Briefly guard with a Sword to ready Blade Focus. While Blade Focus is readied, hitting a target with your sword increases Sword damage and lunge distance for a "}],"Swordmaster":[{"count":"2","perk":"Balestra","desc":"Damaging a target with a Sword, Glaive, or any melee attack exhausts them. \n\nExhausted targets deal reduced outgoing damage."},{"count":"4","perk":"Stesso Tempo","desc":"Blocking attacks with a Sword or Glaive grants a short period of damage resistance against targets when you next drop your guard."}],"New Demotic":[{"count":"2","perk":"Paroli","desc":"Primary ammo weapons gain a bonus to flinch resistance after sliding."},{"count":"4","perk":"Martingale","desc":"Your weapons gain a temporary increase to handling and aim-down-sights speed when an ally is defeated or you revive an ally."}],"Shrewd Survivor":[{"count":"2","perk":"Reflex Action","desc":"Swapping to a Heat weapon, Submachine Gun, or Hand Cannon grants a short period of increased handling and accuracy. This effect is extended by dealing damage wi"},{"count":"4","perk":"Hotshot","desc":"Dealing final blows while Reflex Action is active grants a bonus to weapon stat and increases stability, reload, and aim assist for Heat weapons, Submachine Gun"}],"Thriving Survivor":[{"count":"2","perk":"Opening Act","desc":"Final blows with grenades grant Heat weapons bonus stability and vent speed and grant Primary ammo weapons bonus stability and reload speed."},{"count":"4","perk":"Room Clearing","desc":"Multiple final blows with Heat weapons or Primary ammo weapons grant bonuses to weapon and grenade stats and increased ammo generation for Heat weapons and Prim"}],"Luminopotent":[{"count":"2","perk":"Ionic Overclock","desc":"While amplified, your Fusion Rifles, Linear Fusion Rifles, and Heat weapons gain increased handling, reload, and vent speeds."},{"count":"4","perk":"Shock and Clear","desc":"Final blows with Jolt or against jolted combatants create Ionic Traces."}],"Triumphal Anthem":[{"count":"2","perk":"Scoot to Loot","desc":"Sliding collects nearby ammo and temporarily grants enhanced reload speed and handling to your weapons."},{"count":"4","perk":"Shoot to Scoot","desc":"Dealing damage with your weapons temporarily grants enhanced sliding. Sliding provides damage resistance."}],"Flain":[{"count":"2","perk":"Sinew Stitching","desc":"Taking damage from combatants sometimes spawns a Threadling."},{"count":"4","perk":"Knit Together","desc":"For a short time after your shields break, your next several Threadling hits restore health."}],"Spacewalk":[{"count":"2","perk":"Augmented Armaments","desc":"Primary ammo weapons deal increased damage to disoriented combatants."},{"count":"4","perk":"Augmented Explosives","desc":"Your grenade abilities release an additional disorienting pulse shortly after detonating."}],"Dark Age":[{"count":"2","perk":"Taking Initiative","desc":"Hitting combatants with melee attacks or Sword strikes grants a stack of Initiative, giving bonus handling and reload. Stacks decay slowly over time."},{"count":"4","perk":"Healing Initiative","desc":"While you have Initiative, using your class ability creates a stationary healing aura. The aura gains increased healing based on the number of Initiative stacks"}],"Taken King":[{"count":"2","perk":"The Ceremony","desc":"Finishing combatants or reviving allies initiates a Lucent Hive ritual. While the ritual is active, gain increased Super stat."},{"count":"4","perk":"Lucent Swarm","desc":"Collecting Orbs of Power extends the Ceremony. While it is active, ability final blows occasionally spawn allied Arc moths."}],"TM Custom":[{"count":"2","perk":"Old Martian Diplomacy","desc":"Stowing a weapon after defeating a powerful combatant or a Guardian heals you a small amount and disorients nearby combatants."},{"count":"4","perk":"High Noon","desc":"Freshly drawn weapons deal increased precision damage to combatants for a short period. Weapons with the Tex Balanced Stock Origin Trait equipped or Exotics man"}],"Deep Explorer":[{"count":"2","perk":"Built Bitter","desc":"Taking damage increases the reload speed of your equipped weapon until it is stowed. Taking more damage increases the effect."},{"count":"4","perk":"Bittersweet","desc":"When you stow a weapon, restore health based on the number of Built Bitter stacks lost."}],"Yearning Echo":[{"count":"2","perk":"Untold Greed","desc":"Picking up ammo, Orbs of Power, Elemental pickups, or destroying a Strand Tangle grants stacks of Untold Greed, slightly reducing damage taken and providing rel"},{"count":"4","perk":"Overflowing Coffers","desc":"While you have stacks of Untold Greed, Orbs of Power and Elemental pickups provide more of their respective energy, and Strand Tangles deal increased damage. Wh"}],"CODA":[{"count":"2","perk":"Between Poles","desc":"Final blows with Light weapons grants stacks of Light Polarity, which grants Grenade stat. Final blows with Darkness or Kinetic weapons grants stacks of Dark Po"},{"count":"4","perk":"So Very Thin","desc":"Final blows with Light weapons grants additional grenade energy. Final blows with Dark or Kinetic weapons grants additional melee energy. Rapid final blows that"}],"Apostate's Blade":[{"count":"2","perk":"Regenerative Threshold","desc":"Performing a finisher stores power. The next time your shields are broken, consume stored power to immediately heal and start health regeneration."},{"count":"4","perk":"Melee Conduction","desc":"While you have Radiant, Restoration, or Cure, your melee hits release a burst that will scorch the target."}],"Techeun's Regalia":[{"count":"2","perk":"Queensfoil Rush","desc":"Gain a powerful overshield while performing your finisher. When you finish a target, release a slowing burst around you."},{"count":"4","perk":"Truth to Power","desc":"Gain increasing damage resistance when you deal damage or land final blows. Finishers grant accelerated progress. At max stacks, the recharge rate of your abili"}],"Circuit":[{"count":"2","perk":"Revving Up","desc":"Fast movement builds up a charge that gradually increases your health regeneration speed. Once you are Fully Revved, sprinting grants Speed Booster."},{"count":"4","perk":"Dielectric Drift","desc":"Sliding while Speed Booster is active jolts combatants in front of you."}],"Great Hunt":[{"count":"2","perk":"Taken Barrier","desc":"Grenade final blows temporarily reduce incoming damage."},{"count":"4","perk":"Taken Armaments","desc":"Grenade final blows grant additional Heavy ammo progress."}],"Kentarch 3":[{"count":"2","perk":"Network Admin","desc":"Being near allies creates a relay network that gives the wearer improved handling and reload speed. \n\nBeing near other allied Network Admins additionally grants"},{"count":"4","perk":"Network Upload","desc":"Weapon final blows grant the wearer and nearby allies melee energy."}],"Legacy's Oath":[{"count":"2","perk":"Augmented Servos","desc":"Powered melees release an additional disorienting pulse when used to defeat a target."},{"count":"4","perk":"God-like Judgment","desc":"When your shields are broken by a combatant, or upon casting your Super, release a swarm of heat seeking micro-missiles."}],"Atheon's Memory":[{"count":"2","perk":"Radiolaria Breach","desc":"After picking up an Orb of Power, the next time your shields are broken, gain a bonus to Health stat for a short duration and release a burst of radiolaria arou"},{"count":"4","perk":"Collective Power","desc":"While you have a subclass buff, dealing sustained damage creates an Orb of Power."}],"Oryx's Memory":[{"count":"2","perk":"Iron Sharpens Iron","desc":"Final blows on Guardians and powerful combatants generate additional ammo progress."},{"count":"4","perk":"Ascendant Escape","desc":"After a final blow on a powerful combatant, the next time your shields are broken, you become invisible."}],"Nezarec's Nightmare":[{"count":"2","perk":"Bad Dreams","desc":"Final blows versus subclass-debuffed targets have an escalating chance to spawn an Orb of Power."},{"count":"4","perk":"Dream-Devourer","desc":"Performing a finisher versus a powerful combatant grants Devour. While you have Devour, gain damage resistance versus combatants."}],"Crota's Memory":[{"count":"2","perk":"Cursed Fist","desc":"Melee final blows trigger a Cursed Thrall explosion."},{"count":"4","perk":"Power of the Son","desc":"Being in combat for a duration grants progressively more flinch resistance and damage resistance versus combatants."}],"Promised":[{"count":"2","perk":"Stable Resonance","desc":"Defeating a powerful combatant generates Stable Resonance, which grants damage resistance and increased weapon damage for the duration."},{"count":"4","perk":"Resonance Redirection","desc":"While you have Stable Resonance, continued weapon damage occasionally generates a resonance burst that damages and exhausts targets."}],"Resonant Fury":[{"count":"2","perk":"Resonant Plating","desc":"Your health begins regenerating immediately after taking melee damage from a powerful combatant."},{"count":"4","perk":"Siphoning Touch","desc":"Gain stacks of Siphoning Touch for weapon or Glaive melee hits. Switching weapons heals you and consumes all stacks."}],"Eutechnology":[{"count":"2","perk":"Gift of the Ley Lines","desc":"Rapidly defeating combatants with Void energy spawns a Void breach."},{"count":"4","perk":"Techeun's Foresight","desc":"After collecting a Void breach, your next final blow with a Void weapon triggers a detonation. The detonation is more powerful if it is triggered quickly after "}],"Cruel Electrum":[{"count":"2","perk":"Primary Survivor","desc":"When an ally is defeated, Primary ammo weapons gain increased handling, reload speed, target acquisition, and reduced flinch. Bonus increases when multiple alli"},{"count":"4","perk":"Primary Phantom","desc":"Final blows with Primary ammo weapons remove you from radar for a short time. Drawing a weapon that does not use Primary ammo will immediately end this effect."}],"Iron Battalion Set":[{"count":"2","perk":"Primary Honing","desc":"Increases handling and reload speed for Primary ammo weapons. Primary ammo weapons gain increased damage against non-boss combatants based on your Weapons stat."},{"count":"4","perk":"Supercyclical","desc":"Final blows while your Super is active refund Super energy when it ends."}],"Per Audacia":[{"count":"2","perk":"Primary Chain","desc":"Primary ammo weapon final blows grant a stacking bonus to mobility and Primary weapon range and handling until you are defeated."},{"count":"4","perk":"Sublime Transit","desc":"Increases mobility and grants enhanced sprint speed and slide distance."}],"Cyberserpent Null":[{"count":"2","perk":"Adrenal Rush","desc":"Sprinting for a short time grants a period of improved reload speed and handling. Final blows extend this period."},{"count":"4","perk":"Bountiful Munitions","desc":"While Adrenal Rush is active, final blows grant Special Ammo progress. Final Blows against powerful combatants, Guardians, and Taken grants additional progress."}],"Seventh Seraph":[{"count":"2","perk":"Rasputin's Wrath","desc":"Final blows with area-of-effect damage, Solar abilities, Seventh Seraph weapons, or IKELOS weapons grant Warmind Charges. Each stack of Warmind Charge increases"},{"count":"4","perk":"Rasputin's Reprisal","desc":"While you have Warmind Charges, defeating powerful combatants, destroying a construct, or destroying a Tangle releases a Solar detonation that damages combatant"}],"Pantheos Resplendent":[{"count":"2","perk":"Well Prepared","desc":"Picking up ammo grants Armor Charge. Grants a bonus to Health stat per Armor Charge you have."},{"count":"4","perk":"Down the Line","desc":"Sustained damage on minibosses, Champions, and bosses increases weapon damage versus base and powerful combatants. Weapon final blows consume one stack each."}],"Wildwood":[{"count":"2","perk":"Watchtower","desc":"Precision final blows while aiming down sights grant damage resistance until you stop aiming down sights."},{"count":"4","perk":"Field Expertise","desc":"Precision final blows with any weapon grant a stacking bonus to reload speed, target acquisition, and weapon damage against non-boss combatants for a short dura"}],"Exodus Down":[{"count":"2","perk":"Emergency Electromagnet","desc":"When your shields become broken, collect all nearby Orbs of Power and ammo bricks."},{"count":"4","perk":"Repurposed Charge","desc":"Whenever you gain, lose, or spend an Armor Charge, heal and gain damage reduction for a short time.\n\nThis effect scales with the amount of Armor Charge gained, "}],"Reverie Dawn":[{"count":"2","perk":"A Wish for Protection","desc":"Taking significant damage in a short time generates a Protective Wish that makes it harder for combatants to hit you, and grants increased reload speed and flin"},{"count":"4","perk":"A Wish Fulfilled","desc":"When the Protective Wish expires, it cures you. \n\nRapid final blows prematurely end the Protective Wish."}],"Dreambane":[{"count":"2","perk":"Nightmarish Power","desc":"Final blows to a challenging combatant or higher-ranked target grant Unstable Essence. When you have Unstable Essence, you receive grenade and melee stat bonuse"},{"count":"4","perk":"Nightmarish Resilience","desc":"When you have Unstable Essence, rapid weapon damage or final blows heal you and begin health regeneration."}],"Crystocrene":[{"count":"2","perk":"Resupply","desc":"After being out of combat for a moderate duration, your next final blow grants additional ammo progress and creates an Orb of Power."},{"count":"4","perk":"From the Storm","desc":"After being out of combat for a moderate duration, slowly gain Frost Armor until you reenter combat."}],"Veritas":[{"count":"2","perk":"Lucent Transmutation","desc":"Performing a finisher on a combatant, or landing successive powered melee final blows, generates an Elemental pickup based on your Light subclass."},{"count":"4","perk":"Lucent Tithes","desc":"Performing a finisher on powerful combatants heals you and generates loyal Void moths."}],"Thunderhead":[{"count":"2","perk":"License to Thrill","desc":"Activating your grenade or the Nanotech Tracer Missiles Origin Trait provides stacking resistance to incoming damage at point-blank range."},{"count":"4","perk":"Lethal Weave","desc":"Defeating an unraveled combatant grants grenade ability energy. If you have max grenade energy, you are granted Special ammo meter progress instead."}],"First Ascent":[{"count":"2","perk":"Stack 'Em Up","desc":"Defeating targets with unique elemental damage grants a stacking bonus to Transcendence energy gains while Transcendence is inactive."},{"count":"4","perk":"Burn 'Em Down","desc":"While Transcendence is active, using your grenade ability consumes all stacks of Stack 'Em Up to grant an escalating amount of grenade energy."}]}
+{
+ "AION Renewal": [
+  {
+   "count": "2",
+   "perk": "Force Converter",
+   "desc": "After a final blow with a Rocket Launcher, Grenade Launcher, or micro-missile, sprint for a short time to gain Speed Booster.",
+   "rating": "E",
+   "source": "Kepler",
+   "source_type": "Destination"
+  },
+  {
+   "count": "4",
+   "perk": "Reactive Booster",
+   "desc": "Once per activation of Force Converter, sprinting while at critical health, being suspended, or being slowed by a Stasis effect will immediately grant Speed Boo",
+   "rating": "E",
+   "source": "Kepler",
+   "source_type": "Destination"
+  }
+ ],
+ "AION Adapter": [
+  {
+   "count": "2",
+   "perk": "Force Absorption",
+   "desc": "Final blows with a Rocket Launcher, Grenade Launcher, or micro-missile temporarily decrease incoming area-of-effect damage.",
+   "rating": "B",
+   "source": "Kepler",
+   "source_type": "Destination"
+  },
+  {
+   "count": "4",
+   "perk": "Reactive Shock",
+   "desc": "When Force Absorption is active, taking melee damage causes you to emit a disorienting burst once.",
+   "rating": "C",
+   "source": "Kepler",
+   "source_type": "Destination"
+  }
+ ],
+ "Techsec": [
+  {
+   "count": "2",
+   "perk": "Wrecker",
+   "desc": "You deal significantly increased Kinetic damage to combatant shields, overshields, vehicles, and constructs. Constructs include barricades, turrets, Stasis crys",
+   "rating": "B",
+   "source": "Vanguard Engrams + Postmaster",
+   "source_type": "Vendor (Zavala) + Lost Sectors*"
+  },
+  {
+   "count": "4",
+   "perk": "Concussive Rounds",
+   "desc": "Defeating powerful combatants or breaking a combatant shield with Kinetic damage releases a disorienting Kinetic shockwave.",
+   "rating": "A",
+   "source": "Vanguard Engrams + Postmaster",
+   "source_type": "Vendor (Zavala) + Lost Sectors*"
+  }
+ ],
+ "Last Discipline": [
+  {
+   "count": "2",
+   "perk": "Terminal Velocity",
+   "desc": "Final blows with primary ammo weapons grant your primary ammo weapons temporarily increased reload speed.",
+   "rating": "D",
+   "source": "Crucible Engrams",
+   "source_type": "Vendor (Shaxx)"
+  },
+  {
+   "count": "4",
+   "perk": "Power Loader",
+   "desc": "Picking up an Orb of Power grants Special ammo progress.",
+   "rating": "D",
+   "source": "Crucible Engrams",
+   "source_type": "Vendor (Shaxx)"
+  }
+ ],
+ "Collective Psyche": [
+  {
+   "count": "2",
+   "perk": "Accretion",
+   "desc": "Picking up an ammo brick gives you a stacking bonus to weapon swap and stow speeds until you die.",
+   "rating": "E",
+   "source": "The Desert Perpetual",
+   "source_type": "Raid"
+  },
+  {
+   "count": "4",
+   "perk": "Doppler Effect",
+   "desc": "Suspend, unravel, and sever effects applied to targets, and radiant and restoration effects applied to you have increased duration.",
+   "rating": "C",
+   "source": "The Desert Perpetual",
+   "source_type": "Raid"
+  }
+ ],
+ "Bushido": [
+  {
+   "count": "2",
+   "perk": "Iaido",
+   "desc": "Final blows with freshly drawn or reloaded weapons heal you.",
+   "rating": "B+",
+   "source": "Vanguard Engrams + Postmaster",
+   "source_type": "Vendor (Zavala) + Lost Sectors*"
+  },
+  {
+   "count": "4",
+   "perk": "Unfaltering Focus",
+   "desc": "Bow, Shotgun, or Sword final blows temporarily reduce incoming damage. Damaging targets with those weapons extends the effect.",
+   "rating": "C",
+   "source": "Vanguard Engrams + Postmaster",
+   "source_type": "Vendor (Zavala) + Lost Sectors*"
+  }
+ ],
+ "Twofold Crown": [
+  {
+   "count": "2",
+   "perk": "Crook and Flail",
+   "desc": "Picking up an ammo brick heals you.",
+   "rating": "B",
+   "source": "Trials of Osiris Engrams",
+   "source_type": "Vendor (Saint-14)"
+  },
+  {
+   "count": "4",
+   "perk": "Gift of Sight",
+   "desc": "Final blows with Primary ammo weapons grant you briefly increased radar resolution.",
+   "rating": "E",
+   "source": "Trials of Osiris Engrams",
+   "source_type": "Vendor (Saint-14)"
+  }
+ ],
+ "Lustrous": [
+  {
+   "count": "2",
+   "perk": "Photogalvanic",
+   "desc": "Receiving healing temporarily grants your Solar weapons increased flinch resistance, handling, and reload speed.",
+   "rating": "D",
+   "source": "Solstice",
+   "source_type": "Tenet Of Bravery"
+  },
+  {
+   "count": "4",
+   "perk": "Cauterize",
+   "desc": "Rapid Solar final blows heal you.",
+   "rating": "C",
+   "source": "Solstice",
+   "source_type": "Tenet Of Bravery"
+  }
+ ],
+ "Smoke Jumper Set": [
+  {
+   "count": "2",
+   "perk": "Ride Together, Die Together",
+   "desc": "When you pick up an Orb of Power, gain a brief period of rapidly decaying damage reduction.",
+   "rating": "A",
+   "source": "Vanguard Engrams",
+   "source_type": "Vendor (Zavala)"
+  },
+  {
+   "count": "4",
+   "perk": "Too Old for This",
+   "desc": "Defeating a powerful combatant with a finisher grants you Special ammo progress and replenishes a small amount of health.",
+   "rating": "D",
+   "source": "Vanguard Engrams",
+   "source_type": "Vendor (Zavala)"
+  }
+ ],
+ "Disaster Corps Set": [
+  {
+   "count": "2",
+   "perk": "Pleas Heard",
+   "desc": "Reloading an Auto Rifle, Scout Rifle, or Sidearm after a final blow slowly restores health until you reenter combat.",
+   "rating": "B",
+   "source": "Crucible Engrams",
+   "source_type": "Vendor (Shaxx)"
+  },
+  {
+   "count": "4",
+   "perk": "Magnificent Duty",
+   "desc": "When you reach critical health or heal an ally at critical health, Auto Rifles, Scout Rifles, and Sidearms gain a period of increased range, stability, and relo",
+   "rating": "D",
+   "source": "Crucible Engrams",
+   "source_type": "Vendor (Shaxx)"
+  }
+ ],
+ "Wayward Psyche Set": [
+  {
+   "count": "2",
+   "perk": "Special Relativity",
+   "desc": "Picking up ammo reloads stowed Special weapons from reserves.",
+   "rating": "D",
+   "source": "The Desert Perpetual (Epic)",
+   "source_type": "Raid"
+  },
+  {
+   "count": "4",
+   "perk": "Superluminal Motion",
+   "desc": "After dealing damage with your Super, health and shields regenerate over time while you are in motion. Additional Super damage refreshes this effect.",
+   "rating": "D",
+   "source": "The Desert Perpetual (Epic)",
+   "source_type": "Raid"
+  }
+ ],
+ "Iron Panoply Set": [
+  {
+   "count": "2",
+   "perk": "Vigilant Watch",
+   "desc": "As your health gets lower, your weapons gain increased stability and handling. Weapon final blows while your shields are depleted heal you.",
+   "rating": "D",
+   "source": "Iron Banner Engrams",
+   "source_type": "Vendor (Saladin)"
+  },
+  {
+   "count": "4",
+   "perk": "Iron Conviction",
+   "desc": "When your shields become broken, you gain increased ammo generation, flinch resistance, and damage resistance against nearby combatants for a short time. Final ",
+   "rating": "B",
+   "source": "Iron Banner Engrams",
+   "source_type": "Vendor (Saladin)"
+  }
+ ],
+ "Ferropotent": [
+  {
+   "count": "2",
+   "perk": "Rapid Repair",
+   "desc": "When your shields begin to regenerate, you gain flinch resistance and damage resistance for a short time.",
+   "rating": "B+",
+   "source": "Vanguard Engrams",
+   "source_type": "Vendor (Zavala)"
+  },
+  {
+   "count": "4",
+   "perk": "Built from Scratch",
+   "desc": "While your reserves are low, combatant final blows with weapons provide additional ammo progress based on their ammo type.  Primary ammo weapons boost Special a",
+   "rating": "C",
+   "source": "Vanguard Engrams",
+   "source_type": "Vendor (Zavala)"
+  }
+ ],
+ "Wild Anthem": [
+  {
+   "count": "2",
+   "perk": "Fanfare",
+   "desc": "Gain increased reload speed for the bottom half of your equipped weapon's magazine.",
+   "rating": "PVP",
+   "source": "Crucible + Crucible Engrams",
+   "source_type": "Portal + Vendor (Shaxx)"
+  },
+  {
+   "count": "4",
+   "perk": "Suros Harmony",
+   "desc": "Reloading a weapon grants it a bonus to handling and reduces incoming flinch for a short time. Weapons with the SUROS Synergy Origin Trait are granted increased",
+   "rating": "PVP",
+   "source": "Crucible + Crucible Engrams",
+   "source_type": "Portal + Vendor (Shaxx)"
+  }
+ ],
+ "Sage Protector": [
+  {
+   "count": "2",
+   "perk": "Combat Meditation",
+   "desc": "Sword hits return grenade and class energy. Bonus energy is granted if Blade Focus is active.",
+   "rating": "S",
+   "source": "Equilibrium",
+   "source_type": "Dungeon"
+  },
+  {
+   "count": "4",
+   "perk": "Blade Focus",
+   "desc": "Briefly guard with a Sword to ready Blade Focus. While Blade Focus is readied, hitting a target with your sword increases Sword damage and lunge distance for a ",
+   "rating": "C",
+   "source": "Equilibrium",
+   "source_type": "Dungeon"
+  }
+ ],
+ "Swordmaster": [
+  {
+   "count": "2",
+   "perk": "Balestra",
+   "desc": "Damaging a target with a Sword, Glaive, or any melee attack exhausts them. \n\nExhausted targets deal reduced outgoing damage.",
+   "rating": "B",
+   "source": "Vanguard Engrams + Postmaster",
+   "source_type": "Vendor (Zavala) + Lost Sectors*"
+  },
+  {
+   "count": "4",
+   "perk": "Stesso Tempo",
+   "desc": "Blocking attacks with a Sword or Glaive grants a short period of damage resistance against targets when you next drop your guard.",
+   "rating": "B",
+   "source": "Vanguard Engrams + Postmaster",
+   "source_type": "Vendor (Zavala) + Lost Sectors*"
+  }
+ ],
+ "New Demotic": [
+  {
+   "count": "2",
+   "perk": "Paroli",
+   "desc": "Primary ammo weapons gain a bonus to flinch resistance after sliding.",
+   "rating": "PVP",
+   "source": "Trials of Osiris Engrams",
+   "source_type": "Vendor (Saint-14)"
+  },
+  {
+   "count": "4",
+   "perk": "Martingale",
+   "desc": "Your weapons gain a temporary increase to handling and aim-down-sights speed when an ally is defeated or you revive an ally.",
+   "rating": "PVP",
+   "source": "Trials of Osiris Engrams",
+   "source_type": "Vendor (Saint-14)"
+  }
+ ],
+ "Shrewd Survivor": [
+  {
+   "count": "2",
+   "perk": "Reflex Action",
+   "desc": "Swapping to a Heat weapon, Submachine Gun, or Hand Cannon grants a short period of increased handling and accuracy. This effect is extended by dealing damage wi",
+   "rating": "PVP",
+   "source": "Lawless Frontier",
+   "source_type": "Destination"
+  },
+  {
+   "count": "4",
+   "perk": "Hotshot",
+   "desc": "Dealing final blows while Reflex Action is active grants a bonus to weapon stat and increases stability, reload, and aim assist for Heat weapons, Submachine Gun",
+   "rating": "E",
+   "source": "Lawless Frontier",
+   "source_type": "Destination"
+  }
+ ],
+ "Thriving Survivor": [
+  {
+   "count": "2",
+   "perk": "Opening Act",
+   "desc": "Final blows with grenades grant Heat weapons bonus stability and vent speed and grant Primary ammo weapons bonus stability and reload speed.",
+   "rating": "C",
+   "source": "Lawless Frontier",
+   "source_type": "Destination"
+  },
+  {
+   "count": "4",
+   "perk": "Room Clearing",
+   "desc": "Multiple final blows with Heat weapons or Primary ammo weapons grant bonuses to weapon and grenade stats and increased ammo generation for Heat weapons and Prim",
+   "rating": "B+",
+   "source": "Lawless Frontier",
+   "source_type": "Destination"
+  }
+ ],
+ "Luminopotent": [
+  {
+   "count": "2",
+   "perk": "Ionic Overclock",
+   "desc": "While amplified, your Fusion Rifles, Linear Fusion Rifles, and Heat weapons gain increased handling, reload, and vent speeds.",
+   "rating": "D",
+   "source": "Fireteam + Vanguard Engrams",
+   "source_type": "Portal + Vendor (Zavala)"
+  },
+  {
+   "count": "4",
+   "perk": "Shock and Clear",
+   "desc": "Final blows with Jolt or against jolted combatants create Ionic Traces.",
+   "rating": "C",
+   "source": "Fireteam + Vanguard Engrams",
+   "source_type": "Portal + Vendor (Zavala)"
+  }
+ ],
+ "Triumphal Anthem": [
+  {
+   "count": "2",
+   "perk": "Scoot to Loot",
+   "desc": "Sliding collects nearby ammo and temporarily grants enhanced reload speed and handling to your weapons.",
+   "rating": "PVP",
+   "source": "Crucible + Crucible Engrams",
+   "source_type": "Portal + Vendor (Shaxx)"
+  },
+  {
+   "count": "4",
+   "perk": "Shoot to Scoot",
+   "desc": "Dealing damage with your weapons temporarily grants enhanced sliding. Sliding provides damage resistance.",
+   "rating": "PVP",
+   "source": "Crucible + Crucible Engrams",
+   "source_type": "Portal + Vendor (Shaxx)"
+  }
+ ],
+ "Flain": [
+  {
+   "count": "2",
+   "perk": "Sinew Stitching",
+   "desc": "Taking damage from combatants sometimes spawns a Threadling.",
+   "rating": "D",
+   "source": "Sundered Doctrine",
+   "source_type": "Dungeon"
+  },
+  {
+   "count": "4",
+   "perk": "Knit Together",
+   "desc": "For a short time after your shields break, your next several Threadling hits restore health.",
+   "rating": "C+",
+   "source": "Sundered Doctrine",
+   "source_type": "Dungeon"
+  }
+ ],
+ "Spacewalk": [
+  {
+   "count": "2",
+   "perk": "Augmented Armaments",
+   "desc": "Primary ammo weapons deal increased damage to disoriented combatants.",
+   "rating": "C",
+   "source": "Vespers Host",
+   "source_type": "Dungeon"
+  },
+  {
+   "count": "4",
+   "perk": "Augmented Explosives",
+   "desc": "Your grenade abilities release an additional disorienting pulse shortly after detonating.",
+   "rating": "C",
+   "source": "Vespers Host",
+   "source_type": "Dungeon"
+  }
+ ],
+ "Dark Age": [
+  {
+   "count": "2",
+   "perk": "Taking Initiative",
+   "desc": "Hitting combatants with melee attacks or Sword strikes grants a stack of Initiative, giving bonus handling and reload. Stacks decay slowly over time.",
+   "rating": "C",
+   "source": "Warlord's Ruin",
+   "source_type": "Dungeon"
+  },
+  {
+   "count": "4",
+   "perk": "Healing Initiative",
+   "desc": "While you have Initiative, using your class ability creates a stationary healing aura. The aura gains increased healing based on the number of Initiative stacks",
+   "rating": "S",
+   "source": "Warlord's Ruin",
+   "source_type": "Dungeon"
+  }
+ ],
+ "Taken King": [
+  {
+   "count": "2",
+   "perk": "The Ceremony",
+   "desc": "Finishing combatants or reviving allies initiates a Lucent Hive ritual. While the ritual is active, gain increased Super stat.",
+   "rating": "C",
+   "source": "Ghosts of the Deep",
+   "source_type": "Dungeon"
+  },
+  {
+   "count": "4",
+   "perk": "Lucent Swarm",
+   "desc": "Collecting Orbs of Power extends the Ceremony. While it is active, ability final blows occasionally spawn allied Arc moths.",
+   "rating": "C",
+   "source": "Ghosts of the Deep",
+   "source_type": "Dungeon"
+  }
+ ],
+ "TM Custom": [
+  {
+   "count": "2",
+   "perk": "Old Martian Diplomacy",
+   "desc": "Stowing a weapon after defeating a powerful combatant or a Guardian heals you a small amount and disorients nearby combatants.",
+   "rating": "C",
+   "source": "Spire of the Watcher",
+   "source_type": "Dungeon"
+  },
+  {
+   "count": "4",
+   "perk": "High Noon",
+   "desc": "Freshly drawn weapons deal increased precision damage to combatants for a short period. Weapons with the Tex Balanced Stock Origin Trait equipped or Exotics man",
+   "rating": "A",
+   "source": "Spire of the Watcher",
+   "source_type": "Dungeon"
+  }
+ ],
+ "Deep Explorer": [
+  {
+   "count": "2",
+   "perk": "Built Bitter",
+   "desc": "Taking damage increases the reload speed of your equipped weapon until it is stowed. Taking more damage increases the effect.",
+   "rating": "B",
+   "source": "Duality",
+   "source_type": "Dungeon"
+  },
+  {
+   "count": "4",
+   "perk": "Bittersweet",
+   "desc": "When you stow a weapon, restore health based on the number of Built Bitter stacks lost.",
+   "rating": "C",
+   "source": "Duality",
+   "source_type": "Dungeon"
+  }
+ ],
+ "Yearning Echo": [
+  {
+   "count": "2",
+   "perk": "Untold Greed",
+   "desc": "Picking up ammo, Orbs of Power, Elemental pickups, or destroying a Strand Tangle grants stacks of Untold Greed, slightly reducing damage taken and providing rel",
+   "rating": "A",
+   "source": "Grasp of Avarice",
+   "source_type": "Dungeon"
+  },
+  {
+   "count": "4",
+   "perk": "Overflowing Coffers",
+   "desc": "While you have stacks of Untold Greed, Orbs of Power and Elemental pickups provide more of their respective energy, and Strand Tangles deal increased damage. Wh",
+   "rating": "S",
+   "source": "Grasp of Avarice",
+   "source_type": "Dungeon"
+  }
+ ],
+ "CODA": [
+  {
+   "count": "2",
+   "perk": "Between Poles",
+   "desc": "Final blows with Light weapons grants stacks of Light Polarity, which grants Grenade stat. Final blows with Darkness or Kinetic weapons grants stacks of Dark Po",
+   "rating": "C",
+   "source": "Prophecy",
+   "source_type": "Dungeon"
+  },
+  {
+   "count": "4",
+   "perk": "So Very Thin",
+   "desc": "Final blows with Light weapons grants additional grenade energy. Final blows with Dark or Kinetic weapons grants additional melee energy. Rapid final blows that",
+   "rating": "S",
+   "source": "Prophecy",
+   "source_type": "Dungeon"
+  }
+ ],
+ "Apostate's Blade": [
+  {
+   "count": "2",
+   "perk": "Regenerative Threshold",
+   "desc": "Performing a finisher stores power. The next time your shields are broken, consume stored power to immediately heal and start health regeneration.",
+   "rating": "B",
+   "source": "Pit of Heresy",
+   "source_type": "Dungeon"
+  },
+  {
+   "count": "4",
+   "perk": "Melee Conduction",
+   "desc": "While you have Radiant, Restoration, or Cure, your melee hits release a burst that will scorch the target.",
+   "rating": "C",
+   "source": "Pit of Heresy",
+   "source_type": "Dungeon"
+  }
+ ],
+ "Techeun's Regalia": [
+  {
+   "count": "2",
+   "perk": "Queensfoil Rush",
+   "desc": "Gain a powerful overshield while performing your finisher. When you finish a target, release a slowing burst around you.",
+   "rating": "B",
+   "source": "Shattered Throne",
+   "source_type": "Dungeon"
+  },
+  {
+   "count": "4",
+   "perk": "Truth to Power",
+   "desc": "Gain increasing damage resistance when you deal damage or land final blows. Finishers grant accelerated progress. At max stacks, the recharge rate of your abili",
+   "rating": "S",
+   "source": "Shattered Throne",
+   "source_type": "Dungeon"
+  }
+ ],
+ "Circuit": [
+  {
+   "count": "2",
+   "perk": "Revving Up",
+   "desc": "Fast movement builds up a charge that gradually increases your health regeneration speed. Once you are Fully Revved, sprinting grants Speed Booster.",
+   "rating": "C",
+   "source": "Sparrow Racing League",
+   "source_type": "Portal"
+  },
+  {
+   "count": "4",
+   "perk": "Dielectric Drift",
+   "desc": "Sliding while Speed Booster is active jolts combatants in front of you.",
+   "rating": "B+",
+   "source": "Sparrow Racing League",
+   "source_type": "Portal"
+  }
+ ],
+ "Great Hunt": [
+  {
+   "count": "2",
+   "perk": "Taken Barrier",
+   "desc": "Grenade final blows temporarily reduce incoming damage.",
+   "rating": "A",
+   "source": "Last Wish",
+   "source_type": "Raid"
+  },
+  {
+   "count": "4",
+   "perk": "Taken Armaments",
+   "desc": "Grenade final blows grant additional Heavy ammo progress.",
+   "rating": "B",
+   "source": "Last Wish",
+   "source_type": "Raid"
+  }
+ ],
+ "Kentarch 3": [
+  {
+   "count": "2",
+   "perk": "Network Admin",
+   "desc": "Being near allies creates a relay network that gives the wearer improved handling and reload speed. \n\nBeing near other allied Network Admins additionally grants",
+   "rating": "D",
+   "source": "Garden of Salvation",
+   "source_type": "Raid"
+  },
+  {
+   "count": "4",
+   "perk": "Network Upload",
+   "desc": "Weapon final blows grant the wearer and nearby allies melee energy.",
+   "rating": "D",
+   "source": "Garden of Salvation",
+   "source_type": "Raid"
+  }
+ ],
+ "Legacy's Oath": [
+  {
+   "count": "2",
+   "perk": "Augmented Servos",
+   "desc": "Powered melees release an additional disorienting pulse when used to defeat a target.",
+   "rating": "A",
+   "source": "Deep Stone Crypt",
+   "source_type": "Raid"
+  },
+  {
+   "count": "4",
+   "perk": "God-like Judgment",
+   "desc": "When your shields are broken by a combatant, or upon casting your Super, release a swarm of heat seeking micro-missiles.",
+   "rating": "B",
+   "source": "Deep Stone Crypt",
+   "source_type": "Raid"
+  }
+ ],
+ "Atheon's Memory": [
+  {
+   "count": "2",
+   "perk": "Radiolaria Breach",
+   "desc": "After picking up an Orb of Power, the next time your shields are broken, gain a bonus to Health stat for a short duration and release a burst of radiolaria arou",
+   "rating": "D",
+   "source": "Vault of Glass",
+   "source_type": "Raid"
+  },
+  {
+   "count": "4",
+   "perk": "Collective Power",
+   "desc": "While you have a subclass buff, dealing sustained damage creates an Orb of Power.",
+   "rating": "A",
+   "source": "Vault of Glass",
+   "source_type": "Raid"
+  }
+ ],
+ "Oryx's Memory": [
+  {
+   "count": "2",
+   "perk": "Iron Sharpens Iron",
+   "desc": "Final blows on Guardians and powerful combatants generate additional ammo progress.",
+   "rating": "S",
+   "source": "King's Fall",
+   "source_type": "Raid"
+  },
+  {
+   "count": "4",
+   "perk": "Ascendant Escape",
+   "desc": "After a final blow on a powerful combatant, the next time your shields are broken, you become invisible.",
+   "rating": "B",
+   "source": "King's Fall",
+   "source_type": "Raid"
+  }
+ ],
+ "Nezarec's Nightmare": [
+  {
+   "count": "2",
+   "perk": "Bad Dreams",
+   "desc": "Final blows versus subclass-debuffed targets have an escalating chance to spawn an Orb of Power.",
+   "rating": "B",
+   "source": "Root of Nightmares",
+   "source_type": "Raid"
+  },
+  {
+   "count": "4",
+   "perk": "Dream-Devourer",
+   "desc": "Performing a finisher versus a powerful combatant grants Devour. While you have Devour, gain damage resistance versus combatants.",
+   "rating": "S",
+   "source": "Root of Nightmares",
+   "source_type": "Raid"
+  }
+ ],
+ "Crota's Memory": [
+  {
+   "count": "2",
+   "perk": "Cursed Fist",
+   "desc": "Melee final blows trigger a Cursed Thrall explosion.",
+   "rating": "B+",
+   "source": "Crota's End",
+   "source_type": "Raid"
+  },
+  {
+   "count": "4",
+   "perk": "Power of the Son",
+   "desc": "Being in combat for a duration grants progressively more flinch resistance and damage resistance versus combatants.",
+   "rating": "A",
+   "source": "Crota's End",
+   "source_type": "Raid"
+  }
+ ],
+ "Promised": [
+  {
+   "count": "2",
+   "perk": "Stable Resonance",
+   "desc": "Defeating a powerful combatant generates Stable Resonance, which grants damage resistance and increased weapon damage for the duration.",
+   "rating": "S",
+   "source": "Salvation's Edge",
+   "source_type": "Raid"
+  },
+  {
+   "count": "4",
+   "perk": "Resonance Redirection",
+   "desc": "While you have Stable Resonance, continued weapon damage occasionally generates a resonance burst that damages and exhausts targets.",
+   "rating": "A",
+   "source": "Salvation's Edge",
+   "source_type": "Raid"
+  }
+ ],
+ "Resonant Fury": [
+  {
+   "count": "2",
+   "perk": "Resonant Plating",
+   "desc": "Your health begins regenerating immediately after taking melee damage from a powerful combatant.",
+   "rating": "C",
+   "source": "Vow of the Disciple",
+   "source_type": "Raid"
+  },
+  {
+   "count": "4",
+   "perk": "Siphoning Touch",
+   "desc": "Gain stacks of Siphoning Touch for weapon or Glaive melee hits. Switching weapons heals you and consumes all stacks.",
+   "rating": "D",
+   "source": "Vow of the Disciple",
+   "source_type": "Raid"
+  }
+ ],
+ "Eutechnology": [
+  {
+   "count": "2",
+   "perk": "Gift of the Ley Lines",
+   "desc": "Rapidly defeating combatants with Void energy spawns a Void breach.",
+   "rating": "B",
+   "source": "Pinnacle + Vanguard Engrams",
+   "source_type": "Portal + Vendor (Zavala)"
+  },
+  {
+   "count": "4",
+   "perk": "Techeun's Foresight",
+   "desc": "After collecting a Void breach, your next final blow with a Void weapon triggers a detonation. The detonation is more powerful if it is triggered quickly after ",
+   "rating": "B",
+   "source": "Pinnacle + Vanguard Engrams",
+   "source_type": "Portal + Vendor (Zavala)"
+  }
+ ],
+ "Cruel Electrum": [
+  {
+   "count": "2",
+   "perk": "Primary Survivor",
+   "desc": "When an ally is defeated, Primary ammo weapons gain increased handling, reload speed, target acquisition, and reduced flinch. Bonus increases when multiple alli",
+   "rating": "PVP",
+   "source": "Trials of Osiris + Trials Engrams",
+   "source_type": "Portal + Vendor (Saint-14)"
+  },
+  {
+   "count": "4",
+   "perk": "Primary Phantom",
+   "desc": "Final blows with Primary ammo weapons remove you from radar for a short time. Drawing a weapon that does not use Primary ammo will immediately end this effect.",
+   "rating": "PVP",
+   "source": "Trials of Osiris + Trials Engrams",
+   "source_type": "Portal + Vendor (Saint-14)"
+  }
+ ],
+ "Iron Battalion Set": [
+  {
+   "count": "2",
+   "perk": "Primary Honing",
+   "desc": "Increases handling and reload speed for Primary ammo weapons. Primary ammo weapons gain increased damage against non-boss combatants based on your Weapons stat.",
+   "rating": "S?",
+   "source": "Iron Banner",
+   "source_type": "Portal"
+  },
+  {
+   "count": "4",
+   "perk": "Supercyclical",
+   "desc": "Final blows while your Super is active refund Super energy when it ends.",
+   "rating": "A",
+   "source": "Iron Banner",
+   "source_type": "Portal"
+  }
+ ],
+ "Per Audacia": [
+  {
+   "count": "2",
+   "perk": "Primary Chain",
+   "desc": "Primary ammo weapon final blows grant a stacking bonus to mobility and Primary weapon range and handling until you are defeated.",
+   "rating": "D",
+   "source": "Crucible (Comp) + Crucible Engrams",
+   "source_type": "Portal + Vendor (Shaxx)"
+  },
+  {
+   "count": "4",
+   "perk": "Sublime Transit",
+   "desc": "Increases mobility and grants enhanced sprint speed and slide distance.",
+   "rating": "D",
+   "source": "Crucible (Comp) + Crucible Engrams",
+   "source_type": "Portal + Vendor (Shaxx)"
+  }
+ ],
+ "Cyberserpent Null": [
+  {
+   "count": "2",
+   "perk": "Adrenal Rush",
+   "desc": "Sprinting for a short time grants a period of improved reload speed and handling. Final blows extend this period.",
+   "rating": "D",
+   "source": "Gambit + Gambit Engrams",
+   "source_type": "Portal + Vendor (Drifter)"
+  },
+  {
+   "count": "4",
+   "perk": "Bountiful Munitions",
+   "desc": "While Adrenal Rush is active, final blows grant Special Ammo progress. Final Blows against powerful combatants, Guardians, and Taken grants additional progress.",
+   "rating": "D",
+   "source": "Gambit + Gambit Engrams",
+   "source_type": "Portal + Vendor (Drifter)"
+  }
+ ],
+ "Seventh Seraph": [
+  {
+   "count": "2",
+   "perk": "Rasputin's Wrath",
+   "desc": "Final blows with area-of-effect damage, Solar abilities, Seventh Seraph weapons, or IKELOS weapons grant Warmind Charges. Each stack of Warmind Charge increases",
+   "rating": "A",
+   "source": "Cosmodrome",
+   "source_type": "Destination"
+  },
+  {
+   "count": "4",
+   "perk": "Rasputin's Reprisal",
+   "desc": "While you have Warmind Charges, defeating powerful combatants, destroying a construct, or destroying a Tangle releases a Solar detonation that damages combatant",
+   "rating": "S",
+   "source": "Cosmodrome",
+   "source_type": "Destination"
+  }
+ ],
+ "Pantheos Resplendent": [
+  {
+   "count": "2",
+   "perk": "Well Prepared",
+   "desc": "Picking up ammo grants Armor Charge. Grants a bonus to Health stat per Armor Charge you have.",
+   "rating": "B",
+   "source": "Pantheon",
+   "source_type": "Raid"
+  },
+  {
+   "count": "4",
+   "perk": "Down the Line",
+   "desc": "Sustained damage on minibosses, Champions, and bosses increases weapon damage versus base and powerful combatants. Weapon final blows consume one stack each.",
+   "rating": "C",
+   "source": "Pantheon",
+   "source_type": "Raid"
+  }
+ ],
+ "Wildwood": [
+  {
+   "count": "2",
+   "perk": "Watchtower",
+   "desc": "Precision final blows while aiming down sights grant damage resistance until you stop aiming down sights.",
+   "rating": "C",
+   "source": "European Dead Zone",
+   "source_type": "Destination"
+  },
+  {
+   "count": "4",
+   "perk": "Field Expertise",
+   "desc": "Precision final blows with any weapon grant a stacking bonus to reload speed, target acquisition, and weapon damage against non-boss combatants for a short dura",
+   "rating": "C",
+   "source": "European Dead Zone",
+   "source_type": "Destination"
+  }
+ ],
+ "Exodus Down": [
+  {
+   "count": "2",
+   "perk": "Emergency Electromagnet",
+   "desc": "When your shields become broken, collect all nearby Orbs of Power and ammo bricks.",
+   "rating": "B+",
+   "source": "Nesus",
+   "source_type": "Destination"
+  },
+  {
+   "count": "4",
+   "perk": "Repurposed Charge",
+   "desc": "Whenever you gain, lose, or spend an Armor Charge, heal and gain damage reduction for a short time.\n\nThis effect scales with the amount of Armor Charge gained, ",
+   "rating": "S",
+   "source": "Nesus",
+   "source_type": "Destination"
+  }
+ ],
+ "Reverie Dawn": [
+  {
+   "count": "2",
+   "perk": "A Wish for Protection",
+   "desc": "Taking significant damage in a short time generates a Protective Wish that makes it harder for combatants to hit you, and grants increased reload speed and flin",
+   "rating": "B",
+   "source": "Dreaming City",
+   "source_type": "Destination"
+  },
+  {
+   "count": "4",
+   "perk": "A Wish Fulfilled",
+   "desc": "When the Protective Wish expires, it cures you. \n\nRapid final blows prematurely end the Protective Wish.",
+   "rating": "D",
+   "source": "Dreaming City",
+   "source_type": "Destination"
+  }
+ ],
+ "Dreambane": [
+  {
+   "count": "2",
+   "perk": "Nightmarish Power",
+   "desc": "Final blows to a challenging combatant or higher-ranked target grant Unstable Essence. When you have Unstable Essence, you receive grenade and melee stat bonuse",
+   "rating": "C",
+   "source": "Moon",
+   "source_type": "Destination"
+  },
+  {
+   "count": "4",
+   "perk": "Nightmarish Resilience",
+   "desc": "When you have Unstable Essence, rapid weapon damage or final blows heal you and begin health regeneration.",
+   "rating": "B+",
+   "source": "Moon",
+   "source_type": "Destination"
+  }
+ ],
+ "Crystocrene": [
+  {
+   "count": "2",
+   "perk": "Resupply",
+   "desc": "After being out of combat for a moderate duration, your next final blow grants additional ammo progress and creates an Orb of Power.",
+   "rating": "A",
+   "source": "Europa",
+   "source_type": "Destination"
+  },
+  {
+   "count": "4",
+   "perk": "From the Storm",
+   "desc": "After being out of combat for a moderate duration, slowly gain Frost Armor until you reenter combat.",
+   "rating": "E",
+   "source": "Europa",
+   "source_type": "Destination"
+  }
+ ],
+ "Veritas": [
+  {
+   "count": "2",
+   "perk": "Lucent Transmutation",
+   "desc": "Performing a finisher on a combatant, or landing successive powered melee final blows, generates an Elemental pickup based on your Light subclass.",
+   "rating": "B",
+   "source": "Throne World + Throne World Engrams",
+   "source_type": "Destination"
+  },
+  {
+   "count": "4",
+   "perk": "Lucent Tithes",
+   "desc": "Performing a finisher on powerful combatants heals you and generates loyal Void moths.",
+   "rating": "B+",
+   "source": "Throne World + Throne World Engrams",
+   "source_type": "Destination"
+  }
+ ],
+ "Thunderhead": [
+  {
+   "count": "2",
+   "perk": "License to Thrill",
+   "desc": "Activating your grenade or the Nanotech Tracer Missiles Origin Trait provides stacking resistance to incoming damage at point-blank range.",
+   "rating": "C",
+   "source": "Neomuna",
+   "source_type": "Destination"
+  },
+  {
+   "count": "4",
+   "perk": "Lethal Weave",
+   "desc": "Defeating an unraveled combatant grants grenade ability energy. If you have max grenade energy, you are granted Special ammo meter progress instead.",
+   "rating": "B",
+   "source": "Neomuna",
+   "source_type": "Destination"
+  }
+ ],
+ "First Ascent": [
+  {
+   "count": "2",
+   "perk": "Stack 'Em Up",
+   "desc": "Defeating targets with unique elemental damage grants a stacking bonus to Transcendence energy gains while Transcendence is inactive.",
+   "rating": "A",
+   "source": "Pale Heart + Pale Heart Engrams",
+   "source_type": "Destination + Vendor (Ghost)"
+  },
+  {
+   "count": "4",
+   "perk": "Burn 'Em Down",
+   "desc": "While Transcendence is active, using your grenade ability consumes all stacks of Stack 'Em Up to grant an escalating amount of grenade energy.",
+   "rating": "B",
+   "source": "Pale Heart + Pale Heart Engrams",
+   "source_type": "Destination + Vendor (Ghost)"
+  }
+ ]
+}
