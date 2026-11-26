@@ -28,3 +28,9 @@ compare_ed.py
 build_ed_artifact.py
 bungie_probe_aspects.py
 bungie_fix_mod_hashes.py
+
+# Local development artifacts
+.DS_Store
+Thumbs.db
+.pytest_cache/
+.ipynb_checkpoints/
