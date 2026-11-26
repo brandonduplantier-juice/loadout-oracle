@@ -1,0 +1,13 @@
+root = true
+
+[*]
+charset = utf-8
+insert_final_newline = true
+
+# Preserve existing indentation and line endings unless explicitly configured.
+# Markdown trailing spaces may represent intentional line breaks.
+[*.{json,yml,yaml}]
+indent_style = space
+
+[Makefile]
+indent_style = tab
