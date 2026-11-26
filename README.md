@@ -61,3 +61,7 @@ Unofficial fan-made tool, not affiliated with, endorsed by, or sponsored by
 Bungie. Destiny, Destiny 2, Bungie, and related images, icons, names, and game
 data are property of Bungie. Game data and icons are displayed using Bungie API
 and manifest data.
+
+## Project navigation
+
+- [Engineering guide](ENGINEERING.md): directory map, development workflow and review standards.
