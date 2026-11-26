@@ -65,3 +65,4 @@ and manifest data.
 ## Project navigation
 
 - [Engineering guide](ENGINEERING.md): directory map, development workflow and review standards.
+- [Documentation index](DOCUMENTATION.md): technical documents and existing project resources.
