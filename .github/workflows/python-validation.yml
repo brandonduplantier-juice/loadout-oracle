@@ -1,0 +1,32 @@
+name: Python validation
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile tracked Python source
+        run: |
+          python - <<'PY'
+          import pathlib, subprocess
+          paths = subprocess.check_output(["git", "ls-files", "-z", "*.py"]).decode().split("\0")
+          files = [pathlib.Path(p) for p in paths if p]
+          if not files:
+              raise SystemExit("No tracked Python source")
+          for path in files:
+              compile(path.read_bytes(), str(path), "exec")
+          print(f"Compiled {len(files)} tracked Python files")
+          PY
+      - name: Install declared dashboard or application dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Check dependency consistency
+        run: python -m pip check
