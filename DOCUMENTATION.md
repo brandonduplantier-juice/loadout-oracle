@@ -21,3 +21,7 @@ The following map points to existing resources; their contents and authority are
 - [qa_independent.py](qa_independent.py)
 - [qa_selfheal.py](qa_selfheal.py)
 - [qa_synergy.py](qa_synergy.py)
+
+## Release management
+
+- [Release and versioning policy](RELEASE_POLICY.md): verification, version naming, release evidence and rollback requirements.
